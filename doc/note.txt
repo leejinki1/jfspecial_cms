@@ -1,0 +1,7 @@
+TbSaleAlbum model = TbSaleAlbum.dao.findById(getParaToInt());
+		setAttr("model", model);
+		
+		// ÏÂÀ­¿ò
+		setAttr("selectParentFolder", selectParentFolder(model.getParentId(), model.getId()));
+
+

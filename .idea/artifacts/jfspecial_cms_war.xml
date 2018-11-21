@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="jfspecial_cms:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="jfspecial_cms.war">
+      <element id="artifact" artifact-name="jfspecial_cms:war exploded" />
+    </root>
+  </artifact>
+</component>

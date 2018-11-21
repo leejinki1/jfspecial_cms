@@ -4,7 +4,7 @@ MODIFY COLUMN `name`  varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NO
 INSERT INTO `sys_config` VALUES ('15', '文件备份参数', 'backupParam', '0', null, '0', '10', '2017-04-05 03:49:21', '1', '2017-04-05 03:49:21', '1');
 INSERT INTO `sys_config` VALUES ('16', '文件备份类型名称', 'backup.name', 'filemanger', null, '15', '10', '2017-04-05 03:50:12', '1', '2017-04-05 03:50:12', '1');
 INSERT INTO `sys_config` VALUES ('17', '文件系统备份路径', 'backup.filemanger.path', 'D:\\test', null, '15', '10', '2017-04-05 03:50:42', '1', '2017-04-05 03:50:42', '1');
-INSERT INTO `sys_config` VALUES ('18', '阿里云存储bucketname', 'backup.oss.bucketname', 'jflyfox', null, '15', '10', '2017-04-05 22:58:05', '1', '2017-04-05 22:58:05', '1');
+INSERT INTO `sys_config` VALUES ('18', '阿里云存储bucketname', 'backup.oss.bucketname', 'jfspecial', null, '15', '10', '2017-04-05 22:58:05', '1', '2017-04-05 22:58:05', '1');
 INSERT INTO `sys_config` VALUES ('19', '阿里云存储endpoint', 'backup.oss.endpoint', 'http://oss-cn-beijing.aliyuncs.com', null, '15', '10', '2017-04-05 22:59:01', '1', '2017-04-05 22:59:01', '1');
 INSERT INTO `sys_config` VALUES ('20', '阿里云存储ID', 'backup.oss.id', '', null, '15', '10', '2017-04-05 22:59:24', '1', '2017-04-05 22:59:24', '1');
 INSERT INTO `sys_config` VALUES ('21', '阿里云存储KEY', 'backup.oss.key', '', null, '15', '10', '2017-04-05 22:59:51', '1', '2017-04-05 22:59:51', '1');

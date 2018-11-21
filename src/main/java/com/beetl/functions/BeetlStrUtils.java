@@ -1,5 +1,5 @@
 /**
- * Copyright 2015-2025 FLY的狐狸(email:jflyfox@sina.com qq:369191470).
+ * Copyright 2015-2025 FLY的狐狸(email:jfspecial@sina.com qq:369191470).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,22 +19,18 @@ package com.beetl.functions;
 import java.text.MessageFormat;
 import java.util.Date;
 
-import com.jflyfox.util.DateUtils;
-import com.jflyfox.util.StrUtils;
+import com.jfspecial.util.DateUtils;
+import com.jfspecial.util.StrUtils;
 
 /**
  * 字符串处理
  * 
- * @author flyfox 2012.08.08
- * @email 330627517@qq.com
+ * @author ljk 2018.11.18
  */
 public class BeetlStrUtils  extends StrUtils{
 
 	/**
 	 * startWith
-	 * 
-	 * 2014年8月29日 下午1:40:31 flyfox 330627517@qq.com
-	 * 
 	 * @param str
 	 * @param key
 	 * @return
@@ -47,9 +43,6 @@ public class BeetlStrUtils  extends StrUtils{
 
 	/**
 	 * endWith
-	 * 
-	 * 2014年8月29日 下午1:40:31 flyfox 330627517@qq.com
-	 * 
 	 * @param str
 	 * @param key
 	 * @return
@@ -62,9 +55,6 @@ public class BeetlStrUtils  extends StrUtils{
 
 	/**
 	 * length
-	 * 
-	 * 2014年8月29日 下午1:40:31 flyfox 330627517@qq.com
-	 * 
 	 * @param str
 	 * @param key
 	 * @return

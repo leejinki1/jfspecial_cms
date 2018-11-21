@@ -1,0 +1,36 @@
+/* tepaiyuan.html、、、 :功能模块center中的样式*/
+
+.centerBox-left{margin-bottom: 3px;background: #E6E6E6;}
+.centerBox-left h4{padding: 2px;font-weight: bolder;}
+.centerBox-left ul li{padding: 2px;}
+.centerBox-left-c1 button{background: white;font-size: 14px;}
+
+.centerBox-right{}
+.centerBox-right-c1 ul li{display: inline-block;}
+.centerBox-right-c1 p img{width: 36px;height: 15px;}
+
+
+.centerBox-right-c2 h4{text-align: center;font-weight: bolder;}
+
+
+
+/*手机*/
+@media screen and (min-width: 66px) {
+    .centerBox-left ul li{display: inline-block;}
+    .centerBox-right-c2 table{width: 100%;font-size:14px;text-align: center;border: 1px solid;}
+    .centerBox-right-c2 table tr{width:100%;display: flex;flex-wrap: wrap;}
+    .centerBox-right-c2 table tr td{width:50%;border: 1px solid;}
+    .centerBox-right-c2 table tr td img{width:95%;height:150px;border: 1px solid;}
+	
+}
+/*平板*/
+@media screen and (min-width: 768px) {
+	 .centerBox-left ul li{display: block;}
+    .centerBox-right-c2 table{width: 100%;font-size:18px;text-align: center;font-weight: bolder;border: 1px solid;}
+    .centerBox-right-c2 table tr{width:100%;}
+    .centerBox-right-c2 table tr td{width:25%;border: 1px solid;}
+    .centerBox-right-c2 table tr td img{width:95%;height:200px;border: 1px solid;}
+}
+
+
+/*特派员--解答列表*/

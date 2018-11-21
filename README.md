@@ -27,33 +27,33 @@ jfinal cms
 项目源码地址：
 ------------------------
 
-github地址：https://github.com/jflyfox/jfinal_cms
+github地址：https://github.com/jfspecial/jfinal_cms
 
-码云地址：https://gitee.com/jflyfox/jfinal_cms
+码云地址：https://gitee.com/jfspecial/jfinal_cms
 
 API Clinet 项目源码地址：
 ------------------------
 
-github地址：https://github.com/jflyfox/jfinal_cms_api_client
+github地址：https://github.com/jfspecial/jfinal_cms_api_client
 
-码云地址：https://gitee.com/jflyfox/jfinal_cms_api_client
+码云地址：https://gitee.com/jfspecial/jfinal_cms_api_client
 
 演示效果截图
 ------------------------
 
-#### 网站CMS地址：[http://mtg.jflyfox.com/](http://mtg.jflyfox.com/) ####
+#### 网站CMS地址：[http://mtg.jfspecial.com/](http://mtg.jfspecial.com/) ####
 ![网站](http://static.oschina.net/uploads/img/201601/21022316_Nk5M.gif "jfinal cms")
 
-#### 网站官网模板：[http://website.jflyfox.com/](http://website.jflyfox.com/) ####
+#### 网站官网模板：[http://website.jfspecial.com/](http://website.jfspecial.com/) ####
 ![官网](http://static.oschina.net/uploads/img/201601/21022316_XkxY.gif "jfinal cms")
 
-#### 博客模板模板：[http://blog.jflyfox.com/](http://blog.jflyfox.com) ####
+#### 博客模板模板：[http://blog.jfspecial.com/](http://blog.jfspecial.com) ####
 ![官网](http://static.oschina.net/uploads/space/2016/0622/002206_Rla0_166354.jpg "jfinal cms")
 
-#### 相册管理模板：[http://photo.jflyfox.com/](http://photo.jflyfox.com/) ####
+#### 相册管理模板：[http://photo.jfspecial.com/](http://photo.jfspecial.com/) ####
 ![官网](http://static.oschina.net/uploads/space/2016/0306/144741_ldOJ_166354.gif "jfinal cms")
 
-#### 视频管理模板：[http://video.jflyfox.com/](http://video.jflyfox.com/) ####
+#### 视频管理模板：[http://video.jfspecial.com/](http://video.jfspecial.com/) ####
 ![官网](http://static.oschina.net/uploads/space/2016/0306/144754_FXhR_166354.gif "jfinal cms")
 
 #### 后台页面主题： ####
@@ -71,9 +71,9 @@ support
 
 项目的发展，离不开大家得支持~！~
 
-![jflyfox](http://blog.jflyfox.com/static/images/common/pay_weixin.jpg "Open source support(alipay)")
+![jfspecial](http://blog.jfspecial.com/static/images/common/pay_weixin.jpg "Open source support(alipay)")
 
-![jflyfox](http://blog.jflyfox.com/static/images/common/pay_alipay.jpg "Open source support(weixin)")
+![jfspecial](http://blog.jfspecial.com/static/images/common/pay_alipay.jpg "Open source support(weixin)")
 
 
 捐赠名单

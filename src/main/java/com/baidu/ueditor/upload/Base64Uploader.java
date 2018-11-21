@@ -5,7 +5,7 @@ import com.baidu.ueditor.define.AppInfo;
 import com.baidu.ueditor.define.BaseState;
 import com.baidu.ueditor.define.FileType;
 import com.baidu.ueditor.define.State;
-import com.jflyfox.util.encrypt.Base64;
+import com.jfspecial.util.encrypt.Base64;
 
 import java.util.Map;
 

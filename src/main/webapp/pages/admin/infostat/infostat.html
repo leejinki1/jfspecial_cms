@@ -1,0 +1,115 @@
+<% 
+DIRECTIVE SAFE_OUTPUT_OPEN;
+var headContent = {
+	include("/pages/template/head.html"){}
+%>
+
+<script type="text/javascript">
+	var oper;
+	jQuery(function($) {
+		// 页面方法
+		oper = {
+			form : document.form1,
+			list : function() {
+				var url = 'admin/home';
+				this.form.action = url;
+				this.form.submit();
+			}
+		};
+		//显示Menu索引
+		showMenu('page_home');
+	});
+	
+</script>
+
+<%
+};
+%>
+
+<%
+var bodyContent = {
+%>
+	<!-- 菜单 -->
+	<% include("/pages/template/menu.html"){} %>
+
+	 <%
+	 	// 传递变量  
+	 	// 文章列表 articlelist 必填
+	 	// 默认图片 defalutimg 选填
+	 	var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.userid;
+	 %>
+<div class="container" style="margin-top: 10px;">
+	<div class="row">
+	  
+	  <div class="col-md-4">
+	  		<!-- 用户信息 -->
+	  		<div class="panel panel-default">
+				  <div class="panel-heading">
+					<h3 class="panel-title">信息&nbsp;&nbsp;<a href="admin/person" style="font-size: 12px;color:green;">编辑</a></h3>
+				  </div>
+		   		<div class="panel-body">
+		  			<form class="form-horizontal" name="form1" action="" method="post">
+					<div class="form-group">
+						特派员
+						<div class="col-sm-9">
+							${specials}人
+					   </div>
+					 </div>
+					 <div class="form-group">
+					   <label for="realname" class="col-sm-3 control-label">特卖区</label>
+					   <div class="col-sm-9">
+					     ${sales}条
+					   </div>
+					 </div>
+					新闻中心${newscenters}条 技术需求${trds}次
+						创客活动 ${makers}场 政策法规 ${policys}
+						科普板块 ${spps} 帮扶企业 ${addoils}
+
+					  </form>
+				</div>
+			</div>
+			
+			<% if(!isEmpty(pageViews)){ %>
+	  		<!-- 最新访客 -->
+	  		<div class="panel panel-default">
+			  <div class="panel-heading">
+				<h3 class="panel-title">访客TOP10&nbsp;&nbsp;<a href="admin/pageview" style="font-size: 12px;color:green;">更多</a></h3>
+			  </div>
+			  <ul class="list-group">
+			  	<% for(item in pageViews){ %>
+			  <li class="list-group-item">
+			  <span class="badge">${item.create_time}</span>
+			  ${item.ip}(${item.userid})
+			  </li>
+			  <% } %>
+			  </ul>
+			</div>
+			<% } %>
+			
+			<% if(!isEmpty(users)){ %>
+			<!-- 最新注册用户 -->
+		  	<div class="panel panel-default">
+			  <div class="panel-heading">
+				<h3 class="panel-title">注册用户TOP10&nbsp;&nbsp;<a href="system/user/list" style="font-size: 12px;color:green;">更多</a></h3>
+			  </div>
+			  <ul class="list-group">
+			  	<% for(item in users){ %>
+			  <li class="list-group-item">
+			  <span class="badge">${item.create_time}</span>
+			  用户：${item.realname}<br>邮箱：${item.email}
+			  </li>
+			  <% } %>
+			  </ul>
+			</div>
+			<% } %>
+			
+			
+	</div>
+
+</div>
+
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+DIRECTIVE SAFE_OUTPUT_CLOSE;
+<%} %>

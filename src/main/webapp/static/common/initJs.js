@@ -74,7 +74,7 @@ function myInit(){
 			recordsperpage: paginator_recordsperpage, 
 			length: paginator_length, 
 			initval: paginator_pageno,
-			next: '>', prev: '<', first: '<<', last: '>>', theme: jflyfox_theme, 
+			next: '>', prev: '<', first: '<<', last: '>>', theme: jfspecial_theme,
 			controlsalways: true, onchange: function (newPage) {
 				$('#paginator_pageno').val(newPage);
 				if(typeof paginator!='undefined'&&paginator instanceof Function) paginator(newPage);

@@ -33,7 +33,7 @@ comment = {
 		if(window.confirm('你确定要删除该评论吗？')){
 			jQuery.ajax({
 				type:'POST',
-				url:jflyfox.BASE_PATH + 'front/comment/del',
+				url:jfspecial.BASE_PATH + 'front/comment/del',
 				data:"model.id=" + comment_id + "&model.article_id=" + article_id,
 				success:function(data){
 					if(data.status==1){
@@ -65,7 +65,7 @@ comment = {
 		
 		jQuery.ajax({
 			type:'POST',
-			url:jflyfox.BASE_PATH + 'front/comment/save',
+			url:jfspecial.BASE_PATH + 'front/comment/save',
 			data:urlParams,
 			success:function(data){
 			if(data.status==1){
@@ -75,7 +75,7 @@ comment = {
 				var username = data.create_name;
 				var reply_username = data.reply_username;
 				var content = data.content; 
-				title_url = (title_url=='')?(jflyfox.BASE_PATH + 'static/images/user/user.png'):title_url;
+				title_url = (title_url=='')?(jfspecial.BASE_PATH + 'static/images/user/user.png'):title_url;
 				
 				var htmlText = '<div class="comment-item" id=comment_'+ comment_id + '_' + article_id + '>';
 				htmlText += '<div class="item-top">';
@@ -127,7 +127,7 @@ comment = {
 		
 		jQuery.ajax({
 			type:'POST',
-			url:jflyfox.BASE_PATH + 'front/comment/count',
+			url:jfspecial.BASE_PATH + 'front/comment/count',
 			success:function(data){
 				if(data.status==1){
 					if(data.count > 0 ){

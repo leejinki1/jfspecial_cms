@@ -6,13 +6,13 @@ Change Log 更新说明
 2. 修复启动缓存设置不生效bug
 
 ## 2017-06-11 jfinal cms4.7.0
-1. 去除jflyfox_jfinal和jflyfox_base项目依赖，将代码合并并重构
+1. 去除jfspecial_jfinal和jfspecial_base项目依赖，将代码合并并重构
 
 ## 2017-06-01
 1. 修复多站点和单站点切换导致的异常。
 
 ## 2017-05-26 jfinal cms4.6.0
-1. jflyfox_jfinal升级为4.5.0
+1. jfspecial_jfinal升级为4.5.0
 2. 重构站点逻辑代码，让后台站点配置与前台站点配置分离；
 3. delete、insert、update默认不保存日志信息；如果需要可以默认保存可以恢复BaseProjectModel类；
 4. 规范SessionUser和SysUser属性，避免相同属性不同写法问题；
@@ -181,7 +181,7 @@ Change Log 更新说明
 2. filemanager来自github，再此基础上进行了路径优化，主题切换支持，中文支持，以及replaceFile，addFile接口完善。
 
 ### 2016-02-24
-1. jflyfox_base修改为3.1修复中文和空格目录问题
+1. jfspecial_base修改为3.1修复中文和空格目录问题
 2. 解决pom中mvn tomcat:run 目录问题
 
 ### 2016-02-20 jfinal cms2.9.0
@@ -303,13 +303,13 @@ config.properties文件中可以配置CMS.UPDATE_TIME字段更新时间，单位
 
 ### 2015-06-09 mtgxxw1.2
 1. 发布1.2版本，主要是bug修复。
-2. 感谢fxhover同学，修复漏洞：http://www.jflyfox.com/mtg/front/tags/%3Cimg%20%20src=%22xx%22%20onerror=%22alert%28111%29;%22%3E111
+2. 感谢fxhover同学，修复漏洞：http://www.jfspecial.com/mtg/front/tags/%3Cimg%20%20src=%22xx%22%20onerror=%22alert%28111%29;%22%3E111
 
 ### 2015-06-06
 1. 加入点击用户查看信息。
 
 ### 2015-06-04
-1. jflyfox_jfinal升级为2.1,全面去除模板，更简单易懂
+1. jfspecial_jfinal升级为2.1,全面去除模板，更简单易懂
 2. 登录名称错误修改。
 3. 优化文章编辑操作。
 

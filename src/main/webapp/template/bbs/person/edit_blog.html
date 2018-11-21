@@ -63,12 +63,12 @@
 		
 		jQuery.ajax({
 			type:'POST',
-			url:jflyfox.BASE_PATH + 'front/person/saveblog/'+id,
+			url:jfspecial.BASE_PATH + 'front/person/saveblog/'+id,
 			data:$("form").serialize(),
 			success:function(data){
 				if(data.status==1){
 					alert('发布成功');
-					form1.action = jflyfox.BASE_PATH + "front/person";
+					form1.action = jfspecial.BASE_PATH + "front/person";
 					form1.submit();
 					return true;
 				} else {

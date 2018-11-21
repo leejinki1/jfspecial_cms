@@ -1,0 +1,4 @@
+.centerBox{padding: 2px;}
+.centerBox ul li{display: inline-block;border: 1px gray solid;padding: 10px;}
+.centerBox ul{display: flex;flex-wrap: wrap;justify-content: space-around;}
+

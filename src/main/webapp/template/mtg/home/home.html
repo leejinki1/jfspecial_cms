@@ -19,6 +19,20 @@ var educations = temp.articlePage(1, 10,5);
 
 // 公告
 var noticeList = temp.notice(1);
+
+//特卖区 272
+var sale=temp.articlePage(1,10,272);
+//新闻中心273
+var newscenter=temp.articlePage(1,10,273);
+//技术需求274
+var trd=temp.articlePage(1,10,274);
+//创客活动
+var maker=temp.articlePage(1,10,275);
+//政策法规
+//科普板块
+//项目申报
+//帮扶企业
+
 %>
 
 <% 
@@ -251,13 +265,59 @@ var bodyContent = {
 		</div>
 	  </div>
 	
-	  <div class="col-md-4">	
-		
+	  <div class="col-md-4">
+
+		  <!-- 特卖区 -->
+		  <div class="panel panel-default">
+			  <div class="panel-heading">
+				  <h3 class="panel-title">
+					  <a href="${BASE_PATH }${flyfox.getMenu(3)}.html" target="_blank">特卖区</a>
+					  <a class="more" href="${BASE_PATH }${flyfox.getMenu(3)}.html" target="_blank">更多</a>
+				  </h3>
+			  </div>
+			  <div class="panel-body" style="padding-bottom:0px;">
+				  <div class="row">
+					  <% for(item in sale.list){ %>
+					  <% if(itemLP.index <= 2){ %>
+					  <div class="col-md-6">
+						  <div class="thumbnail">
+							  <a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">
+								  <img alt="${item.title}" src="${flyfox.getImage(item)}" data-holder-rendered="true" style="height: 120px; width: 100%; display: block;">
+							  </a>
+							  <div class="caption">
+								  <a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">${item.title}</a>
+							  </div>
+						  </div>
+					  </div>
+					  <% } %>
+					  <% } %>
+				  </div>
+			  </div>
+
+			  <ul class="list-group">
+				  <% for(item in sale.list){ %>
+				  <% if(itemLP.index > 2){ %>
+				  <li class="list-group-item">
+					  <span class="badge">${flyfox.substr(item.publish_time,5,10) }</span>
+					  <a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">
+						  <% if (strutil.length(item.title) > 18) { %>
+						  ${strutil.subStringTo(item.title, 0, 18)}...
+						  <% 	} else { %>
+						  ${item.title}
+						  <%  } %>
+					  </a>
+				  </li>
+				  <% } %>
+				  <% } %>
+			  </ul>
+
+		  </div>
+
 		<!-- 美食 -->
 		<div class="panel panel-default">
 		  <div class="panel-heading">
 		  	<h3 class="panel-title">
-				<a href="${BASE_PATH }${flyfox.getMenu(3)}.html" target="_blank">美食</a>
+				<a href="${BASE_PATH }${flyfox.getMenu(3)}.html" target="_blank">特卖区</a>
 				<a class="more" href="${BASE_PATH }${flyfox.getMenu(3)}.html" target="_blank">更多</a>
 			</h3>
 		  </div>

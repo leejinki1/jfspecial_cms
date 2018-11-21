@@ -12,7 +12,7 @@
 	<meta name="description" content="${HEAD_TITLE! }">
 	
 	<script>
-	var jflyfox = {
+	var jfspecial = {
 		BASE_PATH:'${BASE_PATH }'
 	}
 	</script>
@@ -63,13 +63,13 @@
 	        var key = e.which;
 	        if (key == 13 ) {
 	            e.preventDefault();
-	            search_form.action = jflyfox.BASE_PATH + "front/tags/"+ $('[name="search_header"]').val();
+	            search_form.action = jfspecial.BASE_PATH + "front/tags/"+ $('[name="search_header"]').val();
 	    		search_form.submit();
 	        }
 	    });
 		
 		$('#search_btn').on('click', function (e) {
-			search_form.action = jflyfox.BASE_PATH + "front/tags/"+ $('[name="search_header"]').val();
+			search_form.action = jfspecial.BASE_PATH + "front/tags/"+ $('[name="search_header"]').val();
 			search_form.submit();
 	    });
 		

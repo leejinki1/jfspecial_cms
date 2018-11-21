@@ -75,8 +75,8 @@ HEAD_included_files = new Array();
 
 getTheme = function(){
 	var theme = config.options.theme;
-	var flag = (typeof jflyfox_theme != 'undefined');
-	if(flag) theme = jflyfox_theme;
+	var flag = (typeof jfspecial_theme != 'undefined');
+	if(flag) theme = jfspecial_theme;
 	return theme;
 };
 

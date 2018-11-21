@@ -22,13 +22,13 @@ $(function() {
         var key = e.which;
         if (key == 13 ) {
             e.preventDefault();
-            search_form.action = jflyfox.BASE_PATH + "front/tags/"+ $('[name="search_header"]').val();
+            search_form.action = jfspecial.BASE_PATH + "front/tags/"+ $('[name="search_header"]').val();
     		search_form.submit();
         }
     });
 	
 	$('#search_btn').on('click', function (e) {
-		search_form.action = jflyfox.BASE_PATH + "front/tags/"+ $('[name="search_header"]').val();
+		search_form.action = jfspecial.BASE_PATH + "front/tags/"+ $('[name="search_header"]').val();
 		search_form.submit();
     });
 	
@@ -41,7 +41,7 @@ $(function() {
 
 
 function delblog(id) {
-	var url = jflyfox.BASE_PATH + 'front/person/delblog/'+id;
+	var url = jfspecial.BASE_PATH + 'front/person/delblog/'+id;
 	var title = '确认要删除该博文？';
 	Confirm(title, function() {
 		form1.action = url;

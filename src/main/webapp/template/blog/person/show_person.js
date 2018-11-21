@@ -3,7 +3,7 @@ $(function() {
 	$('[name="model.title_url"]').change(function(){
 		var pic = $(this).val() ;
 		if(pic == '') {
-			pic = jflyfox.BASE_PATH + 'static/images/user/user.png';
+			pic = jfspecial.BASE_PATH + 'static/images/user/user.png';
 		}
 		
 		$('#title_pic').attr('src',pic);
@@ -18,7 +18,7 @@ function oper_save(){
 	
 	jQuery.ajax({
 		type:'POST',
-		url:jflyfox.BASE_PATH + 'front/person/save',
+		url:jfspecial.BASE_PATH + 'front/person/save',
 		data:$("form").serialize(),
 		success:function(data){
 			if(data.status==1){
