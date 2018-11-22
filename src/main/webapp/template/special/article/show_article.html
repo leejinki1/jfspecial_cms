@@ -173,10 +173,10 @@ var bodyContent = {
 								<a href="javascript:oper_del_comment(${comment.id});" style="float: right;">删除</a>
 							<% } %>
 							<% if(!isEmpty(session.session_user) && comment.create_id!=session.session_user.userid){ %>
-								<a href="javascript:oper_reply_comment(${comment.create_id},'${flyfox.getUserName(comment.create_id)}');" style="float: right;">回复</a>
-							<% } %>
-						</div>
-					</div>
+					<a href="javascript:oper_reply_comment(${comment.create_id},'${flyfox.getUserName(comment.create_id)}');" style="float: right;">回复</a>
+					<% } %>
+				</div>
+			</div>
 					<%  } %>
 				
 					<div style="margin-left: 5px;margin-top: 5px;">

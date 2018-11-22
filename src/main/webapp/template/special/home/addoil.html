@@ -47,7 +47,10 @@
             </div>
 
             <div class="centerBox-right-c2">
-
+                <% var defalutimg= 'static/front/images/news.jpg';%>
+                <% var page=tempAddOil.addoils(1,5,1);%>
+                <!--文章列表-->
+                <% include("/template/special/includes/addoillist.html",{articlelist:page,defalutimg:defalutimg!''}){} %>
             </div>
             <div class="centerBox-right-c3"></div>
         </div>

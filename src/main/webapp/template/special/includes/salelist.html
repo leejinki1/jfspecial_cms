@@ -1,0 +1,31 @@
+	 <%
+	 	// 传递变量  
+	 	// 文章列表 articlelist 必填
+	 	// 默认图片 defalutimg 选填
+	 	var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.userid;
+	 %>
+
+	 <table>
+		 <tr>
+			 <% for(item in articlelist.list){ %>
+			 <td>
+				 <img alt="${item.name}" src="${flyfox.getImage(item)}" data-holder-rendered="true"/>
+				 <p><a href="${BASE_PATH }front/sale/article/${item.id}.html" target="_blank">${item.name}</a></p>
+			 </td>
+			 <% } %>
+
+		 </tr>
+		 <tr>
+			 <!--
+			 <td>
+				 <img src="static/frontend/images/banner.jpg"/>
+				 <p><a href="#">纯羊毛毛线球</a></p>
+			 </td>
+			 <td>
+				 <img src="../../images/banner.jpg"/>
+				 <p><a href="#">纯羊毛毛线球</a></p>
+			 </td>-->
+		 </tr>
+	 </table>
+
+	 <%include("/template/special/includes/paginatorbar.html",{page:articlelist}){} %>

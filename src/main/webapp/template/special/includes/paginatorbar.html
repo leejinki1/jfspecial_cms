@@ -1,0 +1,43 @@
+<% if(page.totalPage > 1 && page.pageNumber <= page.totalPage && page.pageNumber > 0) { %>
+	<% 
+		var len = 10; // 长度
+		var topage = page.pageNumber; // 当前页
+		var totalpages = page.totalPage; // 总页数
+		var startIndex = 0;
+		var endIndex = 0;
+		var mid = len / 2;
+        if (len % 2 > 0) mid = (settings.length + 1) / 2;
+        if (topage >= mid) {
+             if (totalpages - topage > mid)
+                 startIndex = topage - (mid - 1);
+             else if (totalpages > len)
+                 startIndex = totalpages - len;
+   		}
+   		endIndex = (startIndex + len < totalpages) ? startIndex + len : totalpages;
+	%>
+
+	<p class="pageBtnList">
+		<% //if(startIndex > 1) {%>
+		<button type="button" class="btn btn-default btn-sm img-circle">
+			<a href="${CURRENT_PATH}?pageNo=1${suffix!''}">首页</a></button>
+		<% //} %>
+		<% //if(page.pageNumber > 1) {%>
+		<button type="button" class="btn btn-default btn-sm img-circle">
+			<a href="${CURRENT_PATH}?pageNo=${page.pageNumber-1}${suffix!''}">上一页</a></button>
+		<% //} %>
+		<% for(var i = startIndex;i < endIndex ; i++ ) { %>
+		<button type="button" class="btn btn-default btn-xs"><a href="${CURRENT_PATH}?pageNo=${i+1}${suffix!''}">${i+1}</a></button>
+		<% } %>
+		<% //if(page.pageNumber < page.totalPage) {%>
+		<button type="button" class="btn btn-default btn-sm img-circle">
+			<a href="${CURRENT_PATH}?pageNo=${page.pageNumber+1}${suffix!''}">下一页</a></button>
+		<% //} %>
+		<% //if(endIndex + 1 < totalpages) { %>
+		<button type="button" class="btn btn-default btn-sm">
+			<a href="${CURRENT_PATH}?pageNo=${totalpages}${suffix!''}"></a>尾页</button>
+		<% //} %>
+	</p>
+	<p class="pageBtnList">
+		第<span>${topage}</span>页&nbsp;共<span>${totalpages}</span>页&nbsp;<!--共<span>30</span>条记录-->
+	</p>
+<% } %>

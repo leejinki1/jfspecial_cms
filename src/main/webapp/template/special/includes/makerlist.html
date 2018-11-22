@@ -1,0 +1,27 @@
+	 <%
+	 	// 传递变量  
+	 	// 文章列表 articlelist 必填
+	 	// 默认图片 defalutimg 选填
+	 	var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.userid;
+	 %>
+	 <table class="table table-striped ok">
+		 <tbody>
+		 <% for(item in articlelist.list){ %>
+		 <tr>
+			 <td><a href="${BASE_PATH }front/article/${item.id}.html"target="_blank" title="${item.title}">
+				 <% if (strutil.length(item.name) > 36) { %>
+				 ${strutil.subStringTo(item.name, 0, 36)}...
+				 <% 	} else { %>
+				 ${item.name}
+				 <%  } %></a></td>
+			 <td>${flyfox.substr(item.create_time,0,19) }</td>
+			 <td><button type="button" class="btn btn-default btn-sm baoming">我要报名</button></td>
+		 </tr>
+		 <% } %>
+		 </tbody>
+	 </table>
+
+	 <%include("/template/special/includes/paginatorbar.html",{page:articlelist}){} %>
+
+
+
