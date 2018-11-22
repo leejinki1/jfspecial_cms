@@ -1,249 +1,597 @@
-<% 
-DIRECTIVE SAFE_OUTPUT_OPEN;
-var headContent = {
-	include("/pages/template/head.html"){}
-%>
-
-<script type="text/javascript">
-	var oper;
-	jQuery(function($) {
-		// 页面方法
-		oper = {
-			form : document.form1,
-			list : function() {
-				var url = 'admin/home';
-				this.form.action = url;
-				this.form.submit();
-			}
-		};
-		//显示Menu索引
-		showMenu('page_home');
-	});
-	
-</script>
-
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Target Material Design Bootstrap Admin Template</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="${BASE_PATH }static/backend/assets/materialize/css/materialize.min.css" media="screen,projection" />
+	<!-- Bootstrap Styles-->
+	<link href="${BASE_PATH }static/backend/assets/css/bootstrap.css" rel="stylesheet" />
+	<!-- FontAwesome Styles-->
+	<link href="${BASE_PATH }static/backend/assets/css/font-awesome.css" rel="stylesheet" />
+	<!-- Morris Chart Styles-->
+	<link href="${BASE_PATH }static/backend/assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+	<!-- Custom Styles-->
+	<link href="${BASE_PATH }static/backend/assets/css/custom-styles.css" rel="stylesheet" />
+	<!-- Google Fonts-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/cssCharts.css">
+</head>
 <%
-};
+// 传递变量
+var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.userid;
 %>
+<body>
+<div id="wrapper">
+	<nav class="navbar navbar-default top-navbar" role="navigation">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle waves-effect waves-dark" data-toggle="collapse" data-target=".sidebar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand waves-effect waves-dark" href="index.html"><i class="large material-icons">track_changes</i> <strong>信息统计</strong></a>
 
-<%
-var bodyContent = {
-%>
-	<!-- 菜单 -->
-	<% include("/pages/template/menu.html"){} %>
+			<div id="sideNav" href=""><i class="material-icons dp48">toc</i></div>
+		</div>
 
-	 <%
-	 	// 传递变量  
-	 	// 文章列表 articlelist 必填
-	 	// 默认图片 defalutimg 选填
-	 	var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.userid;
-	 %>
-<div class="container" style="margin-top: 10px;">
-	<div class="row">
-	  <div class="col-md-8">
-	  		<% if(!isEmpty(articles)){ %>
-	  		<!-- 最新文章 -->
-		  	<div class="panel panel-default">
-			  <div class="panel-heading">
-				<h3 class="panel-title">文章TOP10&nbsp;&nbsp;<a href="admin/article/list" style="font-size: 12px;color:green;">更多</a></h3>
-			  </div>
-				<table class="table table-striped table-bordered table-hover">
-				<thead>
-					<tr>
-						<th>序号</th>
-						<%  // 列表头部 %>
-						
-						<th>栏目</th> 
-						<th>名称</th> 
-						<th>排序</th> 
-						<th>状态</th> 
-						<th>评论</th> 
-						<th>推荐</th> 
-						<th>发布时间</th> 
-						<th>发布者</th> 
-					</tr>
-				</thead>
-				<tbody>
-				<% for(item in articles){ %>
-					<tr>
-						<td>${itemLP.index }</td>
-						<%  // 列表内容 %>
-						<td>${item.folderName  }</td>
-						<td title="${item.title}">
-						<a href="front/article/${item.id}.html" class="btn btn-link"  target="_blank">
-						<% if (strutil.length(item.title) > 12) { %>
-							${strutil.subStringTo(item.title, 0, 12)}...
-						<% 	} else { %>
-							${item.title}
-						<%  } %>
-						</a>
-						</td> 
-						<td>${item.sort}</td>
-						<td>
-						<% if(item.status=='2') { %>
-						隐藏
-						<%	} %>
-						<% if(item.status=='1') { %>
-						显示
-						<%	} %>
-						</td> 
-						<td>
-						<% if(item.is_comment==2) { %>
-						否
-						<%	} %>
-						<% if(item.is_comment==1) { %>
-						是
-						<%	} %>
-						</td> 
-						<td>
-						<% if(item.is_recommend==2) { %>
-						否
-						<%	} %>
-						<% if(item.is_recommend==1) { %>
-						是
-						<%	} %>
-						</td> 
-		 				<td>${item.publish_time}</td>
-						<td>${item.publish_user}</td> 
-						
-					</tr>
-				<% } %>
-				</tbody>
-			</table>
-		  </div>
-	  	  <% } %>
-	  		
-		  <% if(!isEmpty(comments)){ %>
-		  <!-- 最新回复 -->
-		  <div class="panel panel-default">
-			  <div class="panel-heading">
-				<h3 class="panel-title">回复TOP10&nbsp;&nbsp;<a href="admin/comment/list" style="font-size: 12px;color:green;">更多</a></h3>
-			  </div>
-			<table class="table table-striped table-bordered table-hover">
-				<thead>
-					<tr>
-						<th>序号</th>
-						<%  // 列表头部 %>
-						<th>创建时间</th> 
-						<th>文章</th> 
-						<th>回复人</th> 
-						<th>被回复人</th>
-						<th>内容</th> 
-					</tr>
-				</thead>
-				<tbody>
-				<% for(item in comments){ %>
-					<tr>
-					<td>${itemLP.index }</td>
-						<%  // 列表内容 %>
-						<td>${item.create_time}</td>
-						<td>
-						<a href="front/article/${item.article_id}.html#article_comment" class="btn btn-link"  target="_blank">
-						<% if (strutil.length(item.articleName) > 12) { %>
-							${strutil.subStringTo(item.articleName, 0, 12)}...
-						<% 	} else { %>
-							${item.articleName}
-						<%  } %>
-						</a>
-						</td> 
-						<td>${flyfox.getUserName(item.create_id)}</td> 
-						<td>${flyfox.getUserName(item.reply_userid)}</td> 
-						<td title="${flyfox.showHTML(item.content, 200, '...')}">
-							${flyfox.showHTML(item.content, 30, '...')}
-						</td> 
-					</tr>
-				<% } %>
-				</tbody>
-			</table>
-		  </div>
-	  <% } %>
-	  
-	  </div>
-	  
-	  
-	  <div class="col-md-4">
-	  		<!-- 用户信息 -->
-	  		<div class="panel panel-default">
-				  <div class="panel-heading">
-					<h3 class="panel-title">个人信息&nbsp;&nbsp;<a href="admin/person" style="font-size: 12px;color:green;">编辑</a></h3>
-				  </div>
-		   		<div class="panel-body">
-		  			<form class="form-horizontal" name="form1" action="" method="post">
-					<div class="form-group">
-					   <label for="username" class="col-sm-3 control-label">登录名</label>
-					   <div class="col-sm-9">
-					   	${nowUser.username!''}
-					   </div>
-					 </div>
-					 <div class="form-group">
-					   <label for="realname" class="col-sm-3 control-label">昵称</label>
-					   <div class="col-sm-9">
-					     ${nowUser.realname!''}
-					   </div>
-					 </div>
-					<div class="form-group">
-					    <label for="email" class="col-sm-3 control-label">email</label>
-					    <div class="col-sm-9">
-					    	${nowUser.email!''}
-					    </div>
-					  </div>
-					<div class="form-group">
-					    <label for="tel" class="col-sm-3 control-label">手机号</label>
-					    <div class="col-sm-9">
-					      ${nowUser.tel!''}
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="remark" class="col-sm-3 control-label">备注</label>
-					    <div class="col-sm-9">
-					    	${nowUser.remark!''}
-					    </div>
-					  </div>
-					  </form>
+		<ul class="nav navbar-top-links navbar-right">
+			<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown4"><i class="fa fa-envelope fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li>
+			<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown3"><i class="fa fa-tasks fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li>
+			<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown2"><i class="fa fa-bell fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li>
+			<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>John Doe</b> <i class="material-icons right">arrow_drop_down</i></a></li>
+		</ul>
+	</nav>
+	<!-- Dropdown Structure -->
+	<ul id="dropdown1" class="dropdown-content">
+		<li><a href="#"><i class="fa fa-user fa-fw"></i> My Profile</a>
+		</li>
+		<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+		</li>
+		<li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+		</li>
+	</ul>
+	<ul id="dropdown2" class="dropdown-content w250">
+		<li>
+			<div>
+				<i class="fa fa-comment fa-fw"></i> New Comment
+				<span class="pull-right text-muted small">4 min</span>
+			</div>
+			</a>
+		</li>
+		<li class="divider"></li>
+		<li>
+			<div>
+				<i class="fa fa-twitter fa-fw"></i> 3 New Followers
+				<span class="pull-right text-muted small">12 min</span>
+			</div>
+			</a>
+		</li>
+		<li class="divider"></li>
+		<li>
+			<div>
+				<i class="fa fa-envelope fa-fw"></i> Message Sent
+				<span class="pull-right text-muted small">4 min</span>
+			</div>
+			</a>
+		</li>
+		<li class="divider"></li>
+		<li>
+			<div>
+				<i class="fa fa-tasks fa-fw"></i> New Task
+				<span class="pull-right text-muted small">4 min</span>
+			</div>
+			</a>
+		</li>
+		<li class="divider"></li>
+		<li>
+			<div>
+				<i class="fa fa-upload fa-fw"></i> Server Rebooted
+				<span class="pull-right text-muted small">4 min</span>
+			</div>
+			</a>
+		</li>
+		<li class="divider"></li>
+		<li>
+			<a class="text-center" href="#">
+				<strong>See All Alerts</strong>
+				<i class="fa fa-angle-right"></i>
+			</a>
+		</li>
+	</ul>
+	<ul id="dropdown3" class="dropdown-content dropdown-tasks w250">
+		<li>
+			<a href="#">
+				<div>
+					<p>
+						<strong>Task 1</strong>
+						<span class="pull-right text-muted">60% Complete</span>
+					</p>
+					<div class="progress progress-striped active">
+						<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+							<span class="sr-only">60% Complete (success)</span>
+						</div>
+					</div>
 				</div>
+			</a>
+		</li>
+		<li class="divider"></li>
+		<li>
+			<a href="#">
+				<div>
+					<p>
+						<strong>Task 2</strong>
+						<span class="pull-right text-muted">28% Complete</span>
+					</p>
+					<div class="progress progress-striped active">
+						<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100" style="width: 28%">
+							<span class="sr-only">28% Complete</span>
+						</div>
+					</div>
+				</div>
+			</a>
+		</li>
+		<li class="divider"></li>
+		<li>
+			<a href="#">
+				<div>
+					<p>
+						<strong>Task 3</strong>
+						<span class="pull-right text-muted">60% Complete</span>
+					</p>
+					<div class="progress progress-striped active">
+						<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+							<span class="sr-only">60% Complete (warning)</span>
+						</div>
+					</div>
+				</div>
+			</a>
+		</li>
+		<li class="divider"></li>
+		<li>
+			<a href="#">
+				<div>
+					<p>
+						<strong>Task 4</strong>
+						<span class="pull-right text-muted">85% Complete</span>
+					</p>
+					<div class="progress progress-striped active">
+						<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
+							<span class="sr-only">85% Complete (danger)</span>
+						</div>
+					</div>
+				</div>
+			</a>
+		</li>
+		<li class="divider"></li>
+		<li>
+	</ul>
+	<ul id="dropdown4" class="dropdown-content dropdown-tasks w250 taskList">
+		<li>
+			<div>
+				<strong>John Doe</strong>
+				<span class="pull-right text-muted">
+                                        <em>Today</em>
+                                    </span>
 			</div>
-			
-			<% if(!isEmpty(pageViews)){ %>
-	  		<!-- 最新访客 -->
-	  		<div class="panel panel-default">
-			  <div class="panel-heading">
-				<h3 class="panel-title">访客TOP10&nbsp;&nbsp;<a href="admin/pageview" style="font-size: 12px;color:green;">更多</a></h3>
-			  </div>
-			  <ul class="list-group">
-			  	<% for(item in pageViews){ %>
-			  <li class="list-group-item">
-			  <span class="badge">${item.create_time}</span>
-			  ${item.ip}(${item.userid})
-			  </li>
-			  <% } %>
-			  </ul>
+			<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+			</a>
+		</li>
+		<li class="divider"></li>
+		<li>
+			<div>
+				<strong>John Smith</strong>
+				<span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
 			</div>
-			<% } %>
-			
-			<% if(!isEmpty(users)){ %>
-			<!-- 最新注册用户 -->
-		  	<div class="panel panel-default">
-			  <div class="panel-heading">
-				<h3 class="panel-title">注册用户TOP10&nbsp;&nbsp;<a href="system/user/list" style="font-size: 12px;color:green;">更多</a></h3>
-			  </div>
-			  <ul class="list-group">
-			  	<% for(item in users){ %>
-			  <li class="list-group-item">
-			  <span class="badge">${item.create_time}</span>
-			  用户：${item.realname}<br>邮箱：${item.email}
-			  </li>
-			  <% } %>
-			  </ul>
+			<p>Lorem Ipsum has been the industry's standard dummy text ever since an kwilnw...</p>
+			</a>
+		</li>
+		<li class="divider"></li>
+		<li>
+			<a href="#">
+				<div>
+					<strong>John Smith</strong>
+					<span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+				</div>
+				<p>Lorem Ipsum has been the industry's standard dummy text ever since the...</p>
+			</a>
+		</li>
+		<li class="divider"></li>
+		<li>
+			<a class="text-center" href="#">
+				<strong>Read All Messages</strong>
+				<i class="fa fa-angle-right"></i>
+			</a>
+		</li>
+	</ul>
+	<!--/. NAV TOP  -->
+	<nav class="navbar-default navbar-side" role="navigation">
+		<div class="sidebar-collapse">
+			<ul class="nav" id="main-menu">
+
+				<li>
+					<a class="active-menu waves-effect waves-dark" href="index.html"><i class="fa fa-dashboard"></i> 信息统计</a>
+				</li>
+				<li>
+					<a href="#" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i> 特卖区<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a href="temaiqu_c1.html">特卖区发布信息</a>
+						</li>
+						<li>
+							<a href="temaiqu_c2.html">特卖区发布信息【草稿箱】</a>
+						</li>
+						<li>
+							<a href="temaiqu_c3.html">待审核信息</a>
+						</li>
+						<li>
+							<a href="temaiqu_c4.html">历史发布</a>
+						</li>
+					</ul>
+				</li>
+
+				<li>
+					<a href="#" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 新闻中心<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a href="xinwenzhongxin_c1.html">新闻发布信息</a>
+						</li>
+						<li>
+							<a href="xinwenzhongxin_c2.html">待发布新闻【草稿箱】</a>
+						</li>
+						<li>
+							<a href="xinwenzhongxin_c3.html">待审核新闻</a>
+						</li>
+						<li>
+							<a href="xinwenzhongxin_c4.html">历史新闻</a>
+						</li>
+					</ul>
+				</li>
+
+				<li>
+					<a href="#" class="waves-effect waves-dark"><i class="fa fa-qrcode"></i> 技术需求<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a href="jishuxuqiu_c1.html">技术需求信息</a>
+						</li>
+						<li>
+							<a href="jishuxuqiu_c2.html">待发布需求【草稿箱】</a>
+						</li>
+						<li>
+							<a href="jishuxuqiu_c3.html">待审核需求</a>
+						</li>
+						<li>
+							<a href="jishuxuqiu_c4.html">历史需求</a>
+						</li>
+					</ul>
+				</li>
+
+				<li>
+					<a href="#" class="waves-effect waves-dark"><i class="fa fa-table"></i> 创客活动<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a href="chuangkehuodong_c1.html">创客活动信息</a>
+						</li>
+						<li>
+							<a href="chuangkehuodong_c2.html">待发布活动【草稿箱】</a>
+						</li>
+						<li>
+							<a href="chuangkehuodong_c3.html">待审核活动</a>
+						</li>
+						<li>
+							<a href="chuangkehuodong_c4.html">历史活动</a>
+						</li>
+					</ul>
+				</li>
+
+				<li>
+					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 政策法规<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a href="zhengcefagui_c1.html">政策法规信息</a>
+						</li>
+						<li>
+							<a href="zhengcefagui_c2.html">待发布信息【草稿箱】</a>
+						</li>
+						<li>
+							<a href="zhengcefagui_c3.html">待审核信息</a>
+						</li>
+						<li>
+							<a href="zhengcefagui_c4.html">历史信息</a>
+						</li>
+					</ul>
+				</li>
+
+				<li>
+					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 科普板块<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a href="kepubankuai_c1.html">科普信息</a>
+						</li>
+						<li>
+							<a href="kepubankuai_c2.html">待发布信息【草稿箱】</a>
+						</li>
+						<li>
+							<a href="kepubankuai_c3.html">待审核信息</a>
+						</li>
+						<li>
+							<a href="kepubankuai_c4.html">历史信息</a>
+						</li>
+					</ul>
+				</li>
+
+				<li>
+					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 项目申报<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a href="xiangmushenbao_c1.html">项目信息</a>
+						</li>
+						<li>
+							<a href="xiangmushenbao_c2.html">待发布项目【草稿箱】</a>
+						</li>
+						<li>
+							<a href="xiangmushenbao_c3.html">待审核项目</a>
+						</li>
+						<li>
+							<a href="xiangmushenbao_c4.html">历史项目</a>
+						</li>
+					</ul>
+				</li>
+
+				<li>
+					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 帮扶企业<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a href="bangfuqiye_c1.html">帮扶信息</a>
+						</li>
+						<li>
+							<a href="bangfuqiye_c2.html">待发布信息【草稿箱】</a>
+						</li>
+						<li>
+							<a href="bangfuqiye_c3.html">待审核帮扶申请</a>
+						</li>
+						<li>
+							<a href="bangfuqiye_c4.html">历史帮扶申请</a>
+						</li>
+					</ul>
+				</li>
+
+				<li>
+					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 安全管理<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a href="anquanguanli_c1.html">用户管理</a>
+						</li>
+						<li>
+							<a href="anquanguanli_c2.html">角色管理</a>
+						</li>
+					</ul>
+				</li>
+
+				<li>
+					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 网站设置<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a href="wangzhanshezhi_c1.html">Logo更换</a>
+						</li>
+						<li>
+							<a href="wangzhanshezhi_c2.html">关于我们</a>
+						</li>
+						<li>
+							<a href="wangzhanshezhi_c3.html">联系方式</a>
+						</li>
+						<li>
+							<a href="wangzhanshezhi_c4.html">广告轮播图</a>
+						</li>
+					</ul>
+				</li>
+
+
+			</ul>
+
+		</div>
+
+	</nav>
+	<!-- /. NAV SIDE  -->
+
+	<div id="page-wrapper">
+		<div class="header">
+			<h1 class="page-header">
+				信息统计
+			</h1>
+			<ol class="breadcrumb">
+				<li><a href="#">首页</a></li>
+				<li><a href="#">信息统计</a></li>
+				<li class="active">Data</li>
+			</ol>
+
+		</div>
+		<div id="page-inner">
+
+			<div class="dashboard-cards">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 col-md-3">
+
+						<div class="card horizontal cardIcon waves-effect waves-dark">
+							<div class="card-image green">
+								<i class="material-icons dp48">import_export</i>
+							</div>
+							<div class="card-stacked green">
+								<div class="card-content">
+									<h3>${specials}</h3>
+								</div>
+								<div class="card-action">
+									<strong>特派员</strong>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-3">
+
+						<div class="card horizontal cardIcon waves-effect waves-dark">
+							<div class="card-image green">
+								<i class="material-icons dp48">shopping_cart</i>
+							</div>
+							<div class="card-stacked green">
+								<div class="card-content">
+									<h3>${sales}</h3>
+								</div>
+								<div class="card-action">
+									<strong>特卖区</strong>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-3">
+
+						<div class="card horizontal cardIcon waves-effect waves-dark">
+							<div class="card-image green">
+								<i class="material-icons dp48">equalizer</i>
+							</div>
+							<div class="card-stacked green">
+								<div class="card-content">
+									<h3>${newscenters}</h3>
+								</div>
+								<div class="card-action">
+									<strong>新闻</strong>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-3">
+
+						<div class="card horizontal cardIcon waves-effect waves-dark">
+							<div class="card-image green">
+								<i class="material-icons dp48">supervisor_account</i>
+							</div>
+							<div class="card-stacked green">
+								<div class="card-content">
+									<h3>${trds}</h3>
+								</div>
+								<div class="card-action">
+									<strong>技术需求</strong>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-3">
+
+						<div class="card horizontal cardIcon waves-effect waves-dark">
+							<div class="card-image green">
+								<i class="material-icons dp48">supervisor_account</i>
+							</div>
+							<div class="card-stacked green">
+								<div class="card-content">
+									<h3>${makers}</h3>
+								</div>
+								<div class="card-action">
+									<strong>创客活动</strong>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-3">
+						<div class="card horizontal cardIcon waves-effect waves-dark">
+							<div class="card-image green">
+								<i class="material-icons dp48">supervisor_account</i>
+							</div>
+							<div class="card-stacked green">
+								<div class="card-content">
+									<h3>0</h3>
+								</div>
+								<div class="card-action">
+									<strong>专家对接</strong>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-3">
+
+						<div class="card horizontal cardIcon waves-effect waves-dark">
+							<div class="card-image green">
+								<i class="material-icons dp48">supervisor_account</i>
+							</div>
+							<div class="card-stacked green">
+								<div class="card-content">
+									<h3>88,888</h3>
+								</div>
+								<div class="card-action">
+									<strong>网站访问量</strong>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="card horizontal cardIcon waves-effect waves-dark">
+						<div class="card-image green">
+							<i class="material-icons dp48">supervisor_account</i>
+						</div>
+						<div class="card-stacked green">
+							<div class="card-content">
+								<h3>${addoils}</h3>
+							</div>
+							<div class="card-action">
+								<strong>帮扶企业</strong>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
 			</div>
-			<% } %>
-			
-			
+		</div>
+
+
+		<footer>
+			<p>
+				All right reserved. Template WebThemez.com.  More Templates
+				<a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a>
+				<a Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+			</p>
+
+
+		</footer>
+		<div class="clearBoth"></div>
 	</div>
-
+	<!-- /. PAGE INNER  -->
 </div>
+<!-- /. PAGE WRAPPER  -->
+</div>
+<!-- /. WRAPPER  -->
+<!-- JS Scripts-->
+<!-- jQuery Js -->
+<script src="${BASE_PATH }static/backend/assets/js/jquery-1.10.2.js"></script>
 
-<%}; %>
+<!-- Bootstrap Js -->
+<script src="${BASE_PATH }static/backend/assets/js/bootstrap.min.js"></script>
 
-<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
-DIRECTIVE SAFE_OUTPUT_CLOSE;
-<%} %>
+<script src="${BASE_PATH }static/backend/assets/materialize/js/materialize.min.js"></script>
+
+<!-- Metis Menu Js -->
+<script src="${BASE_PATH }static/backend/assets/js/jquery.metisMenu.js"></script>
+<!-- Morris Chart Js -->
+<script src="${BASE_PATH }static/backend/assets/js/morris/raphael-2.1.0.min.js"></script>
+<script src="${BASE_PATH }static/backend/assets/js/morris/morris.js"></script>
+
+
+<script src="${BASE_PATH }static/backend/assets/js/easypiechart.js"></script>
+<script src="${BASE_PATH }static/backend/assets/js/easypiechart-data.js"></script>
+
+<script src="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/jquery.chart.js"></script>
+
+<!-- Custom Js -->
+<script src="${BASE_PATH }static/backend/assets/js/custom-scripts.js"></script>
+
+
+</body>
+
+</html>

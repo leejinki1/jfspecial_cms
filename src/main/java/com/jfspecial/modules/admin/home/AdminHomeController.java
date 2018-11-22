@@ -1,5 +1,6 @@
 package com.jfspecial.modules.admin.home;
 
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfspecial.component.base.BaseProjectController;
 import com.jfspecial.jfinal.base.Paginator;
@@ -24,7 +25,7 @@ public class AdminHomeController extends BaseProjectController {
 		}
 		setAttr("nowUser", user);
 
-		
+		/*
 		// 最新文件
 		Page<TbArticle> articlePage = TbArticle.dao.paginate(new Paginator(1, 10), "select t.*,f.name as folderName " //
 				, " from tb_article t left join tb_folder f on f.id = t.folder_id " //
@@ -45,7 +46,7 @@ public class AdminHomeController extends BaseProjectController {
 				" from tb_comment t " //
 						+ " left join tb_article a on a.id = t.article_id where 1=1 order by t.id desc  ");
 		setAttr("comments", commentPage.getList());
-
+*/
 		// 最新用户
 		Page<SysUser> userPage = SysUser.dao.paginate(new Paginator(1, 10), "select t.*,d.name as departname ", //
 				" from sys_user t left join sys_department d on d.id = t.departid " //
@@ -57,6 +58,37 @@ public class AdminHomeController extends BaseProjectController {
 		Page<TbPageView> pageViewPage = TbPageView.dao.paginate(new Paginator(1, 10), "select t.*", //
 				" from tb_pageview t order by id desc ");
 		setAttr("pageViews", pageViewPage.getList());
+
+
+		//特派员 300
+		long  specials= Db.queryLong("select count(*)  from tb_sale where 1=1");
+		//特卖区 301
+		long  sales=Db.queryLong("select count(*)  from tb_sale where 1=1 ");
+		//新闻中心 302
+		long newscenters=Db.queryLong("select count(*)  from tb_newscenter where 1=1");
+		//技术需求 303
+		//var trds=temp.articlePage(1,10,303);
+		long trds=Db.queryLong("select count(*)  from tb_trd where 1=1");
+		//创客活动 304
+		long makers=Db.queryLong("select count(*)  from tb_maker where 1=1");
+		//政策法规 305
+		long policys=Db.queryLong("select count(*)  from tb_policy where 1=1");
+		//科普板块 306
+		long spps=Db.queryLong("select count(*)  from tb_spp where 1=1");
+		//项目申报 307
+		long projectapps=Db.queryLong("select count(*)  from tb_projectapp where 1=1");
+		//帮扶企业 308
+		long addoils=Db.queryLong("select count(*)  from tb_addoil where 1=1");
+
+		setAttr("specials", specials);
+		setAttr("sales", sales);
+		setAttr("newscenters", newscenters);
+		setAttr("trds", trds);
+		setAttr("makers", makers);
+		setAttr("policys", policys);
+		setAttr("spps", spps);
+		setAttr("projectapps", projectapps);
+		setAttr("addoils", addoils);
 
 		render(path + "home.html");
 	}
