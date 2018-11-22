@@ -62,7 +62,7 @@ $(function(){
 	$(".centerBox-left-c1").load("static/frontend/html/maker/chuangkehuodong_left_1.html");
 	
 	$(".centerBox-right-c1").load("static/frontend/html/maker/chuangkehuodong_right_1.html");
-	$(".centerBox-right-c2").load("static/frontend/html/maker/chuangkehuodong_test1.html");
+	//$(".centerBox-right-c2").load("static/frontend/html/maker/chuangkehuodong_test1.html");
 	/*$(".centerBox-right-c1").load("tepaiyuan_right_1.html");
 	$(".centerBox-right-c2").load("test1.html");*/
 	

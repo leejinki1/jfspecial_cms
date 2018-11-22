@@ -19,6 +19,6 @@ $(function(){
 	$(".centerBox-left-c2").load("static/frontend/html/sale/temaiqu_left_2.html");
 	
 	$(".centerBox-right-c1").load("static/frontend/html/sale/temaiqu_right_1.html");
-	$(".centerBox-right-c2").load("static/frontend/html/sale/temaiqu_right_2.html");
+	//$(".centerBox-right-c2").load("static/frontend/html/sale/temaiqu_right_2.html");
 })
   

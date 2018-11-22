@@ -23,7 +23,7 @@ $(function(){
 	$(".centerBox-left-c2").load("static/frontend/html/addoil/bangfuqiye_left_2.html");
 	
 	$(".centerBox-right-c1").load("static/frontend/html/addoil/bangfuqiye_right_1.html");
-	$(".centerBox-right-c2").load("static/frontend/html/addoil/bangfuqiye_type1.html");
+//	$(".centerBox-right-c2").load("static/frontend/html/addoil/bangfuqiye_type1.html");
 	/*$(".centerBox-right-c1").load("tepaiyuan_right_1.html");
 	$(".centerBox-right-c2").load("test1.html");*/
 	
