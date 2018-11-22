@@ -30,7 +30,6 @@ public class SaleController extends BaseProjectController {
 
 	public void list() {
 		TbSale model = getModelByAttr(TbSale.class);
-
 		SQLUtils sql = new SQLUtils(" from tb_sale t where 1=1 ");
 		if (model.getAttrValues().length != 0) {
 			sql.setAlias("t");
@@ -56,6 +55,102 @@ public class SaleController extends BaseProjectController {
 		setAttr("page", page);
 		setAttr("attr", model);
 		render(path + "list.html");
+	}
+
+	public void list_approve() {
+		TbSale model = getModelByAttr(TbSale.class);
+
+		SQLUtils sql = new SQLUtils(" from tb_sale t where 1=1 ");
+		if (model.getAttrValues().length != 0) {
+			sql.setAlias("t");
+			sql.whereEquals("album_id", model.getAlbumId());
+			sql.whereLike("name", model.getStr("name"));
+			sql.whereEquals("status", model.getInt("status"));
+		}
+
+		// 排序
+		String orderBy = getBaseForm().getOrderBy();
+		if (StrUtils.isEmpty(orderBy)) {
+			sql.append(" order by sort,id desc");
+		} else {
+			sql.append(" order by ").append(orderBy);
+		}
+
+		Page<TbSale> page = TbSale.dao.paginate(getPaginator(), "select t.* ", //
+				sql.toString().toString());
+
+		// 下拉框
+		setAttr("selectAlbum", new SaleAlbumService().selectAlbum(model.getAlbumId()));
+
+		setAttr("page", page);
+		setAttr("attr", model);
+		render(path + "list_approve.html");
+	}
+
+	public void list_drafts() {
+		TbSale model = getModelByAttr(TbSale.class);
+
+		SQLUtils sql = new SQLUtils(" from tb_sale t where 1=1 ");
+		if (model.getAttrValues().length != 0) {
+			sql.setAlias("t");
+			sql.whereEquals("album_id", model.getAlbumId());
+			sql.whereLike("name", model.getStr("name"));
+			sql.whereEquals("status", model.getInt("status"));
+		}
+
+		// 排序
+		String orderBy = getBaseForm().getOrderBy();
+		if (StrUtils.isEmpty(orderBy)) {
+			sql.append(" order by sort,id desc");
+		} else {
+			sql.append(" order by ").append(orderBy);
+		}
+
+		Page<TbSale> page = TbSale.dao.paginate(getPaginator(), "select t.* ", //
+				sql.toString().toString());
+
+		// 下拉框
+		setAttr("selectAlbum", new SaleAlbumService().selectAlbum(model.getAlbumId()));
+
+		setAttr("page", page);
+		setAttr("attr", model);
+		render(path + "list_drafts.html");
+	}
+	public void list_history() {
+		TbSale model = getModelByAttr(TbSale.class);
+		SQLUtils sql = new SQLUtils(" from tb_sale t where 1=1 ");
+		if (model.getAttrValues().length != 0) {
+			sql.setAlias("t");
+			sql.whereEquals("album_id", model.getAlbumId());
+			sql.whereLike("name", model.getStr("name"));
+			sql.whereEquals("status", model.getInt("status"));
+		}
+		// 排序
+		String orderBy = getBaseForm().getOrderBy();
+		if (StrUtils.isEmpty(orderBy)) {
+			sql.append(" order by sort,id desc");
+		} else {
+			sql.append(" order by ").append(orderBy);
+		}
+		Page<TbSale> page = TbSale.dao.paginate(getPaginator(), "select t.* ", //
+				sql.toString().toString());
+		// 下拉框
+		setAttr("selectAlbum", new SaleAlbumService().selectAlbum(model.getAlbumId()));
+
+		setAttr("page", page);
+		setAttr("attr", model);
+		render(path + "list_history.html");
+	}
+
+	public void publish() {
+		// 获取页面信息,设置目录传入
+		TbSale attr = getModel(TbSale.class);
+		setAttr("model", attr);
+
+		// 查询下拉框
+		setAttr("selectAlbum", new SaleAlbumService().selectAlbum(attr.getAlbumId()));
+
+		render(path + "publish.html");
 	}
 
 	public void add() {

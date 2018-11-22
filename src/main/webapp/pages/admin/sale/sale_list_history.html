@@ -18,7 +18,8 @@
 	<link href="${BASE_PATH }static/backend/assets/css/custom-styles.css" rel="stylesheet" />
 	<!-- Google Fonts-->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-	<link rel="${BASE_PATH }static/backend/stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css">
+	<link rel="stylesheet" href="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/cssCharts.css">
+	<link rel="stylesheet" href="${BASE_PATH }static/backend/adminStyle/all.css" />
 </head>
 <body>
 <div id="wrapper">
@@ -220,10 +221,10 @@
 			<ul class="nav" id="main-menu">
 
 				<li>
-					<a href="index.html" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 信息统计</a>
+					<a href="../home" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 信息统计</a>
 				</li>
 				<li>
-					<a href="temaiqu_c1.html" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 特卖区发布信息</a>
+					<a href="publish" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 历史发布</a>
 				</li>
 
 			</ul>
@@ -236,12 +237,12 @@
 	<div id="page-wrapper">
 		<div class="header">
 			<h1 class="page-header">
-				特卖区发布信息
+				历史发布
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#">首页</a></li>
 				<li><a href="#">特卖区 </a></li>
-				<li><a href="#">特卖区发布信息 </a></li>
+				<li><a href="#">历史发布 </a></li>
 				<li class="active">Data</li>
 			</ol>
 		</div>
@@ -252,102 +253,88 @@
 				<div class="col-lg-12">
 					<div class="card">
 						<div class="card-action">
-							发布信息
+							历史发布记录
 						</div>
 						<div class="card-content">
-							<form class="col s12 form-horizontal">
-								<div class="row">
-									<div class="input-field col s12">
-										<input value="" id="first_name2" type="text" class="validate">
-										<label class="active" for="first_name2">标题</label>
-									</div>
-									<div class="file-field input-field col s12">
-										<div class="btn">
-											<span>文件上传</span>
-											<input type="file">
-										</div>
-										<div class="file-path-wrapper">
-											<input class="file-path validate" type="text" value="可设置图片、上传超链接、视频">
-										</div>
-									</div>
-									<div class="file-field input-field col s12">
-										<div class="btn"/>
-										<span>文件上传</span>
-										<input type="file">
-									</div>
-									<div class="file-path-wrapper">
-										<input class="file-path validate" type="text" value="上传封面图片、图片可选择性上传">
-									</div>
-								</div>
-								<div class="input-field col s12">
-									<input value="" id="first_name2" type="text" class="validate">
-									<label class="active" for="first_name2">属性</label>
-								</div>
-								<div class="input-field col s12">
-									<input value="" id="first_name2" type="text" class="validate">
-									<label class="active" for="first_name2">价格</label>
-								</div>
-								<div class="input-field col s12">
-									<input value="" id="first_name2" type="text" class="validate">
-									<label class="active" for="first_name2">数量</label>
-								</div>
-								<div class="input-field col s12">
-									<input value="" id="first_name2" type="text" class="validate">
-									<label class="active" for="first_name2">单位</label>
-								</div>
-								<div class="input-field col s12">
-									<input value="" id="first_name2" type="text" class="validate">
-									<label class="active" for="first_name2">分类设置</label>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-offset-3 col-sm-9">
-										<div class="checkbox">
-											<label>
-												<a class="waves-effect waves-light btn-large">保存草稿箱</a>&nbsp;
-												<a class="waves-effect waves-light btn-large">确认发布</a>
-											</label>
-										</div>
-									</div>
-								</div>
-
-
+							<table class="table table-striped highlight centered responsive-table">
+								<thead>
+								<tr>
+									<th>序号</th>
+									<th>标题</th>
+									<th>发布人</th>
+									<th>时间</th>
+									<th>操作</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>1</td>
+									<td>鸡蛋100块钱一斤</td>
+									<td>狗蛋</td>
+									<td>2018-11-19 14:51:59</td>
+									<td>
+										<a class="waves-effect waves-light btn">删除</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>白菜200块钱一颗</td>
+									<td>狗剩</td>
+									<td>2018-11-19 14:51:59</td>
+									<td>
+										<a class="waves-effect waves-light btn">删除</a>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+							<p class="pageBtnList">
+								<button type="button" class="btn btn-default btn-sm">首页</button>
+								<button type="button" class="btn btn-default btn-sm img-circle">上一页</button>
+								<button type="button" class="btn btn-default btn-xs">1</button>
+								<button type="button" class="btn btn-default btn-xs">2</button>
+								<button type="button" class="btn btn-default btn-xs">3</button>
+								<button type="button" class="btn btn-default btn-xs">4</button>
+								<button type="button" class="btn btn-default btn-xs">5</button>
+								<button type="button" class="btn btn-default btn-sm img-circle">下一页</button>
+								<button type="button" class="btn btn-default btn-sm">尾页</button>
+							</p>
+							<p class="pageBtnList">
+								第<span>1</span>页&nbsp;共<span>6</span>页&nbsp;共<span>30</span>条记录
+							</p>
+							<div class="clearBoth"></div>
 						</div>
-						</form>
-						<div class="clearBoth"></div>
 
 					</div>
-
 				</div>
 			</div>
-		</div>
 
-	</div><!-- /. PAGE WRAPPER  -->
+		</div><!-- /. PAGE WRAPPER  -->
 
-</div>
-<!-- /. WRAPPER  -->
-<!-- JS Scripts-->
-<!-- jQuery Js -->
-<script src="${BASE_PATH }static/backend/assets/js/jquery-1.10.2.js"></script>
+	</div>
+	<!-- /. WRAPPER  -->
+	<!-- JS Scripts-->
+	<!-- jQuery Js -->
+	<script src="${BASE_PATH }static/backend/assets/js/jquery-1.10.2.js"></script>
 
-<!-- Bootstrap Js -->
-<script src="${BASE_PATH }static/backend/assets/js/bootstrap.min.js"></script>
+	<!-- Bootstrap Js -->
+	<script src="${BASE_PATH }static/backend/assets/js/bootstrap.min.js"></script>
 
-<script src="${BASE_PATH }static/backend/assets/materialize/js/materialize.min.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/materialize/js/materialize.min.js"></script>
 
-<!-- Metis Menu Js -->
-<script src="${BASE_PATH }static/backend/assets/js/jquery.metisMenu.js"></script>
-<!-- Morris Chart Js -->
-<script src="${BASE_PATH }static/backend/assets/js/morris/raphael-2.1.0.min.js"></script>
-<script src="${BASE_PATH }static/backend/assets/js/morris/morris.js"></script>
+	<!-- Metis Menu Js -->
+	<script src="${BASE_PATH }static/backend/assets/js/jquery.metisMenu.js"></script>
+	<!-- Morris Chart Js -->
+	<script src="${BASE_PATH }static/backend/assets/js/morris/raphael-2.1.0.min.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/morris/morris.js"></script>
 
 
-<script src="${BASE_PATH }static/backend/assets/js/easypiechart.js"></script>
-<script src="${BASE_PATH }static/backend/assets/js/easypiechart-data.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/easypiechart.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/easypiechart-data.js"></script>
 
-<script src="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/jquery.chart.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/jquery.chart.js"></script>
 
-<!-- Custom Js -->
-<script src="${BASE_PATH }static/backend/assets/js/custom-scripts.js"></script>
+	<!-- Custom Js -->
+	<script src="${BASE_PATH }static/backend/assets/js/custom-scripts.js"></script>
 
 
 </body>

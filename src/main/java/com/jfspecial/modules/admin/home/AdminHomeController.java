@@ -6,10 +6,7 @@ import com.jfspecial.component.base.BaseProjectController;
 import com.jfspecial.jfinal.base.Paginator;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
 import com.jfspecial.modules.CommonController;
-import com.jfspecial.modules.admin.article.TbArticle;
-import com.jfspecial.modules.admin.comment.TbComment;
 import com.jfspecial.modules.admin.pageview.TbPageView;
-import com.jfspecial.modules.admin.sale.TbSale;
 import com.jfspecial.system.user.SysUser;
 
 @ControllerBind(controllerKey = "/admin/home")
