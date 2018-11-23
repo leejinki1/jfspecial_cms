@@ -12,7 +12,7 @@ import com.jfspecial.util.StrUtils;
 /**
  * 站点
  * 
- * @author flyfox 2014-4-24
+ * @author ljk
  */
 @ControllerBind(controllerKey = "/admin/site")
 public class SiteController extends BaseProjectController {

@@ -1,0 +1,24 @@
+<h4>帮扶企业</h4>
+<ul>
+	<% var x=0; for(item in albumlist){ x++;%>
+	<% if  (session.albumId==item.id) { %>
+	<li>
+		<a href="${BASE_PATH }front/addoil/${item.id}" title="${item.name}">
+			 <button type="button" class="btn btn-xs tepaiyuan_c1" onclick="" style="border: 2px solid;">${item.name}</button>
+		</a>
+	</li>
+	<% } else { %>
+	<li>
+		<a href="${BASE_PATH }front/addoil/${item.id}" title="${item.name}">
+			<button type="button" class="btn btn-xs tepaiyuan_c2" onclick="" >${item.name}</button>
+		</a>
+	</li>
+	<% } %>
+	<% } %>
+	<!--<li><button type="button" class="btn btn-xs tepaiyuan_c2" onclick="">分类二</button></li>
+	<li><button type="button" class="btn btn-xs tepaiyuan_c3" onclick="">分类三</button></li>-->
+</ul>
+
+
+
+
