@@ -30,14 +30,14 @@ import com.jfspecial.util.StrUtils;
 import java.io.File;
 
 /**
- * 网站配置
+ * 网站配置/联系方式
  * 
  * @author ZR2018.11.20
  */
-@ControllerBind(controllerKey = "/admin/introduction")
+@ControllerBind(controllerKey = "/admin/aboutweb/contact")
 public class WebInfoController extends BaseController {
 
-	private static final String path = "/pages/admin/aboutweb/wangzhanshezhi_";
+	private static final String path = "/pages/admin/aboutweb/setting_";
 	
 	public void index() {
 		//System.out.println("测试1:index");//测试方法1
@@ -49,7 +49,7 @@ public class WebInfoController extends BaseController {
 		SysAboutus model = SysAboutus.dao.findById("1");//根据id查出网站的信息,放在model对象中
 		//System.out.println("测试2.1:"+model);
 		setAttr("model",model);
-		render(path + "c3.html");
+		render(path + "contact.html");
 
 	}
 

@@ -1,6 +1,5 @@
 package com.jfspecial.modules.admin.aboutweb;
 
-
 import com.jfspecial.jfinal.base.BaseController;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
 import com.jfspecial.jfinal.component.db.SQLUtils;
@@ -8,14 +7,14 @@ import com.jfspecial.jfinal.component.db.SQLUtils;
 import javax.xml.ws.RequestWrapper;
 
 /**
- * 网站配置
+ * 网站配置/关于我们
  * 
  * @author ZR2018.11.20
  */
-@ControllerBind(controllerKey = "/admin/aboutweb")
+@ControllerBind(controllerKey = "/admin/aboutweb/aboutus")
 public class AboutusController extends BaseController {
 
-	private static final String path = "/pages/admin/aboutweb/wangzhanshezhi_";
+	private static final String path = "/pages/admin/aboutweb/setting_";
 	
 	public void index() {
 
@@ -28,7 +27,7 @@ public class AboutusController extends BaseController {
 		SysAboutus model = SysAboutus.dao.findById("1");//根据id查出网站的信息,放在model对象中
 		//System.out.println("测试2.1:"+model);
 		setAttr("model",model);
-		render(path + "c2.html");
+		render(path + "aboutus.html");
 
 	}
 
@@ -65,6 +64,7 @@ public class AboutusController extends BaseController {
 		setAttr("model", model);
 		renderMessage("保存成功");
 		show();
+
 	}
 }
 

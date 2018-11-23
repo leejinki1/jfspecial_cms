@@ -8,14 +8,14 @@ import com.jfspecial.jfinal.component.db.SQLUtils;
 import com.jfspecial.system.file.util.FileUploadUtils;
 
 /**
- * 网站配置
+ * 网站配置/logo更换
  * 
  * @author ZR2018.11.20
  */
-@ControllerBind(controllerKey = "/admin/logo")
+@ControllerBind(controllerKey = "/admin/aboutweb/logo")
 public class LogoController extends BaseController {
 
-	private static final String path = "/pages/admin/aboutweb/wangzhanshezhi_";
+	private static final String path = "/pages/admin/aboutweb/setting_";
 
 	public void index() {
 
@@ -28,7 +28,7 @@ public class LogoController extends BaseController {
 		SysAboutus model = SysAboutus.dao.findById("1");//根据id查出网站的信息,放在model对象中
 		//System.out.println("测试2.1:"+model);
 		setAttr("model",model);
-		render(path + "c1.html");
+		render(path + "logo.html");
 
 	}
 
@@ -71,7 +71,8 @@ public class LogoController extends BaseController {
 		System.out.println("测试:"+model);//测试
 		setAttr("model", model);
 		renderMessage("保存成功");
-		show();
+
+		render( "/pages/admin/aboutweb/setting_logo.html");
 	}
 }
 
