@@ -20,6 +20,9 @@ public class SysAboutus extends BaseProjectModel<SysAboutus> {
     private String EMAIL="email";//电子邮件
     private String UPDATEID="updateid";//修改人的id
     private String UPDATEDATE ="updatedate";//修改日期
+    private String BANNER1="banner1";//banner1主页轮播图1链接
+    private String BANNER2="banner2";//banner2主页轮播图2链接
+    private String BANNER3="banner3";//banner3主页轮播图3链接
 
     public SysAboutus setId(String value) {
         set(ID, value);
@@ -103,6 +106,9 @@ public class SysAboutus extends BaseProjectModel<SysAboutus> {
                 ", EMAIL='" + EMAIL + '\'' +
                 ", UPDATEID='" + UPDATEID + '\'' +
                 ", UPDATEDATE='" + UPDATEDATE + '\'' +
+                ", BANNER1='" + BANNER1 + '\'' +
+                ", BANNER2='" + BANNER2 + '\'' +
+                ", BANNER3='" + BANNER3 + '\'' +
                 '}';
     }
 
@@ -114,12 +120,35 @@ public class SysAboutus extends BaseProjectModel<SysAboutus> {
         return get(UPDATEID);
     }
 
+
     public SysAboutus setUpdatedate(String value){
         set(UPDATEDATE,value);
         return this;
     }
     public String getUpdatedate(){
         return get(UPDATEDATE);
+    }
+
+    public SysAboutus setBanner1(String value){
+        set(BANNER1,value);
+        return this;
+    }
+    public String getBanner1(){
+        return get(BANNER1);
+    }
+    public SysAboutus setBanner2(String value){
+        set(BANNER2,value);
+        return this;
+    }
+    public String getBanner2(){
+        return get(BANNER2);
+    }
+    public SysAboutus setBanner3(String value){
+        set(BANNER3,value);
+        return this;
+    }
+    public String getBanner3(){
+        return get(BANNER3);
     }
 
 }

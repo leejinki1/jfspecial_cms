@@ -8,11 +8,11 @@ import com.jfspecial.jfinal.component.db.SQLUtils;
 import com.jfspecial.system.file.util.FileUploadUtils;
 
 /**
- * 网站配置/logo更换
+ * 网站配置/logo更换/logo
  * 
  * @author ZR2018.11.20
  */
-@ControllerBind(controllerKey = "/admin/aboutweb/logo")
+@ControllerBind(controllerKey = "/admin/logo")
 public class LogoController extends BaseController {
 
 	private static final String path = "/pages/admin/aboutweb/setting_";

@@ -30,11 +30,11 @@ import com.jfspecial.util.StrUtils;
 import java.io.File;
 
 /**
- * 网站配置/联系方式
+ * 网站配置/联系方式/contact
  * 
  * @author ZR2018.11.20
  */
-@ControllerBind(controllerKey = "/admin/aboutweb/contact")
+@ControllerBind(controllerKey = "/admin/hostcontact")
 public class WebInfoController extends BaseController {
 
 	private static final String path = "/pages/admin/aboutweb/setting_";

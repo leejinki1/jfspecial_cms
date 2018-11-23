@@ -7,11 +7,11 @@ import com.jfspecial.jfinal.component.db.SQLUtils;
 import javax.xml.ws.RequestWrapper;
 
 /**
- * 网站配置/关于我们
+ * 网站配置/关于我们/aboutus
  * 
  * @author ZR2018.11.20
  */
-@ControllerBind(controllerKey = "/admin/aboutweb/aboutus")
+@ControllerBind(controllerKey = "/admin/aboutus")
 public class AboutusController extends BaseController {
 
 	private static final String path = "/pages/admin/aboutweb/setting_";
