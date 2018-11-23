@@ -19,14 +19,14 @@ $(function(){
 	$(".wei").load("static/frontend/html/footer.html");
 	//默认第一个--特派员--
 	/*特派员的初始化*/
-	$(".centerBox-left-c1").load("static/frontend/html/policy/zhengcefagui_left_1.html");
+	//$(".centerBox-left-c1").load("static/frontend/html/policy/zhengcefagui_left_1.html");
 	$(".centerBox-left-c2").load("static/frontend/html/policy/zhengcefagui_left_2.html");
 	
 	$(".centerBox-right-c1").load("static/frontend/html/policy/zhengcefagui_right_1.html");
-	// $(".centerBox-right-c2").load("static/frontend/html/policy/zhengcefagui_type1.html");
-	/*$(".centerBox-right-c1").load("tepaiyuan_right_1.html");
-	$(".centerBox-right-c2").load("test1.html");*/
-	
+    	// $(".centerBox-right-c2").load("static/frontend/html/policy/zhengcefagui_type1.html");
+    	/*$(".centerBox-right-c1").load("tepaiyuan_right_1.html");
+    	$(".centerBox-right-c2").load("test1.html");*/
+
 	
 	
 })

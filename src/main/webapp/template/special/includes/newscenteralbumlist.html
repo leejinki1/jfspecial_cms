@@ -1,0 +1,22 @@
+<h4>新闻中心</h4>
+<ul>
+	<% var x=0; for(item in albumlist){ x++;%>
+	<% if  (session.albumId==item.id) { %>
+	<li>
+		<a href="${BASE_PATH }front/newscenter/${item.id}" title="${item.name}">
+			 <button type="button" class="btn btn-xs tepaiyuan_c1" onclick="" style="border: 2px solid;">${item.name}</button>
+		</a>
+	</li>
+	<% } else { %>
+	<li>
+		<a href="${BASE_PATH }front/newscenter/${item.id}" title="${item.name}">
+			<button type="button" class="btn btn-xs tepaiyuan_c2" onclick="" >${item.name}</button>
+		</a>
+	</li>
+	<% } %>
+	<% } %>
+</ul>
+
+
+
+

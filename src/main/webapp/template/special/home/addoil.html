@@ -36,19 +36,29 @@
         <!--中间--左边-->
         <div class="centerBox-left col-md-4 col-sm-4 col-xs-12">
             <div class="centerBox-left-c1">
-
+                <% var albums=tempAddOil.albums();
+                %>
+                <% include("/template/special/includes/addoilalbumlist.html",{albumlist:albums}){} %>
             </div>
             <div class="centerBox-left-c2"></div>
         </div>
         <!--中间--右边-->
         <div class="centerBox-right col-md-8 col-sm-8 col-xs-12">
             <div class="centerBox-right-c1">
-
             </div>
 
             <div class="centerBox-right-c2">
                 <% var defalutimg= 'static/front/images/news.jpg';%>
-                <% var page=tempAddOil.addoils(1,5,1);%>
+                <%
+                var page;
+                if(!isEmpty(session.albumId)) {
+                var albumId= session.albumId;
+                page = tempAddOil.addoils(1, 5, parseInt(albumId));
+                }
+                else{
+                page = tempAddOil.addoils(1, 5);
+                }
+                %>
                 <!--文章列表-->
                 <% include("/template/special/includes/addoillist.html",{articlelist:page,defalutimg:defalutimg!''}){} %>
             </div>

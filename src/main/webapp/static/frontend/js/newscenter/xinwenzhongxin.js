@@ -19,7 +19,7 @@ $(function(){
 	$(".wei").load("static/frontend/html/footer.html");
 	//默认第一个--特派员--
 	/*特派员的初始化*/
-	$(".centerBox-left-c1").load("static/frontend/html/newscenter/xinwenzhongxin_left_1.html");
+   //	$(".centerBox-left-c1").load("static/frontend/html/newscenter/xinwenzhongxin_left_1.html");
 	$(".centerBox-left-c2").load("static/frontend/html/newscenter/xinwenzhongxin_left_2.html");
 	
 	$(".centerBox-right-c1").load("static/frontend/html/newscenter/xinwenzhongxin_right_1.html");

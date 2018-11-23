@@ -36,7 +36,9 @@
         <!--中间--左边-->
         <div class="centerBox-left col-md-4 col-sm-4 col-xs-12">
             <div class="centerBox-left-c1">
-
+                <% var albums=tempSpp.albums();
+                %>
+                <% include("/template/special/includes/sppalbumlist.html",{albumlist:albums}){} %>
             </div>
             <div class="centerBox-left-c2"></div>
         </div>
@@ -48,7 +50,16 @@
 
             <div class="centerBox-right-c2">
                 <% var defalutimg= 'static/front/images/news.jpg';%>
-                <% var page=tempSpp.spps(1,5,1);%>
+                <%
+                var page;
+                if(!isEmpty(session.albumId)) {
+                var albumId= session.albumId;
+                page = tempSpp.spps(1, 5, parseInt(albumId));
+                }
+                else{
+                page = tempSpp.spps(1, 5);
+                }
+                %>
                 <!--文章列表-->
                 <% include("/template/special/includes/spplist.html",{articlelist:page,defalutimg:defalutimg!''}){} %>
             </div>

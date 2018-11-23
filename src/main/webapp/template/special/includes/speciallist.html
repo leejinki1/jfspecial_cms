@@ -1,0 +1,37 @@
+	 <%
+	 	// 传递变量
+	 	// 默认图片 defalutimg 选填
+	 	var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.userid;
+	 %>
+
+	 <h4>特派员列表</h4>
+	 <table class="table table-striped">
+		 <thead>
+		 <tr>
+			 <td>编号</td>
+			 <td>姓名</td>
+			 <td>性别</td>
+			 <td>年龄</td>
+			 <td>生日</td>
+			 <td>手机</td>
+		 </tr>
+		 </thead>
+		 <tbody>
+		 <% for(item in peoplelist.list){ %>
+		 <tr>
+			 <td>${item.userid}</td>
+			 <td>${item.realname}</td>
+			 <td>${item.sex}</td>
+			 <td>${item.age}</td>
+			 <td>${item.birthday}</td>
+			 <td>${item.tel}</td>
+		 </tr>
+		 <% } %>
+
+		 </tbody>
+	 </table>
+
+	 <%include("/template/special/includes/paginatorbar.html",{page:peoplelist}){} %>
+
+
+

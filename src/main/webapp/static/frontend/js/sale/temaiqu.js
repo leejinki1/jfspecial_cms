@@ -15,7 +15,7 @@ $(function(){
 	$(".tou").load("static/frontend/html/header.html");
 	$(".wei").load("static/frontend/html/footer.html");
 	/*特卖区的初始化*/
-	$(".centerBox-left-c1").load("static/frontend/html/sale/temaiqu_left_1.html");
+	//$(".centerBox-left-c1").load("static/frontend/html/sale/temaiqu_left_1.html");
 	$(".centerBox-left-c2").load("static/frontend/html/sale/temaiqu_left_2.html");
 	
 	$(".centerBox-right-c1").load("static/frontend/html/sale/temaiqu_right_1.html");

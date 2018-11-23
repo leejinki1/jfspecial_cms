@@ -95,6 +95,7 @@ public class BaseConfig extends JFinalConfig {
 		groupTemplate.registerFunctionPackage("tempSpp", TemplateSppService.class);
 		groupTemplate.registerFunctionPackage("tempProjectApp", TemplateProjectAppService.class);
 		groupTemplate.registerFunctionPackage("tempAddOil", TemplateAddoilService.class);
+		groupTemplate.registerFunctionPackage("tempSpecial", TemplateSpecialService.class);
 	};
 	
 	/**
@@ -174,7 +175,7 @@ public class BaseConfig extends JFinalConfig {
 		// 异常拦截器，跳转到500页面
 		me.add(new ExceptionInterceptor());
 		// session model转换
-		me.add(new SessionInViewInterceptor());
+	//	me.add(new SessionInViewInterceptor());
 		// 设置session属性
 		me.add(new SessionAttrInterceptor());
 		// 公共拦截器
