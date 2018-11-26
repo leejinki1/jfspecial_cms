@@ -47,9 +47,10 @@ var addoils=tempAddOil.addoils(1,5);
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!-- //meta-tags -->
 	<!-- Custom Theme files -->
-	<link href="${BASE_PATH }static/frontend/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<!--<link href="${BASE_PATH }static/frontend/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="${BASE_PATH }static/frontend/css/style.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="${BASE_PATH }static/frontend/css/font-awesome.css" rel="stylesheet"> 			<!-- font-awesome icons -->
+	<link href="${BASE_PATH }static/frontend/css/font-awesome.css" rel="stylesheet"> 	-->		<!-- font-awesome icons -->
+	<link rel="stylesheet" href="${BASE_PATH }static/frontend/css/indexAll.css" />
 	<!-- //Custom Theme files -->
 	<!-- js -->
 	<script src="${BASE_PATH }static/frontend/js/jquery-1.11.1.min.js"></script>
@@ -57,6 +58,63 @@ var addoils=tempAddOil.addoils(1,5);
 	<!-- web-font -->
 	<link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
 	<!-- //web-font -->
+	<style>
+
+	/*
+	 2个：50%
+	 4个：25%
+	 5个：20%
+	 8个：12.5%
+	 */
+	/*公共样式*/
+	.homepage_centger{display: flex;flex-direction: row;flex-wrap:wrap;}
+	.homepage_centger ul{padding:5px;}
+	.hc-top,.hc-foot{text-align: center;padding: 3px;background: #58C56F;color: white;}
+
+	.hc-center div a{display: flex;justify-content: space-between;color:rosybrown;}
+	.hc-center div a:hover{color: cornflowerblue;}
+
+	.hc-foot a{color: white;display:inline-block;width: 100%;height: 100%;}
+	.hc-foot a:hover{color: #F6D6FF;}
+	/*手机*/
+	@media screen and (min-width:320px) and (max-width:768px){
+		.homepage_centger ul {width: 50%;}
+		.hc-top{width: 100%;height: 50px;}
+		.hc-top p{line-height:50px;font-size: 12px;}
+		.hc-center{font-size: 9px;}
+		.hc-foot{font-size: 9px;}
+		.header .navbar-default .navbar-nav > li > a {
+			color: rosybrown;
+		}
+	}
+	/*平板*/
+	@media screen and (min-width:769px) and (max-width:991px){
+		.homepage_centger ul {width: 33.33%;}
+		.hc-top{width: 100%;height: 100px;}
+		.hc-top p{line-height:100px;font-size: 15px;}
+		.hc-center{font-size: 10px;}
+		.hc-foot{font-size: 10px;}
+
+	}
+	/*电脑桌面*/
+	@media screen and (min-width:922px) and (max-width:1999px){
+		.homepage_centger ul {width: 25%;}
+		.hc-top{width: 100%;height: 150px;}
+		.hc-top p{line-height:150px;font-size: 25px;}
+		.hc-center{font-size: 14px;}
+		.hc-foot{font-size: 20px;}
+	}
+	/*超大屏幕*/
+	@media screen and (min-width:1200px){
+		.homepage_centger ul{width: 25%;}
+		.hc-top{width: 100%;height: 200px;}
+		.hc-top p{line-height:200px;font-size: 30px;}
+		.hc-center{font-size: 16px;}
+		.hc-foot{font-size: 20px;}
+
+	}
+
+</style>
 </head>
 <body>
 <!-- header -->
@@ -72,7 +130,7 @@ var addoils=tempAddOil.addoils(1,5);
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<h1><a class="navbar-brand" href="index.html"><span>科技</span>特派员创业扶贫联盟</a></h1>
+					<h1><a class="navbar-brand" href="index.html"><span>科技</span>特派员创业扶贫联盟平台</a></h1>
 				</div>
 				<!-- 收集的导航链接，和其他形式的内容，锁定 -->
 				<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
@@ -122,473 +180,223 @@ var addoils=tempAddOil.addoils(1,5);
 			});
 		</script>
 	<!-- //End-slider-script -->
-	<div  id="top" class="callbacks_container">
-		<ul class="rslides" id="slider3">
-			<li>
-				<div class="banner-info" >
-					<div class="baner-w3text">
-						<h3>“科学探索奖”：首期十亿元大奖将带来哪些改变</h3>
-						<p>科学探索奖</p>
-					</div>
-				</div>
-			</li>
-			<li>
-				<div class="banner-info1">
-					<div class="baner-w3text">
-						<h3>聚焦企业创新发展生态圈！园区携手相城区共建开发区企</h3>
-						<p>聚焦企业创新</p>
-					</div>
-				</div>
-			</li>
-			<li>
-				<div class="banner-info2">
-					<div class="baner-w3text">
-						<h3>创新“照亮”未来 互联网大咖聊人工智能</h3>
-						<p>互联网大咖聊人工智能</p>
-					</div>
-				</div>
-			</li>
-		</ul>
-	</div>
-	<div class="banner-bottom-grids">
-		<div class="container">
-			<div class="col-md-3 banner-bottom-grid" >
-				<div class="banner-bottom-grd w3-agile-back" style="background-image: url('images/testimg.jpg');">
-					<h4>特卖区</h4>
-					<p>
-						Special sale area <span>  </span>
-					</p>
-					<div class="clearfix"> </div>
-				</div>
-				<p class="w3ltext">
-				<ol class="myjiaul">
-					<% for(item in sales.list){ %>
-					<% if(itemLP.index > 0){ %>
-					<li><a href="${BASE_PATH }front/sale/article/${item.id}.html"target="_blank" title="${item.title}">
-						<span>
-							<% if (strutil.length(item.name) > 8) { %>
-							${strutil.subStringTo(item.name, 0, 8)}...
-							<% 	} else { %>
-							${item.name}
-							<%  } %></span>
-						<span>${flyfox.substr(item.create_time,0,19) }</span></a></li>
-					<% } %>
-					<% } %>
-				</ol>
-				</p>
-				<div class="more more4">
-					<a href="sale.html">浏览更多</a>
-				</div>
-			</div>
-			<div class="col-md-3 banner-bottom-grid">
-				<div class="banner-bottom-grd w3-agile-back1" style="background-image: url('images/testimg.jpg');">
-					<h4>新闻中心</h4>
-					<p>
-						News Center <span>  </span>
-					</p>
-					<div class="clearfix"> </div>
-				</div>
-				<p class="w3ltext">
-				<ol class="myjiaul">
-					<% for(item in newscenters.list){ %>
-					<% if(itemLP.index > 0){ %>
-					<li><a href="${BASE_PATH }front/newscenter/article/${item.id}.html"target="_blank" title="${item.title}">
-							<span>
-								<% if (strutil.length(item.name) > 8) { %>
-								${strutil.subStringTo(item.name, 0, 8)}...
-								<% 	} else { %>
-								${item.name}
-								<%  } %></span>
-						<span>${flyfox.substr(item.create_time,0,19) }</span></a></li>
-					<% } %>
-					<% } %>
-				</ol>
-				</p>
-				<div class="more more1">
-					<a href="newscenter.html">浏览更多</a>
-				</div>
-			</div>
-			<div class="col-md-3 banner-bottom-grid">
-				<div class="banner-bottom-grd w3-agile-back2" style="background-image: url('images/testimg.jpg');">
-					<h4>技术需求</h4>
-					<p>
-						Technical requirements  <span>  </span>
-					</p>
-					<div class="clearfix"> </div>
-				</div>
-				<p class="w3ltext">
-				<ol class="myjiaul">
-					<% for(item in trds.list){ %>
-					<% if(itemLP.index > 0){ %>
-					<li><a href="${BASE_PATH }front/trd/article/${item.id}.html"target="_blank" title="${item.title}">
-							<span>
-								<% if (strutil.length(item.name) > 8) { %>
-								${strutil.subStringTo(item.name, 0, 8)}...
-								<% 	} else { %>
-								${item.name}
-								<%  } %></span>
-						<span>${flyfox.substr(item.create_time,0,19) }</span></a></li>
-					<% } %>
-					<% } %>
-				</ol>
-				</p>
-				<div class="more more2">
-					<a href="trd.html">浏览更多</a>
-				</div>
-			</div>
-			<div class="col-md-3 banner-bottom-grid">
-				<div class="banner-bottom-grd w3-agile-back3" style="background-image: url('images/testimg.jpg');">
-					<h4>专家对接</h4>
-					<p>
-						Expert butt <span>  </span>
-					</p>
-					<div class="clearfix"> </div>
-				</div>
-				<p class="w3ltext">
-				<ol class="myjiaul">
-					<li><a href="#"><span>绿水青山富农家</span><span>2018-11-15 10:20:00</span></a></li>
-					<li><a href="#"><span>绿水青山富农家</span><span>2018-11-15 10:20:00</span></a></li>
-					<li><a href="#"><span>绿水青山富农家</span><span>2018-11-15 10:20:00</span></a></li>
-				</ol>
-				</p>
-				<div class="more more3">
-					<a href="special.html">浏览更多</a>
-				</div>
-			</div>
 
-			<div class="clearfix"> </div>
+		<div  id="top" class="callbacks_container">
+			<ul class="rslides" id="slider3">
+				<li>
+					<div class="banner-info" >
+						<div class="baner-w3text">
+							<h3>“科学探索奖”：首期十亿元大奖将带来哪些改变</h3>
+							<p>科学探索奖</p>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="banner-info1">
+						<div class="baner-w3text">
+							<h3>聚焦企业创新发展生态圈！园区携手相城区共建开发区企</h3>
+							<p>聚焦企业创新</p>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="banner-info2">
+						<div class="baner-w3text">
+							<h3>创新“照亮”未来 互联网大咖聊人工智能</h3>
+							<p>互联网大咖聊人工智能</p>
+						</div>
+					</div>
+				</li>
+			</ul>
 		</div>
 	</div>
-	<!------------------------------------------------------------------------------------------->
-	<div class="container">
-		<div class="col-md-3 banner-bottom-grid">
-			<div class="banner-bottom-grd w3-agile-back" style="background-image: url('images/testimg.jpg');">
-				<h4>创客活动</h4>
-				<p>
-					Create guest activity <span>  </span>
-				</p>
-				<div class="clearfix"> </div>
-			</div>
-			<p class="w3ltext">
-			<ol class="myjiaul">
-				<% for(item in makers.list){ %>
+
+	<div class="homepage_centger">
+		<ul>
+			<li class="hc-top"><p>特卖区</p></li>
+			<li class="hc-center">
+				<% for(item in sales.list){ %>
 				<% if(itemLP.index > 0){ %>
-				<li><a href="${BASE_PATH }front/maker/article/${item.id}.html"target="_blank" title="${item.title}">
-							<span>
+				<div><a href="${BASE_PATH }front/sale/article/${item.id}.html"title="${item.title}">
+			<b>
 								<% if (strutil.length(item.name) > 8) { %>
 								${strutil.subStringTo(item.name, 0, 8)}...
 								<% 	} else { %>
 								${item.name}
-								<%  } %></span>
-					<span>${flyfox.substr(item.create_time,0,19) }</span></a></li>
+								<%  } %></b>
+					<p>${flyfox.substr(item.create_time,0,19) }</p></a></div>
 				<% } %>
 				<% } %>
-			</ol>
-			</p>
-			<div class="more more4">
-				<a href="maker.html">浏览更多</a>
-			</div>
-		</div>
-		<div class="col-md-3 banner-bottom-grid">
-			<div class="banner-bottom-grd w3-agile-back1" style="background-image: url('images/testimg.jpg');">
-				<h4>政策法规</h4>
-				<p>
-					policies and regulations <span>  </span>
-				</p>
-				<div class="clearfix"> </div>
-			</div>
-			<p class="w3ltext">
-			<ol class="myjiaul">
-				<% for(item in policys.list){ %>
+			</li>
+			<li class="hc-foot"><a href="sale.html">浏览更多</a></li>
+		</ul>
+		<ul>
+			<li class="hc-top"><p>新闻中心</p></li>
+			<li class="hc-center">
+				<% for(item in newscenters.list){ %>
 				<% if(itemLP.index > 0){ %>
-				<li><a href="${BASE_PATH }front/policy/article/${item.id}.html"target="_blank" title="${item.title}">
-							<span>
-								<% if (strutil.length(item.name) > 8) { %>
-								${strutil.subStringTo(item.name, 0, 8)}...
-								<% 	} else { %>
-								${item.name}
-								<%  } %></span>
-					<span>${flyfox.substr(item.create_time,0,19) }</span></a></li>
-				<% } %>
-				<% } %>
-			</ol>
-			</p>
-			<div class="more more1">
-				<a href="policy.html">浏览更多</a>
-			</div>
-		</div>
-		<div class="col-md-3 banner-bottom-grid">
-			<div class="banner-bottom-grd w3-agile-back2" style="background-image: url('images/testimg.jpg');">
-				<h4>科普板块</h4>
-				<p>
-					Science popularization plate <span>  </span>
-				</p>
-				<div class="clearfix"> </div>
-			</div>
-			<p class="w3ltext">
-			<ol class="myjiaul">
-				<% for(item in spps.list){ %>
-				<% if(itemLP.index > 0){ %>
-				<li><a href="${BASE_PATH }front/spp/article/${item.id}.html"target="_blank" title="${item.title}">
-								<span>
+				<div><a href="${BASE_PATH }front/newscenter/article/${item.id}.html"title="${item.title}">
+								<b>
 									<% if (strutil.length(item.name) > 8) { %>
 									${strutil.subStringTo(item.name, 0, 8)}...
 									<% 	} else { %>
 									${item.name}
-									<%  } %></span>
-					<span>${flyfox.substr(item.create_time,0,19) }</span></a></li>
+									<%  } %></b>
+					<p>${flyfox.substr(item.create_time,0,19) }</p></a></div>
 				<% } %>
 				<% } %>
-			</ol>
-			</p>
-			<div class="more more2">
-				<a href="spp.html">浏览更多</a>
-			</div>
-		</div>
-		<div class="col-md-3 banner-bottom-grid">
-			<div class="banner-bottom-grd w3-agile-back3" style="background-image: url('images/testimg.jpg');">
-				<h4>项目申报</h4>
-				<p>
-					Project declaration <span>  </span>
-				</p>
-				<div class="clearfix"> </div>
-			</div>
-			<p class="w3ltext">
-			<ol class="myjiaul">
-				<% for(item in projectapps.list){ %>
+			</li>
+			<li class="hc-foot"><a href="newscenter.html">浏览更多</a></li>
+		</ul>
+		<ul>
+			<li class="hc-top"><p>技术需求</p></li>
+			<li class="hc-center">
+				<% for(item in trds.list){ %>
 				<% if(itemLP.index > 0){ %>
-				<li><a href="${BASE_PATH }front/projectapp/article/${item.id}.html"target="_blank" title="${item.title}">
-							<span>
-								<% if (strutil.length(item.name) > 8) { %>
-								${strutil.subStringTo(item.name, 0, 8)}...
-								<% 	} else { %>
-								${item.name}
-								<%  } %></span>
-					<span>${flyfox.substr(item.create_time,0,19) }</span></a></li>
+				<div><a href="${BASE_PATH }front/trd/article/${item.id}.html" title="${item.title}">
+								<b>
+									<% if (strutil.length(item.name) > 8) { %>
+									${strutil.subStringTo(item.name, 0, 8)}...
+									<% 	} else { %>
+									${item.name}
+									<%  } %></b>
+					<p>${flyfox.substr(item.create_time,0,19) }</p></a></div>
 				<% } %>
 				<% } %>
-			</ol>
-			</p>
-			<div class="more more3">
-				<a href="projectapp.html">浏览更多</a>
-			</div>
-		</div>
+			</li>
+			<li class="hc-foot"><a href="trd.html">浏览更多</a></li>
+		</ul>
+		<ul>
+			<li class="hc-top"><p>专家对接</p></li>
+			<li class="hc-center">
+				<div><a href="#"><b>绿水青山富农家</b><p>2018-11-15 10:20:00</p></a></div>
+				<div><a href="#"><b>绿水青山富农家</b><p>2018-11-15 10:20:00</p></a></div>
+				<div><a href="#"><b>绿水青山富农家</b><p>2018-11-15 10:20:00</p></a></div>
+			</li>
+			<li class="hc-foot"><a href="special.html">浏览更多</a></li>
+		</ul>
+		<ul>
+			<li class="hc-top"><p>创客活动</p></li>
+			<li class="hc-center">
+				<% for(item in makers.list){ %>
+				<% if(itemLP.index > 0){ %>
+				<div><a href="${BASE_PATH }front/maker/article/${item.id}.html" title="${item.title}">
+								<b>
+									<% if (strutil.length(item.name) > 8) { %>
+									${strutil.subStringTo(item.name, 0, 8)}...
+									<% 	} else { %>
+									${item.name}
+									<%  } %></b>
+					<p>${flyfox.substr(item.create_time,0,19) }</p></a></div>
+				<% } %>
+				<% } %>
+			</li>
+			<li class="hc-foot"><a href="maker.html">浏览更多</a></li>
+		</ul>
+		<ul>
+			<li class="hc-top"><p>政策法规</p></li>
+			<li class="hc-center">
+				<% for(item in policys.list){ %>
+				<% if(itemLP.index > 0){ %>
+				<div><a href="${BASE_PATH }front/policy/article/${item.id}.html" title="${item.title}">
+								<b>
+									<% if (strutil.length(item.name) > 8) { %>
+									${strutil.subStringTo(item.name, 0, 8)}...
+									<% 	} else { %>
+									${item.name}
+									<%  } %></b>
+					<p>${flyfox.substr(item.create_time,0,19) }</p></a></div>
+				<% } %>
+				<% } %>
+			</li>
+			<li class="hc-foot"><a href="policy.html">浏览更多</a></li>
+		</ul>
+		<ul>
+			<li class="hc-top"><p>科普板块</p></li>
+			<li class="hc-center">
+				<% for(item in spps.list){ %>
+				<% if(itemLP.index > 0){ %>
+				<div><a href="${BASE_PATH }front/spp/article/${item.id}.html"title="${item.title}">
+									<b>
+										<% if (strutil.length(item.name) > 8) { %>
+										${strutil.subStringTo(item.name, 0, 8)}...
+										<% 	} else { %>
+										${item.name}
+										<%  } %></b>
+					<p>${flyfox.substr(item.create_time,0,19) }</p></a></div>
+				<% } %>
+				<% } %>
+			</li>
+			<li class="hc-foot"><a href="spp.html">浏览更多</a></li>
+		</ul>
+		<ul>
+			<li class="hc-top"><p>帮扶企业</p></li>
+			<li class="hc-center">
+				<% for(item in addoils.list){ %>
+				<% if(itemLP.index > 0){ %>
+				<div><a href="${BASE_PATH }front/addoil/article/${item.id}.html" title="${item.title}">
+								<b>
+									<% if (strutil.length(item.name) > 8) { %>
+									${strutil.subStringTo(item.name, 0, 8)}...
+									<% 	} else { %>
+									${item.name}
+									<%  } %></b>
+					<p>${flyfox.substr(item.create_time,0,19) }</p></a></div>
+				<% } %>
+				<% } %>
 
-		<div class="clearfix"> </div>
+			</li>
+			<li class="hc-foot"><a href="addoil.html">浏览更多</a></li>
+		</ul>
 	</div>
-	<!------------------------------------------------------------------------------------------->
-</div>
-<!-- //banner -->
-<div class="tlinks">Collect from <a href="http://www.cssmoban.com/" >网页模板</a></div>
-<!-- welcome -->
-<div class="welcome w3-agileits">
-	<div class="container mymokuai2">
-		<h2>欢迎 !</h2>
-		<div class="banner-agileits-w3layouts">
-			<div class="col-md-4 welcome-grid">
-				<img src="images/1.jpg" alt=" " class="img-responsive" />
-			</div>
-			<div class="col-md-8 welcome-grid">
-				<h4>[医]女蜗牛别名后遗症(At Perferendis Aliquid Ex EA Conceratur)</h4>
-				<p> 最简单的方法是，在正常条件下，对所有的人进行必要的训练，使我们在日常生活中得到更多的帮助。
-					(实习编辑：顾名思义)(美国著名的国家和地区经济委员会(UT enim a veniam，Quis nospoliam，quis nosprem，quis nosprem)</p>
-				<div class="more">
-					<a href="single.html">浏览更多</a>
+	<!-- footer -->
+	<div class="footer">
+		<div class="container">
+			<div class="footer-agileitsrow">
+				<!--<div class="col-md-3 footer-grid">
+					<h3>临时演员</h3>
+					<p>[医]金红花，[医]金红花[NS][NS]。[医]小叶蝉。佩列斯克征服了达官贵人。</p>
+				</div>-->
+				<div class="col-md-3 footer-grid">
+					<h3> 社会化媒体</h3>
+					<ul>
+						<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i> qq</a></li>
+						<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i> 微信</a></li>
+						<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i> 邮箱</a></li>
+						<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i> 官网</a></li>
+					</ul>
 				</div>
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-	</div>
-</div>
-<!-- //welcome -->
-<!-- newsletter -->
-<div class="newsletter">
-	<div class="container">
-		<div class="get-in-grids">
-			<div class="get-in-grid-left">
-				<p>LOG</p>
-			</div>
-			<div class="get-in-grid-right">
-				<form action="#" method="post">
-					<input type="email" name="email" Placeholder="请输入搜索内容" required="">
-					<input type="submit" value="搜索 " >
-				</form>
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-	</div>
-</div>
-<!-- //newsletter -->
-<!-- news -->
-<div class="news">
-	<div class="container">
-		<h3>新闻与事件</h3>
-		<p class="news-wthreetext">近日，位于重庆的长江师范学院下发《关于落实“一流学风”建设相关工作的通知》
-			（以下简称《通知》），要求全校实行“一日作息”制度，学生“阳光锻炼”计划，开展班级建设。</p>
-		<div class="news-agileinfo">
-			<div class="col-md-6 news-grid">
-				<div class="col-xs-4 news-grid-left">
-					<p>啦啦啦<span>哈哈哈</span></p>
+				<div class="col-md-3 footer-grid">
+					<h3>有用信息</h3>
+					<ul>
+						<li><a href="index.html">首页</a></li>
+						<li><a href="about.html">关于</a></li>
+						<li><a href="index.html">博客</a></li>
+						<li><a href="contact.html">接触</a></li>
+					</ul>
 				</div>
-				<div class="col-xs-8 news-grid-right">
-					<p>别名，化名; 化名为; 以化名为人所知; 别名为; 别称又被称为</p>
-					<div class="more">
-						<a href="single.html">浏览更多</a>
+				<div class="col-md-3 footer-grid">
+					<h3>联系我们</h3>
+					<p>玉林市科技局</p>
+					<div class="footer-grid-address">
+						<p>电话.800-255-9999</p>
+						<p>传真: 1234 568</p>
+						<p>邮箱: <a class="email-link" href="mailto:info@example.com">Example.com</a></p>
 					</div>
 				</div>
 				<div class="clearfix"> </div>
 			</div>
-			<div class="col-md-6 news-grid">
-				<div class="col-xs-4 news-grid-left">
-					<p>啦啦啦<span>哈哈哈</span></p>
-				</div>
-				<div class="col-xs-8 news-grid-right">
-					<p>别名，化名; 化名为; 以化名为人所知; 别名为; 别称又被称为</p>
-					<div class="more">
-						<a href="single.html">浏览更多</a>
-					</div>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-		<div class="news-agileinfo">
-			<div class="col-md-6 news-grid">
-				<div class="col-xs-4 news-grid-left">
-					<p>啦啦啦<span>哈哈哈</span></p>
-				</div>
-				<div class="col-xs-8 news-grid-right">
-					<p>别名，化名; 化名为; 以化名为人所知; 别名为; 别称又被称为</p>
-					<div class="more">
-						<a href="single.html">浏览更多</a>
-					</div>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="col-md-6 news-grid">
-				<div class="col-xs-4 news-grid-left">
-					<p>啦啦啦<span>哈哈哈</span></p>
-				</div>
-				<div class="col-xs-8 news-grid-right">
-					<p>别名，化名; 化名为; 以化名为人所知; 别名为; 别称又被称为</p>
-					<div class="more">
-						<a href="single.html">浏览更多</a>
-					</div>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="clearfix"> </div>
 		</div>
 	</div>
-</div>
-<!-- //news -->
-<!-- customer -->
-<div class="customer">
-	<div class="container">
-		<h3>顾客说</h3>
-		<div class="customer-w3layoutsgrids">
-			<ul id="flexiselDemo1">
-				<li>
-					<div class="customer-grid">
-						<p> 异形牛肝菌属(Neque Porro Quisquam Est)、白羊绒属(Qui Dolorem Isum Iquia Dolor)、
-							神仙属(Consectetur)、阿迪皮斯氏天鹅绒(Adipici Velit)、长毛羊属(Numquam Eius Modi Modi)属植物。</p>
-						<h4>约翰史密斯</h4>
-					</div>
-				</li>
-				<li>
-					<div class="customer-grid">
-						<p> SED Quia non-Numquam eius Modi neque porro quisquam est，
-							qui dolorem ipsum quia dolor同坐，consectetur，adipici velit，偶发性唇部畸形</p>
-						<h4>迈克尔·罗伯特</h4>
-					</div>
-				</li>
-				<li>
-					<div class="customer-grid">
-						<p> 异形牛肝菌属(Neque Porro Quisquam Est)、白羊绒属(Qui Dolorem Isum Iquia Dolor)、
-							神仙属(Consectetur)、阿迪皮斯氏天鹅绒(Adipici Velit)、长毛羊属(Numquam Eius Modi Modi)属植物。</p>
-						<h4>约翰史密斯</h4>
-					</div>
-				</li>
-			</ul>
-			<script type="text/javascript">
-					$(window).load(function() {
-						$("#flexiselDemo1").flexisel({
-							visibleItems: 3,
-							animationSpeed: 1000,
-							autoPlay: true,
-							autoPlaySpeed: 3000,
-							pauseOnHover: true,
-							enableResponsiveBreakpoints: true,
-							responsiveBreakpoints: {
-								portrait: {
-									changePoint:480,
-									visibleItems: 1
-								},
-								landscape: {
-									changePoint:640,
-									visibleItems:2
-								},
-								tablet: {
-									changePoint:768,
-									visibleItems: 2
-								}
-							}
-						});
+	<div class="copy-right">
+		<p>玉林市科技局所有 &copy; 桂公网安备 31011502002267号</p>
+	</div>
 
-					});
-				</script>
-			<script type="text/javascript" src="${BASE_PATH }static/frontend/js/jquery.flexisel.js"></script>
-		</div>
-	</div>
-</div>
-<!-- //customer -->
-<!-- footer -->
-<div class="footer">
-	<div class="container">
-		<div class="footer-agileitsrow">
-			<div class="col-md-3 footer-grid">
-				<h3>临时演员</h3>
-				<p>[医]金红花，[医]金红花[NS][NS]。[医]小叶蝉。佩列斯克征服了达官贵人。</p>
-			</div>
-			<div class="col-md-3 footer-grid">
-				<h3> 社会化媒体</h3>
-				<ul>
-					<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i> 脸书</a></li>
-					<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> 推特</a></li>
-					<li><a href="#"><i class="fa fa-google" aria-hidden="true"></i> 谷歌</a></li>
-					<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i> 滴水的</a></li>
-				</ul>
-			</div>
-			<div class="col-md-3 footer-grid">
-				<h3>有用信息</h3>
-				<ul>
-					<li><a href="index.html">首页</a></li>
-					<li><a href="about.html">关于</a></li>
-					<li><a href="index.html">博客</a></li>
-					<li><a href="contact.html">接触</a></li>
-				</ul>
-			</div>
-			<div class="col-md-3 footer-grid">
-				<h3>联系我们</h3>
-				<p>佩列斯克征服了达官贵人。</p>
-				<div class="footer-grid-address">
-					<p>电话.800-255-9999</p>
-					<p>传真: 1234 568</p>
-					<p>邮箱: <a class="email-link" href="mailto:info@example.com">Example.com</a></p>
-				</div>
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-	</div>
-</div>
-<div class="copy-right">
-	<p>迪士尼版权所有 &copy; 沪公网安备 31011502002267号 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
-</div>
-<!-- //footer -->
-<!-- start-smooth-scrolling -->
-<script type="text/javascript" src="${BASE_PATH }static/frontend/js/move-top.js"></script>
-<script type="text/javascript" src="${BASE_PATH }static/frontend/js/easing.js"></script>
-<script type="text/javascript">
+	<!-- //footer -->
+	<!-- start-smooth-scrolling -->
+	<script type="text/javascript" src="${BASE_PATH }static/frontend/js/move-top.js"></script>
+
+	<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				$(".scroll").click(function(event){
 					event.preventDefault();
@@ -597,26 +405,8 @@ var addoils=tempAddOil.addoils(1,5);
 				});
 			});
 	</script>
-<!-- //end-smooth-scrolling -->
-<!-- smooth-scrolling-of-move-up -->
-<script type="text/javascript">
-		$(document).ready(function() {
-			/*
-			var defaults = {
-				containerID: 'toTop', // fading element id
-				containerHoverID: 'toTopHover', // fading element hover id
-				scrollSpeed: 1200,
-				easingType: 'linear'
-			};
-			*/
 
-			$().UItoTop({ easingType: 'easeOutQuart' });
+	<script type="text/javascript" src="${BASE_PATH }static/frontend/js/indexAll.js" ></script>
 
-		});
-	</script>
-<!-- //smooth-scrolling-of-move-up -->
-<!-- for bootstrap working -->
-<script src="${BASE_PATH }static/frontend/js/bootstrap.js"> </script>
-<!-- //for bootstrap working -->
 </body>
 </html>

@@ -5,9 +5,12 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfspecial.component.base.BaseProjectController;
 import com.jfspecial.component.util.JFSpecialUtils;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
+import com.jfspecial.modules.admin.addoil.model.TbAddOil;
+import com.jfspecial.modules.admin.addoil.model.TbAddOilAlbum;
 import com.jfspecial.modules.admin.image.model.TbImage;
 import com.jfspecial.modules.admin.image.model.TbImageAlbum;
 import com.jfspecial.modules.front.interceptor.FrontInterceptor;
+import com.jfspecial.modules.front.service.FrontAddoilService;
 import com.jfspecial.modules.front.service.FrontImageService;
 import com.jfspecial.util.NumberUtils;
 
@@ -29,7 +32,7 @@ public class FrontAlbumAddoilController extends BaseProjectController {
 		// 活动目录
 		setAttr("album_selected", albumId);
 
-		TbImageAlbum album = new FrontImageService().getAlbum(albumId);
+		TbAddOilAlbum album = new FrontAddoilService().getAlbum(albumId);
 		setAttr("album", album);
 
 		setAttr("paginator", getPaginator());
@@ -52,7 +55,7 @@ public class FrontAlbumAddoilController extends BaseProjectController {
 		// 活动目录
 		setAttr("imageId", imageId);
 
-		TbImage image = new FrontImageService().getImage(imageId);
+		TbAddOil image = new FrontAddoilService().getAddOil(imageId);
 		setAttr("image", image);
 
 		// 设置标签

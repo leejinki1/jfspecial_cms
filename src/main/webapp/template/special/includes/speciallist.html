@@ -18,14 +18,16 @@
 		 </thead>
 		 <tbody>
 		 <% for(item in peoplelist.list){ %>
-		 <tr>
-			 <td>${item.userid}</td>
-			 <td>${item.realname}</td>
-			 <td>${item.sex}</td>
-			 <td>${item.age}</td>
-			 <td>${item.birthday}</td>
-			 <td>${item.tel}</td>
-		 </tr>
+		<!-- <a href="${BASE_PATH }front/special/info/${item.id}.html">-->
+			 <tr>
+				 <td>${item.userid}</td>
+				 <td><a href="${BASE_PATH }front/special/info/${item.userid}.html">${item.realname}</a></td>
+				 <td>${item.sex}</td>
+				 <td>${item.age}</td>
+				 <td>${item.birthday}</td>
+				 <td>${item.tel}</td>
+			 </tr>
+		<!-- </a>-->
 		 <% } %>
 
 		 </tbody>
