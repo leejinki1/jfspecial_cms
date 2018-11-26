@@ -220,7 +220,7 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a href="home" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 信息统计</a>
+                        <a href="../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 信息统计</a>
                     </li>
                     <li>
                         <a href="banner" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 广告轮播图</a>
@@ -259,93 +259,134 @@
 							<div class="row">
 								<!--banner1上传-->
 								<form class="col s12 form-horizontal" enctype="multipart/form-data" method="post" action="banner/save1">
-								<div class="file-field input-field col s12">
-							      <div class="btn">
-							        <span>文件上传</span>
-							        <input type="file" name="model.banner1" >
-							      </div>
-							      <div class="file-path-wrapper">
-							        <input class="file-path validate" type="text" value="请上传轮播图1">
-							      </div>
-							    </div>
-							    <div class="form-group">
-								    <div class="col-sm-offset-3 col-sm-9">
-									    <div class="checkbox">
-									        <label>
-									          <!--<a class="waves-effect waves-light btn-large" href="${BASE_PATH}admin/banner">保存</a>-->
-												<input class="btn-large" type="submit" value="保存">
-									        </label>
+									<!--上传图片1-->
+									<div class="file-field input-field col s12">
+										  <div class="btn">
+											<span>文件上传</span>
+											<input type="file" name="model.banner1" >
+										  </div>
+										  <div class="file-path-wrapper">
+											<input class="file-path validate" type="text" value="请上传轮播图1">
+										  </div>
+									</div>
+									<!--增加主题1-->
+									<div class="file-field col s12">
+										<div class="btn">
+											<span>主题 1 </span>
+										</div>
+										<div class="file-path-wrapper">
+											<input class="file-path validate" type="text" value="${model.bannertitle1}" name="model.bannertitle1" placeholder="请输入主题1">
 										</div>
 									</div>
-								</div>
+									<!--增加主题内容1-->
+									<div class="file-field col s12">
+										<div class="btn">
+											<span>主题内容 1 </span>
+										</div>
+										<div class="file-path-wrapper">
+											<input class="file-path validate" type="text" value="${model.bannertitlecontent1}" name="model.bannertitlecontent1" placeholder="请输入主题1内容">
+										</div>
+									</div>
+									<!--提交-->
+									<div class="form-group">
+										<div class="col-sm-offset-3 col-sm-9">
+											<div class="checkbox">
+												<label>
+												  <!--<a class="waves-effect waves-light btn-large" href="${BASE_PATH}admin/banner">保存</a>-->
+													<input class="btn-large" type="submit" value="保存">
+												</label>
+											</div>
+										</div>
+									</div>
 								</form>
 
+								<!--banner2上传-->
 								<form class="col s12 form-horizontal" enctype="multipart/form-data" method="post" action="banner/save2">
-							    <div class="file-field input-field col s12">
-							      <div class="btn">
-							        <span>文件上传</span>
-							        <input type="file" name="model.banner2">
-							      </div>
-							      <div class="file-path-wrapper">
-							        <input class="file-path validate" type="text" value="请上传轮播图2">
-							      </div>
-							    </div>
-							    <div class="form-group">
-								    <div class="col-sm-offset-3 col-sm-9">
-									    <div class="checkbox">
-									        <label>
-									          <!--<a class="waves-effect waves-light btn-large" href="admin//banner">保存</a>-->
-												<input class="btn-large" type="submit" value="保存">
-									        </label>
+									<!--上传图片1-->
+									<div class="file-field input-field col s12">
+										<div class="btn">
+											<span>文件上传</span>
+											<input type="file" name="model.banner2" >
+										</div>
+										<div class="file-path-wrapper">
+											<input class="file-path validate" type="text" value="请上传轮播图2">
 										</div>
 									</div>
-								</div>
+									<!--增加主题2-->
+									<div class="file-field col s12">
+										<div class="btn">
+											<span>主题 2 </span>
+										</div>
+										<div class="file-path-wrapper">
+											<input class="file-path validate" type="text" value="${model.bannertitle2}" name="model.bannertitle2" placeholder="请输入主题2">
+										</div>
+									</div>
+									<!--增加主题内容2-->
+									<div class="file-field col s12">
+										<div class="btn">
+											<span>主题 2 </span>
+										</div>
+										<div class="file-path-wrapper">
+											<input class="file-path validate" type="text" value="${model.bannertitlecontent2}" name="model.bannertitlecontent2" placeholder="请输入主题2内容">
+										</div>
+									</div>
+									<!--提交-->
+									<div class="form-group">
+										<div class="col-sm-offset-3 col-sm-9">
+											<div class="checkbox">
+												<label>
+													<!--<a class="waves-effect waves-light btn-large" href="${BASE_PATH}admin/banner">保存</a>-->
+													<input class="btn-large" type="submit" value="保存">
+												</label>
+											</div>
+										</div>
+									</div>
 								</form>
 
+								<!--banner3-->
 								<form class="col s12 form-horizontal" enctype="multipart/form-data" method="post" action="banner/save3">
-							    <div class="file-field input-field col s12">
-							      <div class="btn">
-							        <span>文件上传</span>
-							        <input type="file" name="model.banner3">
-							      </div>
-							      <div class="file-path-wrapper">
-							        <input class="file-path validate" type="text" value="请上传轮播图3">
-							      </div>
-							    </div>
-							    <div class="form-group">
-								    <div class="col-sm-offset-3 col-sm-9">
-									    <div class="checkbox">
-									        <label>
-									          <!--<a class="waves-effect waves-light btn-large" href="http://localhost:8080/jfinal_cms/admin/banner">保存</a>-->
-												<input class="btn-large" type="submit" value="保存">
-									        </label>
+									<!--上传图片1-->
+									<div class="file-field input-field col s12">
+										<div class="btn">
+											<span>文件上传</span>
+											<input type="file" name="model.banner3" >
+										</div>
+										<div class="file-path-wrapper">
+											<input class="file-path validate" type="text" value="请上传轮播图3">
 										</div>
 									</div>
-								</div>
-								</form>
-
-								<form class="col s12 form-horizontal" enctype="multipart/form-data" method="post" action="banner/save4">
-							    <div class="file-field input-field col s12">
-							      <div class="btn">
-							        <span>文件上传</span>
-							        <input type="file" name="">
-							      </div>
-							      <div class="file-path-wrapper">
-							        <input class="file-path validate" type="text" value="请上传轮播图4">
-							      </div>
-							    </div>
-							    
-								<div class="form-group">
-								    <div class="col-sm-offset-3 col-sm-9">
-									    <div class="checkbox">
-									        <label>
-									          <a class="waves-effect waves-light btn-large">保存</a>
-									        </label>
+									<!--增加主题3-->
+									<div class="file-field col s12">
+										<div class="btn">
+											<span>主题  3  </span>
+										</div>
+										<div class="file-path-wrapper">
+											<input class="file-path validate" type="text" value="${model.bannertitle3}" name="model.bannertitle3" placeholder="请输入主题3">
 										</div>
 									</div>
-								</div>
-
+									<!--增加主题内容3-->
+									<div class="file-field col s12">
+										<div class="btn">
+											<span>主题  3  </span>
+										</div>
+										<div class="file-path-wrapper">
+											<input class="file-path validate" type="text" value="${model.bannertitlecontent3}" name="model.bannertitlecontent3" placeholder="请输入主题3内容">
+										</div>
+									</div>
+									<!--提交-->
+									<div class="form-group">
+										<div class="col-sm-offset-3 col-sm-9">
+											<div class="checkbox">
+												<label>
+													<!--<a class="waves-effect waves-light btn-large" href="${BASE_PATH}admin/banner">保存</a>-->
+													<input class="btn-large" type="submit" value="保存">
+												</label>
+											</div>
+										</div>
+									</div>
 								</form>
+
+
 							</div>
 
     					<div class="clearBoth"></div>
