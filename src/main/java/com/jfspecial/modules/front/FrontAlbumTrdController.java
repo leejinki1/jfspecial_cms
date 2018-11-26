@@ -7,8 +7,11 @@ import com.jfspecial.component.util.JFSpecialUtils;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
 import com.jfspecial.modules.admin.image.model.TbImage;
 import com.jfspecial.modules.admin.image.model.TbImageAlbum;
+import com.jfspecial.modules.admin.trd.model.TbTrd;
+import com.jfspecial.modules.admin.trd.model.TbTrdAlbum;
 import com.jfspecial.modules.front.interceptor.FrontInterceptor;
 import com.jfspecial.modules.front.service.FrontImageService;
+import com.jfspecial.modules.front.service.FrontTrdService;
 import com.jfspecial.util.NumberUtils;
 
 @ControllerBind(controllerKey = "/album/trd")
@@ -29,7 +32,7 @@ public class FrontAlbumTrdController extends BaseProjectController {
 		// 活动目录
 		setAttr("album_selected", albumId);
 
-		TbImageAlbum album = new FrontImageService().getAlbum(albumId);
+		TbTrdAlbum album = new FrontTrdService().getAlbum(albumId);
 		setAttr("album", album);
 
 		setAttr("paginator", getPaginator());
@@ -52,18 +55,18 @@ public class FrontAlbumTrdController extends BaseProjectController {
 		// 活动目录
 		setAttr("imageId", imageId);
 
-		TbImage image = new FrontImageService().getImage(imageId);
-		setAttr("image", image);
+		TbTrd trd = new FrontTrdService().getTrd(imageId);
+		setAttr("trd", trd);
 
 		// 设置标签
 		String tags = Db.findFirst("select group_concat(tagname) tags " //
-				+ " from tb_sale_tags where image_id = ? order by id", image.getId()).getStr("tags");
+				+ " from tb_trd_tags where image_id = ? order by id", trd.getId()).getStr("tags");
 		setAttr("tags", tags);
 				
 		setAttr("paginator", getPaginator());
 
 		// seo：title优化
-		String imageName = (image == null ? "" : image.getName() + " - ");
+		String imageName = (trd == null ? "" : trd.getName() + " - ");
 		setAttr(JFSpecialUtils.TITLE_ATTR, imageName + getAttr(JFSpecialUtils.TITLE_ATTR));
 
 		renderAuto(path + "common_image.html");

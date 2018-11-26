@@ -15,13 +15,13 @@ $(document).on("click",".centerBox-right-c2 td a",function(){
 })
 
 $(function(){
-	$(".tou").load("static/frontend/html/header.html");
-    	$(".wei").load("static/frontend/html/footer.html");
+	$(".tou").load("../../../static/frontend/html/header_article.html");
+    	$(".wei").load("../../../static/frontend/html/footer.html");
 	//默认第一个--特派员--
 	/*特派员的初始化*/
 //	$(".centerBox-left-c1").load("static/frontend/html/spp/kepubankuai_left_1.html");
 	
-	$(".centerBox-right-c1").load("static/frontend/html/spp/kepubankuai_right_1.html");
+//	$(".centerBox-right-c1").load("static/frontend/html/spp/kepubankuai_right_1.html");
 //	$(".centerBox-right-c2").load("static/frontend/html/spp/kepubankuai_type1.html");
 	/*$(".centerBox-right-c1").load("tepaiyuan_right_1.html");
 	$(".centerBox-right-c2").load("test1.html");*/

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>特卖区</title>
+    <title>帮扶企业</title>
     <!-- meta-tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -35,9 +35,9 @@
         <!--中间--左边-->
         <div class="centerBox-left col-md-4 col-sm-4 col-xs-12">
             <div class="centerBox-left-c1">
-                <% var albums=tempSale.albums();
+                <% var albums=tempSpp.albums();
                 %>
-                <% include("/template/special/includes/salealbumlist.html",{albumlist:albums}){} %>
+                <% include("/template/special/includes/addoilalbumlist.html",{albumlist:albums}){} %>
             </div>
             <div class="centerBox-left-c2">
                 <h4>联系我们</h4>
@@ -55,8 +55,8 @@
                 <p>
                     <button class="btn btn-warning btn-xs" disabled="disabled">首页</button>
                     <img src="${BASE_PATH }static/frontend/images/rightImg.png"/>
-                    <button class="btn btn-warning btn-xs" disabled="disabled">特卖区</button>
-                    <img src='${BASE_PATH }static/frontend/images/rightImg.png'/><span>商品</span>
+                    <button class="btn btn-warning btn-xs" disabled="disabled">帮扶企业</button>
+                    <img src='${BASE_PATH }static/frontend/images/rightImg.png'/><span>正文</span>
                 </p>
                 <div class="container-fluid">
                     <div class="row">
@@ -94,7 +94,7 @@
 <script type="text/javascript" src="${BASE_PATH }static/frontend/js/move-top.js"></script>
 <script type="text/javascript" src="${BASE_PATH }static/frontend/js/easing.js"></script>
 <script type="text/javascript" src="${BASE_PATH }static/frontend/js/jquery-1.11.1.min.js" ></script>
-<script type="text/javascript" src="${BASE_PATH }static/frontend/js/sale/article.js" ></script>
+<script type="text/javascript" src="${BASE_PATH }static/frontend/js/addoil/article.js" ></script>
 
 <script type="text/javascript">
 			jQuery(document).ready(function($) {

@@ -11,6 +11,7 @@ import com.jfspecial.modules.admin.article.TbArticle;
 import com.jfspecial.modules.admin.comment.TbComment;
 import com.jfspecial.modules.admin.folder.FolderService;
 import com.jfspecial.modules.admin.sale.model.TbSale;
+import com.jfspecial.modules.admin.sysuser.TbSysUser;
 import com.jfspecial.modules.admin.tags.TbTags;
 import com.jfspecial.modules.front.interceptor.FrontInterceptor;
 import com.jfspecial.modules.front.service.FrontCacheService;
@@ -45,6 +46,15 @@ public class ArticleSaleController extends BaseProjectController {
 		TbSale article = TbSale.dao.findById(articleId);
 
 		// 新增链接跳转
+		if (article != null) {
+			String createId = article.getStr("create_id");
+			if (StrUtils.isNotEmpty(createId)) { // jump url
+				TbSysUser sysuser = TbSysUser.dao.findFirst(
+						"select * from sys_user where userid = ? ",createId);
+				setAttr("sysuser", sysuser);
+				//return;
+			}
+		}
 		if (article != null) {
 			String jumpUrl = article.getStr("jump_url");
 			if (StrUtils.isNotEmpty(jumpUrl)) { // jump url
