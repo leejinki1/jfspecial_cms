@@ -32,6 +32,7 @@ public class TbMaker extends BaseProjectModel<TbMaker> {
 	private String UPDATE_ID = "update_id"; // 创建者
 	private String CREATE_TIME = "create_time"; // 创建时间
 	private String CREATE_ID = "create_id"; // 创建者
+	private String CONTENT="content";//内容;2018.11.27zr添加
 
 	public TbMaker setId(Integer value) {
 		set(ID, value);
@@ -231,31 +232,42 @@ public class TbMaker extends BaseProjectModel<TbMaker> {
 		return get(CREATE_ID);
 	}
 
+	/*2018.11.27 添加	*/
+	public TbMaker setContent(String value) {
+		set(CONTENT, value);
+		return this;
+	}
+
+	public String getContent() {
+		return get(CONTENT);
+	}
+
 	@Override
 	public String toString() {
-		String log = "";
-		log += "[id:" + getId() + "]";
-		log += "[albumId:" + getAlbumId() + "]";
-		log += "[albumName:" + getAlbumName() + "]";
-		log += "[name:" + getName() + "]";
-		log += "[linkurl:" + getLinkurl() + "]";
-		log += "[cdnurl:" + getCdnurl() + "]";
-		log += "[imageUrl:" + getImageUrl() + "]";
-		log += "[imageNetUrl:" + getImageNetUrl() + "]";
-		log += "[ext:" + getExt() + "]";
-		log += "[width:" + getWidth() + "]";
-		log += "[height:" + getHeight() + "]";
-		log += "[status:" + getStatus() + "]";
-		log += "[isComment:" + getIsComment() + "]";
-		log += "[isRecommend:" + getIsRecommend() + "]";
-		log += "[sort:" + getSort() + "]";
-		log += "[remark:" + getRemark() + "]";
-		log += "[publishTime:" + getPublishTime() + "]";
-		log += "[publishUser:" + getPublishUser() + "]";
-		log += "[updateTime:" + getUpdateTime() + "]";
-		log += "[updateId:" + getUpdateId() + "]";
-		log += "[createTime:" + getCreateTime() + "]";
-		log += "[createId:" + getCreateId() + "]";
-		return log;
+		return "TbMaker{" +
+				"ID='" + ID + '\'' +
+				", ALBUM_ID='" + ALBUM_ID + '\'' +
+				", ALBUM_NAME='" + ALBUM_NAME + '\'' +
+				", NAME='" + NAME + '\'' +
+				", LINKURL='" + LINKURL + '\'' +
+				", CDNURL='" + CDNURL + '\'' +
+				", IMAGE_URL='" + IMAGE_URL + '\'' +
+				", IMAGE_NET_URL='" + IMAGE_NET_URL + '\'' +
+				", EXT='" + EXT + '\'' +
+				", WIDTH='" + WIDTH + '\'' +
+				", HEIGHT='" + HEIGHT + '\'' +
+				", STATUS='" + STATUS + '\'' +
+				", IS_COMMENT='" + IS_COMMENT + '\'' +
+				", IS_RECOMMEND='" + IS_RECOMMEND + '\'' +
+				", SORT='" + SORT + '\'' +
+				", REMARK='" + REMARK + '\'' +
+				", PUBLISH_TIME='" + PUBLISH_TIME + '\'' +
+				", PUBLISH_USER='" + PUBLISH_USER + '\'' +
+				", UPDATE_TIME='" + UPDATE_TIME + '\'' +
+				", UPDATE_ID='" + UPDATE_ID + '\'' +
+				", CREATE_TIME='" + CREATE_TIME + '\'' +
+				", CREATE_ID='" + CREATE_ID + '\'' +
+				", CONTENT='" + CONTENT + '\'' +
+				'}';
 	}
 }

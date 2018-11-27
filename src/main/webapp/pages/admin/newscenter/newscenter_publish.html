@@ -1,6 +1,83 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!--新闻/发布-->
+<!-- jquery -->
+<% include("/template/includes/jquery.html"){} %>
+<% include("/template/includes/ueditor.html"){} %>
+
+
+
+<script type="text/javascript">
+	var ue;
+	$(document).ready(function(){
+		ue = UE.getEditor('editor',{
+			initialFrameHeight:350  //初始化编辑器高度,默认320
+			,compressSide:1
+			,imageScaleEnabled:false // 图片不允许拖拽
+       		, toolbars: [[
+                       'source', '|',
+                      'bold', 'italic', 'underline', 'strikethrough', 'insertorderedlist', 'insertunorderedlist', 'paragraph', '|',
+                      'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|',
+                      'link', 'unlink', '|',
+                      'simpleupload', 'insertimage', 'emotion' , 'insertcode'
+                  ]]
+		});
+
+	});
+function oper_save(id) {
+		var albumId = $('[name="model.album_id"]').val();
+		if(albumId=='-1') {
+			Alert('请选择栏目');
+			return false;
+		}
+
+		var title = $('[name="model.name"]').val();
+		if(title=='') {
+			Alert('请输入文章题目');
+			return false;
+		}
+		if(title.length > 80 ) {
+			Alert('文章（'+title.length+'字）题目过长，请输入小于80个字');
+			return false;
+		}
+
+		if(!ue.hasContents()){
+			Alert('请输入文章内容');
+			return false;
+		}
+		if(ue.getContentTxt().length > 1200){
+			Alert('文章（'+ue.getContentTxt().length+'字）文字过长，请输入小于1200个字');
+			return false;
+		}
+
+		jQuery.ajax({
+			type:'POST',
+			url:'newscenter_publish/publishArticle/'+id,
+			data:$("form").serialize(),
+			success:function(data){
+				if(data.status==1){
+					alert('发布成功');
+					form1.action = "newscenter_publish";
+					form1.submit();
+					return true;
+				} else {
+					alert('发布失败：'+data.msg);
+				}
+				$('[name="old_password"]').val('');
+				$('[name="new_password"]').val('');
+				$('[name="new_password2"]').val('');
+			},
+			error:function(html){
+				var flag = (typeof console != 'undefined');
+				if(flag) console.log("服务器忙，提交数据失败，代码:" +html.status+ "，请联系管理员！");
+				alert("服务器忙，提交数据失败，请联系管理员！");
+			}
+		});
+
+		return false;
+	}
+
+</script>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,22 +97,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/cssCharts.css">
 	<script src="${BASE_PATH }static/backend/assets/js/jquery-1.10.2.js"></script>
-	<script type="text/javascript">
-	$(function(){
-		alert(1);
-		var oper={
-			save:function(){
-				alert(2);
-			},
-			save1:function(){
-				alert(3);
-			}
-		}
-	})
 
-	var oper;
-
-	</script>
 </head>
 <body>
     <div id="wrapper">
@@ -272,60 +334,73 @@
                             	发布新闻
                     </div>
 					<div class="card-content">
-						<form name="form1" class="col s12 form-horizontal">
+						<form class="form-horizontal" name="form1" action="" method="post">
+							<input type="hidden" name="model.id" class="form-control" id="model.id"
+								   value="${model.id!'0'}">
 							<div class="row">
-							    <div class="input-field col s12">
-							      <input value="" id="first_name2" type="text" class="validate">
-							      <label class="active" for="first_name2">标题</label>
-							    </div>
-								<div class="input-field col s12">
-						          <textarea id="textarea1" class="materialize-textarea"></textarea>
-						          <label for="textarea1">正文</label>
-						        </div>
-								<div class="file-field input-field col s12">
-							      <div class="btn">
-							        <span>文件上传</span>
-							        <input type="file">
-							      </div>
-							      <div class="file-path-wrapper">
-							        <input class="file-path validate" type="text" value="可设置图片、上传超链接、视频">
-							      </div>
-							    </div>
-							    <div class="file-field input-field col s12">
-							      <div class="btn"/>
-							        <span>文件上传</span>
-							        <input type="file">
-							      </div>
-							      <div class="file-path-wrapper">
-							        <input class="file-path validate" type="text" value="上传封面图片、图片可选择性上传">
-							      </div>
-							    </div>
-								<div class="input-field col s12">
-								  <textarea id="textarea1" class="materialize-textarea"></textarea>
-								  <label for="textarea1">分类设置</label>
-								</div>
 								<div class="form-group">
-								    <div class="col-sm-offset-3 col-sm-9">
-									    <div class="checkbox">
-									        <label id="todrafts">
-									          <a  class="waves-effect waves-light btn-large" onclick="oper.save();">保存草稿箱</a>&nbsp;
-									          <!--<a class="waves-effect waves-light btn-large"  >确认发布</a>-->
-									        </label>
-										</div>
+									<label for="model.album_id" class="col-sm-2 control-label">栏目</label>
+									<div class="col-sm-10" >
+										<select  class="form-control" name="model.album_id">
+											<option value="-1">--请选择栏目--</option>
+											<%  //var albums=tempTrd.albums();
+											if(!isEmpty(albums)) {
+											for(item in albums){ %>
+											<option value="${item.id}" ${item.id==model.album_id!0?'selected':''} >${item.name}</option>
+											<%
+											}
+											}
+											%>
+										</select>
 									</div>
 								</div>
 
-								</form>
+								<div class="form-group">
+									<label for="model.name" class="col-sm-2 control-label">标题</label>
+									<div class="col-sm-10">
+										<input name="model.name" class="form-control" id="model.name"
+											   value="${model.name!''}" placeholder="标题">
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="remark" class="col-sm-2 control-label">内容</label>
+									<div class="col-sm-10">
+										<script id="editor" type="text/plain" name="model.content"
+												style="width: 98%; height: 320px;">${model.content!''}</script>
+										</div>
+								  	</div>
+
+							    <!--
+								<div class="input-field col s12">
+								  <textarea id="textarea1" class="materialize-textarea"></textarea>
+								  <label for="textarea1">分类设置</label>
+								</div>-->
+									<div class="form-group">
+										<div class="col-sm-offset-3 col-sm-9">
+											<div class="checkbox">
+												<label>
+												 <input type="button" value="确认发布"  class="waves-effect waves-light btn-large" onclick="oper_save(${model.id!'0'});"/>&nbsp;
+												  <input type="button" value="保存草稿箱"  class="waves-effect waves-light btn-large" onclick="oper_savedraft(${model.id!'0'});"/>
+												  <!-- <a class="waves-effect waves-light btn-large">保存草稿箱</a>&nbsp;
+												<!--  <a class="waves-effect waves-light btn-large">确认发布</a>-->
+												</label>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</form>
 							</div>
 
     					<div class="clearBoth"></div>
 	   					
 					</div>
-					
+
   				</div>
 			</div>	
 		</div>		
-		
+
 	</div><!-- /. PAGE WRAPPER  -->
 
 </div>
@@ -334,8 +409,6 @@
     <!-- JS Scripts-->
     <!-- jQuery Js -->
     <script src="${BASE_PATH }static/backend/assets/js/jquery-1.10.2.js"></script>
-	
-	<!-- Bootstrap Js -->
     <script src="${BASE_PATH }static/backend/assets/js/bootstrap.min.js"></script>
 	
 	<script src="${BASE_PATH }static/backend/assets/materialize/js/materialize.min.js"></script>

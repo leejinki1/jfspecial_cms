@@ -1,5 +1,7 @@
 package com.jfspecial.modules.admin.maker.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.jfinal.aop.Before;
 import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
@@ -7,16 +9,23 @@ import com.jfinal.upload.UploadFile;
 import com.jfspecial.component.base.BaseProjectController;
 import com.jfspecial.component.util.ImageModel;
 import com.jfspecial.component.util.ImageUtils;
+import com.jfspecial.component.util.JFSpecialUtils;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
 import com.jfspecial.jfinal.component.db.SQLUtils;
-import com.jfspecial.modules.admin.newscenter.model.TbNewsCenter;
-import com.jfspecial.modules.admin.newscenter.model.TbNewsCenterTags;
-import com.jfspecial.modules.admin.newscenter.service.NewsCenterAlbumService;
+import com.jfspecial.modules.CommonController;
+import com.jfspecial.modules.admin.article.ArticleConstant;
+import com.jfspecial.modules.admin.maker.model.TbMaker;
+import com.jfspecial.modules.admin.maker.model.TbMakerAlbum;
 import com.jfspecial.modules.admin.site.TbSite;
+import com.jfspecial.modules.front.interceptor.FrontInterceptor;
 import com.jfspecial.system.file.util.FileUploadUtils;
+import com.jfspecial.system.user.SysUser;
+import com.jfspecial.util.DateUtils;
 import com.jfspecial.util.StrUtils;
+import com.jfspecial.util.extend.HtmlUtils;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * 创客/发布
@@ -27,181 +36,107 @@ public class MakerPublishController extends BaseProjectController {
 
 	private static final String path = "/pages/admin/maker/maker_publish";
 
-	public void index(){
-		list();
-	}
-
-	//
-	public void list() {
-		TbNewsCenter model = getModelByAttr(TbNewsCenter.class);
-
-		SQLUtils sql = new SQLUtils(" from tb_maker t where 1=1 ");
-		if (model.getAttrValues().length != 0) {
-			sql.setAlias("t");
-			sql.whereEquals("album_id", model.getAlbumId());
-			sql.whereLike("name", model.getStr("name"));
-			sql.whereEquals("status", model.getInt("status"));
-		}
-
-		// 排序
-		String orderBy = getBaseForm().getOrderBy();
-		if (StrUtils.isEmpty(orderBy)) {
-			sql.append(" order by sort,id desc");
-		} else {
-			sql.append(" order by ").append(orderBy);
-		}
-		
-		Page<TbNewsCenter> page = TbNewsCenter.dao.paginate(getPaginator(), "select t.* ", //
-				sql.toString().toString());
-
-		// 下拉框
-		setAttr("selectAlbum", new NewsCenterAlbumService().selectAlbum(model.getAlbumId()));
-				
-		setAttr("page", page);
-		setAttr("attr", model);
-		render(path + ".html");
-	}
-
-	public void add() {
-		// 获取页面信息,设置目录传入
-		TbNewsCenter attr = getModel(TbNewsCenter.class);
-		setAttr("model", attr);
-
-		// 查询下拉框
-		setAttr("selectAlbum", new NewsCenterAlbumService().selectAlbum(attr.getAlbumId()));
-		
-		render(path + "add.html");
-	}
-
-	public void view() {
-		TbNewsCenter model = TbNewsCenter.dao.findById(getParaToInt());
-		setAttr("model", model);
-		
-		// 设置标签
-		String tags = Db.findFirst("select group_concat(tagname) tags " //
-				+ " from tb_newscenter_tags where image_id = ? order by id", model.getInt("id")).getStr("tags");
-		setAttr("tags", tags);
-		
-		render(path + "view.html");
-	}
-
-	public void delete() {
-		// 日志添加
-		TbNewsCenter model = new TbNewsCenter();
-		Integer userid = getSessionUser().getUserid();
-		String now = getNow();
-		model.put("update_id", userid);
-		model.put("update_time", now);
-		model.deleteById(getParaToInt());
-				
-		list();
-	}
-	
 	/**
-	 * Iframe删除
+	 * 跳转到编辑博文页面
+	 *
+	 * 2018年11月17日 下午9:53:04 ljk
 	 */
-	public void del() {
-		int id = getParaToInt();
-		// 日志添加
-		TbNewsCenter model = new TbNewsCenter();
-		Integer userid = getSessionUser().getUserid();
-		String now = getNow();
-		model.put("update_id", userid);
-		model.put("update_time", now);
-		model.deleteById(id);
-				
-		renderMessage("删除成功");
-	}
+	@Before(FrontInterceptor.class)
+	public void index() {
+		SysUser user = (SysUser) getSessionUser();
+		if (user == null) {
+			redirect(CommonController.firstPage);
+			return;
+		}
 
-	public void edit() {
-		TbNewsCenter model = TbNewsCenter.dao.findById(getParaToInt());
+		setAttr("user", user);
+
+
+		// 不是自己的文章也想修改,总有不怀好意的人哦
+		//	if (model.getCreateId() != user.getUserid()) {
+		//		System.err.println("####userid(" + user.getUserid() + ")非法编辑内容");
+		//		redirect(CommonController.firstPage);
+		//		return;
+		//	}
+
+		TbMaker model = TbMaker.dao.findById(getParaToInt());
 		setAttr("model", model);
-		
-		// 查询下拉框
-		setAttr("selectAlbum", new NewsCenterAlbumService().selectAlbum(model.getAlbumId()));
-				
-		// 设置标签
-		String tags = Db.findFirst("select group_concat(tagname) tags " //
-				+ " from tb_newscenter_tags where image_id = ? order by id", model.getInt("id")).getStr("tags");
-		setAttr("tags", tags);
-				
-		render(path + "edit.html");
+
+		String sql = "select * from tb_maker_album t where  status = 1 order by sort,id desc";
+		List<TbMakerAlbum> albums = TbMakerAlbum.dao.find(sql);
+		setAttr("albums", albums);
+
+		render(path+".html");//
 	}
 
-	public void save() {
-		TbSite site = getBackSite();
-		UploadFile uploadImage = getFile("model.image_url", FileUploadUtils.getUploadTmpPath(site), FileUploadUtils.UPLOAD_MAX);
-		
+
+	/**
+	 * publish article
+	 *
+	 * 2018年11月27日 下午10:12:18 ljk
+	 */
+	public void publishArticle() {
+		JSONObject json = new JSONObject();
+		json.put("status", 2);// 失败
+
+		SysUser user = (SysUser) getSessionUser();
+		if (user == null) {
+			json.put("msg", "没有登录，不能提交文章！");
+			renderJson(json.toJSONString());
+			return;
+		}
+
 		Integer pid = getParaToInt();
-		TbNewsCenter model = getModel(TbNewsCenter.class);
-		
-		// 图片附件
-		if (uploadImage != null) {
-			String fileUrl = uploadHandler(site, uploadImage.getFile(), "image");
-			model.set("image_url", fileUrl);
+		TbMaker model = getModel(TbMaker.class);
+		// 验证题目，内容
+		String content = model.getContent();
+		String title = model.getName();
+
+		// 删除侵入脚本
+		content = JFSpecialUtils.delScriptTag(content);
+		title = HtmlUtils.delHTMLTag(title);
+
+		// 这里没有必要提示太精准~因为前台有验证~绕过的都不是好人哦
+		if (content == null || HtmlUtils.delHTMLTag(content).length() > 2000 //
+				|| title == null || title.length() > 200 //
+		) {
+			json.put("msg", "文章信息错误，请输入正确数据！");
+			renderJson(json.toJSONString());
+			return;
 		}
-		
-		// 设置图片信息
-		if (StrUtils.isNotEmpty(model.getImageNetUrl())) {
-			ImageModel imageModel = ImageUtils.getIamge(model.getImageNetUrl());
-			model.setExt(imageModel.getExt());
-			model.setWidth(imageModel.getWidth() + "");
-			model.setHeight(imageModel.getHeight() + "");
-			
-			model.setLinkurl(model.getImageNetUrl());
-		} else if (StrUtils.isNotEmpty(model.getImageUrl())) {
-			ImageModel imageModel = ImageUtils
-					.getIamge(PathKit.getWebRootPath() + File.separator + model.getImageUrl());
-			model.setExt(imageModel.getExt());
-			model.setWidth(imageModel.getWidth() + "");
-			model.setHeight(imageModel.getHeight() + "");
-			
-			String linkUrl = getAttr("BASE_PATH") + model.getImageUrl();
-			model.setLinkurl(linkUrl.replace("\\", "/"));
-		}
-		
-		Integer userid = getSessionUser().getUserid();
-		String now = getNow();
-		model.put("update_id", userid);
-		model.put("update_time", now);
+
+		model.setUpdateTime(getNow());
 		if (pid != null && pid > 0) { // 更新
+			// 管理员或者自己才能修改
+			//	if (! model.getCreateId().intValue() != user.getUserid().intValue()) {
+			//	if (!isAdmin(user) //
+			//	&& model.getCreateId().intValue() != user.getUserid().intValue()) {
+			//	json.put("msg", "你没有权限修改文章！");
+			//	renderJson(json.toJSONString());
+			//	return;
+			//	}
 			model.update();
-			
 		} else { // 新增
 			model.remove("id");
-			model.put("create_id", userid);
-			model.put("create_time", now);
+			if (model.getAlbumId() == null || model.getAlbumId() <= 0) {
+				//model.getAlbumId(JFSpecialUtils.MENU_BLOG); // 博文目录
+			}
+			model.setStatus(1); // 显示
+			//model.setType(11);
+			model.setIsComment(1); // 能评论
+			model.setIsRecommend(2);// 不推荐
+			model.setSort(20); // 排序
+			model.set("approve_status", ArticleConstant.APPROVE_STATUS_PASS); // 需要审核改为update
+			model.setPublishTime(DateUtils.getNow("yyyy-MM-dd")); // 发布时间
+			model.setPublishUser(user.getUserName()); // 发布人
+			model.setCreateId(getSessionUser().getUserid());
+			model.setUpdateId(getSessionUser().getUserid());
+			model.setCreateTime(getNow());
 			model.save();
 		}
-		
-		
-		// 保存tags
-		if (pid != null && pid > 0) { 
-			Db.update(" delete from tb_newscenter_tags where image_id = ?", model.getInt("id"));
-		}
-		String tags = getPara("tags");
-		if (StrUtils.isNotEmpty(tags)) {
-			String[] tagsArr = tags.split(",");
-			for (int i = 0; i < tagsArr.length; i++) {
-				String tagname = tagsArr[i];
-				// 最多5个
-				if (i >= 5) {
-					break;
-				}
-				if (StrUtils.isEmpty(tagname)) {
-					continue;
-				}
-				TbNewsCenterTags tag = new TbNewsCenterTags();
-				tag.put("tagname", tagname);
-				tag.put("image_id", model.getInt("id"));
-				tag.put("create_id", getSessionUser().getUserid());
-				tag.put("create_time", getNow());
-				tag.save();
 
-			}
-		}
-		
-		renderMessage("保存成功");
+		json.put("status", 1);// 成功
+		renderJson(json.toJSONString());
 	}
 
 
