@@ -57,10 +57,10 @@ public class FrontAddoilService extends BaseService {
 	 */
 	public Page<TbAddOil> getAddOil(Paginator paginator) {
 		String key = ("article_" + paginator.getPageNo() + "_" + paginator.getPageSize());
-		Page<TbAddOil> addoils = TbAddOil.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_addoil " //
+		Page<TbAddOil> addoils = TbAddOil.dao.paginateCache(cacheName, key, paginator, "select (@i:=@i+1)pm,t.* " //
+				, " from tb_addoil t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
-						+ " order by sort,create_time desc");
+						+ " order by update_time desc");
 		return addoils;
 	}
 
@@ -77,7 +77,7 @@ public class FrontAddoilService extends BaseService {
 				, " from tb_addoil " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
-						+ " order by sort,create_time desc", albumId);
+						+ " order by update_time desc", albumId);
 		return addoils;
 	}
 
@@ -105,7 +105,7 @@ public class FrontAddoilService extends BaseService {
 		Page<TbAddOil> articles = TbAddOil.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_addoil  where status = 1 " //
 						+ " and is_recommend = 1 " // 推荐文章
-						+ " order by sort,create_time desc");
+						+ " order by update_time desc");
 		return articles;
 	}
 }

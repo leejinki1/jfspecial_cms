@@ -267,24 +267,19 @@
 								</tr>
 							</thead>
 							<tbody>
-							 	<tr>
-							 		<td>1</td>
-							 		<td>鸡蛋100块钱一斤</td>
-							 		<td>狗蛋</td>
-							 		<td>2018-11-19 14:51:59</td>
+							<%//帮扶企业 308
+							var addoils=tempAddOil.addoils(1,5);%>
+							<% for(item in addoils.list){ %>
+								<tr>
+							 		<td>${item.pm}</td>
+							 		<td>${item.name}</td>
+							 		<td>${item.publish_user}</td>
+							 		<td>${item.update_time}</td>
 							 		<td>
 							 			<a class="waves-effect waves-light btn">删除</a>
 							 		</td>
 							 	</tr>
-							 	<tr>
-							 		<td>2</td>
-							 		<td>白菜200块钱一颗</td>
-							 		<td>狗剩</td>
-							 		<td>2018-11-19 14:51:59</td>
-							 		<td>
-							 			<a class="waves-effect waves-light btn">删除</a>
-							 		</td>
-							 	</tr>
+							<% } %>
 						 	</tbody>
 						</table>
 						<p class="pageBtnList">
@@ -314,27 +309,27 @@
      <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
-    <script src="assets/js/jquery-1.10.2.js"></script>
+    <script src="${BASE_PATH }static/backend/assets/js/jquery-1.10.2.js"></script>
 	
 	<!-- Bootstrap Js -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="${BASE_PATH }static/backend/assets/js/bootstrap.min.js"></script>
 	
-	<script src="assets/materialize/js/materialize.min.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/materialize/js/materialize.min.js"></script>
 	
     <!-- Metis Menu Js -->
-    <script src="assets/js/jquery.metisMenu.js"></script>
+    <script src="${BASE_PATH }static/backend/assets/js/jquery.metisMenu.js"></script>
     <!-- Morris Chart Js -->
-    <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
-    <script src="assets/js/morris/morris.js"></script>
+    <script src="${BASE_PATH }static/backend/assets/js/morris/raphael-2.1.0.min.js"></script>
+    <script src="${BASE_PATH }static/backend/assets/js/morris/morris.js"></script>
 	
 
-	<script src="assets/js/easypiechart.js"></script>
-	<script src="assets/js/easypiechart-data.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/easypiechart.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/easypiechart-data.js"></script>
 	
-	<script src="assets/js/Lightweight-Chart/jquery.chart.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/jquery.chart.js"></script>
 	
     <!-- Custom Js -->
-   <script src="assets/js/custom-scripts.js"></script> 
+   <script src="${BASE_PATH }static/backend/assets/js/custom-scripts.js"></script>
 
 
 </body>

@@ -32,6 +32,16 @@ public class TbAddOil extends BaseProjectModel<TbAddOil> {
 	private String UPDATE_ID = "update_id"; // 创建者
 	private String CREATE_TIME = "create_time"; // 创建时间
 	private String CREATE_ID = "create_id"; // 创建者
+	private String CONTENT = "content"; // 正文
+
+	public TbAddOil setContent(String value) {
+		set(CONTENT, value);
+		return this;
+	}
+
+	public String getContent() {
+		return get(CONTENT);
+	}
 
 	public TbAddOil setId(Integer value) {
 		set(ID, value);
