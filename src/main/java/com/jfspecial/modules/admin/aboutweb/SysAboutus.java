@@ -23,6 +23,12 @@ public class SysAboutus extends BaseProjectModel<SysAboutus> {
     private String BANNER1="banner1";//banner1主页轮播图1链接
     private String BANNER2="banner2";//banner2主页轮播图2链接
     private String BANNER3="banner3";//banner3主页轮播图3链接
+    private String BANNERTITLE1="bannertitle1";//banner1主页轮播图1主题
+    private String BANNERTITLE2="bannertitle2";//banner2主页轮播图2主题
+    private String BANNERTITLE3="bannertitle3";//banner3主页轮播图3主题
+    private String BANNERTITLECONTENT1="bannertitlecontent1";//banner1主页轮播图1主题内容
+    private String BANNERTITLECONTENT2="bannertitlecontent2";//banner2主页轮播图2主题内容
+    private String BANNERTITLECONTENT3="bannertitlecontent3";//banner3主页轮播图3主题内容
 
     public SysAboutus setId(String value) {
         set(ID, value);
@@ -109,6 +115,12 @@ public class SysAboutus extends BaseProjectModel<SysAboutus> {
                 ", BANNER1='" + BANNER1 + '\'' +
                 ", BANNER2='" + BANNER2 + '\'' +
                 ", BANNER3='" + BANNER3 + '\'' +
+                ", BANNERTITLE1='" + BANNERTITLE1 + '\'' +
+                ", BANNERTITLE2='" + BANNERTITLE2 + '\'' +
+                ", BANNERTITLE3='" + BANNERTITLE3 + '\'' +
+                ", BANNERTITLECONTENT1='" + BANNERTITLECONTENT1 + '\'' +
+                ", BANNERTITLECONTENT2='" + BANNERTITLECONTENT2 + '\'' +
+                ", BANNERTITLECONTENT3='" + BANNERTITLECONTENT3 + '\'' +
                 '}';
     }
 
@@ -129,6 +141,7 @@ public class SysAboutus extends BaseProjectModel<SysAboutus> {
         return get(UPDATEDATE);
     }
 
+    /*banner图*/
     public SysAboutus setBanner1(String value){
         set(BANNER1,value);
         return this;
@@ -150,5 +163,53 @@ public class SysAboutus extends BaseProjectModel<SysAboutus> {
     public String getBanner3(){
         return get(BANNER3);
     }
+
+    /*标题*/
+    public SysAboutus setBannerTitle1(String value){
+        set(BANNERTITLE1,value);
+        return this;
+    }
+    public String getBannerTitle1(){
+        return get(BANNERTITLE1);
+    }
+    public SysAboutus setBannerTitle2(String value){
+        set(BANNERTITLE2,value);
+        return this;
+    }
+    public String getBannerTitle2(){
+        return get(BANNERTITLE2);
+    }
+    public SysAboutus setBannerTitle3(String value){
+        set(BANNERTITLE3,value);
+        return this;
+    }
+    public String getBannerTitle3(){
+        return get(BANNERTITLE3);
+    }
+
+    /*主题内容*/
+
+    public SysAboutus setBannerTitleContent1(String value){
+        set(BANNERTITLECONTENT1,value);
+        return this;
+    }
+    public String getBannerTitleContent1(){
+        return get(BANNERTITLECONTENT1);
+    }
+    public SysAboutus setBannerTitleContent2(String value){
+        set(BANNERTITLECONTENT2,value);
+        return this;
+    }
+    public String getBannerTitleContent2(){
+        return get(BANNERTITLECONTENT2);
+    }
+    public SysAboutus setBannerTitleContent3(String value){
+        set(BANNERTITLECONTENT3,value);
+        return this;
+    }
+    public String getBannerTitleContent3(){
+        return get(BANNERTITLECONTENT3);
+    }
+
 
 }

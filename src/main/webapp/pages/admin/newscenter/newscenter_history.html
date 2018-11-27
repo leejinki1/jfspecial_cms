@@ -1,24 +1,25 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<!--网站设置/广告轮播图-->
+<!--新闻中心/历史-->
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Target Material Design Bootstrap Admin Template</title>
 	
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="${BASE_PATH}static/backend/assets/materialize/css/materialize.min.css" media="screen,projection" />
+	<link rel="stylesheet" href="${BASE_PATH }static/backend/assets/materialize/css/materialize.min.css" media="screen,projection" />
     <!-- Bootstrap Styles-->
-    <link href="${BASE_PATH}static/backend/assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="${BASE_PATH }static/backend/assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FontAwesome Styles-->
-    <link href="${BASE_PATH}static/backend/assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="${BASE_PATH }static/backend/assets/css/font-awesome.css" rel="stylesheet" />
     <!-- Morris Chart Styles-->
-    <link href="${BASE_PATH}static/backend/assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <link href="${BASE_PATH }static/backend/assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
     <!-- Custom Styles-->
-    <link href="${BASE_PATH}static/backend/assets/css/custom-styles.css" rel="stylesheet" />
+    <link href="${BASE_PATH }static/backend/assets/css/custom-styles.css" rel="stylesheet" />
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" href="${BASE_PATH}static/backend/assets/js/Lightweight-Chart/cssCharts.css">
+    <link rel="stylesheet" href="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/cssCharts.css">
+    <link rel="stylesheet" href="${BASE_PATH }static/backend/adminStyle/all.css" />
 </head>
 <body>
     <div id="wrapper">
@@ -30,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand waves-effect waves-dark" href="index.html"><i class="large material-icons">track_changes</i> <strong>网站设置</strong></a>
+                <a class="navbar-brand waves-effect waves-dark" href="index.html"><i class="large material-icons">track_changes</i> <strong>新闻中心</strong></a>
 				
 		<div id="sideNav" href=""><i class="material-icons dp48">toc</i></div>
             </div>
@@ -223,7 +224,7 @@
                         <a href="../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 信息统计</a>
                     </li>
                     <li>
-                        <a href="banner" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 广告轮播图</a>
+                        <a href="newscenter_history" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 历史需求</a>
                     </li>
 
                 </ul>
@@ -236,12 +237,12 @@
 <div id="page-wrapper">
 	<div class="header"> 
         <h1 class="page-header">
-                	广告轮播图
+                	历史需求
         </h1>
 	    <ol class="breadcrumb">
 			<li><a href="#">首页</a></li>
-			<li><a href="#">网站设置 </a></li>
-			<li><a href="#">广告轮播图 </a></li>
+			<li><a href="#">新闻中心 </a></li>
+			<li><a href="#">历史需求 </a></li>
 			<li class="active">Data</li>
 		</ol> 							
 	</div>
@@ -252,145 +253,68 @@
 			<div class="col-lg-12">
 	            <div class="card">
 	            	<div class="card-action">
-                            	修改轮播图
+                            	历史需求记录
                     </div>
 					<div class="card-content">
-
-							<div class="row">
-								<!--banner1上传-->
-								<form class="col s12 form-horizontal" enctype="multipart/form-data" method="post" action="banner/save1">
-									<!--上传图片1-->
-									<div class="file-field input-field col s12">
-										  <div class="btn">
-											<span>文件上传</span>
-											<input type="file" name="model.banner1" >
-										  </div>
-										  <div class="file-path-wrapper">
-											<input class="file-path validate" type="text" value="请上传轮播图1">
-										  </div>
-									</div>
-									<!--增加主题1-->
-									<div class="file-field col s12">
-										<div class="btn">
-											<span>主题 1 </span>
-										</div>
-										<div class="file-path-wrapper">
-											<input class="file-path validate" type="text" value="${model.bannertitle1}" name="model.bannertitle1" placeholder="请输入主题1">
-										</div>
-									</div>
-									<!--增加主题内容1-->
-									<div class="file-field col s12">
-										<div class="btn">
-											<span>主题内容 1 </span>
-										</div>
-										<div class="file-path-wrapper">
-											<input class="file-path validate" type="text" value="${model.bannertitlecontent1}" name="model.bannertitlecontent1" placeholder="请输入主题1内容">
-										</div>
-									</div>
-									<!--提交-->
-									<div class="form-group">
-										<div class="col-sm-offset-3 col-sm-9">
-											<div class="checkbox">
-												<label>
-												  <!--<a class="waves-effect waves-light btn-large" href="${BASE_PATH}admin/banner">保存</a>-->
-													<input class="btn-large" type="submit" value="保存">
-												</label>
-											</div>
-										</div>
-									</div>
-								</form>
-
-								<!--banner2上传-->
-								<form class="col s12 form-horizontal" enctype="multipart/form-data" method="post" action="banner/save2">
-									<!--上传图片1-->
-									<div class="file-field input-field col s12">
-										<div class="btn">
-											<span>文件上传</span>
-											<input type="file" name="model.banner2" >
-										</div>
-										<div class="file-path-wrapper">
-											<input class="file-path validate" type="text" value="请上传轮播图2">
-										</div>
-									</div>
-									<!--增加主题2-->
-									<div class="file-field col s12">
-										<div class="btn">
-											<span>主题 2 </span>
-										</div>
-										<div class="file-path-wrapper">
-											<input class="file-path validate" type="text" value="${model.bannertitle2}" name="model.bannertitle2" placeholder="请输入主题2">
-										</div>
-									</div>
-									<!--增加主题内容2-->
-									<div class="file-field col s12">
-										<div class="btn">
-											<span>主题 2 </span>
-										</div>
-										<div class="file-path-wrapper">
-											<input class="file-path validate" type="text" value="${model.bannertitlecontent2}" name="model.bannertitlecontent2" placeholder="请输入主题2内容">
-										</div>
-									</div>
-									<!--提交-->
-									<div class="form-group">
-										<div class="col-sm-offset-3 col-sm-9">
-											<div class="checkbox">
-												<label>
-													<!--<a class="waves-effect waves-light btn-large" href="${BASE_PATH}admin/banner">保存</a>-->
-													<input class="btn-large" type="submit" value="保存">
-												</label>
-											</div>
-										</div>
-									</div>
-								</form>
-
-								<!--banner3-->
-								<form class="col s12 form-horizontal" enctype="multipart/form-data" method="post" action="banner/save3">
-									<!--上传图片1-->
-									<div class="file-field input-field col s12">
-										<div class="btn">
-											<span>文件上传</span>
-											<input type="file" name="model.banner3" >
-										</div>
-										<div class="file-path-wrapper">
-											<input class="file-path validate" type="text" value="请上传轮播图3">
-										</div>
-									</div>
-									<!--增加主题3-->
-									<div class="file-field col s12">
-										<div class="btn">
-											<span>主题  3  </span>
-										</div>
-										<div class="file-path-wrapper">
-											<input class="file-path validate" type="text" value="${model.bannertitle3}" name="model.bannertitle3" placeholder="请输入主题3">
-										</div>
-									</div>
-									<!--增加主题内容3-->
-									<div class="file-field col s12">
-										<div class="btn">
-											<span>主题  3  </span>
-										</div>
-										<div class="file-path-wrapper">
-											<input class="file-path validate" type="text" value="${model.bannertitlecontent3}" name="model.bannertitlecontent3" placeholder="请输入主题3内容">
-										</div>
-									</div>
-									<!--提交-->
-									<div class="form-group">
-										<div class="col-sm-offset-3 col-sm-9">
-											<div class="checkbox">
-												<label>
-													<!--<a class="waves-effect waves-light btn-large" href="${BASE_PATH}admin/banner">保存</a>-->
-													<input class="btn-large" type="submit" value="保存">
-												</label>
-											</div>
-										</div>
-									</div>
-								</form>
-
-
-							</div>
-
-    					<div class="clearBoth"></div>
-	   					
+						<table class="table table-striped highlight centered responsive-table">
+							<thead>
+								<tr>
+									<th>序号</th>
+								 	<th>标题</th> 
+								 	<th>发布人</th> 
+									<th>时间</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+							<!--列表中的数据-->
+							<% for(item in page.list){ %>
+							 	<tr>
+							 		<td>${itemLP.index }</td><!--序号-->
+							 		<td>${item.name}</td><!--标题-->
+							 		<td>${item.publish_user}</td><!--发布人-->
+							 		<td>${item.update_time}</td><!--更新时间-->
+							 		<td>
+							 			<a class="waves-effect waves-light btn">删除</a>
+							 		</td>
+							 	</tr>
+							<%	} %>
+							<!--下面是静态数据-->
+								<tr>
+									<td>1</td>
+									<td>鸡蛋100块钱一斤</td>
+									<td>狗蛋</td>
+									<td>2018-11-19 14:51:59</td>
+									<td>
+										<a class="waves-effect waves-light btn">删除</a>
+									</td>
+								</tr>
+							 	<tr>
+							 		<td>2</td>
+							 		<td>白菜200块钱一颗</td>
+							 		<td>狗剩</td>
+							 		<td>2018-11-19 14:51:59</td>
+							 		<td>
+							 			<a class="waves-effect waves-light btn">删除</a>
+							 		</td>
+							 	</tr>
+						 	</tbody>
+						</table>
+						<p class="pageBtnList">
+							<button type="button" class="btn btn-default btn-sm">首页</button>
+							<button type="button" class="btn btn-default btn-sm img-circle">上一页</button>
+							<button type="button" class="btn btn-default btn-xs">1</button>
+							<button type="button" class="btn btn-default btn-xs">2</button>
+							<button type="button" class="btn btn-default btn-xs">3</button>
+							<button type="button" class="btn btn-default btn-xs">4</button>
+							<button type="button" class="btn btn-default btn-xs">5</button>
+							<button type="button" class="btn btn-default btn-sm img-circle">下一页</button>
+							<button type="button" class="btn btn-default btn-sm">尾页</button>
+						</p>
+						<p class="pageBtnList">
+							第<span>1</span>页&nbsp;共<span>6</span>页&nbsp;共<span>30</span>条记录
+						</p>	
+						<div class="clearBoth"></div>
 					</div>
 					
   				</div>
@@ -403,27 +327,27 @@
      <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
-    <script src="assets/js/jquery-1.10.2.js"></script>
+    <script src="${BASE_PATH }static/backend/assets/js/jquery-1.10.2.js"></script>
 	
 	<!-- Bootstrap Js -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="${BASE_PATH }static/backend/assets/js/bootstrap.min.js"></script>
 	
-	<script src="assets/materialize/js/materialize.min.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/materialize/js/materialize.min.js"></script>
 	
     <!-- Metis Menu Js -->
-    <script src="assets/js/jquery.metisMenu.js"></script>
+    <script src="${BASE_PATH }static/backend/assets/js/jquery.metisMenu.js"></script>
     <!-- Morris Chart Js -->
-    <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
-    <script src="assets/js/morris/morris.js"></script>
+    <script src="${BASE_PATH }static/backend/assets/js/morris/raphael-2.1.0.min.js"></script>
+    <script src="${BASE_PATH }static/backend/assets/js/morris/morris.js"></script>
 	
 
-	<script src="assets/js/easypiechart.js"></script>
-	<script src="assets/js/easypiechart-data.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/easypiechart.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/easypiechart-data.js"></script>
 	
-	<script src="assets/js/Lightweight-Chart/jquery.chart.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/jquery.chart.js"></script>
 	
     <!-- Custom Js -->
-   <script src="assets/js/custom-scripts.js"></script> 
+   <script src="${BASE_PATH }static/backend/assets/js/custom-scripts.js"></script>
 
 
 </body>

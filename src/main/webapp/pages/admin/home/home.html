@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+<!--首页-->
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -240,16 +241,16 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 新闻中心<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="newscenter/publish">新闻发布信息</a>
+							<a href="newscenter_publish">新闻发布信息</a>
 						</li>
 						<li>
-							<a href="newscenter/list_drafts">待发布新闻【草稿箱】</a>
+							<a href="newscenter_drafts">待发布新闻【草稿箱】</a>
 						</li>
 						<li>
-							<a href="newscenter/list_approve">待审核新闻</a>
+							<a href="newscenter_approve">待审核新闻</a>
 						</li>
 						<li>
-							<a href="newscenter/list_history">历史新闻</a>
+							<a href="newscenter_history">历史新闻</a>
 						</li>
 					</ul>
 				</li>
@@ -258,16 +259,16 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-qrcode"></i> 技术需求<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="jishuxuqiu_c1.html">技术需求信息</a>
+							<a href="trd_publish">技术需求信息</a>
 						</li>
 						<li>
-							<a href="jishuxuqiu_c2.html">待发布需求【草稿箱】</a>
+							<a href="trd_drafts">待发布需求【草稿箱】</a>
 						</li>
 						<li>
-							<a href="jishuxuqiu_c3.html">待审核需求</a>
+							<a href="trd_approve">待审核需求</a>
 						</li>
 						<li>
-							<a href="jishuxuqiu_c4.html">历史需求</a>
+							<a href="trd_history">历史需求</a>
 						</li>
 					</ul>
 				</li>
@@ -276,16 +277,16 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-table"></i> 创客活动<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="chuangkehuodong_c1.html">创客活动信息</a>
+							<a href="maker_publish">创客活动信息</a>
 						</li>
 						<li>
-							<a href="chuangkehuodong_c2.html">待发布活动【草稿箱】</a>
+							<a href="maker_drafts">待发布活动【草稿箱】</a>
 						</li>
 						<li>
-							<a href="chuangkehuodong_c3.html">待审核活动</a>
+							<a href="maker_approve">待审核活动</a>
 						</li>
 						<li>
-							<a href="chuangkehuodong_c4.html">历史活动</a>
+							<a href="maker_history">历史活动</a>
 						</li>
 					</ul>
 				</li>
@@ -294,16 +295,16 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 政策法规<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="zhengcefagui_c1.html">政策法规信息</a>
+							<a href="policy_publish">政策法规信息</a>
 						</li>
 						<li>
-							<a href="zhengcefagui_c2.html">待发布信息【草稿箱】</a>
+							<a href="policy_drafts">待发布信息【草稿箱】</a>
 						</li>
 						<li>
-							<a href="zhengcefagui_c3.html">待审核信息</a>
+							<a href="policy_approve">待审核信息</a>
 						</li>
 						<li>
-							<a href="zhengcefagui_c4.html">历史信息</a>
+							<a href="policy_history">历史信息</a>
 						</li>
 					</ul>
 				</li>
@@ -312,16 +313,16 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 科普板块<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="kepubankuai_c1.html">科普信息</a>
+							<a href="spp_publish">科普信息</a>
 						</li>
 						<li>
-							<a href="kepubankuai_c2.html">待发布信息【草稿箱】</a>
+							<a href="spp_drafts">待发布信息【草稿箱】</a>
 						</li>
 						<li>
-							<a href="kepubankuai_c3.html">待审核信息</a>
+							<a href="spp_approve">待审核信息</a>
 						</li>
 						<li>
-							<a href="kepubankuai_c4.html">历史信息</a>
+							<a href="spp_history">历史信息</a>
 						</li>
 					</ul>
 				</li>
@@ -330,16 +331,16 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 项目申报<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="xiangmushenbao_c1.html">项目信息</a>
+							<a href="projectapp_publish">项目信息</a>
 						</li>
 						<li>
-							<a href="xiangmushenbao_c2.html">待发布项目【草稿箱】</a>
+							<a href="projectapp_drafts">待发布项目【草稿箱】</a>
 						</li>
 						<li>
-							<a href="xiangmushenbao_c3.html">待审核项目</a>
+							<a href="projectapp_approve">待审核项目</a>
 						</li>
 						<li>
-							<a href="xiangmushenbao_c4.html">历史项目</a>
+							<a href="projectapp_history">历史项目</a>
 						</li>
 					</ul>
 				</li>
@@ -384,7 +385,7 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 							<a href="aboutus">关于我们</a>
 						</li>
 						<li>
-							<a href="contact_host">联系方式</a>
+							<a href="hostcontact">联系方式</a>
 						</li>
 						<li>
 							<a href="banner">广告轮播图</a>

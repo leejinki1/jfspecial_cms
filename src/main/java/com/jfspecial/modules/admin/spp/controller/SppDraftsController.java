@@ -1,4 +1,4 @@
-package com.jfspecial.modules.admin.newscenter.controller;
+package com.jfspecial.modules.admin.spp.controller;
 
 import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.Db;
@@ -12,8 +12,6 @@ import com.jfspecial.jfinal.component.db.SQLUtils;
 import com.jfspecial.modules.admin.newscenter.model.TbNewsCenter;
 import com.jfspecial.modules.admin.newscenter.model.TbNewsCenterTags;
 import com.jfspecial.modules.admin.newscenter.service.NewsCenterAlbumService;
-import com.jfspecial.modules.admin.sale.model.TbSale;
-import com.jfspecial.modules.admin.sale.service.SaleAlbumService;
 import com.jfspecial.modules.admin.site.TbSite;
 import com.jfspecial.system.file.util.FileUploadUtils;
 import com.jfspecial.util.StrUtils;
@@ -21,119 +19,23 @@ import com.jfspecial.util.StrUtils;
 import java.io.File;
 
 /**
- * 新闻中心/总控制,待定
+ * 科普/草稿
+ * zr  2018.11.27
  */
-@ControllerBind(controllerKey = "/admin/newscenter")
-public class NewsCenterController extends BaseProjectController {
+@ControllerBind(controllerKey = "/admin/spp_drafts")
+public class SppDraftsController extends BaseProjectController {
 
-	private static final String path = "/pages/admin/newscenter/newscenter_";
+	private static final String path = "/pages/admin/spp/spp_drafts";
 
-	/*public void publish1() {
-		System.out.println("1111111111111111111");
-	}
-	public void publish2() {
-		System.out.println("222222222222222222");
-	}*/
-	public void publish() {
-		// 获取页面信息,设置目录传入
-		TbNewsCenter attr = getModel(TbNewsCenter.class);
-		setAttr("model", attr);
-
-		// 查询下拉框
-		setAttr("selectAlbum", new NewsCenterAlbumService().selectAlbum(attr.getAlbumId()));
-
-		render(path + "publish.html");
+	public void index(){
+		list();
 	}
 
-	public void list_approve() {
-		TbSale model = getModelByAttr(TbSale.class);
-
-		SQLUtils sql = new SQLUtils(" from tb_sale t where 1=1 ");
-		if (model.getAttrValues().length != 0) {
-			sql.setAlias("t");
-			sql.whereEquals("album_id", model.getAlbumId());
-			sql.whereLike("name", model.getStr("name"));
-			sql.whereEquals("status", model.getInt("status"));
-		}
-
-		// 排序
-		String orderBy = getBaseForm().getOrderBy();
-		if (StrUtils.isEmpty(orderBy)) {
-			sql.append(" order by sort,id desc");
-		} else {
-			sql.append(" order by ").append(orderBy);
-		}
-
-		Page<TbSale> page = TbSale.dao.paginate(getPaginator(), "select t.* ", //
-				sql.toString().toString());
-
-		// 下拉框
-		setAttr("selectAlbum", new SaleAlbumService().selectAlbum(model.getAlbumId()));
-
-		setAttr("page", page);
-		setAttr("attr", model);
-		render(path + "list_approve.html");
-	}
-
-	public void list_drafts() {
-		TbSale model = getModelByAttr(TbSale.class);
-
-		SQLUtils sql = new SQLUtils(" from tb_sale t where 1=1 ");
-		if (model.getAttrValues().length != 0) {
-			sql.setAlias("t");
-			sql.whereEquals("album_id", model.getAlbumId());
-			sql.whereLike("name", model.getStr("name"));
-			sql.whereEquals("status", model.getInt("status"));
-		}
-
-		// 排序
-		String orderBy = getBaseForm().getOrderBy();
-		if (StrUtils.isEmpty(orderBy)) {
-			sql.append(" order by sort,id desc");
-		} else {
-			sql.append(" order by ").append(orderBy);
-		}
-
-		Page<TbSale> page = TbSale.dao.paginate(getPaginator(), "select t.* ", //
-				sql.toString().toString());
-
-		// 下拉框
-		setAttr("selectAlbum", new SaleAlbumService().selectAlbum(model.getAlbumId()));
-
-		setAttr("page", page);
-		setAttr("attr", model);
-		render(path + "list_drafts.html");
-	}
-	public void list_history() {
-		TbSale model = getModelByAttr(TbSale.class);
-		SQLUtils sql = new SQLUtils(" from tb_sale t where 1=1 ");
-		if (model.getAttrValues().length != 0) {
-			sql.setAlias("t");
-			sql.whereEquals("album_id", model.getAlbumId());
-			sql.whereLike("name", model.getStr("name"));
-			sql.whereEquals("status", model.getInt("status"));
-		}
-		// 排序
-		String orderBy = getBaseForm().getOrderBy();
-		if (StrUtils.isEmpty(orderBy)) {
-			sql.append(" order by sort,id desc");
-		} else {
-			sql.append(" order by ").append(orderBy);
-		}
-		Page<TbSale> page = TbSale.dao.paginate(getPaginator(), "select t.* ", //
-				sql.toString().toString());
-		// 下拉框
-		setAttr("selectAlbum", new SaleAlbumService().selectAlbum(model.getAlbumId()));
-
-		setAttr("page", page);
-		setAttr("attr", model);
-		render(path + "list_history.html");
-	}
-
+	//
 	public void list() {
 		TbNewsCenter model = getModelByAttr(TbNewsCenter.class);
 
-		SQLUtils sql = new SQLUtils(" from tb_newscenter t where 1=1 ");
+		SQLUtils sql = new SQLUtils(" from tb_maker t where 1=1 ");
 		if (model.getAttrValues().length != 0) {
 			sql.setAlias("t");
 			sql.whereEquals("album_id", model.getAlbumId());
@@ -157,7 +59,7 @@ public class NewsCenterController extends BaseProjectController {
 				
 		setAttr("page", page);
 		setAttr("attr", model);
-		render(path + "list.html");
+		render(path + ".html");
 	}
 
 	public void add() {

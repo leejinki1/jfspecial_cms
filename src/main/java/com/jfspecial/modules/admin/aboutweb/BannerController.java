@@ -51,6 +51,8 @@ public class BannerController extends BaseController {
 		//修改参数
 		model.setId("1");
 		model.setBanner1("\\web\\"+uploadImage1.getFileName());
+		model.setBannerTitle1(getPara("model.bannertitle1"));
+		model.setBannerTitleContent1(getPara("model.bannertitlecontent1"));
 		//model.setBanner2("\\web\\"+uploadImage2.getFileName());
 		//model.setBanner3("\\web\\"+uploadImage3.getFileName());
 		//System.out.println("测试:"+uploadImage.getUploadPath()+"\\"+uploadImage.getFileName());
@@ -104,6 +106,9 @@ public class BannerController extends BaseController {
 		model.setId("1");
 		//model.setBanner1("\\web\\"+uploadImage1.getFileName());
 		model.setBanner2("\\web\\"+uploadImage2.getFileName());
+
+		model.setBannerTitle2(getPara("model.bannertitle2"));
+		model.setBannerTitleContent2(getPara("model.bannertitlecontent2"));
 		//model.setBanner3("\\web\\"+uploadImage3.getFileName());
 		//System.out.println("测试:"+uploadImage.getUploadPath()+"\\"+uploadImage.getFileName());
 
@@ -157,6 +162,9 @@ public class BannerController extends BaseController {
 		//model.setBanner1("\\web\\"+uploadImage1.getFileName());
 		//model.setBanner2("\\web\\"+uploadImage2.getFileName());
 		model.setBanner3("\\web\\"+uploadImage3.getFileName());
+
+		model.setBannerTitle3(getPara("model.bannertitle3"));
+		model.setBannerTitleContent3(getPara("model.bannertitlecontent3"));
 		//System.out.println("测试:"+uploadImage.getUploadPath()+"\\"+uploadImage.getFileName());
 
 
