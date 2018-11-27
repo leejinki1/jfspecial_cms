@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<!--新闻中心/历史-->
+<!--待发布新闻【草稿箱】-->
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -221,10 +221,10 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a href="../home" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 信息统计</a>
+                        <a href="../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 信息统计</a>
                     </li>
                     <li>
-                        <a href="list_history" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 历史需求</a>
+                        <a href="newscenter_drafts" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 待发布新闻【草稿箱】</a>
                     </li>
 
                 </ul>
@@ -237,12 +237,12 @@
 <div id="page-wrapper">
 	<div class="header"> 
         <h1 class="page-header">
-                	历史需求
+                	待发布新闻【草稿箱】
         </h1>
 	    <ol class="breadcrumb">
 			<li><a href="#">首页</a></li>
 			<li><a href="#">新闻中心 </a></li>
-			<li><a href="#">历史需求 </a></li>
+			<li><a href="#">待发布新闻【草稿箱】 </a></li>
 			<li class="active">Data</li>
 		</ol> 							
 	</div>
@@ -253,7 +253,7 @@
 			<div class="col-lg-12">
 	            <div class="card">
 	            	<div class="card-action">
-                            	历史需求记录
+                            	草稿箱
                     </div>
 					<div class="card-content">
 						<table class="table table-striped highlight centered responsive-table">
@@ -261,42 +261,28 @@
 								<tr>
 									<th>序号</th>
 								 	<th>标题</th> 
-								 	<th>发布人</th> 
 									<th>时间</th>
-									<th>操作</th>
 								</tr>
 							</thead>
 							<tbody>
-							<!--列表中的数据-->
-							<% for(item in page.list){ %>
+                                <!--下面是数据库中数据-->
+                            <% for(item in page.list){ %>
+                                <tr>
+                                    <td>${itemLP.index }</td><!--显示序号-->
+                                    <td>${item.name}</td><!--新闻标题-->
+                                    <td>${item.update_time}</td><!--发布时间-->
+                                </tr>
+                            <%	} %>
+                                <!--下面是静态数据-->
 							 	<tr>
-							 		<td>${itemLP.index }</td><!--序号-->
-							 		<td>${item.name}</td><!--标题-->
-							 		<td>${item.publish_user}</td><!--发布人-->
-							 		<td>${item.update_time}</td><!--更新时间-->
-							 		<td>
-							 			<a class="waves-effect waves-light btn">删除</a>
-							 		</td>
+							 		<td>1</td>
+							 		<td>银保监会副主席周亮：本周会出台支持民营经济发展的指导意见</td>
+							 		<td>2018-11-19 14:51:59</td>
 							 	</tr>
-							<%	} %>
-							<!--下面是静态数据-->
-								<tr>
-									<td>1</td>
-									<td>鸡蛋100块钱一斤</td>
-									<td>狗蛋</td>
-									<td>2018-11-19 14:51:59</td>
-									<td>
-										<a class="waves-effect waves-light btn">删除</a>
-									</td>
-								</tr>
 							 	<tr>
 							 		<td>2</td>
-							 		<td>白菜200块钱一颗</td>
-							 		<td>狗剩</td>
+							 		<td>银保监会副主席周亮：本周会出台支持民营经济发展的指导意见</td>
 							 		<td>2018-11-19 14:51:59</td>
-							 		<td>
-							 			<a class="waves-effect waves-light btn">删除</a>
-							 		</td>
 							 	</tr>
 						 	</tbody>
 						</table>
