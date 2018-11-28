@@ -109,10 +109,10 @@
                 var page;
                 if(!isEmpty(session.albumId)) {
                 var albumId= session.albumId;
-                page = tempSale.sales(1, 5, parseInt(albumId));
+                page = tempSale.alter_sales(1, 5, parseInt(albumId));
                 }
                 else{
-                page = tempSale.sales(1, 5);
+                page = tempSale.alter_sales(1, 5);
                 }
                 %>
                 <!--文章列表-->

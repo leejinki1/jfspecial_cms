@@ -42,6 +42,14 @@ public class TemplateSppService extends BaseService {
 		return service.getSpp(new Paginator(pageNo, pageSize), albumId);
 	}
 
+	public Page<TbSpp> alter_spps(int pageNo, int pageSize) {
+		return service.alterSpp(new Paginator(pageNo, pageSize));
+	}
+
+	public Page<TbSpp> alter_spps(int pageNo, int pageSize, int albumId) {
+		return service.alterSpp(new Paginator(pageNo, pageSize), albumId);
+	}
+
 	public TbSpp image(Integer iamgeId) {
 		return service.getSpp(iamgeId);
 	}

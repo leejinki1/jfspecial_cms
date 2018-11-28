@@ -42,6 +42,13 @@ public class TemplateTrdService extends BaseService {
 		return service.getTrd(new Paginator(pageNo, pageSize), albumId);
 	}
 
+	public Page<TbTrd> alter_trds(int pageNo, int pageSize) {
+		return service.alterTrd(new Paginator(pageNo, pageSize));
+	}
+
+	public Page<TbTrd> alter_trds(int pageNo, int pageSize, int albumId) {
+		return service.alterTrd(new Paginator(pageNo, pageSize), albumId);
+	}
 	public TbTrd image(Integer iamgeId) {
 		return service.getTrd(iamgeId);
 	}

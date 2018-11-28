@@ -54,10 +54,10 @@
                 var page;
                 if(!isEmpty(session.albumId)) {
                 var albumId= session.albumId;
-                page = tempTrd.trds(1, 10, parseInt(albumId));
+                page = tempTrd.alter_trds(1, 10, parseInt(albumId));
                 }
                 else{
-                page = tempTrd.trds(1, 10);
+                page = tempTrd.alter_trds(1, 10);
                 }
                 %>
                 <!--文章列表-->

@@ -42,6 +42,13 @@ public class TemplateProjectAppService extends BaseService {
 		return service.getProjectApp(new Paginator(pageNo, pageSize), albumId);
 	}
 
+	public Page<TbProjectApp> alter_projectapps(int pageNo, int pageSize) {
+		return service.alterProjectApp(new Paginator(pageNo, pageSize));
+	}
+
+	public Page<TbProjectApp> alter_projectapps(int pageNo, int pageSize, int albumId) {
+		return service.alterProjectApp(new Paginator(pageNo, pageSize), albumId);
+	}
 	public TbProjectApp image(Integer iamgeId) {
 		return service.getProjectApp(iamgeId);
 	}

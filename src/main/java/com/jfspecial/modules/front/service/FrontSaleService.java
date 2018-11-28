@@ -54,7 +54,15 @@ public class FrontSaleService extends BaseService {
 	 * @return
 	 */
 	public Page<TbSale> getSale(Paginator paginator) {
-		String key = ("article_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+		String key = ("sale_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+		Page<TbSale> sales = TbSale.dao.paginateCache(cacheName, key, paginator, "select * " //
+				, " from tb_sale " //
+						+ " where status = 1 " // 查询状态为显示
+						+ " order by update_time desc");
+		return sales;
+	}
+	public Page<TbSale> alterSale(Paginator paginator) {
+		String key = ("sale_" + System.currentTimeMillis());
 		Page<TbSale> sales = TbSale.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_sale " //
 						+ " where status = 1 " // 查询状态为显示
@@ -70,7 +78,7 @@ public class FrontSaleService extends BaseService {
 	 * @return
 	 */
 	public Page<TbSale> getSale(Paginator paginator, int albumId) {
-		String key = ("article_" + albumId + "_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+		String key = ("sale_" + albumId + "_" + paginator.getPageNo() + "_" + paginator.getPageSize());
 		Page<TbSale> sales = TbSale.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_sale " //
 						+ " where status = 1 " // 查询状态为显示
@@ -78,7 +86,15 @@ public class FrontSaleService extends BaseService {
 						+ " order by update_time desc", albumId);
 		return sales;
 	}
-
+	public Page<TbSale> alterSale(Paginator paginator, int albumId) {
+		String key = ("sale_" + System.currentTimeMillis());
+		Page<TbSale> sales = TbSale.dao.paginateCache(cacheName, key, paginator, "select * " //
+				, " from tb_sale " //
+						+ " where status = 1 " // 查询状态为显示
+						+ " and album_id =  ? " //
+						+ " order by update_time desc", albumId);
+		return sales;
+	}
 	/**
 	 * 查询图片
 	 *

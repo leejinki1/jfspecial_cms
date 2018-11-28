@@ -56,14 +56,21 @@ public class FrontAddoilService extends BaseService {
 	 * @return
 	 */
 	public Page<TbAddOil> getAddOil(Paginator paginator) {
-		String key = ("article_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+		String key = ("addoil_" + paginator.getPageNo() + "_" + paginator.getPageSize());
 		Page<TbAddOil> addoils = TbAddOil.dao.paginateCache(cacheName, key, paginator, "select (@i:=@i+1)pm,t.* " //
 				, " from tb_addoil t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " order by update_time desc");
 		return addoils;
 	}
-
+	public Page<TbAddOil> alterAddOil(Paginator paginator) {
+		String key = ("addoil_" + System.currentTimeMillis());
+		Page<TbAddOil> addoils = TbAddOil.dao.paginateCache(cacheName, key, paginator, "select (@i:=@i+1)pm,t.* " //
+				, " from tb_addoil t,(select @i:=0)s " //
+						+ " where status = 1 " // 查询状态为显示
+						+ " order by update_time desc");
+		return addoils;
+	}
 	/**
 	 * 查询图片
 	 *
@@ -72,7 +79,16 @@ public class FrontAddoilService extends BaseService {
 	 * @return
 	 */
 	public Page<TbAddOil> getAddOil(Paginator paginator, int albumId) {
-		String key = ("article_" + albumId + "_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+		String key = ("addoil_" + albumId + "_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+		Page<TbAddOil> addoils = TbAddOil.dao.paginateCache(cacheName, key, paginator, "select * " //
+				, " from tb_addoil " //
+						+ " where status = 1 " // 查询状态为显示
+						+ " and album_id =  ? " //
+						+ " order by update_time desc", albumId);
+		return addoils;
+	}
+	public Page<TbAddOil> alterAddOil(Paginator paginator, int albumId) {
+		String key = ("addoil_"  + System.currentTimeMillis());
 		Page<TbAddOil> addoils = TbAddOil.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_addoil " //
 						+ " where status = 1 " // 查询状态为显示

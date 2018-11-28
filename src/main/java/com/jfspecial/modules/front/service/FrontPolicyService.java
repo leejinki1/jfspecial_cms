@@ -54,7 +54,16 @@ public class FrontPolicyService extends BaseService {
 	 * @return
 	 */
 	public Page<TbPolicy> getPolicy(Paginator paginator) {
-		String key = ("article_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+		String key = ("policy_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+		Page<TbPolicy> policys = TbPolicy.dao.paginateCache(cacheName, key, paginator, "select * " //
+				, " from tb_policy " //
+						+ " where status = 1 " // 查询状态为显示
+						+ " order by update_time desc");
+		return policys;
+	}
+
+	public Page<TbPolicy> alterPolicy(Paginator paginator) {
+		String key = ("policy_" + System.currentTimeMillis());
 		Page<TbPolicy> policys = TbPolicy.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_policy " //
 						+ " where status = 1 " // 查询状态为显示
@@ -70,7 +79,17 @@ public class FrontPolicyService extends BaseService {
 	 * @return
 	 */
 	public Page<TbPolicy> getPolicy(Paginator paginator, int albumId) {
-		String key = ("article_" + albumId + "_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+		String key = ("policy_" + albumId + "_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+		Page<TbPolicy> policys = TbPolicy.dao.paginateCache(cacheName, key, paginator, "select * " //
+				, " from tb_policy " //
+						+ " where status = 1 " // 查询状态为显示
+						+ " and album_id =  ? " //
+						+ " order by update_time desc", albumId);
+		return policys;
+	}
+
+	public Page<TbPolicy> alterPolicy(Paginator paginator, int albumId) {
+		String key = ("policy_" + System.currentTimeMillis());
 		Page<TbPolicy> policys = TbPolicy.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_policy " //
 						+ " where status = 1 " // 查询状态为显示
