@@ -35,7 +35,16 @@ public class TbTrd extends BaseProjectModel<TbTrd> {
 	private String CREATE_ID = "create_id"; // 创建者
 	private String CONTENT="content";//内容;2018.11.27zr添加
 	private String IS_DRAFTS = "is_drafts"; // 是否保存到草稿箱:0 否 1 是
+	private String APPROVE_STATUS = "approve_status"; // 是否保存到草稿箱:0 否 1 是
 
+	public TbTrd setApproveStatus(String value) {
+		set(APPROVE_STATUS, value);
+		return this;
+	}
+
+	public String getApproveStatus() {
+		return get(APPROVE_STATUS);
+	}
 	public TbTrd setIsDrafts(String value) {
 		set(IS_DRAFTS, value);
 		return this;

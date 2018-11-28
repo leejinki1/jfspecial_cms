@@ -33,6 +33,16 @@ public class TbProjectApp extends BaseProjectModel<TbProjectApp> {
 	private String UPDATE_ID = "update_id"; // 创建者
 	private String CREATE_TIME = "create_time"; // 创建时间
 	private String IS_DRAFTS = "is_drafts"; // 是否保存到草稿箱:0 否 1 是
+	private String APPROVE_STATUS = "approve_status"; // 是否保存到草稿箱:0 否 1 是
+
+	public TbProjectApp setApproveStatus(String value) {
+		set(APPROVE_STATUS, value);
+		return this;
+	}
+
+	public String getApproveStatus() {
+		return get(APPROVE_STATUS);
+	}
 
 	public TbProjectApp setIsDrafts(String value) {
 		set(IS_DRAFTS, value);
