@@ -36,15 +36,15 @@ public class NewsCenterHistoryController extends BaseProjectController {
 	@Before(FrontInterceptor.class)
 	public void index() {
 		System.out.println("进入方法index");
-		String sql = "select t.id,t.name,t.publish_user, t.update_time from tb_newscenter t where  status = 1 order by sort,id desc";
+		String sql = "select t.id,t.name,t.publish_user, t.update_time from tb_newscenter t where  status = 1 and is_drafts=0 order by sort,id desc";
 		List<TbNewsCenter> lists = TbNewsCenter.dao.find(sql);
 		setAttr("lists", lists);
 		render(path+".html");//先反回主页,待补充
 	}
 
 	/**
-	 * del assistance article
-	 *
+	 * del article
+	 *	删除
 	 * 2018年11月27日 下午9:53:04 ljk
 	 */
 	@Before(FrontInterceptor.class)

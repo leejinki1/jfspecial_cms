@@ -21,7 +21,7 @@ public class AddoilHistoryController extends BaseController {
 
 	@Before(FrontInterceptor.class)
 	public void index() {
-		String sql = "select t.id,t.name,t.publish_user, t.update_time from tb_addoil t where  status = 1 order by sort,id desc";
+		String sql = "select t.id,t.name,t.publish_user, t.update_time from tb_addoil t where  status = 1 and is_drafts=0 order by sort,id desc";
 		List<TbAddOil> lists = TbAddOil.dao.find(sql);
 		setAttr("lists", lists);
 		render(path+".html");//先反回主页,待补充
@@ -33,7 +33,7 @@ public class AddoilHistoryController extends BaseController {
 	 * 2018年11月27日 下午9:53:04 ljk
 	 */
 	@Before(FrontInterceptor.class)
-	public void delarticle() {
+	public void  delArticle() {
 		SysUser user = (SysUser) getSessionUser();
 		Integer id = getParaToInt();
 		if (user == null || id == null) {
@@ -54,7 +54,7 @@ public class AddoilHistoryController extends BaseController {
 		//new CommentService().deleteComment(id);
 		// 删除文章
 		TbAddOil.dao.deleteById(id);
-		redirect("/admin/assistance_history");
+		redirect("/admin/addoil_history");
 	}
 }
 

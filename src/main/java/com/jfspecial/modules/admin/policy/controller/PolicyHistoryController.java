@@ -36,19 +36,19 @@ public class PolicyHistoryController extends BaseProjectController {
 
 	@Before(FrontInterceptor.class)
 	public void index() {
-		String sql = "select t.id,t.name,t.publish_user, t.update_time from tb_policy t where  status = 1 order by sort,id desc";
+		String sql = "select t.id,t.name,t.publish_user, t.update_time from tb_policy t where  status = 1 and is_drafts=0  order by sort,id desc";
 		List<TbPolicy> lists = TbPolicy.dao.find(sql);
 		setAttr("lists", lists);
 		render(path+".html");//先反回主页,待补充
 	}
 
 	/**
-	 * del assistance article
-	 *
+	 * del  article
+	 *	删除
 	 * 2018年11月27日 下午9:53:04 ljk
 	 */
 	@Before(FrontInterceptor.class)
-	public void delarticle() {
+	public void  delArticle() {
 		SysUser user = (SysUser) getSessionUser();
 		Integer id = getParaToInt();
 		if (user == null || id == null) {
