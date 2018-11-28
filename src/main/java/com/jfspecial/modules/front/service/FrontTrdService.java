@@ -60,7 +60,7 @@ public class FrontTrdService extends BaseService {
 		Page<TbTrd> trds = TbTrd.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_trd " //
 						+ " where status = 1 " // 查询状态为显示
-						+ " order by sort,create_time desc");
+						+ " order by update_time desc");
 		return trds;
 	}
 
@@ -77,7 +77,7 @@ public class FrontTrdService extends BaseService {
 				, " from tb_trd " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
-						+ " order by sort,create_time desc", albumId);
+						+ " order by update_time desc", albumId);
 		return policys;
 	}
 
@@ -105,7 +105,7 @@ public class FrontTrdService extends BaseService {
 		Page<TbTrd> articles = TbTrd.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_trd where status = 1 " //
 						+ " and is_recommend = 1 " // 推荐文章
-						+ " order by sort,create_time desc");
+						+ " order by update_time desc");
 		return articles;
 	}
 }

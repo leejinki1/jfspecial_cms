@@ -7,24 +7,29 @@
 
 	 <table>
 		 <tr>
-			 <% for(item in articlelist.list){ %>
-			 <td>
-				 <img alt="${item.name}" src="${flyfox.getImage(item)}" data-holder-rendered="true"/>
-				 <p><a href="${BASE_PATH }front/sale/article/${item.id}.html">${item.name}</a></p>
-			 </td>
-			 <% } %>
-
+			 <%
+			 var x=0;
+			 for(item in articlelist.list){
+				  x=x+1;
+				 if (x==5){ %>
+		 			<tr>
+					 <td>
+						 <img alt="${item.name}" src="${flyfox.getImage(item)}" onerror="onerror=null;src='${BASE_PATH }static/images/common/no_image.jpg'"  data-holder-rendered="true"/>
+						 <p><a href="${BASE_PATH }front/sale/article/${item.id}.html">${item.name}</a></p>
+					 </td>
+				 <% }else { %>
+				 <td>
+					 <img alt="${item.name}" src="${flyfox.getImage(item)}" onerror="onerror=null;src='${BASE_PATH }static/images/common/no_image.jpg'"  data-holder-rendered="true"/>
+					 <p><a href="${BASE_PATH }front/sale/article/${item.id}.html">${item.name}</a></p>
+				 </td>
+			 <% }} %>
+		 </tr>
 		 </tr>
 		 <tr>
-			 <!--
-			 <td>
-				 <img src="static/frontend/images/banner.jpg"/>
-				 <p><a href="#">纯羊毛毛线球</a></p>
-			 </td>
 			 <td>
 				 <img src="../../images/banner.jpg"/>
-				 <p><a href="#">纯羊毛毛线球</a></p>
-			 </td>-->
+				 <p><a href="#" data="5">纯羊毛毛线球</a></p>
+			 </td>
 		 </tr>
 	 </table>
 

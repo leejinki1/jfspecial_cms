@@ -1,6 +1,6 @@
-<% var headContent = { %> <%
-include("/template/special/includes/header.html"){} %>
-
+<!DOCTYPE html>
+<html lang="en">
+<% include("/template/includes/jquery.html"){} %>
 <script type="text/javascript" src="${BASE_PATH }template/special/regist/show_regist.js"></script>
 <script type="text/javascript">
 	function login() {
@@ -9,7 +9,7 @@ include("/template/special/includes/header.html"){} %>
 			alert('用户名不能为空！');
 			return;
 		}
-		
+
 		var pwd = $('[name="password"]').val();
 		if(pwd==''){
 			alert('密码不能为空！');
@@ -24,15 +24,15 @@ include("/template/special/includes/header.html"){} %>
 			alert('验证码输入错误！');
 			return;
 		}
-		
-		form1.action = jfspecial.BASE_PATH + "login";
+
+		form1.action = ${BASE_PATH }+ "login";
 		form1.submit();
 	}
 
 	function loadPicimageCode() {
 		document.getElementById("picimageCode").src = '${BASE_PATH }front/image_code?ran=' + Math.random();
 	}
-	
+
 	<!-- jQuery 当键盘敲击【ENTER】键时，系统登录 -->
 	$(document).ready(function() {
 		$("body").keydown(function(event) {
@@ -42,93 +42,219 @@ include("/template/special/includes/header.html"){} %>
 		});
 	});
 </script>
-
-<% }; var bodyContent = { %> <%
-include("/template/special/includes/header_menu.html"){} %>
-
-
-<div class="container">
-
-	<div class="row">
-		<div class="col-md-8">
-		
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-			<h3 class="panel-title">用户登陆</h3>
-		  </div>
-		   <div class="panel-body">
-		  
-				<form class="form-horizontal" name="form1" action="" method="post">
-						<input type="hidden" name="pre_page" value="${pre_page!'' }" />
-						
-						  <div class="form-group">
-						    <label for="email" class="col-sm-2 control-label">账户名：</label>
-						    <div class="col-sm-10">
-						    	<input name="username" class="form-control" id="username" placeholder="登录账号"
-						    		 autofocus="autofocus" autocomplete="off" tabindex="1" value="" maxlength="100" >
-						    </div>
-						  </div>
-						  <div class="form-group">
-						    <label for="password" class="col-sm-2 control-label">登录密码：</label>
-						    <div class="col-sm-10">
-						      <input name="password" type="password"class="form-control" id="password" placeholder="登录密码"
-						      	autocomplete="off" tabindex="2" value="" maxlength="100" >
-						    </div>
-						  </div>
-						  <div class="form-group">
-						    <label for="imageCode" class="col-sm-2 control-label">验证码：</label>
-						    <div class="col-sm-10">
-						      <div class="input-group">
-						      	 <input name="imageCode" type="text"  class="form-control" id="imageCode" 
-						      	  	tabindex="3" placeholder="验证码">
-						      	 <div class="input-group-addon" style="padding:2px;">
-						      			<img id="picimageCode" align="middle" width="60" height="26"  
-						      				 style="line-height: 18px;cursor:pointer;"
-								 			 src="${BASE_PATH }front/image_code" title="更换一张验证码图片" onclick="loadPicimageCode()"/>
-							     </div>
-							    </div>
-						     
-						    </div>
-						  </div>
-						  <% if(strutil.isNotEmpty(msg!'')) { %>
-						  <div class="form-group">
-						  	<label for="imageCode" class="col-sm-2 control-label">
-							提示：
-							</label>
-							<div class="col-sm-10">
-								<p class="form-control-static" style="color: red;font-weight:bold ;">${msg!}</p>
-						    </div>
-						  </div>
-						  <% } %>
-						   <div class="form-group">
-							    <div class="col-sm-offset-2 col-sm-10">
-							      <input type="button" value="登 录"  class="btn btn-success btn-block"
-							      	tabindex="4"   onclick="login();"/>
-							    </div>
-							</div>
-						
-						</form>
-				
+<head>
+	<title>login</title>
+	<!-- meta-tags -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="" />
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!-- //meta-tags -->
+	<!-- Custom Theme files -->
+	<link href="${BASE_PATH }static/frontend/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="${BASE_PATH }static/frontend/css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="${BASE_PATH }static/frontend/css/font-awesome.css" rel="stylesheet"> 			<!-- font-awesome icons -->
+	<!-- //Custom Theme files -->
+	<!-- js -->
+	<script src="${BASE_PATH }static/frontend/js/jquery-1.11.1.min.js"></script>
+	<!-- //js -->
+	<!-- web-font -->
+	<link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
+	<!-- //web-font -->
+</head>
+<body>
+<!-- header -->
+<div class="header">
+	<div class="container">
+		<div class="header-nav">
+			<nav class="navbar navbar-default">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<h1><a class="navbar-brand" href="index.html"><span>科技</span>特派员创业扶贫联盟平台</a></h1>
 				</div>
-			</div>
+				<!-- 收集的导航链接，和其他形式的内容，锁定 -->
+				<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class="hvr-bounce-to-bottom active"><a href="../index.html">主页</a></li>
+						<li class="hvr-bounce-to-bottom"><a href="../special.html" />特派员</a></li>
+						<li class="hvr-bounce-to-bottom"><a href="../sale.html" />特卖区</a></li>
+						<li class="hvr-bounce-to-bottom"><a href="../newscenter.html" />新闻中心</a></li>
+						<li class="hvr-bounce-to-bottom"><a href="../trd.html" />技术需求</a></li>
+						<li class="hvr-bounce-to-bottom"><a href="../maker.html" />创客活动</a></li>
+						<li class="hvr-bounce-to-bottom"><a href="../policy.html" />政策法规</a></li>
+						<li class="hvr-bounce-to-bottom"><a href="../spp.html" />科普板块</a></li>
+						<li class="hvr-bounce-to-bottom"><a href="../projectapp.html" />项目申报</a></li>
+						<li class="hvr-bounce-to-bottom"><a href="../addoil.html" />帮扶企业</a></li>
+						<% if(isEmpty(session.session_user)){ %>
+						<li class="hvr-bounce-to-bottom"><a href="front/login.html">登录/注册</a></li>
+						<% } else { %>
+						<li class="hvr-bounce-to-bottom"><a href="${BASE_PATH }front/logout">${session.session_user.username}/退出</a></li>
+						<% } %>
+						<li class="hvr-bounce-to-bottom"><a href="../contactus.html" />联系我们</a></li>
+					</ul>
+				</div><!-- //navbar-collapse -->
+			</nav>
 		</div>
-		
-		<div class="col-md-4">
-			<!-- 推荐文章 -->
-			<%  include("/template/special/includes/recommend.html"){} %>
-			
-			<!-- 友情链接 -->
-		  	<%  include("/template/special/includes/friendly.html"){} %>
-		</div>
-		
 	</div>
 </div>
+<!-- //header -->
+<!-- contact -->
+<div class="contact agileits-w3layouts">
+	<div class="container">
+		<div class="contact-w3layouts">
+			<h2>Contact Us</h2>
+			<div class="contact-agileinfo">
+				<div class="col-md-6 contact-wthree-left">
+					<!--	<iframe src="https://www.csdn.net/"></iframe>-->
+				</div>
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">登录</a></li>
+					<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">注册</a></li>
+				</ul>
 
-<%  include("/template/special/includes/footer.html"){} %>
-	
-<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
-	
-<%}; %>
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="home">
+						<div class="col-md-6 contact-wthree-right" style="float: right;">
+							<div class="contact-w3-agileits">
+								<form class="form-horizontal" name="form1" action="" method="post">
+									<input type="hidden" name="pre_page" value="${pre_page!'' }" />
 
-<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
-<%} %>
+									<input type="text"name="username" id="username" placeholder="手机号" required=""/>
+									<br />
+									<input type="text"  name="password" type="password"id="password"  placeholder="密码" required=""/>
+									<input type="text" name="imageCode" id="imageCode"placeholder="验证码" required=""/>
+									<button class="btn btn-default"onclick="loadPicimageCode()">获取图形验证码</button>&nbsp;
+									<img id="picimageCode" width="100px" height="50px" src="${BASE_PATH }front/image_code"onclick="loadPicimageCode()"/>
+									<br/><input type="submit"  value="确认" onclick="login();">
+									<input type="reset" value="重置" >
+								</form>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="profile">
+						<div class="col-md-6 contact-wthree-right" style="float: right;">
+							<div class="contact-w3-agileits">
+								<form class="form-horizontal" name="form2" action="" method="post">
+									<input type="hidden" name="reg_pre_page" value="${pre_page!'' }" />
+
+									<input type="text" name="model.reg_username" id="reg_username" placeholder="手机号" required=""/>
+									<input type="text" name="model.reg_realname" placeholder="姓名" id="reg_realname"required=""/>
+									<select class="form-control">
+										<option>--请选择角色--</option>
+										<option value="">农户</option>
+										<option value="">养殖户</option>
+										<option value="">手工户</option>
+										<option value="">采购商</option>
+										<option value="">贫困代表</option>
+									</select><br />
+									<input type="text" name="reg_password" placeholder="密码" id="reg_password"required=""/>
+									<input type="text" name="reg_password2" placeholder="确认密码" id="reg_password2"required=""/>
+									<!--
+									<input type="text" name="Email" placeholder="手机验证码" required=""/>
+									<button class="btn btn-default">获取短信验证码</button>-->
+									<input type="text" name="reg_imageCode" id="reg_imageCode" placeholder="验证码" required=""/>
+									<button class="btn btn-default" onclick="reg_loadPicimageCode()">获取图形验证码</button>&nbsp;
+									  <img id="reg_picimageCode" src="${BASE_PATH }front/image_code" width="100px" height="50px"onclick="reg_loadPicimageCode()"/>
+									<br/><input type="submit" value="注册"  onclick="oper_save();">
+									<input type="reset" value="重置" >
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+			</div>
+		</div>
+	</div>
+</div>
+<!-- //contact -->
+<!-- footer -->
+<div class="footer">
+	<div class="container">
+		<div class="footer-agileitsrow">
+			<div class="col-md-3 footer-grid">
+				<h3>临时演员</h3>
+				<p>[医]金红花，[医]金红花[NS][NS]。[医]小叶蝉。佩列斯克征服了达官贵人。</p>
+			</div>
+			<div class="col-md-3 footer-grid">
+				<h3> 社会化媒体</h3>
+				<ul>
+					<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i> 脸书</a></li>
+					<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> 推特</a></li>
+					<li><a href="#"><i class="fa fa-google" aria-hidden="true"></i> 谷歌</a></li>
+					<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i> 滴水的</a></li>
+				</ul>
+			</div>
+			<div class="col-md-3 footer-grid">
+				<h3>有用信息</h3>
+				<ul>
+					<li><a href="index.html">首页</a></li>
+					<li><a href="about.html">关于</a></li>
+					<li><a href="blog.html">博客</a></li>
+					<li><a href="contact.html">接触</a></li>
+				</ul>
+			</div>
+			<div class="col-md-3 footer-grid">
+				<h3>联系我们</h3>
+				<p>佩列斯克征服了达官贵人。</p>
+				<div class="footer-grid-address">
+					<p>电话.800-255-9999</p>
+					<p>传真: 1234 568</p>
+					<p>邮箱: <a class="email-link" href="mailto:info@example.com">Example.com</a></p>
+				</div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+</div>
+<div class="copy-right">
+	<p>迪士尼版权所有 &copy; 沪公网安备 31011502002267号 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+</div>
+<!-- //footer -->
+<!-- start-smooth-scrolling -->
+<script type="text/javascript" src="${BASE_PATH }static/frontend/js/move-top.js"></script>
+<script type="text/javascript" src="${BASE_PATH }static/frontend/js/easing.js"></script>
+<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){
+					event.preventDefault();
+
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+	</script>
+<!-- //end-smooth-scrolling -->
+<!-- smooth-scrolling-of-move-up -->
+<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+			var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear'
+			};
+			*/
+
+			$().UItoTop({ easingType: 'easeOutQuart' });
+
+		});
+	</script>
+<!-- //smooth-scrolling-of-move-up -->
+<!-- for bootstrap working -->
+<script src="${BASE_PATH }static/frontend/js/bootstrap.js"> </script>
+
+<!-- //for bootstrap working -->
+</body>
+</html>

@@ -60,7 +60,7 @@ public class FrontSppService extends BaseService {
 		Page<TbSpp> spps = TbSpp.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_spp " //
 						+ " where status = 1 " // 查询状态为显示
-						+ " order by sort,create_time desc");
+						+ " order by update_time desc");
 		return spps;
 	}
 
@@ -77,7 +77,7 @@ public class FrontSppService extends BaseService {
 				, " from tb_spp " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
-						+ " order by sort,create_time desc", albumId);
+						+ " order by update_time desc", albumId);
 		return spps;
 	}
 

@@ -58,7 +58,7 @@ public class FrontSaleService extends BaseService {
 		Page<TbSale> sales = TbSale.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_sale " //
 						+ " where status = 1 " // 查询状态为显示
-						+ " order by sort,create_time desc");
+						+ " order by update_time desc");
 		return sales;
 	}
 
@@ -75,7 +75,7 @@ public class FrontSaleService extends BaseService {
 				, " from tb_sale " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
-						+ " order by sort,create_time desc", albumId);
+						+ " order by update_time desc", albumId);
 		return sales;
 	}
 

@@ -58,7 +58,7 @@ public class FrontMakerService extends BaseService {
 		Page<TbMaker> makers = TbMaker.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_maker " //
 						+ " where status = 1 " // 查询状态为显示
-						+ " order by sort,create_time desc");
+						+ " order by update_time desc");
 		return makers;
 	}
 
@@ -75,7 +75,7 @@ public class FrontMakerService extends BaseService {
 				, " from tb_maker " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
-						+ " order by sort,create_time desc", albumId);
+						+ " order by update_time desc", albumId);
 		return makers;
 	}
 

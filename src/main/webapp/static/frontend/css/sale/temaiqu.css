@@ -17,19 +17,20 @@
 /*手机*/
 @media screen and (min-width: 66px) {
     .centerBox-left ul li{display: inline-block;}
-    .centerBox-right-c2 table{width: 100%;font-size:14px;text-align: center;border: 1px solid;}
+    .centerBox-right-c2 table{width: 100%;font-size:14px;text-align: center;}
     .centerBox-right-c2 table tr{width:100%;display: flex;flex-wrap: wrap;}
-    .centerBox-right-c2 table tr td{width:50%;border: 1px solid;}
-    .centerBox-right-c2 table tr td img{width:95%;height:150px;border: 1px solid;}
+    .centerBox-right-c2 table tr td{width:50%;}
+    .centerBox-right-c2 table tr td img{width:95%;height:150px;}
 	
 }
 /*平板*/
 @media screen and (min-width: 768px) {
-	 .centerBox-left ul li{display: block;}
-    .centerBox-right-c2 table{width: 100%;font-size:18px;text-align: center;font-weight: bolder;border: 1px solid;}
+	.centerBox-left ul li{display: block;}
+    .centerBox-right-c2 table{width: 100%;font-size:18px;text-align: center;font-weight: bolder;}
     .centerBox-right-c2 table tr{width:100%;}
-    .centerBox-right-c2 table tr td{width:25%;border: 1px solid;}
-    .centerBox-right-c2 table tr td img{width:95%;height:200px;border: 1px solid;}
+    .centerBox-right-c2 table tr td{width:25%;}
+    .centerBox-right-c2 table tr td img{width:95%;height:200px;}
+    .centerBox-left-c1 button{width:50%;}
 }
 
 

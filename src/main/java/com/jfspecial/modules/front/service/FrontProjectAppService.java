@@ -58,7 +58,7 @@ public class FrontProjectAppService extends BaseService {
 		Page<TbProjectApp> projectapps = TbProjectApp.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_projectapp " //
 						+ " where status = 1 " // 查询状态为显示
-						+ " order by sort,create_time desc");
+						+ " order by update_time desc");
 		return projectapps;
 	}
 
@@ -75,7 +75,7 @@ public class FrontProjectAppService extends BaseService {
 				, " from tb_projectapp " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
-						+ " order by sort,create_time desc", albumId);
+						+ " order by update_time desc", albumId);
 		return projectapps;
 	}
 

@@ -36,7 +36,8 @@ public class RegistController extends BaseProjectController {
 		if (user != null) {
 			redirect(prePage);
 		} else {
-			renderAuto(path + "show_regist.html");
+			//renderAuto(path + "show_regist.html");
+			renderAuto(path + "login.html");
 		}
 	}
 
@@ -50,7 +51,7 @@ public class RegistController extends BaseProjectController {
 		SysUser user = getModel(SysUser.class);
 		String password = getPara("password");
 		String password2 = getPara("password2");
-		String key = user.getStr("email");
+		String key = user.getStr("username");
 
 		// 获取验证码
 		String imageCode = getSessionAttr(ImageCode.class.getName());
@@ -62,8 +63,8 @@ public class RegistController extends BaseProjectController {
 			return;
 		}
 
-		if (StrUtils.isEmpty(key) || key.indexOf("@") < 0) {
-			json.put("msg", "email格式错误！");
+		if (StrUtils.isEmpty(key) ) {
+			json.put("msg", "手机号格式错误！");
 			renderJson(json.toJSONString());
 			return;
 		}
@@ -82,7 +83,7 @@ public class RegistController extends BaseProjectController {
 
 		SysUser newUser = SysUser.dao.findFirstByWhere("where username = ? ", key);
 		if (newUser != null) {
-			json.put("msg", "邮箱已存在，请重新输入");
+			json.put("msg", "手机号已存在，请重新输入");
 			renderJson(json.toJSONString());
 			return;
 		}

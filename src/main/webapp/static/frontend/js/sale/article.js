@@ -12,8 +12,8 @@ $(document).on("click",".centerBox-right-c2 p a",function(){
 	"<button class='btn btn-warning btn-xs' disabled='disabled'>正文</button>");
 })
 $(function(){
-	$(".tou").load("../../../static/frontend/html/header_article.html");
-	$(".wei").load("../../../static/frontend/html/footer.html");
+	$(".tou").load("jfspecial_cms/static/frontend/html/header.html");
+	$(".wei").load("jfspecial_cms/static/frontend/html/footer.html");
 	/*特卖区的初始化*/
 	//$(".centerBox-left-c1").load("static/frontend/html/sale/temaiqu_left_1.html");
 	//$(".centerBox-left-c2").load("../../../static/frontend/html/sale/temaiqu_left_2.html");
