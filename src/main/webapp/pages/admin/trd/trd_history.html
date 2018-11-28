@@ -1,6 +1,13 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!--技术需求/历史-->
+<script type="text/javascript">
+function oper_delete(id) {
+		location.href="trd_history/delarticle/"+id;
+		return false;
+	}
+
+</script>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -44,135 +51,135 @@
             </ul>
         </nav>
 		<!-- Dropdown Structure -->
-<ul id="dropdown1" class="dropdown-content">
-<li><a href="#"><i class="fa fa-user fa-fw"></i> My Profile</a>
-</li>
-<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-</li> 
-<li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-</li>
-</ul>
-<ul id="dropdown2" class="dropdown-content w250">
-  <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
-                                    <span class="pull-right text-muted small">4 min</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small">12 min</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                    <span class="pull-right text-muted small">4 min</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
-                                    <span class="pull-right text-muted small">4 min</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small">4 min</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Alerts</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-</ul>
-<ul id="dropdown3" class="dropdown-content dropdown-tasks w250">
-<li>
-		<a href="#">
-			<div>
-				<p>
-					<strong>Task 1</strong>
-					<span class="pull-right text-muted">60% Complete</span>
-				</p>
-				<div class="progress progress-striped active">
-					<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-						<span class="sr-only">60% Complete (success)</span>
+		<ul id="dropdown1" class="dropdown-content">
+		<li><a href="#"><i class="fa fa-user fa-fw"></i> My Profile</a>
+		</li>
+		<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+		</li>
+		<li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+		</li>
+		</ul>
+		<ul id="dropdown2" class="dropdown-content w250">
+		  <li>
+									<a href="#">
+										<div>
+											<i class="fa fa-comment fa-fw"></i> New Comment
+											<span class="pull-right text-muted small">4 min</span>
+										</div>
+									</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="#">
+										<div>
+											<i class="fa fa-twitter fa-fw"></i> 3 New Followers
+											<span class="pull-right text-muted small">12 min</span>
+										</div>
+									</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="#">
+										<div>
+											<i class="fa fa-envelope fa-fw"></i> Message Sent
+											<span class="pull-right text-muted small">4 min</span>
+										</div>
+									</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="#">
+										<div>
+											<i class="fa fa-tasks fa-fw"></i> New Task
+											<span class="pull-right text-muted small">4 min</span>
+										</div>
+									</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="#">
+										<div>
+											<i class="fa fa-upload fa-fw"></i> Server Rebooted
+											<span class="pull-right text-muted small">4 min</span>
+										</div>
+									</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a class="text-center" href="#">
+										<strong>See All Alerts</strong>
+										<i class="fa fa-angle-right"></i>
+									</a>
+								</li>
+		</ul>
+		<ul id="dropdown3" class="dropdown-content dropdown-tasks w250">
+		<li>
+				<a href="#">
+					<div>
+						<p>
+							<strong>Task 1</strong>
+							<span class="pull-right text-muted">60% Complete</span>
+						</p>
+						<div class="progress progress-striped active">
+							<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+								<span class="sr-only">60% Complete (success)</span>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-		</a>
-	</li>
-	<li class="divider"></li>
-	<li>
-		<a href="#">
-			<div>
-				<p>
-					<strong>Task 2</strong>
-					<span class="pull-right text-muted">28% Complete</span>
-				</p>
-				<div class="progress progress-striped active">
-					<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100" style="width: 28%">
-						<span class="sr-only">28% Complete</span>
+				</a>
+			</li>
+			<li class="divider"></li>
+			<li>
+				<a href="#">
+					<div>
+						<p>
+							<strong>Task 2</strong>
+							<span class="pull-right text-muted">28% Complete</span>
+						</p>
+						<div class="progress progress-striped active">
+							<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100" style="width: 28%">
+								<span class="sr-only">28% Complete</span>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-		</a>
-	</li>
-	<li class="divider"></li>
-	<li>
-		<a href="#">
-			<div>
-				<p>
-					<strong>Task 3</strong>
-					<span class="pull-right text-muted">60% Complete</span>
-				</p>
-				<div class="progress progress-striped active">
-					<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-						<span class="sr-only">60% Complete (warning)</span>
+				</a>
+			</li>
+			<li class="divider"></li>
+			<li>
+				<a href="#">
+					<div>
+						<p>
+							<strong>Task 3</strong>
+							<span class="pull-right text-muted">60% Complete</span>
+						</p>
+						<div class="progress progress-striped active">
+							<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+								<span class="sr-only">60% Complete (warning)</span>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-		</a>
-	</li>
-	<li class="divider"></li>
-	<li>
-		<a href="#">
-			<div>
-				<p>
-					<strong>Task 4</strong>
-					<span class="pull-right text-muted">85% Complete</span>
-				</p>
-				<div class="progress progress-striped active">
-					<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
-						<span class="sr-only">85% Complete (danger)</span>
+				</a>
+			</li>
+			<li class="divider"></li>
+			<li>
+				<a href="#">
+					<div>
+						<p>
+							<strong>Task 4</strong>
+							<span class="pull-right text-muted">85% Complete</span>
+						</p>
+						<div class="progress progress-striped active">
+							<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
+								<span class="sr-only">85% Complete (danger)</span>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-		</a>
-	</li>
-	<li class="divider"></li>
-	<li>
-</ul>   
-<ul id="dropdown4" class="dropdown-content dropdown-tasks w250 taskList">
+				</a>
+			</li>
+			<li class="divider"></li>
+			<li>
+		</ul>
+		<ul id="dropdown4" class="dropdown-content dropdown-tasks w250 taskList">
   <li>
                                 <div>
                                     <strong>John Doe</strong>
@@ -267,24 +274,31 @@
 								</tr>
 							</thead>
 							<tbody>
-							 	<tr>
-							 		<td>1</td>
-							 		<td>鸡蛋100块钱一斤</td>
-							 		<td>狗蛋</td>
-							 		<td>2018-11-19 14:51:59</td>
-							 		<td>
-							 			<a class="waves-effect waves-light btn">删除</a>
-							 		</td>
-							 	</tr>
-							 	<tr>
-							 		<td>2</td>
-							 		<td>白菜200块钱一颗</td>
-							 		<td>狗剩</td>
-							 		<td>2018-11-19 14:51:59</td>
-							 		<td>
-							 			<a class="waves-effect waves-light btn">删除</a>
-							 		</td>
-							 	</tr>
+
+								<!--全部显示//待分页弄好,再删除-->
+								<% for(item in lists){ %>
+								<tr>
+									<td>${item.pm}</td>
+									<td>${item.name}</td>
+									<td>${item.publish_user}</td>
+									<td>${item.update_time}</td>
+									<td>
+										<a class="waves-effect waves-light btn" onclick="oper_delete(${item.id!'0'});">删除</a>
+									</td>
+								</tr>
+								<% } %>
+								<!--<%//
+                                var addoils=tempAddOil.addoils(1,5);%>
+                                <% for(item in addoils.list){ %>
+                                    <tr>
+                                         <td>${item.pm}</td>
+                                         <td>${item.name}</td>
+                                         <td>${item.publish_user}</td>
+                                         <td>${item.update_time}</td>
+                                             <a class="waves-effect waves-light btn" onclick="oper_delete(${item.id!'0'});">删除</a>
+                                         </td>
+                                     </tr>
+                                <% } %>-->
 						 	</tbody>
 						</table>
 						<p class="pageBtnList">

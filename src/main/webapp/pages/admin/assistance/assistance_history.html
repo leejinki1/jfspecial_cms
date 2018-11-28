@@ -1,6 +1,13 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+<!--帮扶/历史-->
+<script type="text/javascript">
+function oper_delete(id) {
+		location.href="assistance_history/delarticle/"+id;
+		return false;
+	}
 
+</script>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -267,7 +274,19 @@
 								</tr>
 							</thead>
 							<tbody>
-							<%//帮扶企业 308
+							<!--全部显示//待分页弄好,再删除-->
+							<% for(item in lists){ %>
+							<tr>
+								<td>${item.pm}</td>
+								<td>${item.name}</td>
+								<td>${item.publish_user}</td>
+								<td>${item.update_time}</td>
+								<td>
+									<a class="waves-effect waves-light btn" onclick="oper_delete(${item.id!'0'});">删除</a>
+								</td>
+							</tr>
+							<% } %>
+							<!--<%//帮扶企业 308
 							var addoils=tempAddOil.addoils(1,5);%>
 							<% for(item in addoils.list){ %>
 								<tr>
@@ -275,11 +294,10 @@
 							 		<td>${item.name}</td>
 							 		<td>${item.publish_user}</td>
 							 		<td>${item.update_time}</td>
-							 		<td>
-							 			<a class="waves-effect waves-light btn">删除</a>
+							 			<a class="waves-effect waves-light btn" onclick="oper_delete(${item.id!'0'});">删除</a>
 							 		</td>
 							 	</tr>
-							<% } %>
+							<% } %>-->
 						 	</tbody>
 						</table>
 						<p class="pageBtnList">
