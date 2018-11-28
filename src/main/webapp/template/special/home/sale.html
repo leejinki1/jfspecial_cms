@@ -87,7 +87,7 @@
                     <button class="btn btn-warning btn-xs" disabled="disabled">首页</button>
                     <img src="${BASE_PATH }static/frontend/images/rightImg.png"/>
                     <button class="btn btn-warning btn-xs" disabled="disabled">特卖区</button>
-                    <img src='${BASE_PATH }static/frontend/images/rightImg.png'/><span>商品</span>
+                    <img src='${BASE_PATH }static/frontend/images/rightImg.png'/><span>正文</span>
                 </p>
                 <div class="container-fluid">
                     <div class="row">
@@ -95,8 +95,8 @@
                             <div class="input-group" style="margin: 3px 0px;">
                                 <input type="text" class="form-control" placeholder="请输入您要搜索的内容">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">搜索</button>
-                                </span>
+			    	<button class="btn btn-default" type="button">搜索</button>
+			    </span>
                             </div>
                         </div>
                     </div>
@@ -109,10 +109,10 @@
                 var page;
                 if(!isEmpty(session.albumId)) {
                 var albumId= session.albumId;
-                page = tempSale.sales(1, 8, parseInt(albumId));
+                page = tempSale.sales(1, 5, parseInt(albumId));
                 }
                 else{
-                page = tempSale.sales(1, 8);
+                page = tempSale.sales(1, 5);
                 }
                 %>
                 <!--文章列表-->
@@ -125,48 +125,6 @@
 </div>
 <!-- //centerBox -->
 <!-- footer -->
-<div class="footer">
-    <div class="container">
-        <div class="footer-agileitsrow">
-            <div class="col-md-3 footer-grid">
-                <h3>临时演员</h3>
-                <p>[医]金红花，[医]金红花[NS][NS]。[医]小叶蝉。佩列斯克征服了达官贵人。</p>
-            </div>
-            <div class="col-md-3 footer-grid">
-                <h3> 社会化媒体</h3>
-                <ul>
-                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i> 脸书</a></li>
-                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> 推特</a></li>
-                    <li><a href="#"><i class="fa fa-google" aria-hidden="true"></i> 谷歌</a></li>
-                    <li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i> 滴水的</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 footer-grid">
-                <h3>有用信息</h3>
-                <ul>
-                    <li><a href="index.html">首页</a></li>
-                    <li><a href="about.html">关于</a></li>
-                    <li><a href="blog.html">博客</a></li>
-                    <li><a href="contact.html">接触</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 footer-grid">
-                <h3>联系我们</h3>
-                <p>佩列斯克征服了达官贵人。</p>
-                <div class="footer-grid-address">
-                    <p>电话.800-255-9999</p>
-                    <p>传真: 1234 568</p>
-                    <p>邮箱: <a class="email-link" href="mailto:info@example.com">Example.com</a></p>
-                </div>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-    </div>
-</div>
-<div class="copy-right">
-    <p>迪士尼版权所有 &copy; 沪公网安备 31011502002267号 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
-</div>
-<!-- //footer -->
 
 <div class="wei"></div>
 <!-- //footer -->
