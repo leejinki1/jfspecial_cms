@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<!--政策法规/发布-->
 <!-- jquery -->
 <% include("/template/includes/jquery.html"){} %>
 <% include("/template/includes/ueditor.html"){} %>
@@ -22,9 +21,11 @@
                       'simpleupload', 'insertimage', 'emotion' , 'insertcode'
                   ]]
 		});
-
 	});
+
+<!--发布-->
 function oper_save(id) {
+
 		<!--判断栏目-->
 		var albumId = $('[name="model.album_id"]').val();
 		if(albumId=='-1') {
@@ -69,15 +70,14 @@ function oper_save(id) {
 
 
 		<!--ajax上传-->
-
 		jQuery.ajax({
 			type:'POST',
-			url:'policy_publish/publishArticle/'+id,
+			url:'assistance_info/publishArticle/'+id,
 			data:$("form").serialize(),
 			success:function(data){
 				if(data.status==1){
 					alert('发布成功');
-					form1.action = "policy_publish";
+					form1.action = "assistance_info";
 					form1.submit();
 					return true;
 				} else {
@@ -96,7 +96,6 @@ function oper_save(id) {
 
 		return false;
 	}
-
 
 <!--保存到草稿箱-->
 function oper_savedraft(id) {
@@ -148,12 +147,12 @@ function oper_savedraft(id) {
 		<!--ajax上传-->
 		jQuery.ajax({
 			type:'POST',
-			url:'policy_publish/saveToDrafts/'+id,
+			url:'assistance_info/saveToDrafts/'+id,
 			data:$("form").serialize(),
 			success:function(data){
 				if(data.status==1){
 					alert('发布成功');
-					form1.action = "policy_publish";
+					form1.action = "assistance_info";
 					form1.submit();
 					return true;
 				} else {
@@ -176,7 +175,7 @@ function oper_savedraft(id) {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>政策法规/发布</title>
+    <title>Target Material Design Bootstrap Admin Template</title>
 	
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="${BASE_PATH }static/backend/assets/materialize/css/materialize.min.css" media="screen,projection" />
@@ -202,7 +201,7 @@ function oper_savedraft(id) {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand waves-effect waves-dark" href="index.html"><i class="large material-icons">track_changes</i> <strong>政策法规</strong></a>
+                <a class="navbar-brand waves-effect waves-dark" href="index.html"><i class="large material-icons">track_changes</i> <strong>帮扶企业</strong></a>
 				
 		<div id="sideNav" href=""><i class="material-icons dp48">toc</i></div>
             </div>
@@ -344,47 +343,47 @@ function oper_savedraft(id) {
 			<li>
 		</ul>
 		<ul id="dropdown4" class="dropdown-content dropdown-tasks w250 taskList">
-  <li>
-                                <div>
-                                    <strong>John Doe</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Today</em>
-                                    </span>
-                                </div>
-                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <p>Lorem Ipsum has been the industry's standard dummy text ever since an kwilnw...</p>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the...</p>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>Read All Messages</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-</ul>  
+		  <li>
+										<div>
+											<strong>John Doe</strong>
+											<span class="pull-right text-muted">
+												<em>Today</em>
+											</span>
+										</div>
+										<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+									</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+										<div>
+											<strong>John Smith</strong>
+											<span class="pull-right text-muted">
+												<em>Yesterday</em>
+											</span>
+										</div>
+										<p>Lorem Ipsum has been the industry's standard dummy text ever since an kwilnw...</p>
+									</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="#">
+										<div>
+											<strong>John Smith</strong>
+											<span class="pull-right text-muted">
+												<em>Yesterday</em>
+											</span>
+										</div>
+										<p>Lorem Ipsum has been the industry's standard dummy text ever since the...</p>
+									</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a class="text-center" href="#">
+										<strong>Read All Messages</strong>
+										<i class="fa fa-angle-right"></i>
+									</a>
+								</li>
+		</ul>
 	   <!--/. NAV TOP  -->
         <!--/. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
@@ -395,7 +394,7 @@ function oper_savedraft(id) {
                         <a href="../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 信息统计</a>
                     </li>
                     <li>
-                        <a href="policy_publish" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 政策法规信息</a>
+                        <a href="addoil_publish" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 帮扶信息</a>
                     </li>
 
                 </ul>
@@ -408,26 +407,27 @@ function oper_savedraft(id) {
 <div id="page-wrapper">
 	<div class="header"> 
         <h1 class="page-header">
-                	政策法规信息
+                	帮扶信息
         </h1>
 	    <ol class="breadcrumb">
 			<li><a href="#">首页</a></li>
-			<li><a href="#">政策法规 </a></li>
-			<li><a href="#">政策法规信息 </a></li>
+			<li><a href="#">帮扶企业 </a></li>
+			<li><a href="#">帮扶信息 </a></li>
 			<li class="active">Data</li>
 		</ol> 							
 	</div>
 		<!--666-->
-	<div id="page-inner"> 
-		
+	<div id="page-inner">
+
+		<!--edit blog-->
 		<div class="row">
 			<div class="col-lg-12">
 	            <div class="card">
 	            	<div class="card-action">
-                            	发布新闻
+                            	发布帮扶企业
                     </div>
 					<div class="card-content">
-						<form class="form-horizontal" name="form1" action="" method="post">
+						<form id="form1" class="form-horizontal" name="form1" action="" method="post" enctype="multipart/form-data" onsubmit="">
 							<input type="hidden" name="model.id" class="form-control" id="model.id"
 								   value="${model.id!'0'}">
 							<div class="row">
@@ -438,12 +438,12 @@ function oper_savedraft(id) {
 										<select  class="form-control" name="model.album_id">
 											<option value="-1">--请选择栏目--</option>
 											<%  //var albums=tempTrd.albums();
-											if(!isEmpty(albums)) {
-											for(item in albums){ %>
-											<option value="${item.id}" ${item.id==model.album_id!0?'selected':''} >${item.name}</option>
-											<%
-											}
-											}
+												if(!isEmpty(albums)) {
+											 	for(item in albums){ %>
+													<option value="${item.id}" ${item.id==model.album_id!0?'selected':''} >${item.name}</option>
+													<%
+													}
+											    }
 											%>
 										</select>
 									</div>
@@ -464,8 +464,9 @@ function oper_savedraft(id) {
 										<input name="model.image_net_url" class="form-control" id="model.image_net_url"
 											   value="${model.image_net_url!''}" placeholder="输入网络图片地址">
 										<!--下面是上传图片的,暂时未完成-->
+										<label for="model.image_url" class="col-sm-2 control-label"></label>
 										<input  type="button" value="没有网络图片,点击上传本地图片;如果同时上传,以网络图片为准;" >
-										<input type="file" name="model.image_url" class="form-control" id="model.image_urle"
+										<input type="file" name="model.url" class="form-control" id="file"
 											   value="${model.image_url!''}" placeholder="没有网络图片,点击上传本地图片;如果同时上传,以网络图片为准;">
 
 									</div>
@@ -487,21 +488,21 @@ function oper_savedraft(id) {
 								  <label for="textarea1">分类设置</label>
 								</div>-->
 								<!--提交按钮-->
-									<div class="form-group">
-										<div class="col-sm-offset-3 col-sm-9">
-											<div class="checkbox">
-												<label>
-												 <input type="button" value="确认发布"  class="waves-effect waves-light btn-large" onclick="oper_save(${model.id!'0'});"/>&nbsp;
-												  <input type="button" value="保存草稿箱"  class="waves-effect waves-light btn-large" onclick="oper_savedraft(${model.id!'0'});"/>
-												  <!-- <a class="waves-effect waves-light btn-large">保存草稿箱</a>&nbsp;
-												<!--  <a class="waves-effect waves-light btn-large">确认发布</a>-->
-												</label>
-											</div>
+								<div class="form-group">
+								    <div class="col-sm-offset-3 col-sm-9">
+									    <div class="checkbox">
+									        <label>
+									         <input type="button" value="确认发布"  class="waves-effect waves-light btn-large" onclick="oper_save(${model.id!'0'});"/>&nbsp;
+									          <input type="button" value="保存草稿箱"  class="waves-effect waves-light btn-large" onclick="oper_savedraft(${model.id!'0'});"/>
+									          <!-- <a class="waves-effect waves-light btn-large">保存草稿箱</a>&nbsp;
+									          <!--  <a class="waves-effect waves-light btn-large">确认发布</a>-->
+									        </label>
 										</div>
 									</div>
-
 								</div>
-							</form>
+
+							</div>
+						</form>
     					<div class="clearBoth"></div>
 	   					
 					</div>
@@ -519,6 +520,7 @@ function oper_savedraft(id) {
     <script src="${BASE_PATH }static/backend/assets/js/jquery-1.10.2.js"></script>
 	
 	<!-- Bootstrap Js -->
+
     <script src="${BASE_PATH }static/backend/assets/js/bootstrap.min.js"></script>
 	
 	<script src="${BASE_PATH }static/backend/assets/materialize/js/materialize.min.js"></script>

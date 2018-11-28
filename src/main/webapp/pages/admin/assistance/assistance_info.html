@@ -23,7 +23,7 @@
 		});
 	});
 
-
+<!--发布-->
 function oper_save(id) {
 
 		<!--判断栏目-->
@@ -70,17 +70,11 @@ function oper_save(id) {
 
 
 		<!--ajax上传-->
-
 		jQuery.ajax({
 			type:'POST',
 			url:'assistance_info/publishArticle/'+id,
 			data:$("form").serialize(),
-			async:false,
-			cache:false,
-			contentType:false,
-			contentType:'multipart/form-data',
 			success:function(data){
-				alert(1);
 				if(data.status==1){
 					alert('发布成功');
 					form1.action = "assistance_info";
@@ -103,6 +97,80 @@ function oper_save(id) {
 		return false;
 	}
 
+<!--保存到草稿箱-->
+function oper_savedraft(id) {
+
+		<!--判断栏目-->
+		var albumId = $('[name="model.album_id"]').val();
+		if(albumId=='-1') {
+			alert('请选择栏目');
+			return false;
+		}
+
+		<!--判断标题-->
+		var title = $('[name="model.name"]').val();
+		if(title=='') {
+			alert('请输入文章题目');
+			return false;
+		}
+		if(title.length > 80 ) {
+			alert('文章（'+title.length+'字）题目过长，请输入小于80个字');
+			return false;
+		}
+
+		<!--判断标题图片-->
+		var image_net_url=$('[name="model.image_net_url"]').val();
+		var image_url=$('[name="model.image_url"]').val();
+		//alert(image_net_url);
+		//alert(image_url);
+		if(image_net_url==''){
+			if(image_url==''){
+				alert('请至少选择一种方式提交图片');
+				return false;
+			}
+		}
+
+		<!--判断内容-->
+		if(!ue.hasContents()){
+			alert('请输入文章内容');
+			return false;
+		}
+		if(ue.getContentTxt().length > 1200){
+			alert('文章（'+ue.getContentTxt().length+'字）文字过长，请输入小于1200个字');
+			return false;
+		}
+
+		<!--利用插件上传文件-->
+
+
+
+		<!--ajax上传-->
+		jQuery.ajax({
+			type:'POST',
+			url:'assistance_info/saveToDrafts/'+id,
+			data:$("form").serialize(),
+			success:function(data){
+				if(data.status==1){
+					alert('发布成功');
+					form1.action = "assistance_info";
+					form1.submit();
+					return true;
+				} else {
+					alert('发布失败：'+data.msg);
+				}
+				$('[name="old_password"]').val('');
+				$('[name="new_password"]').val('');
+				$('[name="new_password2"]').val('');
+			},
+			error:function(html){
+				var flag = (typeof console != 'undefined');
+				if(flag) console.log("服务器忙，提交数据失败，代码:" +html.status+ "，请联系管理员！");
+				alert("服务器忙，提交数据失败，请联系管理员！");
+			}
+		});
+
+		return false;
+}
 </script>
 <head>
     <meta charset="utf-8" />
@@ -396,8 +464,9 @@ function oper_save(id) {
 										<input name="model.image_net_url" class="form-control" id="model.image_net_url"
 											   value="${model.image_net_url!''}" placeholder="输入网络图片地址">
 										<!--下面是上传图片的,暂时未完成-->
+										<label for="model.image_url" class="col-sm-2 control-label"></label>
 										<input  type="button" value="没有网络图片,点击上传本地图片;如果同时上传,以网络图片为准;" >
-										<input type="file" name="model.image_url" class="form-control" id="model.image_urle"
+										<input type="file" name="model.url" class="form-control" id="file"
 											   value="${model.image_url!''}" placeholder="没有网络图片,点击上传本地图片;如果同时上传,以网络图片为准;">
 
 									</div>

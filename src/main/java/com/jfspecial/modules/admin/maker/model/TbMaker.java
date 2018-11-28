@@ -2,6 +2,7 @@ package com.jfspecial.modules.admin.maker.model;
 
 import com.jfspecial.component.base.BaseProjectModel;
 import com.jfspecial.jfinal.component.annotation.ModelBind;
+import com.jfspecial.modules.admin.addoil.model.TbAddOil;
 
 @ModelBind(table = "tb_maker")
 public class TbMaker extends BaseProjectModel<TbMaker> {
@@ -33,6 +34,16 @@ public class TbMaker extends BaseProjectModel<TbMaker> {
 	private String CREATE_TIME = "create_time"; // 创建时间
 	private String CREATE_ID = "create_id"; // 创建者
 	private String CONTENT="content";//内容;2018.11.27zr添加
+	private String IS_DRAFTS = "is_drafts"; // 是否保存到草稿箱:0 否 1 是
+
+	public TbMaker setIsDrafts(String value) {
+		set(IS_DRAFTS, value);
+		return this;
+	}
+
+	public String getIsDrafts() {
+		return get(IS_DRAFTS);
+	}
 
 	public TbMaker setId(Integer value) {
 		set(ID, value);

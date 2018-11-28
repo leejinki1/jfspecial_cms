@@ -33,6 +33,16 @@ public class TbAddOil extends BaseProjectModel<TbAddOil> {
 	private String CREATE_TIME = "create_time"; // 创建时间
 	private String CREATE_ID = "create_id"; // 创建者
 	private String CONTENT = "content"; // 正文
+	private String IS_DRAFTS = "is_drafts"; // 是否保存到草稿箱:0 否 1 是
+
+	public TbAddOil setIsDrafts(String value) {
+		set(IS_DRAFTS, value);
+		return this;
+	}
+
+	public String getIsDrafts() {
+		return get(IS_DRAFTS);
+	}
 
 	public TbAddOil setContent(String value) {
 		set(CONTENT, value);

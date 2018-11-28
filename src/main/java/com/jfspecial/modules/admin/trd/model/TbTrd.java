@@ -2,6 +2,7 @@ package com.jfspecial.modules.admin.trd.model;
 
 import com.jfspecial.component.base.BaseProjectModel;
 import com.jfspecial.jfinal.component.annotation.ModelBind;
+import com.jfspecial.modules.admin.maker.model.TbMaker;
 
 @ModelBind(table = "tb_trd")
 public class TbTrd extends BaseProjectModel<TbTrd> {
@@ -33,6 +34,16 @@ public class TbTrd extends BaseProjectModel<TbTrd> {
 	private String CREATE_TIME = "create_time"; // 创建时间
 	private String CREATE_ID = "create_id"; // 创建者
 	private String CONTENT="content";//内容;2018.11.27zr添加
+	private String IS_DRAFTS = "is_drafts"; // 是否保存到草稿箱:0 否 1 是
+
+	public TbTrd setIsDrafts(String value) {
+		set(IS_DRAFTS, value);
+		return this;
+	}
+
+	public String getIsDrafts() {
+		return get(IS_DRAFTS);
+	}
 
 	public TbTrd setId(Integer value) {
 		set(ID, value);
