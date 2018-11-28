@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.upload.UploadFile;
 import com.jfspecial.component.base.BaseProjectController;
 import com.jfspecial.component.util.JFSpecialUtils;
 import com.jfspecial.jfinal.base.BaseController;
@@ -14,6 +15,7 @@ import com.jfspecial.modules.admin.addoil.model.TbAddOil;
 import com.jfspecial.modules.admin.addoil.model.TbAddOilAlbum;
 import com.jfspecial.modules.admin.article.ArticleConstant;
 import com.jfspecial.modules.front.interceptor.FrontInterceptor;
+import com.jfspecial.system.file.util.FileUploadUtils;
 import com.jfspecial.system.menu.MenuSvc;
 import com.jfspecial.system.menu.SysMenu;
 import com.jfspecial.system.role.RoleSvc;
@@ -132,6 +134,24 @@ public class AssistanceInfoController extends BaseController {
 			model.setCreateId(getSessionUser().getUserid());
 		    model.setUpdateId(getSessionUser().getUserid());
 			model.setCreateTime(getNow());
+
+			System.out.println("输出1此"+model);
+			//判断图片是否上传
+		   UploadFile uploadImage=null;//声明上传文件
+		   System.out.println("文件名"+uploadImage.getFileName());
+		   try{
+				uploadImage = getFile("model.image_url","logo", FileUploadUtils.UPLOAD_MAX,"utf-8");
+
+		   }catch(Exception exception){
+			   System.out.println("路径错误");
+		   }
+		   /*if(uploadImage!=null){
+			   model.setImageUrl("\\web\\"+uploadImage.getFileName());
+		   }*/
+		   model.setImageUrl("\\logo\\"+uploadImage.getFileName());
+		   System.out.println("输出2此"+model);
+
+
 			model.save();
 		}
 

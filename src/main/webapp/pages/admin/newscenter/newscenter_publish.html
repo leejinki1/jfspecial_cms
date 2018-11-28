@@ -25,31 +25,50 @@
 
 	});
 function oper_save(id) {
+		<!--判断栏目-->
 		var albumId = $('[name="model.album_id"]').val();
 		if(albumId=='-1') {
-			Alert('请选择栏目');
+			alert('请选择栏目');
 			return false;
 		}
 
+		<!--判断标题-->
 		var title = $('[name="model.name"]').val();
 		if(title=='') {
-			Alert('请输入文章题目');
+			alert('请输入文章题目');
 			return false;
 		}
 		if(title.length > 80 ) {
-			Alert('文章（'+title.length+'字）题目过长，请输入小于80个字');
+			alert('文章（'+title.length+'字）题目过长，请输入小于80个字');
 			return false;
 		}
 
+		<!--判断标题图片-->
+		var image_net_url=$('[name="model.image_net_url"]').val();
+		var image_url=$('[name="model.image_url"]').val();
+		//alert(image_net_url);
+		//alert(image_url);
+		if(image_net_url==''){
+			if(image_url==''){
+				alert('请至少选择一种方式提交图片');
+				return false;
+			}
+		}
+
+		<!--判断内容-->
 		if(!ue.hasContents()){
-			Alert('请输入文章内容');
+			alert('请输入文章内容');
 			return false;
 		}
 		if(ue.getContentTxt().length > 1200){
-			Alert('文章（'+ue.getContentTxt().length+'字）文字过长，请输入小于1200个字');
+			alert('文章（'+ue.getContentTxt().length+'字）文字过长，请输入小于1200个字');
 			return false;
 		}
 
+		<!--利用插件上传文件-->
+
+
+		<!--ajax上传-->
 		jQuery.ajax({
 			type:'POST',
 			url:'newscenter_publish/publishArticle/'+id,
@@ -338,6 +357,7 @@ function oper_save(id) {
 							<input type="hidden" name="model.id" class="form-control" id="model.id"
 								   value="${model.id!'0'}">
 							<div class="row">
+								<!--文章分类栏目-->
 								<div class="form-group">
 									<label for="model.album_id" class="col-sm-2 control-label">栏目</label>
 									<div class="col-sm-10" >
@@ -354,7 +374,7 @@ function oper_save(id) {
 										</select>
 									</div>
 								</div>
-
+								<!--标题-->
 								<div class="form-group">
 									<label for="model.name" class="col-sm-2 control-label">标题</label>
 									<div class="col-sm-10">
@@ -363,19 +383,36 @@ function oper_save(id) {
 									</div>
 								</div>
 
+								<!--主题图片/网络-->
+								<div class="form-group">
+									<label for="model.image_net_url" class="col-sm-2 control-label">主题图片</label>
+									<div class="col-sm-10">
+										<input name="model.image_net_url" class="form-control" id="model.image_net_url"
+											   value="${model.image_net_url!''}" placeholder="输入网络图片地址">
+										<!--下面是上传图片的,暂时未完成-->
+										<input  type="button" value="没有网络图片,点击上传本地图片;如果同时上传,以网络图片为准;" >
+										<input type="file" name="model.image_url" class="form-control" id="model.image_urle"
+											   value="${model.image_url!''}" placeholder="没有网络图片,点击上传本地图片;如果同时上传,以网络图片为准;">
+
+									</div>
+								</div>
+
+
+								<!--文字内容-->
 								<div class="form-group">
 									<label for="remark" class="col-sm-2 control-label">内容</label>
 									<div class="col-sm-10">
 										<script id="editor" type="text/plain" name="model.content"
 												style="width: 98%; height: 320px;">${model.content!''}</script>
-										</div>
-								  	</div>
+									</div>
+							  </div>
 
 							    <!--
 								<div class="input-field col s12">
 								  <textarea id="textarea1" class="materialize-textarea"></textarea>
 								  <label for="textarea1">分类设置</label>
 								</div>-->
+								<!--提交按钮-->
 									<div class="form-group">
 										<div class="col-sm-offset-3 col-sm-9">
 											<div class="checkbox">
