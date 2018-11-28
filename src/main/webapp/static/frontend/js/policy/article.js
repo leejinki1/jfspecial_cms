@@ -10,8 +10,8 @@ $(document).on("click",".centerBox-right-c2 td a",function(){
 	$(".centerBox-right-c2").load("static/frontend/html/policy/zhengcefagui_type1_child.html");
 	//$(".centerBox-left-c2").load("static/frontend/html/policy/zhengcefagui_left_2_2.html");
 	
-	$(".centerBox-right-c1 p").append("<img src='../../../static/frontend/images/rightImg.png'/>"+
-	"<span>正文</span>");
+//	$(".centerBox-right-c1 p").append("<img src='../../../static/frontend/images/rightImg.png'/>"+
+	//"<span>正文</span>");
 })
 
 $(function(){

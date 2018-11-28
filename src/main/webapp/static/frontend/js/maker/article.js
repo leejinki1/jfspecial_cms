@@ -55,13 +55,13 @@ function chuangkehuodong_c2(){
 
 
 $(function(){
-	$(".tou").load("static/frontend/html/header.html");
-    	$(".wei").load("static/frontend/html/footer.html");
+	$(".tou").load("../../../static/frontend/html/header_article.html");
+    	$(".wei").load("../../../static/frontend/html/footer.html");
 	//默认第一个--特派员--
 	/*特派员的初始化*/
-	$(".centerBox-left-c1").load("static/frontend/html/maker/chuangkehuodong_left_1.html");
+//	$(".centerBox-left-c1").load("static/frontend/html/maker/chuangkehuodong_left_1.html");
 	
-	$(".centerBox-right-c1").load("static/frontend/html/maker/chuangkehuodong_right_1.html");
+	//$(".centerBox-right-c1").load("static/frontend/html/maker/chuangkehuodong_right_1.html");
 	//$(".centerBox-right-c2").load("static/frontend/html/maker/chuangkehuodong_test1.html");
 	/*$(".centerBox-right-c1").load("tepaiyuan_right_1.html");
 	$(".centerBox-right-c2").load("test1.html");*/

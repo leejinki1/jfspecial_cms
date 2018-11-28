@@ -54,10 +54,10 @@
                 var page;
                 if(!isEmpty(session.albumId)) {
                 var albumId= session.albumId;
-                page = tempPolicy.alter_policys(1, 10, parseInt(albumId));
+                page = tempPolicy.alter_policys(paginator.pageNo, 10, parseInt(albumId));
                 }
                 else{
-                page = tempPolicy.alter_policys(1, 10);
+                page = tempPolicy.alter_policys(paginator.pageNo, 10);
                 }
                 %>
                 <!--文章列表-->
