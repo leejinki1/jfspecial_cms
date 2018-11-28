@@ -3,7 +3,7 @@
 <!--帮扶/历史-->
 <script type="text/javascript">
 function oper_delete(id) {
-		location.href="assistance_history/delarticle/"+id;
+		location.href="addoil_history/ delArticle/"+id;
 		return false;
 	}
 
@@ -228,10 +228,10 @@ function oper_delete(id) {
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a href="home" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 信息统计</a>
+                        <a href="../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 信息统计</a>
                     </li>
                     <li>
-                        <a href="assistance_history" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 历史帮扶申请</a>
+                        <a href="addoil_history" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 历史帮扶申请</a>
                     </li>
 
                 </ul>
@@ -277,7 +277,7 @@ function oper_delete(id) {
 							<!--全部显示//待分页弄好,再删除-->
 							<% for(item in lists){ %>
 							<tr>
-								<td>${item.pm}</td>
+								<td>${itemLP.index}</td>
 								<td>${item.name}</td>
 								<td>${item.publish_user}</td>
 								<td>${item.update_time}</td>
@@ -290,7 +290,7 @@ function oper_delete(id) {
 							var addoils=tempAddOil.addoils(1,5);%>
 							<% for(item in addoils.list){ %>
 								<tr>
-							 		<td>${item.pm}</td>
+							 		<td>${itemLP.index}</td>
 							 		<td>${item.name}</td>
 							 		<td>${item.publish_user}</td>
 							 		<td>${item.update_time}</td>

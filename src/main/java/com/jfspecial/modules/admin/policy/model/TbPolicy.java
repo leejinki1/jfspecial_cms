@@ -2,6 +2,7 @@ package com.jfspecial.modules.admin.policy.model;
 
 import com.jfspecial.component.base.BaseProjectModel;
 import com.jfspecial.jfinal.component.annotation.ModelBind;
+import com.jfspecial.modules.admin.maker.model.TbMaker;
 
 @ModelBind(table = "tb_policy")
 public class TbPolicy extends BaseProjectModel<TbPolicy> {
@@ -33,6 +34,26 @@ public class TbPolicy extends BaseProjectModel<TbPolicy> {
 	private String CREATE_TIME = "create_time"; // 创建时间
 	private String CREATE_ID = "create_id"; // 创建者
 	private String CONTENT="content";//内容;2018.11.27zr添加
+	private String IS_DRAFTS = "is_drafts"; // 是否保存到草稿箱:0 否 1 是
+	private String APPROVE_STATUS = "approve_status"; // 是否保存到草稿箱:0 否 1 是
+
+	public TbPolicy setApproveStatus(String value) {
+		set(APPROVE_STATUS, value);
+		return this;
+	}
+
+	public String getApproveStatus() {
+		return get(APPROVE_STATUS);
+	}
+
+	public TbPolicy setIsDrafts(String value) {
+		set(IS_DRAFTS, value);
+		return this;
+	}
+
+	public String getIsDrafts() {
+		return get(IS_DRAFTS);
+	}
 
 	@Override
 	public String toString() {
