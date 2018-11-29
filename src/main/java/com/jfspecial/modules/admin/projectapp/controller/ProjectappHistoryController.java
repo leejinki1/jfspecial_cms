@@ -35,7 +35,7 @@ public class ProjectappHistoryController extends BaseProjectController {
 
 	@Before(FrontInterceptor.class)
 	public void index() {
-		String sql = "select t.id,t.name,t.publish_user, t.update_time from tb_projectapp t where  status = 1 and approve.status=10 order by sort,id desc";
+		String sql = "select t.id,t.name,t.publish_user, t.update_time from tb_projectapp t where  status = 1 and approve_status=10 order by sort,id desc";
 		//历史===已发布(approve.status=pass)===不在草稿(is_draft=0)
 		List<TbProjectApp> lists = TbProjectApp.dao.find(sql);
 		setAttr("lists", lists);
