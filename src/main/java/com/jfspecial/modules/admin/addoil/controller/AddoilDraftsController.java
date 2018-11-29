@@ -28,8 +28,8 @@ public class AddoilDraftsController extends BaseController {
 	}
 
 	/**
-	 * del assistance article
-	 *
+	 * del article
+	 *删除
 	 * 2018年11月27日 下午9:53:04 ljk
 	 */
 	@Before(FrontInterceptor.class)
