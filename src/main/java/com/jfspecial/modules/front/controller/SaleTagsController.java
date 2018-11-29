@@ -44,9 +44,9 @@ public class SaleTagsController extends BaseProjectController {
 			//	+ " and name = '%'"+ tagName+"'%'");
 				//	+ " and name = ?  "//
 			//	+ " order by t.update_time desc ", "%" + tagName + "%" );
-		Page<TbArticle> articles = TbArticle.dao.paginate(getPaginator(), " select t.*", //
+		Page<TbSale> articles = TbSale.dao.paginate(getPaginator(), " select t.*", //
 				" from tb_sale t " //
-						+ " where (t.name like ? or t.title like ?) " //
+						+ " where (t.name like ? or t.content like ?) " //
 						+ " and t.status = 1   " // 查询状态为显示，类型是预览和正常的文章
 						+ " order by t.update_time desc ", "%" + tagName + "%", "%" + tagName + "%");
 

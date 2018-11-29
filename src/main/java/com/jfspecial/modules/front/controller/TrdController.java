@@ -15,7 +15,7 @@ public class TrdController extends BaseProjectController {
 		String albumId = getPara();
 		setSessionAttr("albumId", Integer.parseInt(albumId.toString()));
 
-		redirect("/policy.html");
+		redirect("/trd.html");
 	}
 
 

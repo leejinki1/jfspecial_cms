@@ -18,5 +18,4 @@ public class MakerController extends BaseProjectController {
 		redirect("/maker.html");
 	}
 
-
 }

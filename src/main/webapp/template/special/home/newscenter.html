@@ -54,10 +54,10 @@
                 var page;
                 if(!isEmpty(session.albumId)) {
                 var albumId= session.albumId;
-                page = tempNewsCenter.alter_newscenters(1, 10, parseInt(albumId));
+                page = tempNewsCenter.alter_newscenters(paginator.pageNo, 10, parseInt(albumId));
                 }
                 else{
-                page = tempNewsCenter.alter_newscenters(1,10);
+                page = tempNewsCenter.alter_newscenters(paginator.pageNo,10);
                 }
                 %>
                 <!--文章列表-->

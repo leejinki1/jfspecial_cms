@@ -49,6 +49,9 @@ public class TemplateMakerService extends BaseService {
 	public Page<TbMaker> alter_makers(int pageNo, int pageSize, int albumId) {
 		return service.alterMaker(new Paginator(pageNo, pageSize), albumId);
 	}
+	public Page<TbMaker> time_makers(int pageNo, int pageSize, int albumId) {
+		return service.timeMaker(new Paginator(pageNo, pageSize), albumId);
+	}
 	public TbMaker image(Integer iamgeId) {
 		return service.getMaker(iamgeId);
 	}
