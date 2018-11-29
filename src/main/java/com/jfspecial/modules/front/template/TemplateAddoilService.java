@@ -42,6 +42,14 @@ public class TemplateAddoilService extends BaseService {
 		return service.getAddOil(new Paginator(pageNo, pageSize), albumId);
 	}
 
+	public Page<TbAddOil> alter_addoils(int pageNo, int pageSize) {
+		return service.alterAddOil(new Paginator(pageNo, pageSize));
+	}
+
+	public Page<TbAddOil> alter_addoils(int pageNo, int pageSize, int albumId) {
+		return service.alterAddOil(new Paginator(pageNo, pageSize), albumId);
+	}
+
 	public TbAddOil image(Integer iamgeId) {
 		return service.getAddOil(iamgeId);
 	}

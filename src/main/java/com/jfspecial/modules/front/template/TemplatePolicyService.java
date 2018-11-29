@@ -40,6 +40,14 @@ public class TemplatePolicyService extends BaseService {
 		return service.getPolicy(new Paginator(pageNo, pageSize), albumId);
 	}
 
+	public Page<TbPolicy> alter_policys(int pageNo, int pageSize) {
+		return service.alterPolicy(new Paginator(pageNo, pageSize));
+	}
+
+	public Page<TbPolicy> alter_policys(int pageNo, int pageSize, int albumId) {
+		return service.alterPolicy(new Paginator(pageNo, pageSize), albumId);
+	}
+
 	public TbPolicy policy(Integer iamgeId) {
 		return service.getPolicy(iamgeId);
 	}

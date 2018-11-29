@@ -66,24 +66,5 @@ public class TagsController extends BaseProjectController {
 		renderAuto(path + "search.html");
 	}
 
-	@Before(FrontInterceptor.class)
-	public void all() {
-		// 目录列表
-		int tagsAllId = Db.findFirst(" SELECT id FROM tb_folder where jump_url = 'front/tags/all'").getInt("id");
-		// 活动目录
-		setAttr("folders_selected", tagsAllId);
-
-		List<TbTags> taglist = TbTags.dao.find(" select t.tagname from tb_tags t "
-				+ " left join tb_article ta on ta.id = t.article_id " //
-				+ " left join tb_folder tf on tf.id = ta.folder_id " //
-				+ " where tf.site_id = ? " //
-				+ " group by t.tagname order by t.id ", getSessionSite().getSiteId());
-		setAttr("taglist", taglist);
-
-		// seo：title优化
-		setAttr(JFSpecialUtils.TITLE_ATTR, "标签 - " + getAttr(JFSpecialUtils.TITLE_ATTR));
-
-		renderAuto(path + "show_tags.html");
-	}
 
 }

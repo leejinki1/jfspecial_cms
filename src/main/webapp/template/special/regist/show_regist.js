@@ -1,38 +1,33 @@
-function loadPicimageCode() {
-	document.getElementById("picimageCode").src = jfspecial.BASE_PATH + 'front/image_code?ran=' + Math.random();
+
+function reg_loadPicimageCode() {
+		document.getElementById("reg_picimageCode").src = jfspecial.BASE_PATH +  'front/image_code?ran=' + Math.random();
 }
 
 function oper_save(){
-	var email = $('[name="model.email"]').val();
-	var realname = $('[name="model.realname"]').val();
-	if(email==''){
-		alert('邮箱不能为空！');
+	var username = $('[name="model.reg_username"]').val();
+	var realname = $('[name="model.reg_realname"]').val();
+	if(username==''){
+		alert('手机号不能为空！');
 		return;
 	}
 	
-	var regexEmail = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
-    if(!regexEmail.test(email)){
-    	alert('邮箱格式不正确！');
-		return;
-    }
-	 
 	if(realname==''){
-		alert('昵称不能为空！');
+		alert('姓名不能为空！');
 		return;
 	}
 	
-	if(realname.length < 3){
-		alert('昵称长度必须大于3！');
+	if(realname.length < 2){
+		alert('姓名长度必须大于2！');
 		return;
 	}
 	
-	if(realname.length > 15){
-		alert('昵称长度必须小于16！');
+	if(realname.length > 10){
+		alert('姓名长度必须小于11！');
 		return;
 	}
 	
-	var pwd = $('[name="password"]').val();
-	var pwd2 = $('[name="password2"]').val();
+	var pwd = $('[name="reg_password"]').val();
+	var pwd2 = $('[name="reg_password2"]').val();
 	if(pwd==''){
 		alert('密码不能为空！');
 		return;
@@ -54,7 +49,7 @@ function oper_save(){
 		alert('两次密码不一致！');
 		return;
 	}
-	var imageCode = $('[name="imageCode"]').val();
+	var imageCode = $('[name="reg_imageCode"]').val();
 	if(imageCode==''){
 		alert('验证码不能为空！');
 		return;
@@ -71,16 +66,16 @@ function oper_save(){
 		success:function(data){
 			if(data.status==1){
 				alert('保存成功');
-				var prePage = $('[name="pre_page"]').val();
+				var prePage = $('[name="reg_pre_page"]').val();
 				if (prePage=='') {
 					prePage = "/";
 				}
 				window.top.location.href = prePage;
 			} else {
-				loadPicimageCode();
-				$('[name="imageCode"]').val('');
-				$('[name="password"]').val('');
-				$('[name="password2"]').val('');
+				reg_loadPicimageCode();
+				$('[name="reg_imageCode"]').val('');
+				$('[name="reg_password"]').val('');
+				$('[name="reg_password2"]').val('');
 				alert('保存失败：'+data.msg);
 			}
 		},

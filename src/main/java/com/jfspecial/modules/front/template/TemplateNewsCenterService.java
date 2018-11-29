@@ -42,6 +42,14 @@ public class TemplateNewsCenterService extends BaseService {
 		return service.getNewsCenter(new Paginator(pageNo, pageSize), albumId);
 	}
 
+	public Page<TbNewsCenter> alter_newscenters(int pageNo, int pageSize) {
+		return service.alterNewsCenter(new Paginator(pageNo, pageSize));
+	}
+
+	public Page<TbNewsCenter> alter_newscenters(int pageNo, int pageSize, int albumId) {
+		return service.alterNewsCenter(new Paginator(pageNo, pageSize), albumId);
+	}
+
 	public TbNewsCenter image(Integer iamgeId) {
 		return service.getNewsCenter(iamgeId);
 	}

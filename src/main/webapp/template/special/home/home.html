@@ -12,28 +12,28 @@ var noticeList = temp.notice(1);
 var specials=	temp.articlePage(1,10,300);
 
 //特卖区 301
-var sales=	tempSale.sales(1,5);
+var sales=	tempSale.alter_sales(1,5);
 
 //新闻中心 302
-var newscenters=tempNewsCenter.newscenters(1,5);
+var newscenters=tempNewsCenter.alter_newscenters(1,5);
 
 //技术需求 303
-var trds=tempTrd.trds(1,5);
+var trds=tempTrd.alter_trds(1,5);
 
 //创客活动 304
-var makers=tempMaker.makers(1,5);
+var makers=tempMaker.alter_makers(1,5);
 
 //政策法规 305
-var policys=tempPolicy.policys(1,5);
+var policys=tempPolicy.alter_policys(1,5);
 
 //科普板块 306
-var spps=tempSpp.spps(1,5);
+var spps=tempSpp.alter_spps(1,5);
 
 //项目申报 307
-var projectapps=tempProjectApp.projectapps(1,5);
+var projectapps=tempProjectApp.alter_projectapps(1,5);
 
 //帮扶企业 308
-var addoils=tempAddOil.addoils(1,5);
+var addoils=tempAddOil.alter_addoils(1,5);
 
 %>
 <!DOCTYPE html>
@@ -44,6 +44,11 @@ var addoils=tempAddOil.addoils(1,5);
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="keywords" content="" />
+	<!--清空缓存-->
+	<!--<META HTTP-EQUIV="pragma" CONTENT="no-cache">
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+	<META HTTP-EQUIV="expires" CONTENT="0">-->
+
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!-- //meta-tags -->
 	<!-- Custom Theme files -->
@@ -146,7 +151,11 @@ var addoils=tempAddOil.addoils(1,5);
 						<li class="hvr-bounce-to-bottom"><a href="projectapp.html" />项目申报</a></li>
 						<li class="hvr-bounce-to-bottom"><a href="addoil.html" />帮扶企业</a></li>
 						<!--<li class="hvr-bounce-to-bottom"><a href="front/regist.html">注册</a></li>-->
-						<li class="hvr-bounce-to-bottom"><a href="front/login.html">登录/注册</a></li>
+						<% if(isEmpty(session.session_user)){ %>
+						<li class="hvr-bounce-to-bottom"><a href="login.html">登录/注册</a></li>
+						<% } else { %>
+						<li class="hvr-bounce-to-bottom"><a href="${BASE_PATH }front/logout">${session.session_user.realname}/退出</a></li>
+						<% } %>
 						<li class="hvr-bounce-to-bottom"><a href="contactus.html" />联系我们</a></li>
 					</ul>
 				</div><!-- //navbar-collapse -->

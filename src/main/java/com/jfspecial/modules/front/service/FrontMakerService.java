@@ -54,14 +54,21 @@ public class FrontMakerService extends BaseService {
 	 * @return
 	 */
 	public Page<TbMaker> getMaker(Paginator paginator) {
-		String key = ("article_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+		String key = ("maker_" + paginator.getPageNo() + "_" + paginator.getPageSize());
 		Page<TbMaker> makers = TbMaker.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_maker " //
 						+ " where status = 1 " // 查询状态为显示
-						+ " order by sort,create_time desc");
+						+ " order by update_time desc");
 		return makers;
 	}
-
+	public Page<TbMaker> alterMaker(Paginator paginator) {
+		String key = ("maker_" + System.currentTimeMillis());
+		Page<TbMaker> makers = TbMaker.dao.paginateCache(cacheName, key, paginator, "select * " //
+				, " from tb_maker " //
+						+ " where status = 1 " // 查询状态为显示
+						+ " order by update_time desc");
+		return makers;
+	}
 	/**
 	 * 查询图片
 	 *
@@ -70,15 +77,23 @@ public class FrontMakerService extends BaseService {
 	 * @return
 	 */
 	public Page<TbMaker> getMaker(Paginator paginator, int albumId) {
-		String key = ("article_" + albumId + "_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+		String key = ("maker_" + albumId + "_" + paginator.getPageNo() + "_" + paginator.getPageSize());
 		Page<TbMaker> makers = TbMaker.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_maker " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
-						+ " order by sort,create_time desc", albumId);
+						+ " order by update_time desc", albumId);
 		return makers;
 	}
-
+	public Page<TbMaker> alterMaker(Paginator paginator, int albumId) {
+		String key = ("maker_" + System.currentTimeMillis());
+		Page<TbMaker> makers = TbMaker.dao.paginateCache(cacheName, key, paginator, "select * " //
+				, " from tb_maker " //
+						+ " where status = 1 " // 查询状态为显示
+						+ " and album_id =  ? " //
+						+ " order by update_time desc", albumId);
+		return makers;
+	}
 	/**
 	 * 查询图片
 	 *

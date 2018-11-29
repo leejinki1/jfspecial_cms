@@ -53,10 +53,10 @@
                 var page;
                 if(!isEmpty(session.albumId)) {
                 var albumId= session.albumId;
-                page = tempAddOil.addoils(1, 5, parseInt(albumId));
+                page = tempAddOil.alter_addoils(1, 10, parseInt(albumId));
                 }
                 else{
-                page = tempAddOil.addoils(1, 5);
+                page = tempAddOil.alter_addoils(1, 10);
                 }
                 %>
                 <!--文章列表-->

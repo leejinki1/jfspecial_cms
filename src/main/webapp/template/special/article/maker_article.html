@@ -21,8 +21,24 @@
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
     <!-- //web-font -->
     <script>
+	$(function() {
+		// 回车绑定查询按钮
+		$('[name="search_header"]').on('keydown', function (e) {
+	        var key = e.which;
+	        if (key == 13 ) {
+	            e.preventDefault();
+	            search_form.action =  "front/sale_tags/"+ $('[name="search_header"]').val();
+	    		search_form.submit();
+	        }
+	    });
 
-    </script>
+		$('#search_btn').on('click', function (e) {
+			search_form.action =  "front/sale_tags/"+ $('[name="search_header"]').val();
+			search_form.submit();
+	    });
+
+	});
+	</script>
 </head>
 <body>
 <!-- header -->
@@ -38,12 +54,40 @@
             <div class="centerBox-left-c1">
 
             </div>
-            <div class="centerBox-left-c2"></div>
+            <div class="centerBox-left-c2">
+                <h4>联系我们</h4>
+                <p>
+                    地址：${sysuser.address}<br />
+                    邮箱：${sysuser.email}<br />
+                    电话：${sysuser.tel}<br />
+                    微信：${sysuser.weixin}<br />
+                </p>
+            </div>
         </div>
         <!--中间--右边-->
         <div class="centerBox-right col-md-8 col-sm-8 col-xs-12">
             <div class="centerBox-right-c1">
-
+                <p>
+                    <button class="btn btn-warning btn-xs" disabled="disabled">首页</button>
+                    <img src="${BASE_PATH }static/frontend/images/rightImg.png"/>
+                    <button class="btn btn-warning btn-xs" disabled="disabled">创客活动</button>
+                    <img src='${BASE_PATH }static/frontend/images/rightImg.png'/>
+                    <button class="btn btn-warning btn-xs" disabled="disabled">最新活动</button>
+                    <img src='${BASE_PATH }static/frontend/images/rightImg.png'/>
+                    <button class="btn btn-warning btn-xs" disabled="disabled">正文</button>
+                </p>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="input-group" style="margin: 3px 0px;">
+                                <input type="text" class="form-control" placeholder="请输入您要搜索的内容">
+                                <span class="input-group-btn">
+			                	<button class="btn btn-default" type="button">搜索</button>
+			                     </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="centerBox-right-c2">            </div>
             <div class="centerBox-right-c3">

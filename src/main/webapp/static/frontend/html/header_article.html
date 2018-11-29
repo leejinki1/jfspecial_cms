@@ -25,7 +25,11 @@
 							<li class="hvr-bounce-to-bottom"><a href="../../../spp.html">科普板块</a></li>
 							<li class="hvr-bounce-to-bottom"><a href="../../../projectapp.html">项目申报</a></li>
 							<li class="hvr-bounce-to-bottom"><a href="../../../addoil.html">帮扶企业</a></li>
+							<% if(isEmpty(session.session_user)){ %>
 							<li class="hvr-bounce-to-bottom"><a href="../../../login.html">登录/注册</a></li>
+							<% } else { %>
+							<li class="hvr-bounce-to-bottom"><a href="../../../front/logout">${session.session_user.realname}/退出</a></li>
+							<% } %>
 							<li class="hvr-bounce-to-bottom"><a href="../../../contactus.html">联系我们</a></li>
 						</ul>
 					</div><!-- //navbar-collapse -->

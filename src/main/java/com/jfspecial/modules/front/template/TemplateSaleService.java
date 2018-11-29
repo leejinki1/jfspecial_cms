@@ -39,6 +39,14 @@ public class TemplateSaleService extends BaseService {
 		return service.getSale(new Paginator(pageNo, pageSize), albumId);
 	}
 
+	public Page<TbSale> alter_sales(int pageNo, int pageSize) {
+		return service.alterSale(new Paginator(pageNo, pageSize));
+	}
+
+	public Page<TbSale> alter_sales(int pageNo, int pageSize, int albumId) {
+		return service.alterSale(new Paginator(pageNo, pageSize), albumId);
+	}
+
 	public TbSale image(Integer iamgeId) {
 		return service.getSale(iamgeId);
 	}

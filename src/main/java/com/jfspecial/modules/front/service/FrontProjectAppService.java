@@ -54,11 +54,19 @@ public class FrontProjectAppService extends BaseService {
 	 * @return
 	 */
 	public Page<TbProjectApp> getProjectApp(Paginator paginator) {
-		String key = ("article_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+		String key = ("projectapp_" + paginator.getPageNo() + "_" + paginator.getPageSize());
 		Page<TbProjectApp> projectapps = TbProjectApp.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_projectapp " //
 						+ " where status = 1 " // 查询状态为显示
-						+ " order by sort,create_time desc");
+						+ " order by update_time desc");
+		return projectapps;
+	}
+	public Page<TbProjectApp> alterProjectApp(Paginator paginator) {
+		String key = ("projectapp_" + System.currentTimeMillis());
+		Page<TbProjectApp> projectapps = TbProjectApp.dao.paginateCache(cacheName, key, paginator, "select * " //
+				, " from tb_projectapp " //
+						+ " where status = 1 " // 查询状态为显示
+						+ " order by update_time desc");
 		return projectapps;
 	}
 
@@ -70,15 +78,23 @@ public class FrontProjectAppService extends BaseService {
 	 * @return
 	 */
 	public Page<TbProjectApp> getProjectApp(Paginator paginator, int albumId) {
-		String key = ("article_" + albumId + "_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+		String key = ("projectapp_" + albumId + "_" + paginator.getPageNo() + "_" + paginator.getPageSize());
 		Page<TbProjectApp> projectapps = TbProjectApp.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_projectapp " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
-						+ " order by sort,create_time desc", albumId);
+						+ " order by update_time desc", albumId);
 		return projectapps;
 	}
-
+	public Page<TbProjectApp> alterProjectApp(Paginator paginator, int albumId) {
+		String key = ("projectapp_" + System.currentTimeMillis());
+		Page<TbProjectApp> projectapps = TbProjectApp.dao.paginateCache(cacheName, key, paginator, "select * " //
+				, " from tb_projectapp " //
+						+ " where status = 1 " // 查询状态为显示
+						+ " and album_id =  ? " //
+						+ " order by update_time desc", albumId);
+		return projectapps;
+	}
 	/**
 	 * 查询图片
 	 *

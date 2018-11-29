@@ -5,6 +5,7 @@ import com.jfspecial.jfinal.base.BaseService;
 import com.jfspecial.jfinal.base.Paginator;
 import com.jfspecial.modules.admin.newscenter.model.TbNewsCenter;
 import com.jfspecial.modules.admin.newscenter.model.TbNewsCenterAlbum;
+import com.jfspecial.modules.admin.policy.model.TbPolicy;
 import com.jfspecial.modules.admin.spp.model.TbSpp;
 import com.jfspecial.modules.admin.spp.model.TbSppAlbum;
 import com.jfspecial.util.cache.CacheManager;
@@ -56,14 +57,21 @@ public class FrontNewsCenterService extends BaseService {
 	 * @return
 	 */
 	public Page<TbNewsCenter> getNewsCenter(Paginator paginator) {
-		String key = ("article_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+		String key = ("newscenter_" + paginator.getPageNo() + "_" + paginator.getPageSize());
 		Page<TbNewsCenter> newscenters = TbNewsCenter.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_newscenter " //
 						+ " where status = 1 " // 查询状态为显示
-						+ " order by sort,create_time desc");
+						+ " order by update_time desc");
 		return newscenters;
 	}
-
+	public Page<TbNewsCenter> alterNewsCenter(Paginator paginator) {
+		String key = ("newscenter_" + System.currentTimeMillis());
+		Page<TbNewsCenter> newscenters = TbNewsCenter.dao.paginateCache(cacheName, key, paginator, "select * " //
+				, " from tb_policy " //
+						+ " where status = 1 " // 查询状态为显示
+						+ " order by update_time desc");
+		return newscenters;
+	}
 	/**
 	 * 查询图片
 	 *
@@ -72,15 +80,23 @@ public class FrontNewsCenterService extends BaseService {
 	 * @return
 	 */
 	public Page<TbNewsCenter> getNewsCenter(Paginator paginator, int albumId) {
-		String key = ("article_" + albumId + "_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+		String key = ("newscenter_" + albumId + "_" + paginator.getPageNo() + "_" + paginator.getPageSize());
 		Page<TbNewsCenter> newscenters = TbNewsCenter.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_newscenter " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
-						+ " order by sort,create_time desc", albumId);
+						+ " order by update_time desc", albumId);
 		return newscenters;
 	}
-
+	public Page<TbNewsCenter> alterNewsCenter(Paginator paginator, int albumId) {
+		String key = ("newscenter_" + System.currentTimeMillis());
+		Page<TbNewsCenter> newscenters = TbNewsCenter.dao.paginateCache(cacheName, key, paginator, "select * " //
+				, " from tb_newscenter " //
+						+ " where status = 1 " // 查询状态为显示
+						+ " and album_id =  ? " //
+						+ " order by update_time desc", albumId);
+		return newscenters;
+	}
 	/**
 	 * 查询图片
 	 *

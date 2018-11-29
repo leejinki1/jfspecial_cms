@@ -132,21 +132,21 @@ public class PolicyPublishController extends BaseProjectController {
 			model.setCreateId(getSessionUser().getUserid());
 			model.setUpdateId(getSessionUser().getUserid());
 			model.setCreateTime(getNow());
-			model.setIsDrafts("0");//0=发布;1=草稿箱
+		//	model.setIsDrafts("0");//0=发布;1=草稿箱
 
 			//上传图片(未完成)
 			System.out.println("输出1此"+model);
 			//判断图片是否上传
-			UploadFile uploadImage=null;//声明上传文件
+	//		UploadFile uploadImage=null;//声明上传文件
 			//System.out.println("文件名"+uploadImage.getFileName());
-			try{
-				uploadImage = getFile("model.image_url","logo", FileUploadUtils.UPLOAD_MAX,"utf-8");
-			}catch(Exception exception){
-				System.out.println("路径错误");
-			}
-			if(uploadImage!=null){
-				model.setImageUrl("\\logo\\"+uploadImage.getFileName());
-			}
+		//	try{
+		//		uploadImage = getFile("model.image_url","logo", FileUploadUtils.UPLOAD_MAX,"utf-8");
+		//	}catch(Exception exception){
+		//		System.out.println("路径错误");
+	//		}
+		//	if(uploadImage!=null){
+		//		model.setImageUrl("\\logo\\"+uploadImage.getFileName());
+		//	}
 			//System.out.println("输出2此"+model);
 
 			model.save();
