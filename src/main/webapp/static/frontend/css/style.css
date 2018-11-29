@@ -3147,16 +3147,4 @@ h2.typoh2{
 	}
 }
 
-/**************附加*****************/
-.mymokuai2{margin-top: 5rem;}
-.more{}
-.myjiaul{padding: 0px;}
-.myjiaul li{list-style-type: none;text-align: center;font-size: 13px;}
-.myjiaul li a{display: flex;justify-content: space-between;}
-.more{text-align: center;margin-top:5rem;}
-ul li{list-style: none;}
 
-/*.centerBox{border: 2px orangered solid;}
-.centerBox-left-c1,.centerBox-left-c2{border: 1px solid;}
-.centerBox-right-c1,.centerBox-right-c2{border: 1px solid;}*/
-.pageBtnList{text-align: center;}

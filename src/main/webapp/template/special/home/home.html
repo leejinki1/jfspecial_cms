@@ -137,6 +137,32 @@ var addoils=tempAddOil.alter_addoils(1,5);
 					</button>
 					<h1><a class="navbar-brand" href="index.html"><span>科技</span>特派员创业扶贫联盟平台</a></h1>
 				</div>
+				<!--暂时放这 -->
+				<style>
+					/*.header *{border: 1px white solid;}*/
+					.loginAndregister{color: white;line-height: 50px;text-align: right;}
+					.loginAndregister a{color: #ffc400;text-decoration:none;}
+					.loginAndregister a:hover{color: #e2cd87;}
+					.userBox{display: none;}
+					/*.lgLink,.userBox{border: 1px white solid;}*/
+				</style>
+				<div class="loginAndregister">
+					<% if(isEmpty(session.session_user)){ %>
+					<div class="lgLink">
+						<a href="login.html">登 录</a>&nbsp;
+						<a href="front/regist.html">注 册</a>
+					</div>
+					<% } else { %>
+					<div class="userBox">
+						<p>
+							<span class="glyphicon glyphicon-user" aria-hidden="false"></span>
+							${session.session_user.realname}&nbsp;<a href="${BASE_PATH }front/logout">注 销</a>
+						</p>
+					</div>
+					<% } %>
+				</div>
+
+
 				<!-- 收集的导航链接，和其他形式的内容，锁定 -->
 				<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
@@ -150,20 +176,14 @@ var addoils=tempAddOil.alter_addoils(1,5);
 						<li class="hvr-bounce-to-bottom"><a href="spp.html" />科普板块</a></li>
 						<li class="hvr-bounce-to-bottom"><a href="projectapp.html" />项目申报</a></li>
 						<li class="hvr-bounce-to-bottom"><a href="addoil.html" />帮扶企业</a></li>
-						<!--<li class="hvr-bounce-to-bottom"><a href="front/regist.html">注册</a></li>-->
-						<% if(isEmpty(session.session_user)){ %>
-						<li class="hvr-bounce-to-bottom"><a href="login.html">登录/注册</a></li>
-						<% } else { %>
-						<li class="hvr-bounce-to-bottom"><a href="${BASE_PATH }front/logout">${session.session_user.realname}/退出</a></li>
-						<% } %>
-						<li class="hvr-bounce-to-bottom"><a href="contactus.html" />联系我们</a></li>
+						<li class="hvr-bounce-to-bottom"><a href="contactus.html">联系我们</a></li>
 					</ul>
 				</div><!-- //navbar-collapse -->
 			</nav>
 		</div>
 	</div>
 </div>
-<!-- //header -->
+<!-- header END-->
 <!-- banner -->
 <div class="banner">
 	<!-- Slider-starts-Here -->
@@ -358,51 +378,48 @@ var addoils=tempAddOil.alter_addoils(1,5);
 			<li class="hc-foot"><a href="addoil.html">浏览更多</a></li>
 		</ul>
 	</div>
-	<!-- footer -->
-	<div class="footer">
-		<div class="container">
-			<div class="footer-agileitsrow">
-				<!--<div class="col-md-3 footer-grid">
-					<h3>临时演员</h3>
-					<p>[医]金红花，[医]金红花[NS][NS]。[医]小叶蝉。佩列斯克征服了达官贵人。</p>
-				</div>-->
-				<div class="col-md-3 footer-grid">
-					<h3> 社会化媒体</h3>
-					<ul>
-						<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i> qq</a></li>
-						<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i> 微信</a></li>
-						<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i> 邮箱</a></li>
-						<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i> 官网</a></li>
-					</ul>
-				</div>
-				<div class="col-md-3 footer-grid">
-					<h3>有用信息</h3>
-					<ul>
-						<li><a href="index.html">首页</a></li>
-						<li><a href="about.html">关于</a></li>
-						<li><a href="index.html">博客</a></li>
-						<li><a href="contact.html">接触</a></li>
-					</ul>
-				</div>
-				<div class="col-md-3 footer-grid">
-					<h3>联系我们</h3>
-					<p>玉林市科技局</p>
-					<div class="footer-grid-address">
-						<p>电话.800-255-9999</p>
-						<p>传真: 1234 568</p>
-						<p>邮箱: <a class="email-link" href="mailto:info@example.com">Example.com</a></p>
-					</div>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>
-	<div class="copy-right">
-		<p>玉林市科技局所有 &copy; 桂公网安备 31011502002267号</p>
+<!-- footer -->
+<div class="footer">
+	<style>
+		/*.footer *{border: 1px white solid;}*/
+		.footerList{display: flex;flex-wrap: wrap;justify-content: space-around;align-items: center;
+		color: white;}
+
+		.footerList ul li{padding: 5px;font-weight: 300;}
+		.footerList ul li a{text-decoration: none;color:whitesmoke}
+		.footerList ul li a:hover{color:#efb3e7c7;}
+		.footerList ul li:nth-child(1){color: #ffc400;font-size: 16px;font-weight: 900;}
+	</style>
+	<div class="footerList">
+		<ul>
+			<li>社会化媒体</li>
+			<li><a href="#">QQ</a></li>
+			<li><a href="#">微信</a></li>
+			<li><a href="#">邮箱</a></li>
+			<li><a href="#">官网</a></li>
+		</ul>
+		<ul>
+			<li>网站信息</li>
+			<li><a href="#">首页</a></li>
+			<li><a href="#">关于</a></li>
+			<li><a href="#">博客</a></li>
+			<li><a href="#">接触</a></li>
+		</ul>
+		<ul>
+			<li>联系我们</li>
+			<li><a href="#">玉林市科技局</a></li>
+			<li>电话：<span>800-255-9999</span></li>
+			<li>传真：<span>1234 568</span></li>
+			<li>邮箱：<span>example.com</span></li>
+		</ul>
 	</div>
 
-	<!-- //footer -->
-	<!-- start-smooth-scrolling -->
+</div><!--footer END-->
+<div class="copy-right">
+	<p>玉林市科技局所有 &copy; 桂公网安备 31011502002267号</p>
+</div>
+
+<!-- start-smooth-scrolling -->
 	<script type="text/javascript" src="${BASE_PATH }static/frontend/js/move-top.js"></script>
 
 	<script type="text/javascript">
