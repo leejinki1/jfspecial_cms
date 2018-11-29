@@ -126,13 +126,13 @@ public class SppPublishController extends BaseProjectController {
 			model.setIsComment(1); // 能评论
 			model.setIsRecommend(2);// 不推荐
 			model.setSort(20); // 排序
-			model.set("approve_status", ArticleConstant.APPROVE_STATUS_PASS); // 需要审核改为update
+			model.set("approve_status", ArticleConstant.APPROVE_STATUS_UPDATE); // 需要审核改为update
 			model.setPublishTime(DateUtils.getNow("yyyy-MM-dd")); // 发布时间
 			model.setPublishUser(user.getUserName()); // 发布人
 			model.setCreateId(getSessionUser().getUserid());
 			model.setUpdateId(getSessionUser().getUserid());
 			model.setCreateTime(getNow());
-			model.setIsDrafts("0");//0=发布;1=草稿箱
+			model.setIsDraft("0");//0=发布;1=草稿箱
 
 			//上传图片(未完成)
 			System.out.println("输出1此"+model);
@@ -213,8 +213,8 @@ public class SppPublishController extends BaseProjectController {
 			model.setIsComment(1); // 能评论
 			model.setIsRecommend(2);// 不推荐
 			model.setSort(20); // 排序
-			model.setIsDrafts("1");//0=发布;1=草稿箱
-			model.set("approve_status", ArticleConstant.APPROVE_STATUS_PASS); // 需要审核改为update
+			model.setIsDraft("1");//0=发布;1=草稿箱
+			//model.set("approve_status", ArticleConstant.APPROVE_STATUS_UPDATE); // 需要审核改为update
 			model.setPublishTime(DateUtils.getNow("yyyy-MM-dd")); // 发布时间
 			model.setPublishUser(user.getUserName()); // 发布人
 			model.setCreateId(getSessionUser().getUserid());

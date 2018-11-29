@@ -33,7 +33,7 @@ public class TbAddOil extends BaseProjectModel<TbAddOil> {
 	private String CREATE_TIME = "create_time"; // 创建时间
 	private String CREATE_ID = "create_id"; // 创建者
 	private String CONTENT = "content"; // 正文
-	private String IS_DRAFTS = "is_drafts"; // 是否保存到草稿箱:0 否 1 是
+	private String IS_DRAFT= "is_draft"; // 是否保存到草稿箱:0 否 1 是
 	private String APPROVE_STATUS = "approve_status"; // 是否保存到草稿箱:0 否 1 是
 
 	public TbAddOil setApproveStatus(String value) {
@@ -45,13 +45,13 @@ public class TbAddOil extends BaseProjectModel<TbAddOil> {
 		return get(APPROVE_STATUS);
 	}
 
-	public TbAddOil setIsDrafts(String value) {
-		set(IS_DRAFTS, value);
+	public TbAddOil setIsDraft(String value) {
+		set(IS_DRAFT, value);
 		return this;
 	}
 
-	public String getIsDrafts() {
-		return get(IS_DRAFTS);
+	public String getIsDraft() {
+		return get(IS_DRAFT);
 	}
 
 	public TbAddOil setContent(String value) {

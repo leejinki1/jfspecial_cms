@@ -32,7 +32,7 @@ public class TbProjectApp extends BaseProjectModel<TbProjectApp> {
 	private String UPDATE_TIME = "update_time"; // 更新时间
 	private String UPDATE_ID = "update_id"; // 创建者
 	private String CREATE_TIME = "create_time"; // 创建时间
-	private String IS_DRAFTS = "is_drafts"; // 是否保存到草稿箱:0 否 1 是
+	private String IS_DRAFT = "is_draft"; // 是否保存到草稿箱:0 否 1 是
 	private String APPROVE_STATUS = "approve_status"; // 是否保存到草稿箱:0 否 1 是
 
 	public TbProjectApp setApproveStatus(String value) {
@@ -44,13 +44,13 @@ public class TbProjectApp extends BaseProjectModel<TbProjectApp> {
 		return get(APPROVE_STATUS);
 	}
 
-	public TbProjectApp setIsDrafts(String value) {
-		set(IS_DRAFTS, value);
+	public TbProjectApp setIsDraft(String value) {
+		set(IS_DRAFT, value);
 		return this;
 	}
 
-	public String getIsDrafts() {
-		return get(IS_DRAFTS);
+	public String getIsDraft() {
+		return get(IS_DRAFT);
 	}
 
 	@Override

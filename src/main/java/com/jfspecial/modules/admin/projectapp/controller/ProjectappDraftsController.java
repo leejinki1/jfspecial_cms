@@ -35,7 +35,7 @@ public class ProjectappDraftsController extends BaseProjectController {
 
 	//显示保存的草稿
 	public void index() {
-		String sql = "select t.id,t.name,t.publish_user, t.update_time from tb_projectapp t where  status = 1 and is_drafts = 1 order by sort,id desc";
+		String sql = "select t.id,t.name,t.publish_user, t.update_time from tb_projectapp t where  status = 1 and is_draft = 1 order by sort,id desc";
 		List<TbProjectApp> lists = TbProjectApp.dao.find(sql);
 		setAttr("lists", lists);
 		render(path+".html");

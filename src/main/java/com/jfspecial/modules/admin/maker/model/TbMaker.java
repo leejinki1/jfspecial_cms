@@ -34,7 +34,7 @@ public class TbMaker extends BaseProjectModel<TbMaker> {
 	private String CREATE_TIME = "create_time"; // 创建时间
 	private String CREATE_ID = "create_id"; // 创建者
 	private String CONTENT="content";//内容;2018.11.27zr添加
-	private String IS_DRAFTS = "is_drafts"; // 是否保存到草稿箱:0 否 1 是
+	private String IS_DRAFT = "is_draft"; // 是否保存到草稿箱:0 否 1 是
 	private String APPROVE_STATUS = "approve_status"; // 是否保存到草稿箱:0 否 1 是
 
 	public TbMaker setApproveStatus(String value) {
@@ -46,13 +46,13 @@ public class TbMaker extends BaseProjectModel<TbMaker> {
 		return get(APPROVE_STATUS);
 	}
 
-	public TbMaker setIsDrafts(String value) {
-		set(IS_DRAFTS, value);
+	public TbMaker setIsDraft(String value) {
+		set(IS_DRAFT, value);
 		return this;
 	}
 
-	public String getIsDrafts() {
-		return get(IS_DRAFTS);
+	public String getIsDraft() {
+		return get(IS_DRAFT);
 	}
 
 	public TbMaker setId(Integer value) {
