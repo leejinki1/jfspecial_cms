@@ -2,8 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!--创客/审核-->
 <script type="text/javascript">
-function oper_delete(id) {
-		location.href="maker_approve/delArticle/"+id;
+<!--审核通过-->
+function oper_pass(id) {
+		location.href="maker_approve/passArticle/"+id;
+		return false;
+	}
+<!--审核退回-->
+function oper_reject(id) {
+		location.href="maker_approve/rejectArticle/"+id;
 		return false;
 	}
 </script>
@@ -274,7 +280,7 @@ function oper_delete(id) {
 							</thead>
 							<!--盒马CEO就上海“标签门”致歉，宣布免去上海区总经理职务--在瑞幸们的围剿之下，为什么说涨价是星巴克最错误的战略决策？-->
 							<tbody>
-							 	<tr>
+							 	<!--<tr>
 							 		<td>1</td>
 							 		<td>鸡蛋10块钱一斤</td>
 							 		<td>狗蛋</td>
@@ -283,7 +289,7 @@ function oper_delete(id) {
 							 			<a class="waves-effect waves-light btn">通过</a>&nbsp;
 							 			<a class="waves-effect waves-light btn">退回</a>
 							 		</td>
-							 	</tr>
+							 	</tr>-->
 								<% for(item in lists){ %>
 								<tr>
 									<td>${itemLP.index}</td>
@@ -291,7 +297,8 @@ function oper_delete(id) {
 									<td>${item.publish_user}</td>
 									<td>${item.update_time}</td>
 									<td>
-										<a class="waves-effect waves-light btn" onclick="oper_delete(${item.id!'0'});">删除</a>
+										<a class="waves-effect waves-light btn" onclick="oper_pass(${item.id!'0'});">通过</a>&nbsp;
+										<a class="waves-effect waves-light btn" onclick="oper_reject(${item.id!'0'});">退回</a>
 									</td>
 								</tr>
 								<% } %>
@@ -302,7 +309,8 @@ function oper_delete(id) {
                                          <td>${itemLP.index}</td>
                                          <td>${item.name}</td>
                                          <td>${item.update_time}</td>
-                                             <a class="waves-effect waves-light btn" onclick="oper_delete(${item.id!'0'});">删除</a>
+                                             <a class="waves-effect waves-light btn" onclick="oper_pass(${item.id!'0'});">通过</a>&nbsp;
+										<a class="waves-effect waves-light btn" onclick="oper_reject(${item.id!'0'});">退回</a>
                                          </td>
                                      </tr>
                                 <% } %>-->

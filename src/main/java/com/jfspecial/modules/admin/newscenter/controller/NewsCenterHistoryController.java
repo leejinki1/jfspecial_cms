@@ -36,7 +36,7 @@ public class NewsCenterHistoryController extends BaseProjectController {
 	@Before(FrontInterceptor.class)
 	public void index() {
 		System.out.println("进入方法index");
-		String sql = "select t.id,t.name,t.publish_user, t.update_time from tb_newscenter t where  status = 1 and is_drafts=0 order by sort,id desc";
+		String sql = "select t.id,t.name,t.publish_user, t.update_time from tb_newscenter t where  status = 1 and approve_status = 10 order by sort,id desc";
 		List<TbNewsCenter> lists = TbNewsCenter.dao.find(sql);
 		setAttr("lists", lists);
 		render(path+".html");//先反回主页,待补充

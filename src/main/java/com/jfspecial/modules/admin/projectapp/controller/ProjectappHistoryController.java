@@ -35,7 +35,8 @@ public class ProjectappHistoryController extends BaseProjectController {
 
 	@Before(FrontInterceptor.class)
 	public void index() {
-		String sql = "select t.id,t.name,t.publish_user, t.update_time from tb_projectapp t where  status = 1  and is_drafts=0 order by sort,id desc";
+		String sql = "select t.id,t.name,t.publish_user, t.update_time from tb_projectapp t where  status = 1 and approve_status=10 order by sort,id desc";
+		//历史===已发布(approve.status=pass)===不在草稿(is_draft=0)
 		List<TbProjectApp> lists = TbProjectApp.dao.find(sql);
 		setAttr("lists", lists);
 		render(path+".html");//先反回主页,待补充
@@ -44,6 +45,7 @@ public class ProjectappHistoryController extends BaseProjectController {
 	/**
 	 * del  article
 	 *	删除
+	 *	未完成功能:1.判断权限,是否能删
 	 * 2018年11月27日 下午9:53:04 ljk
 	 */
 	@Before(FrontInterceptor.class)
