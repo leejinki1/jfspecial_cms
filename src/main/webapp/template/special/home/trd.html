@@ -21,8 +21,24 @@
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
     <!-- //web-font -->
     <script>
+	$(function() {
+		// 回车绑定查询按钮
+		$('[name="search_header"]').on('keydown', function (e) {
+	        var key = e.which;
+	        if (key == 13 ) {
+	            e.preventDefault();
+	            search_form.action =  "front/trd_tags/"+ $('[name="search_header"]').val();
+	    		search_form.submit();
+	        }
+	    });
 
-    </script>
+		$('#search_btn').on('click', function (e) {
+			search_form.action =  "front/trd_tags/"+ $('[name="search_header"]').val();
+			search_form.submit();
+	    });
+
+	});
+	</script>
 </head>
 <body>
 <!-- header -->
@@ -54,10 +70,10 @@
                 var page;
                 if(!isEmpty(session.albumId)) {
                 var albumId= session.albumId;
-                page = tempTrd.alter_trds(1, 10, parseInt(albumId));
+                page = tempTrd.alter_trds(paginator.pageNo, 10, parseInt(albumId));
                 }
                 else{
-                page = tempTrd.alter_trds(1, 10);
+                page = tempTrd.alter_trds(paginator.pageNo, 10);
                 }
                 %>
                 <!--文章列表-->

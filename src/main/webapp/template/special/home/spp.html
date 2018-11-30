@@ -54,10 +54,10 @@
                 var page;
                 if(!isEmpty(session.albumId)) {
                 var albumId= session.albumId;
-                page = tempSpp.alter_spps(1, 10, parseInt(albumId));
+                page = tempSpp.alter_spps(paginator.pageNo, 10, parseInt(albumId));
                 }
                 else{
-                page = tempSpp.alter_spps(1, 10);
+                page = tempSpp.alter_spps(paginator.pageNo, 10);
                 }
                 %>
                 <!--文章列表-->

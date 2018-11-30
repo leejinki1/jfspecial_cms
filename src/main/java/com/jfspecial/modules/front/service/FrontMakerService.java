@@ -94,6 +94,18 @@ public class FrontMakerService extends BaseService {
 						+ " order by update_time desc", albumId);
 		return makers;
 	}
+	public Page<TbMaker> timeMaker(Paginator paginator, int albumId) {
+		String key = ("maker_" + System.currentTimeMillis());
+		//String wheresql;
+		//if (albumId==1) {
+		//	wheresql=
+		Page<TbMaker> makers = TbMaker.dao.paginateCache(cacheName, key, paginator, "select * " //
+				, " from tb_maker " //
+						+ " where status = 1 " // 查询状态为显示
+						+ " and album_id =  ? " //
+						+ " order by update_time desc", albumId);
+		return makers;
+	}
 	/**
 	 * 查询图片
 	 *

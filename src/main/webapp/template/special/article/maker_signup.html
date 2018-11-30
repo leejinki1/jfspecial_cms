@@ -27,18 +27,37 @@
 	        var key = e.which;
 	        if (key == 13 ) {
 	            e.preventDefault();
-	            search_form.action =  "front/maker_tags/"+ $('[name="search_header"]').val();
+	            search_form.action =  "../../../front/maker_tags/"+ $('[name="search_header"]').val();
 	    		search_form.submit();
 	        }
 	    });
 
 		$('#search_btn').on('click', function (e) {
-			search_form.action =  "front/maker_tags/"+ $('[name="search_header"]').val();
+			search_form.action =  "../../../front/maker_tags/"+ $('[name="search_header"]').val();
 			search_form.submit();
 	    });
 
 	});
 	</script>
+    <script type="text/javascript">
+
+	function oper_save() {
+		var realname = $('[name="realname"]').val();
+		if(realname==''){
+			alert('姓名不能为空！');
+			return;
+		}
+		var contact = $('[name="contact"]').val();
+		if(contact==''){
+			alert('联系方式不能为空！');
+			return;
+		}
+		form1.action = "front/maker/signup/save/"+form1["model.id"].value;
+		form1.submit();
+		return true;
+	}
+
+</script>
 </head>
 <body>
 <!-- header -->
@@ -54,7 +73,8 @@
             <div class="centerBox-left-c1">
                 <% include("/template/special/includes/makeralbumlist.html"){} %>
             </div>
-            <div class="centerBox-left-c2"></div>
+            <div class="centerBox-left-c2">
+            </div>
         </div>
         <!--中间--右边-->
         <div class="centerBox-right col-md-8 col-sm-8 col-xs-12">
@@ -65,6 +85,8 @@
                     <button class="btn btn-warning btn-xs" disabled="disabled">创客活动</button>
                     <img src='${BASE_PATH }static/frontend/images/rightImg.png'/>
                     <button class="btn btn-warning btn-xs" disabled="disabled">最新活动</button>
+                    <img src='${BASE_PATH }static/frontend/images/rightImg.png'/>
+                    <button class="btn btn-warning btn-xs" disabled="disabled">正文</button>
                 </p>
                 <div class="container-fluid">
                     <div class="row">
@@ -81,25 +103,58 @@
                     </div>
                 </div>
             </div>
+            <div class="centerBox-right-c2">            </div>
+            <div class="centerBox-right-c3">
+                <form class="form-horizontal" name="form1" action="" method="post"style="margin:5px 0px;">
+                    <input type="hidden" name="pre_page" value="${pre_page!'' }" />
+                    <div class="form-group">
+                        <label for="realname" class="col-sm-3 control-label">姓名</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="model.realname" id="realname"  placeholder="请输入姓名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact" class="col-sm-3 control-label">联系方式</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="contact" name="model.contact"placeholder="请输入联系方式">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inlineRadio1" class="col-sm-3 control-label">性别</label>
+                        <div class="col-sm-9">
+                            <label class="radio-inline">
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked="checked"> 男
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 女
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-3 control-label">邮箱</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="model.email" id="email"placeholder="请输入邮箱">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="remark" class="col-sm-3 control-label">备注 </label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" rows="6" name="model.remark" id="remark"placeholder="..."></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="submit" class="btn btn-default btn-md" value="提 交" onclick="oper_save();">&nbsp;
+                                    <input class="btn btn-default btn-md" type="reset" value="重 置" >
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
 
-            <div class="centerBox-right-c2">
-                <% var defalutimg= 'static/front/images/news.jpg';%>
-                <% //var page=tempMaker.alter_makers(paginator.pageNo,10);%>
-                <%
-                var page;
-                if(!isEmpty(session.albumId)) {
-                var albumId= session.albumId;
-                //page = tempMaker.alter_makers(paginator.pageNo, 10, parseInt(albumId));
-                page = tempMaker.alter_makers(paginator.pageNo, 10);
-                }
-                else{
-                page = tempMaker.alter_makers(paginator.pageNo, 10);
-                }
-                %>
-                <!--文章列表-->
-                <% include("/template/special/includes/makerlist.html",{articlelist:page,defalutimg:defalutimg!''}){} %>
             </div>
-            <div class="centerBox-right-c3"></div>
         </div>
     </div>
 
@@ -113,7 +168,7 @@
 <script type="text/javascript" src="${BASE_PATH }static/frontend/js/move-top.js"></script>
 <script type="text/javascript" src="${BASE_PATH }static/frontend/js/easing.js"></script>
 <script type="text/javascript" src="${BASE_PATH }static/frontend/js/jquery-1.11.1.min.js" ></script>
-<script type="text/javascript" src="${BASE_PATH }static/frontend/js/maker/chuangkehuodong.js" ></script>
+<script type="text/javascript" src="${BASE_PATH }static/frontend/js/maker/article.js" ></script>
 
 <script type="text/javascript">
 			jQuery(document).ready(function($) {
