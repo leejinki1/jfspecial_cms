@@ -172,6 +172,88 @@ function oper_savedraft(id) {
 
 		return false;
 }
+
+<!--新增分类 11.30-->
+function oper_addAlbum(id){
+	<!--新分类名称-->
+	var name=$("#albumname").val();
+	if(name==''){
+		return false;
+	}
+
+	<!--ajax新增-->
+	jQuery.ajax({
+	type:'POST',
+			url:'policyalbum/addAlbum/'+id,
+			data:$("#form1").serialize(),
+			success:function(data){
+			if(data.status==1){
+					alert('发布成功');
+						<!--模态框中新增补充代码-->
+					$('#modal_tobody').append(data.modal);
+						<!--下拉列表中新增代码段-->
+					$('#select').append(data.option);
+						<!--清空输入框内容-->
+					$('#albumname').val('');
+				} else {
+					alert('发布失败：'+data.msg);
+				}
+			},
+			error:function(html){
+				var flag = (typeof console != 'undefined');
+				if(flag) console.log("服务器忙，提交数据失败，代码:" +html.status+ "，请联系管理员！");
+				alert("服务器忙，提交数据失败，请联系管理员！");
+			}
+		});
+}
+
+<!--删除分类 11.30-->
+function oper_delAlbum(id){
+
+<!--ajax删除-->
+<!--$("#form2").serialize()-->
+	jQuery.ajax({
+	type:'POST',
+			url:'policyalbum/delAlbum/'+id,
+			data:'',
+			success:function(data){
+			if(data.status==1){
+					alert('删除成功');
+						<!--页面上移除删除的分类-->
+					$('#modal'+id+'').html('');
+						<!--移除下拉列表中的分类-->
+					$('#option'+id+'').css('display','none');
+				} else {
+					alert('删除失败：'+data.msg);
+				}
+			},
+			error:function(html){
+				var flag = (typeof console != 'undefined');
+				if(flag) console.log("服务器忙，提交数据失败，代码:" +html.status+ "，请联系管理员！");
+				alert("服务器忙，提交数据失败，请联系管理员！");
+			}
+		});
+}
+
+
+
+<!--显示隐藏框-->
+function opendiv(){
+	var display=$('#hiddendiv').css('display');
+	if(display=='none'){
+		$('#hiddendiv').css('display','block');
+		$('#displaybutton').text('点击关闭分类编辑');
+	}else{
+		$('#hiddendiv').css('display','none');
+		$('#displaybutton').text('点击编辑分类');
+	}
+}
+
+<!--鼠标离开,关闭编辑分类框-->
+function closediv(){
+		$('#hiddendiv').css('display','none');
+		$('#displaybutton').text('点击编辑分类');
+}
 </script>
 <head>
     <meta charset="utf-8" />
@@ -411,10 +493,10 @@ function oper_savedraft(id) {
                 	政策法规信息
         </h1>
 	    <ol class="breadcrumb">
-			<li><a href="#">首页</a></li>
-			<li><a href="#">政策法规 </a></li>
-			<li><a href="#">政策法规信息 </a></li>
-			<li class="active">Data</li>
+			<li><a href="../admin">首页</a></li>
+			<li><a href="policy_publish">政策法规 </a></li>
+			<li><a href="policy_publish">政策法规信息 </a></li>
+			<!--<li class="active">Data</li>-->
 		</ol> 							
 	</div>
 		<!--666-->
@@ -427,7 +509,7 @@ function oper_savedraft(id) {
                             	发布新闻
                     </div>
 					<div class="card-content">
-						<form class="form-horizontal" name="form1" action="" method="post">
+						<form class="form-horizontal" name="form1" action="" method="post" id="form1">
 							<input type="hidden" name="model.id" class="form-control" id="model.id"
 								   value="${model.id!'0'}">
 							<div class="row">
@@ -435,7 +517,7 @@ function oper_savedraft(id) {
 								<div class="form-group">
 									<label for="model.album_id" class="col-sm-2 control-label">栏目</label>
 									<div class="col-sm-10" >
-										<select  class="form-control" name="model.album_id">
+										<select  class="form-control" name="model.album_id" id="select">
 											<option value="-1">--请选择栏目--</option>
 											<%  //var albums=tempTrd.albums();
 											if(!isEmpty(albums)) {
@@ -446,6 +528,32 @@ function oper_savedraft(id) {
 											}
 											%>
 										</select>
+										<!--<button data-toggle="modal" data-target="#myModal">新增分类</button>-->
+										<button id="displaybutton" onclick="opendiv();return false;">点击编辑分类</button>
+										<!--隐藏div  代替模态框-->
+										<div id="hiddendiv" onmouseleave="closediv();return false;" style="display:none;">
+											<div class="modal-body">
+												<input id="albumname" type="text" name="albumname" placeholder="输入新分类的名称">
+												<input type="button" value="确认增加" onclick="oper_addAlbum('0');return false;">
+											</div>
+											<!--&lt;!&ndash;显示原来的分类&ndash;&gt;-->
+											<div class="modal-body">
+												<table>
+													<thead>
+													<th>分类名称</th>
+													<th>删除</th>
+													</thead>
+													<tbody id="modal_tobody">
+													<%for(item in albums){ %>
+													<tr id="modal${item.id}">
+														<td>${item.name}</td>
+														<td><a onclick="oper_delAlbum(${item.id!'0'});return false;" aria-hidden="true">删除</a></td>
+													</tr>
+													<%}%>
+													</tbody>
+												</table>
+											</div>
+										</div>
 									</div>
 								</div>
 								<!--标题-->

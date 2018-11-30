@@ -1,11 +1,13 @@
 package com.jfspecial.modules.admin.policy.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfspecial.component.base.BaseProjectController;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
 import com.jfspecial.jfinal.component.db.SQLUtils;
 import com.jfspecial.modules.admin.policy.model.TbPolicy;
 import com.jfspecial.modules.admin.policy.model.TbPolicyAlbum;
+import com.jfspecial.system.user.SysUser;
 import com.jfspecial.util.StrUtils;
 
 import java.util.List;
@@ -19,133 +21,97 @@ public class PolicyalbumController extends BaseProjectController {
 
 	private static final String path = "/pages/admin/policyalbum/policyalbum_";
 
-	public void list() {
-		TbPolicyAlbum model = getModelByAttr(TbPolicyAlbum.class);
-
-		SQLUtils sql = new SQLUtils(" from tb_policy_album t "
-				+ " left join tb_policy_album f  on f.id = t.parent_id  where 1=1 ");
-		if (model.getAttrValues().length != 0) {
-			sql.setAlias("t");
-			sql.whereLike("name", model.getStr("name"));
-			sql.whereEquals("status", model.getInt("status"));
-		}
-
-		// 排序
-		String orderBy = getBaseForm().getOrderBy();
-		if (StrUtils.isEmpty(orderBy)) {
-			sql.append(" order by t.sort,t.id desc");
-		} else {
-			sql.append(" order by t.").append(orderBy);
-		}
-				
-		Page<TbPolicyAlbum> page = TbPolicyAlbum.dao.paginate(getPaginator(), "select t.*,f.name as parentName ", //
-				sql.toString().toString());
-
-		// 下拉框
-		setAttr("page", page);
-		setAttr("attr", model);
-		render(path + "list.html");
-	}
-
-	public void add() {
-		setAttr("selectParentFolder", selectParentFolder(0, 0));
-		
-		render(path + "add.html");
-	}
-
-	public void view() {
-		TbPolicyAlbum model = TbPolicyAlbum.dao.findById(getParaToInt());
-		
-		TbPolicyAlbum album = TbPolicyAlbum.dao.findById(model.getParentId());
-		model.put("parentName", album != null ? album.getName() : null);
-		
-		setAttr("model", model);
-		render(path + "view.html");
-	}
-
-	public void delete() {
-		// 日志添加
-		TbPolicyAlbum model = new TbPolicyAlbum();
-		Integer userid = getSessionUser().getUserid();
-		String now = getNow();
-		model.put("update_id", userid);
-		model.put("update_time", now);
-		model.deleteById(getParaToInt());
-				
-		list();
-	}
-	
 	/**
-	 * Iframe删除
+	 * 2018.11.30 ZR 新增分类
 	 */
-	public void del() {
-		int id = getParaToInt();
-		TbPolicy imag = TbPolicy.dao.findFirstByWhere(" where album_id = ? ", id);
-		if (imag != null) {
-			renderMessage("相册下存在图片，不能删除");
+	public void addAlbum() {
+		//ajax返回参数设置
+		JSONObject json = new JSONObject();
+		json.put("status", 2);// 失败
+
+		//验证登陆--------------------------------判断用户权限
+		SysUser user = (SysUser) getSessionUser();
+		if (user == null) {
+			json.put("msg", "没有登录，不能提交文章！");
+			renderJson(json.toJSONString());
 			return;
 		}
-		
-		// 日志添加
-		TbPolicyAlbum model = new TbPolicyAlbum();
-		Integer userid = getSessionUser().getUserid();
-		String now = getNow();
-		model.put("update_id", userid);
-		model.put("update_time", now);
-		model.deleteById(id);
-				
-		renderMessage("删除成功");
-	}
 
-	public void edit() {
-		TbPolicyAlbum model = TbPolicyAlbum.dao.findById(getParaToInt());
-		setAttr("model", model);
-		
-		// 下拉框
-		setAttr("selectParentFolder", selectParentFolder(model.getParentId(), model.getId()));
-				
-		render(path + "edit.html");
-	}
-
-	public void save() {
+		//获取参数
 		Integer pid = getParaToInt();
-		TbPolicyAlbum model = getModel(TbPolicyAlbum.class);
-		
+		TbPolicyAlbum model = new TbPolicyAlbum();
+		String sql1="select max(id) id from tb_addoil_album t";
+		model=TbPolicyAlbum.dao.findFirst(sql1);
+		Integer id=model.getId()+1;//获取原来数据库中最大id,加1,即是新的id
+		String name=getPara("albumname");
+		model.setName(name);
+
+
+		//设置修改人和修改时间
 		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
+
+
+		//保存数据库//只有新增,没有修改
 		if (pid != null && pid > 0) { // 更新
 			model.update();
 		} else { // 新增
-			model.remove("id");
+			//model.remove("id");
+			model.setId(id);//为了和页面中追加的id统一
 			model.put("create_id", userid);
 			model.put("create_time", now);
 			model.save();
 		}
-		renderMessage("保存成功");
+
+		/*ajax返回成功信号*/
+		json.put("status", 1);// 成功
+		//modal增加的代码
+		json.put("modal","<tr>" +
+				"<td>"+name+"</td>\n" +
+				"<td><a onclick=\"oper_delAlbum("+id+");return false\">删除</a></td>\n" +
+				"</tr>");
+		//option增加的代码
+		json.put("option","<option id=\"option"+id+"\" " +
+				"value=\""+id+"\" ${"+id+"==model.album_id!0?'selected':''} >"+name+"</option>");
+		renderJson(json.toJSONString());
 	}
-	
+
+
 	/**
-	 * 目录复选框
-	 * 
-	 * @return
+	 * 2018.11.30 ZR 删除分类
 	 */
-	private String selectParentFolder(Integer selected, Integer id) {
-		List<TbPolicyAlbum> list = TbPolicyAlbum.dao.find(" select id,name from tb_policy_album " //
-				+ " where id != ? order by sort,create_time desc ", id);
-		StringBuffer sb = new StringBuffer("");
-		if (list != null && list.size() > 0) {
-			for (TbPolicyAlbum album : list) {
-				sb.append("<option value=\"");
-				sb.append(album.getInt("id"));
-				sb.append("\" ");
-				sb.append(album.getInt("id") == selected ? "selected" : "");
-				sb.append(">");
-				sb.append(album.getStr("name"));
-				sb.append("</option>");
-			}
+	public void delAlbum() {
+		//ajax返回参数设置
+		JSONObject json = new JSONObject();
+		json.put("status", 2);// 失败
+
+		//验证登陆--------------------------------判断用户权限
+		SysUser user = (SysUser) getSessionUser();
+		if (user == null) {
+			json.put("msg", "没有登录，不能提交文章！");
+			renderJson(json.toJSONString());
+			return;
 		}
-		return sb.toString();
+
+		//获取参数
+		Integer pid = getParaToInt();//从路径中获取参数
+		//TbAddOilAlbum model = getModel(TbAddOilAlbum.class);//从前台获取参数
+		TbPolicyAlbum model = TbPolicyAlbum.dao.findById(pid);//从数据库获取信息
+
+		//判断分类下是否已有文章或内容
+		String sql="select * from tb_policy t where album_id="+pid;
+		List<TbPolicy> makers=TbPolicy.dao.find(sql);
+		if(makers.isEmpty()){
+			//保存数据库
+			model.delete();
+			/*ajax返回成功信号*/
+			json.put("status", 1);// 成功
+		}else{
+			json.put("msg","该分类下有文章,请先删除文章再来删除分类!");
+		}
+
+		renderJson(json.toJSONString());
 	}
 }
