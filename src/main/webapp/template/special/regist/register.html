@@ -1,46 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <% include("/template/includes/jquery.html"){} %>
-<script type="text/javascript">
-	function login() {
-		var username = $('[name="username"]').val();
-		if(username==''){
-			alert('用户名不能为空！');
-			return;
-		}
+<script type="text/javascript" src="${BASE_PATH }template/special/regist/show_regist.js"></script>
 
-		var pwd = $('[name="password"]').val();
-		if(pwd==''){
-			alert('密码不能为空！');
-			return;
-		}
-		var imageCode = $('[name="imageCode"]').val();
-		if(imageCode==''){
-			alert('验证码不能为空！');
-			return;
-		}
-		if(imageCode.length != 4){
-			alert('验证码输入错误！');
-			return;
-		}
-
-		form1.action = ${BASE_PATH }+ "login";
-		form1.submit();
-	}
-
-	function loadPicimageCode() {
-		document.getElementById("picimageCode").src = '${BASE_PATH }front/image_code?ran=' + Math.random();
-	}
-
-	<!-- jQuery 当键盘敲击【ENTER】键时，系统登录 -->
-	$(document).ready(function() {
-		$("body").keydown(function(event) {
-			if (event.which == 13) {
-				login();
-			}
-		});
-	});
-</script>
 <head>
 	<title>login</title>
 	<!-- meta-tags -->
@@ -123,31 +85,43 @@
 <div class="contact agileits-w3layouts">
 	<div class="container">
 		<div class="contact-w3layouts">
-			<h2>Login</h2>
+			<h2>Register</h2>
 			<div class="contact-agileinfo">
 				<div class="col-md-6 contact-wthree-left">
 					<!--	<iframe src="https://www.csdn.net/"></iframe>-->
 				</div>
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">登录</a></li>
+					<li role="presentation" class="active"><a href="#register" aria-controls="register" role="tab" data-toggle="tab">注册</a></li>
 				</ul>
 
 				<!-- Tab panes -->
+
 				<div class="tab-content">
-					<div role="tabpanel" class="tab-pane active" id="home">
+					<div role="tabpanel" class="tab-pane active" id="register">
 						<div class="col-md-7 contact-wthree-right" style="float: right;">
 							<div class="contact-w3-agileits">
-								<form  name="form1" action="" method="post">
+								<form  name="form1" action=""method="post">
 									<input type="hidden" name="pre_page" value="${pre_page!'' }" />
 
-									<input type="text" name="username" id="username" placeholder="手机号" required=""/>
-									<br />
-									<input type="text" name="password" id="password" placeholder="密码" required=""/>
-									<input type="text" name="imageCode" id="imageCode"placeholder="验证码" required=""/>
+									<input type="text" name="model.username"  id="model.username" placeholder="手机号" required=""/>
+									<input type="text" name="model.realname"  id="model.realname" placeholder="姓名" required=""/>
+									<select class="form-control" name="model.rolename"id="model.rolename">
+										<option>--请选择角色--</option>
+										<option value="农户">农户</option>
+										<option value="养殖户">养殖户</option>
+										<option value="手工户">手工户</option>
+										<option value="采购商">采购商</option>
+										<option value="贫困代表">贫困代表</option>
+									</select><br />
+									<input type="text" name="password" id="password"placeholder="密码" required=""/>
+									<input type="text" name="password2" id="password2" placeholder="确认密码" required=""/>
+									<!--<input type="text" name="Email" placeholder="手机验证码" required=""/>
+									<button class="btn btn-default">获取短信验证码</button>-->
+									<input type="text" name="imageCode"  id="imageCode"placeholder="验证码" required=""/>
 									<button class="btn btn-default"onclick="loadPicimageCode()">获取图形验证码</button>&nbsp;
-									<img id="picimageCode" width="100px" height="50px"src="${BASE_PATH }front/image_code"onclick="loadPicimageCode()"/>
-									<br/><input type="submit" value="确认"  onclick="login();"/>
+									<img id="picimageCode" src="${BASE_PATH }front/image_code" width="100px" height="50px"onclick="loadPicimageCode()"/>
+									<br/><input type="submit" value="注 册" onclick="oper_save();"/>
 									<input type="reset" value="重置" >
 								</form>
 							</div>
@@ -155,11 +129,14 @@
 						</div>
 					</div>
 				</div>
+
+
+
 			</div>
 		</div>
 	</div>
 </div>
-<!-- //contact -->.
+<!-- //contact -->
 <!-- footer -->
 <div class="footer">
 	<style>
@@ -200,6 +177,7 @@
 <div class="copy-right">
 	<p>玉林市科技局所有 &copy; 桂公网安备 31011502002267号</p>
 </div>
+
 <!-- start-smooth-scrolling -->
 <script type="text/javascript" src="${BASE_PATH }static/frontend/js/move-top.js"></script>
 <script type="text/javascript" src="${BASE_PATH }static/frontend/js/easing.js"></script>

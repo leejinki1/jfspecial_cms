@@ -1,11 +1,11 @@
 
-function reg_loadPicimageCode() {
-		document.getElementById("reg_picimageCode").src = jfspecial.BASE_PATH +  'front/image_code?ran=' + Math.random();
+function loadPicimageCode() {
+		document.getElementById("picimageCode").src = '../front/image_code?ran=' + Math.random();
 }
 
 function oper_save(){
-	var username = $('[name="model.reg_username"]').val();
-	var realname = $('[name="model.reg_realname"]').val();
+	var username = $('[name="model.username"]').val();
+	var realname = $('[name="model.realname"]').val();
 	if(username==''){
 		alert('手机号不能为空！');
 		return;
@@ -26,8 +26,8 @@ function oper_save(){
 		return;
 	}
 	
-	var pwd = $('[name="reg_password"]').val();
-	var pwd2 = $('[name="reg_password2"]').val();
+	var pwd = $('[name="password"]').val();
+	var pwd2 = $('[name="password2"]').val();
 	if(pwd==''){
 		alert('密码不能为空！');
 		return;
@@ -49,7 +49,8 @@ function oper_save(){
 		alert('两次密码不一致！');
 		return;
 	}
-	var imageCode = $('[name="reg_imageCode"]').val();
+
+	var imageCode = $('[name="imageCode"]').val();
 	if(imageCode==''){
 		alert('验证码不能为空！');
 		return;
@@ -61,21 +62,21 @@ function oper_save(){
 	
 	jQuery.ajax({
 		type:'POST',
-		url:jfspecial.BASE_PATH + 'front/regist/save',
+		url: '../front/regist/save',
 		data:$("form").serialize(),
 		success:function(data){
 			if(data.status==1){
 				alert('保存成功');
-				var prePage = $('[name="reg_pre_page"]').val();
+				var prePage = $('[name="pre_page"]').val();
 				if (prePage=='') {
 					prePage = "/";
 				}
 				window.top.location.href = prePage;
 			} else {
-				reg_loadPicimageCode();
-				$('[name="reg_imageCode"]').val('');
-				$('[name="reg_password"]').val('');
-				$('[name="reg_password2"]').val('');
+				loadPicimageCode();
+				$('[name="imageCode"]').val('');
+				$('[name="password"]').val('');
+				$('[name="password2"]').val('');
 				alert('保存失败：'+data.msg);
 			}
 		},

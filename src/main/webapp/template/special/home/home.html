@@ -147,23 +147,24 @@ var addoils=tempAddOil.alter_addoils(1,5);
 					/*.lgLink,.userBox{border: 1px white solid;}*/
 				</style>
 				<div class="loginAndregister">
-					<% if(isEmpty(session.session_user)){ %>
-					<div class="lgLink">
-						<a href="login.html">登 录</a>&nbsp;
-						<a href="front/regist.html">注 册</a>
-					</div>
+					<% if (isEmpty(session.session_user)){ %>
+						<div class="lgLink">
+							<a href="login.html">登 录</a>&nbsp;
+							<a href="front/regist.html">注 册</a>
+						</div>
 					<% } else { %>
-					<div class="userBox">
-						<p>
-							<span class="glyphicon glyphicon-user" aria-hidden="false"></span>
-							${session.session_user.realname}&nbsp;<a href="${BASE_PATH }front/logout">注 销</a>
-						</p>
-					</div>
+					    ${session.session_user.realname}&nbsp;<a href="${BASE_PATH }front/logout">注 销</a>
+						<!--<div class="userBox">
+							<p>
+
+								<span class="glyphicon glyphicon-user" aria-hidden="false"></span>
+								${session.session_user.realname}&nbsp;<a href="${BASE_PATH }front/logout">注 销</a>
+							</p>
+						</div>-->
 					<% } %>
+
 				</div>
-
-
-				<!-- 收集的导航链接，和其他形式的内容，锁定 -->
+				        <!-- 收集的导航链接，和其他形式的内容，锁定 -->
 				<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li class="hvr-bounce-to-bottom active"><a href="index.html">主页</a></li>
