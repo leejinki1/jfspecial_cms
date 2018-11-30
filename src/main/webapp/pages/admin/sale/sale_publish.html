@@ -294,7 +294,7 @@ function oper_publish(id) {
 			<ul class="nav" id="main-menu">
 
 				<li>
-					<a href="../home" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 信息统计</a>
+					<a href="../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 信息统计</a>
 				</li>
 				<li>
 					<a href="publish" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 特卖区发布信息</a>
@@ -389,8 +389,17 @@ function oper_publish(id) {
 									</div>
 
 									<div class="form-group">
-										<label for="model.unit" class="col-sm-2 control-label">上传封面图片</label>
+										<label for="model.unit" class="col-sm-2 control-label">封面图片</label>
 										<div class="col-sm-10">
+											<!--网络图片地址-->
+											<label>方法一:</label>
+											<!--class="form-control"-->
+											<input type="text" accept="image/*"  name="model.image_net_url"
+												   id="model.image_net_url" placeholder="输入网络图片链接"/>
+											<!--<input name="model.unit" class="form-control" id="model.unit"
+												   value="${model.unit!''}" placeholder="上传封面图片">-->
+											<!--上传本地图片-->
+											<label>方法二:</label>
 											<input type="file" accept="image/*" class="form-control" name="model.image_url"
 												   id="model.image_url"/>
 											<!--<input name="model.unit" class="form-control" id="model.unit"
@@ -405,15 +414,6 @@ function oper_publish(id) {
 													style="width: 98%; height: 320px;">${model.content!''}</script>
 										</div>
 									 </div>
-
-									<div class="file-field input-field col s12">
-										<div class="btn"/>
-										<span>文件上传</span>
-										<input type="file">
-									</div>
-									<div class="file-path-wrapper">
-										<input class="file-path validate" type="text" value="上传封面图片、图片可选择性上传">
-									</div>
 								</div>
 
 								<div class="form-group">
