@@ -16,7 +16,7 @@ $(document).on("click",".centerBox-right-c2 p a",function(){
 	
 })
 $(function(){
-	    $(".tou").load("static/frontend/html/header.html");
+	    $(".tou").load("static/frontend/html/header1.html");
     	$(".wei").load("static/frontend/html/footer.html");
 	/*特卖区的初始化*/
 //	$(".centerBox-left-c1").load("temaiqu_left_1.html");

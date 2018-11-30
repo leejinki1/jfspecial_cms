@@ -6,13 +6,7 @@ import com.jfspecial.component.base.BaseProjectController;
 import com.jfspecial.component.util.JFSpecialUtils;
 import com.jfspecial.jfinal.base.Paginator;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
-import com.jfspecial.modules.admin.article.ArticleConstant;
-import com.jfspecial.modules.admin.article.TbArticle;
-import com.jfspecial.modules.admin.folder.FolderService;
-import com.jfspecial.modules.admin.maker.model.TbMaker;
 import com.jfspecial.modules.admin.makersingup.TbMakerSignup;
-import com.jfspecial.modules.admin.sysuser.TbSysUser;
-import com.jfspecial.modules.admin.tags.TbTags;
 import com.jfspecial.modules.front.interceptor.FrontInterceptor;
 import com.jfspecial.modules.front.service.FrontCacheService;
 import com.jfspecial.util.DateUtils;
@@ -40,16 +34,25 @@ public class SignupMakerController extends BaseProjectController {
 		// 数据列表
 		int articleId = getParaToInt();
 
-		renderAuto(path + "maker_signup.html");
+		setAttr("articleId", articleId);
 
+		renderAuto(path + "maker_signup.html");
 	}
 
 	public void save() {
 		Integer makerid = getParaToInt();
 		TbMakerSignup model = getModel(TbMakerSignup.class);
-		model.remove("id");
+		//model.remove("id");
+		String realname = getPara("model.realname");
+		String contact = getPara("model.contact");
+		String sex = getPara("model.sex");
+		String email = getPara("model.email");
+		String remark = getPara("model.remark");
 		model.setStatus(1); // 显示
 		model.setMakerId(makerid.toString());
+		model.setContact(contact);
+		model.setEmail(email);
+		model.setRemark(remark);
 		model.setCreateId(getSessionUser().getUserid());
 		model.setCreateTime(getNow());
 		model.save();

@@ -42,48 +42,7 @@
 </head>
 <body>
 <!-- header -->
-<div class="tou">
-    <div class="header">
-        <div class="container">
-            <div class="header-nav">
-                <nav class="navbar navbar-default">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <h1><a class="navbar-brand" href="index.html"><span>科技</span>特派员创业扶贫联盟</a></h1>
-                    </div>
-                    <!-- 收集的导航链接，和其他形式的内容，锁定 -->
-                    <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li class="hvr-bounce-to-bottom active"><a href="index.html">主页</a></li>
-                            <li class="hvr-bounce-to-bottom"><a href="special.html">特派员</a></li>
-                            <li class="hvr-bounce-to-bottom"><a href="sale.html">特卖区</a></li>
-                            <li class="hvr-bounce-to-bottom"><a href="newscenter.html">新闻中心</a></li>
-                            <li class="hvr-bounce-to-bottom"><a href="trd.html">技术需求</a></li>
-                            <li class="hvr-bounce-to-bottom"><a href="maker.html">创客活动</a></li>
-                            <li class="hvr-bounce-to-bottom"><a href="policy.html">政策法规</a></li>
-                            <li class="hvr-bounce-to-bottom"><a href="spp.html">科普板块</a></li>
-                            <li class="hvr-bounce-to-bottom"><a href="projectapp.html">项目申报</a></li>
-                            <li class="hvr-bounce-to-bottom"><a href="addoil.html">帮扶企业</a></li>
-                            <% if(isEmpty(session.session_user)){ %>
-                            <li class="hvr-bounce-to-bottom"><a href="front/login.html">登录/注册</a></li>
-                            <% } else { %>
-                            <li class="hvr-bounce-to-bottom"><a href="${BASE_PATH }front/logout">${session.session_user.username}/退出</a></li>
-                            <% } %>
-                            <li class="hvr-bounce-to-bottom"><a href="contactus.html">联系我们</a></li>
-                        </ul>
-                    </div><!-- //navbar-collapse -->
-                </nav>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- //header -->
+<% include("/template/special/includes/header1.html"){} %>
 <!-- centerBox -->
 <div class="centerBox container-fluid">
     <div class="row">
@@ -143,48 +102,7 @@
 </div>
 <!-- //centerBox -->
 <!-- footer -->
-<!-- footer -->
-<div class="footer">
-    <div class="container">
-        <div class="footer-agileitsrow">
-            <div class="col-md-3 footer-grid">
-                <h3>临时演员</h3>
-                <p>[医]金红花，[医]金红花[NS][NS]。[医]小叶蝉。佩列斯克征服了达官贵人。</p>
-            </div>
-            <div class="col-md-3 footer-grid">
-                <h3> 社会化媒体</h3>
-                <ul>
-                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i> 脸书</a></li>
-                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> 推特</a></li>
-                    <li><a href="#"><i class="fa fa-google" aria-hidden="true"></i> 谷歌</a></li>
-                    <li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i> 滴水的</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 footer-grid">
-                <h3>有用信息</h3>
-                <ul>
-                    <li><a href="index.html">首页</a></li>
-                    <li><a href="about.html">关于</a></li>
-                    <li><a href="blog.html">博客</a></li>
-                    <li><a href="contact.html">接触</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 footer-grid">
-                <h3>联系我们</h3>
-                <p>佩列斯克征服了达官贵人。</p>
-                <div class="footer-grid-address">
-                    <p>电话.800-255-9999</p>
-                    <p>传真: 1234 568</p>
-                    <p>邮箱: <a class="email-link" href="mailto:info@example.com">Example.com</a></p>
-                </div>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-    </div>
-</div>
-<div class="copy-right">
-    <p>迪士尼版权所有 &copy; 沪公网安备 31011502002267号 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
-</div>
+<% include("/template/special/includes/footer1.html"){} %>
 <!-- //footer -->
 <div class="wei"></div>
 <!-- //footer -->

@@ -15,7 +15,7 @@ $(document).on("click",".centerBox-right-c2 td a",function(){
 })
 
 $(function(){
-	$(".tou").load("static/frontend/html/header.html");
+	$(".tou").load("static/frontend/html/header1.html");
 	$(".wei").load("static/frontend/html/footer.html");
 	//默认第一个--特派员--
 	/*特派员的初始化*/

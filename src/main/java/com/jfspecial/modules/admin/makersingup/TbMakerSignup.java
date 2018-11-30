@@ -75,12 +75,12 @@ public class TbMakerSignup extends BaseProjectModel<TbMakerSignup> {
 		return get(SEX);
 	}
 
-	public TbMakerSignup setEmail(Integer value) {
+	public TbMakerSignup setEmail(String value) {
 		set(EMAIL, value);
 		return this;
 	}
 
-	public Integer getEmail() {
+	public String getEmail() {
 		return get(EMAIL);
 	}
 
