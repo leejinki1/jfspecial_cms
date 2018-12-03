@@ -1,3 +1,71 @@
 @import url("bootstrap.css");
 @import url("style.css");
 @import url("font-awesome.css");
+/*引入的头尾的样式*/
+
+/*.header *{border: 1px white solid;}*/
+.loginAndregister{color: white;line-height: 50px;text-align: right;}
+.loginAndregister a{color: #ffc400;text-decoration:none;}
+.loginAndregister a:hover{color: #e2cd87;}
+.userBox{display: none;}
+
+/*.footer *{border: 1px white solid;}*/
+.footerList{display: flex;flex-wrap: wrap;justify-content: space-around;align-items: center;
+color: white;}
+		
+.footerList ul li{padding: 5px;font-weight: 300;}
+.footerList ul li a{text-decoration: none;color:whitesmoke}
+.footerList ul li a:hover{color:#efb3e7c7;}
+.footerList ul li:nth-child(1){color: #ffc400;font-size: 16px;font-weight: 900;}
+
+
+/*公共样式*/
+.centerBox{padding: 2px 0px;}
+.centerBox-right-c1 th{text-align: center;font-weight: 600;}
+.centerBox-right-c1 table{text-align: center;}
+.pageBtnList{text-align: center;}
+ul{list-style: none;padding: 0px;margin: 0px;}
+body{background: #F2F2F2;}
+.centerBox-left-c1 ul li:nth-child(1) button{border: 2px solid;}
+.centerBox-left-c1,.centerBox-left-c2,.centerBox-right-c1 h4{padding: 5px;}
+
+/*.centerBox{border: 2px hotpink solid;}*/
+/*.centerBox-left,.centerBox-right{border: 2px rosybrown solid;}*/
+.centerBox-left{background:#252525;color: whitesmoke;border-radius: 10px;}
+.centerBox-left li{background: #1B1E31;text-align: center;border: 2px #252525 dashed;cursor: pointer;}
+.centerBox-left li:nth-child(1){background:#8f56cc7a;}
+
+
+.centerBox-right{background: #F2F2F2;}
+.breadcrumb{background: #d3bcec66;}
+	/*手机*/
+	@media screen and (min-width:200px) and (max-width:768px){
+		/*左边菜单栏*/
+		.centerBox-left ul li{padding:4px;display: inline-block;}
+		.centerBox-left li{font-size: 13px;}
+		/*右边的表格*/
+		.centerBox-right-c1 table td{font-size:12px;}
+		.pageBtnList{font-size: 12px;}
+		.pageBtnList li{font-size: 9px;}
+		/*页尾*/
+		.footerList ul li{color: white;font-size: 12px;font-weight: 500;}
+		.footerList ul li:nth-child(1){color: #ffc400;font-size: 14px;font-weight: 900;}
+	}
+	/*平板*/
+	@media screen and (min-width:769px) and (max-width:991px){
+		.centerBox-left ul li{padding: 6px;display: block;}
+		.centerBox-left li{font-size: 15px;width: 50%;}
+		.centerBox-right-c1 table td{font-size:15px;}
+	}
+	/*电脑桌面*/
+	@media screen and (min-width:922px) and (max-width:1999px){
+		.centerBox-left ul li{padding: 8px;display: block;}
+		.centerBox-left li{font-size: 16px;width: 50%;}
+		.centerBox-right-c1 table td{font-size:16px;}
+	}
+	/*超大屏幕*/
+	@media screen and (min-width:1200px){
+		.centerBox-left ul li{padding: 10px;display: block;}
+		.centerBox-left li{font-size: 16px;width: 50%;}
+		.centerBox-right-c1 table td{font-size:16px;color:gray}
+	}

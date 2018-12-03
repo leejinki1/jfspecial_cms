@@ -22,7 +22,7 @@ $(function(){
    //	$(".centerBox-left-c1").load("static/frontend/html/newscenter/xinwenzhongxin_left_1.html");
 	//$(".centerBox-left-c2").load("static/frontend/html/newscenter/xinwenzhongxin_left_2.html");
 	
-	$(".centerBox-right-c1").load("static/frontend/html/newscenter/xinwenzhongxin_right_1.html");
+	//$(".centerBox-right-c1").load("static/frontend/html/newscenter/xinwenzhongxin_right_1.html");
 	//$(".centerBox-right-c2").load("static/frontend/html/newscenter/xinwenzhongxin_right_2.html");
 	/*$(".centerBox-right-c1").load("tepaiyuan_right_1.html");
 	$(".centerBox-right-c2").load("test1.html");*/

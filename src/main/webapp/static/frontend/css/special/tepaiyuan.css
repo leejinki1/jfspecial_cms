@@ -1,32 +1,7 @@
-/* tepaiyuan.html、、、 :功能模块center中的样式*/
-
-.centerBox-left{margin-bottom: 3px;background: #E6E6E6;}
-.centerBox-left h4{padding: 2px;font-weight: bolder;}
-.centerBox-left ul li{padding: 2px;}
-.centerBox-left-c1 button{background: white;font-size: 14px;}
-
-.centerBox-right{}
-.centerBox-right-c1 ul li{display: inline-block;}
-.centerBox-right-c1 p img{width: 36px;height: 15px;}
-
-
+/*特派员Style*/
 .centerBox-right h4,.centerBox-right-c2{text-align: center;font-weight: bolder;}
 .centerBox-right-c2 table{width: 90%;margin: 3px auto;text-align: center;}
-.centerBox-right-c2 table td:nth-child(2){color: black;}
+.centerBox-right-c2 table td{font-weight: 500;}
+
+.onlyMessage td:nth-child(2){color: black;}
 .centerBox-right-c2 button{margin: 2px;}
-
-/*手机*/
-@media screen and (min-width: 66px) {
-    .centerBox-left ul li{display: inline-block;}
-    .centerBox-right-c2 table{width: 100%;font-size:13px;font-weight: 400;}
-    
-}
-/*平板*/
-@media screen and (min-width: 768px) {
-    .centerBox-left ul li{display: block;}
-    .centerBox-left button{width: 50%;}
-    .centerBox-right-c2 table{font-size:18px;font-weight: 500;}
-}
-
-
-/*特派员--解答列表*/

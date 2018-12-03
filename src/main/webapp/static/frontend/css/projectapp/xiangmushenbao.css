@@ -1,4 +1,29 @@
-.centerBox{padding: 2px;}
-.centerBox ul li{display: inline-block;border: 1px gray solid;padding: 10px;}
-.centerBox ul{display: flex;flex-wrap: wrap;justify-content: space-around;}
+.centerBox{background: #F2F2F2;}
+	.centerBox h2{padding: 8px;color: #c5a63f;}
+	.centerBox ul{display: flex;flex-wrap: wrap;justify-content: flex-start;align-items: center;}
+	
+	.centerBox ul li{text-align: center;
+	overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}/*超出文字变...*/
+	
+	.centerBox ul li a{color: #43853D;text-decoration: none;display: inline-block;width: 100%;height: 100%;padding: 10px;}
+	.centerBox ul li a:hover{color: white;background: #43853D;border-radius: 10px;}
+	
+	
+	
+	/*手机*/
+	@media screen and (min-width:320px) and (max-width:768px){
+		.centerBox ul li{width: 100%;}
+	}
+	/*平板*/
+	@media screen and (min-width:769px) and (max-width:991px){
+		.centerBox ul li{width: 33.33%;}
+	}
+	/*电脑桌面*/
+	@media screen and (min-width:922px) and (max-width:1999px){
+		.centerBox ul li{width: 25%;}
+	}
+	/*超大屏幕*/
+	@media screen and (min-width:1200px){
+		.centerBox ul li{width: 16.66%;}
+	}
 

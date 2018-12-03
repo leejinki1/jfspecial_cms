@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>特卖区</title>
+	<title>技术需求</title>
 	<!-- meta-tags -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -10,7 +10,7 @@
 	<!-- //meta-tags -->
 	<!-- Custom Theme files -->
 	<link href="${BASE_PATH }static/frontend/css/all.css" rel="stylesheet" type="text/css" media="all" />
-	<link rel="stylesheet" href="${BASE_PATH }static/frontend/css/sale/temaiqu.css" />
+	<link rel="stylesheet" href="${BASE_PATH }static/frontend/css/trd/jishuxuqiu.css" />
 	<!-- //Custom Theme files -->
 	<!-- js -->
 	<script src="${BASE_PATH }static/frontend/js/jquery-1.11.1.min.js"></script>
@@ -25,13 +25,13 @@
 	        var key = e.which;
 	        if (key == 13 ) {
 	            e.preventDefault();
-	            search_form.action =  ""+ $('[name="search_header"]').val();
+	            search_form.action =  "front/trd_tags/"+ $('[name="search_header"]').val();
 	    		search_form.submit();
 	        }
 	    });
 
 		$('#search_btn').on('click', function (e) {
-			search_form.action =  ""+ $('[name="search_header"]').val();
+			search_form.action =  "front/trd_tags/"+ $('[name="search_header"]').val();
 			search_form.submit();
 	    });
 
@@ -40,7 +40,7 @@
 </head>
 <body>
 <!-- header -->
-<% include("/template/special/includes/header_search.html"){} %>
+<% include("/template/special/includes/header1.html"){} %>
 <!-- //header -->
 <!-- centerBox -->
 <div class="centerBox container-fluid">
@@ -48,9 +48,9 @@
 		<!--中间--左边-->
 		<div class="centerBox-left col-md-4 col-sm-4 col-xs-12">
 			<div class="centerBox-left-c1">
-				<% var albums=tempSale.albums();
+				<% var albums=tempTrd.albums();
 				%>
-				<% include("/template/special/includes/salealbumlist.html",{albumlist:albums}){} %>
+				<% include("/template/special/includes/trdalbumlist.html",{albumlist:albums}){} %>
 			</div>
 			<div class="centerBox-left-c2"></div>
 		</div>
@@ -58,9 +58,9 @@
 		<div class="centerBox-right col-md-8 col-sm-8 col-xs-12">
 			<div class="centerBox-right-c1">
 				<ol class="breadcrumb">
-					<li><a href="../../index.html">首页</a></li>
-					<li><a href="../../sale.html">特卖区</a></li>
-					<li class="active">商品</li>
+					<li><a href="index.html">首页</a></li>
+					<li><a href="trd.html">技术需求 </a></li>
+					<li class="active"></li>
 				</ol>
 				<div class="container-fluid">
 					<div class="row">
@@ -80,8 +80,19 @@
 
 			<div class="centerBox-right-c2">
 				<% var defalutimg= 'static/front/images/news.jpg';%>
+				<%
+				var page;
+				if(!isEmpty(session.albumId)) {
+				var albumId= session.albumId;
+				page = tempTrd.alter_trds(paginator.pageNo, 10, parseInt(albumId));
+				}
+				else{
+				page = tempTrd.alter_trds(paginator.pageNo, 10);
+				}
+				%>
 				<!--文章列表-->
-				<% include("/template/special/includes/salelist.html",{articlelist:page,defalutimg:defalutimg!''}){} %>
+				<% include("/template/special/includes/trdlist.html",{articlelist:page,defalutimg:defalutimg!''}){} %>
+
 			</div>
 			<div class="centerBox-right-c3"></div>
 		</div>
@@ -92,9 +103,11 @@
 <!-- footer -->
 <% include("/template/special/includes/footer1.html"){} %>
 <!-- //footer -->
+<!-- start-smooth-scrolling -->
 <script type="text/javascript" src="${BASE_PATH }static/frontend/js/move-top.js"></script>
 <script type="text/javascript" src="${BASE_PATH }static/frontend/js/easing.js"></script>
 <script type="text/javascript" src="${BASE_PATH }static/frontend/js/jquery-1.11.1.min.js" ></script>
+<script type="text/javascript" src="${BASE_PATH }static/frontend/js/trd/jishuxuqiu.js" ></script>
 
 <script type="text/javascript">
 			jQuery(document).ready(function($) {
@@ -122,6 +135,9 @@
 
 		});
 	</script>
+<!-- //smooth-scrolling-of-move-up -->
+<!-- for bootstrap working -->
+<script src="${BASE_PATH }static/frontend/js/bootstrap.js"> </script>
 <!-- //for bootstrap working -->
 </body>
 </html>
