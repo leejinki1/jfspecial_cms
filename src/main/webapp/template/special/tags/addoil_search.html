@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>技术需求</title>
+	<title>帮扶企业</title>
 	<!-- meta-tags -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -10,7 +10,7 @@
 	<!-- //meta-tags -->
 	<!-- Custom Theme files -->
 	<link href="${BASE_PATH }static/frontend/css/all.css" rel="stylesheet" type="text/css" media="all" />
-	<link rel="stylesheet" href="${BASE_PATH }static/frontend/css/trd/jishuxuqiu.css" />
+	<link rel="stylesheet" href="${BASE_PATH }static/frontend/css/addoil/bangfuqiye.css" />
 	<!-- //Custom Theme files -->
 	<!-- js -->
 	<script src="${BASE_PATH }static/frontend/js/jquery-1.11.1.min.js"></script>
@@ -19,7 +19,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
 	<!-- //web-font -->
 	<script>
-	$(function() {
+$(function() {
 		// 回车绑定查询按钮
 		$('[name="search_header"]').on('keydown', function (e) {
 	        var key = e.which;
@@ -36,7 +36,7 @@
 	    });
 
 	});
-	</script>
+    </script>
 </head>
 <body>
 <!-- header -->
@@ -48,9 +48,9 @@
 		<!--中间--左边-->
 		<div class="centerBox-left col-md-4 col-sm-4 col-xs-12">
 			<div class="centerBox-left-c1">
-				<% var albums=tempTrd.albums();
+				<% var albums=tempAddOil.albums();
 				%>
-				<% include("/template/special/includes/trdalbumlist.html",{albumlist:albums}){} %>
+				<% include("/template/special/includes/addoilalbumlist.html",{albumlist:albums}){} %>
 			</div>
 			<div class="centerBox-left-c2"></div>
 		</div>
@@ -59,8 +59,8 @@
 			<div class="centerBox-right-c1">
 				<ol class="breadcrumb">
 					<li><a href="index.html">首页</a></li>
-					<li><a href="trd.html">技术需求 </a></li>
-					<li class="active"></li>
+					<li><a href="addoil.html">帮扶企业</a></li>
+					<li class="active">分类</li>
 				</ol>
 				<div class="container-fluid">
 					<div class="row">
@@ -81,8 +81,9 @@
 			<div class="centerBox-right-c2">
 				<% var defalutimg= 'static/front/images/news.jpg';%>
 				<!--文章列表-->
-				<% include("/template/special/includes/trdlist.html",{articlelist:page,defalutimg:defalutimg!''}){} %>
+				<% include("/template/special/includes/addoillist.html",{articlelist:page,defalutimg:defalutimg!''}){} %>
 
+			</div>
 			<div class="centerBox-right-c3"></div>
 		</div>
 	</div>
@@ -96,7 +97,7 @@
 <script type="text/javascript" src="${BASE_PATH }static/frontend/js/move-top.js"></script>
 <script type="text/javascript" src="${BASE_PATH }static/frontend/js/easing.js"></script>
 <script type="text/javascript" src="${BASE_PATH }static/frontend/js/jquery-1.11.1.min.js" ></script>
-<script type="text/javascript" src="${BASE_PATH }static/frontend/js/trd/jishuxuqiu.js" ></script>
+<script type="text/javascript" src="${BASE_PATH }static/frontend/js/addoil/bangfuqiye.js" ></script>
 
 <script type="text/javascript">
 			jQuery(document).ready(function($) {

@@ -19,7 +19,23 @@
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
     <!-- //web-font -->
     <script>
+$(function() {
+		// 回车绑定查询按钮
+		$('[name="search_header"]').on('keydown', function (e) {
+	        var key = e.which;
+	        if (key == 13 ) {
+	            e.preventDefault();
+	            search_form.action =  "front/policy_tags/"+ $('[name="search_header"]').val();
+	    		search_form.submit();
+	        }
+	    });
 
+		$('#search_btn').on('click', function (e) {
+			search_form.action =  "front/policy_tags/"+ $('[name="search_header"]').val();
+			search_form.submit();
+	    });
+
+	});
     </script>
 </head>
 <body>

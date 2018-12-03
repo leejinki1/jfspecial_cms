@@ -25,13 +25,13 @@
 	        var key = e.which;
 	        if (key == 13 ) {
 	            e.preventDefault();
-	            search_form.action =  "front/maker_tags/"+ $('[name="search_header"]').val();
+	            search_form.action =  ""+ $('[name="search_header"]').val();
 	    		search_form.submit();
 	        }
 	    });
 
 		$('#search_btn').on('click', function (e) {
-			search_form.action =  "front/maker_tags/"+ $('[name="search_header"]').val();
+			search_form.action =  ""+ $('[name="search_header"]').val();
 			search_form.submit();
 	    });
 
