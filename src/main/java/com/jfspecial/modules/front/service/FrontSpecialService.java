@@ -34,7 +34,14 @@ public class FrontSpecialService extends BaseService {
 						+ " order by create_time desc");
 		return specials;
 	}
-
+	public Page<TbSpecial> alterSpecial(Paginator paginator) {
+		String key = ("special_" + System.currentTimeMillis());
+		Page<TbSpecial> specials = TbSpecial.dao.paginateCache(cacheName, key, paginator, "select * " //
+				, " from sys_user " //
+						+ " where usertype = 10 " // 查询状态为显示
+						+ " order by create_time desc");
+		return specials;
+	}
 	/**
 	 * 查询图片
 	 *
@@ -51,6 +58,14 @@ public class FrontSpecialService extends BaseService {
 		return specials;
 	}
 
+	public Page<TbSpecial> alterSpecial(Paginator paginator, int userId) {
+		String key = ("special_" + System.currentTimeMillis());
+		Page<TbSpecial> specials = TbSpecial.dao.paginateCache(cacheName, key, paginator, "select * " //
+				, " from sys_user " //
+						+ " where userid = ? " // 查询状态为显示
+						+ " order by create_time desc", userId);
+		return specials;
+	}
 	/**
 	 * 查询图片
 	 *

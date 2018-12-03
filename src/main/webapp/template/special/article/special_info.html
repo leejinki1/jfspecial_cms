@@ -26,9 +26,7 @@
 </head>
 <body>
 <!-- header -->
-<div class="tou">
-
-</div>
+<% include("/template/special/includes/header_article.html"){} %>
 <!-- //header -->
 <!-- centerBox -->
 <div class="centerBox container-fluid">
@@ -102,7 +100,9 @@
                     </td>
                     </tr>
                 </table>
-                <button type="button" class="btn btn-warning" style="width: 100%;">对接此专家</button>
+                <a href="${BASE_PATH }front/special/expert_docking/${item.userid}.html">
+                   <button type="button" class="btn btn-warning" style="width: 100%;">对接此专家</button>
+                </a>
             </div>
             <div class="centerBox-right-c3"></div>
         </div>

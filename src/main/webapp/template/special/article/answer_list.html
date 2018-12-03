@@ -39,7 +39,6 @@
         <!--中间--右边-->
         <div class="centerBox-right col-md-8 col-sm-8 col-xs-12">
             <div class="centerBox-right-c1">
-
             </div>
 
             <div class="centerBox-right-c2">
@@ -48,7 +47,7 @@
                 var page = tempSpecial.specials(paginator.pageNo, 10);
                 %>
                 <!--文章列表-->
-                <% include("/template/special/includes/speciallist.html",{peoplelist:page,defalutimg:defalutimg!''}){} %>
+                <% include("/template/special/includes/expertdockinglist.html",{peoplelist:page,defalutimg:defalutimg!''}){} %>
             </div>
             <div class="centerBox-right-c3"></div>
         </div>
