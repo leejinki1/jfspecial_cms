@@ -358,7 +358,7 @@ function closediv(){
 											<%  //var albums=tempTrd.albums();
 											if(!isEmpty(albums)) {
 											for(item in albums){ %>
-											<option id="${item.id}" value="${item.id}" ${item.id==model.album_id!0?'selected':''} >${item.name}</option>
+											<option id="option${item.id}" value="${item.id}" ${item.id==model.album_id!0?'selected':''} >${item.name}</option>
 											<%
 											}
 											}

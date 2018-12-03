@@ -68,7 +68,7 @@ public class MakeralbumController extends BaseProjectController {
 		/*ajax返回成功信号*/
 		json.put("status", 1);// 成功
 		//modal增加的代码
-		json.put("modal","<tr>" +
+		json.put("modal","<tr id=\"modal"+id+"\">"+
 				"<td>"+name+"</td>\n" +
 				"<td><a onclick=\"oper_delAlbum("+id+");return false\">删除</a></td>\n" +
 				"</tr>");

@@ -3,7 +3,7 @@ package com.jfspecial.modules.admin.sale.controller;
 import com.jfspecial.jfinal.base.BaseController;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
 import com.jfspecial.jfinal.component.db.SQLUtils;
-import com.jfspecial.modules.admin.sale.model.TbSale;
+import com.jfspecial.modules.admin.sale.TbSale;
 import com.jfspecial.modules.admin.sale.model.TbSaleAlbum;
 import com.jfspecial.modules.admin.sale.service.SaleAlbumService;
 import com.jfspecial.util.StrUtils;

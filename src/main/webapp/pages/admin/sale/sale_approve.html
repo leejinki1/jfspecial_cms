@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-
+<!--特卖/审核-->
+<script type="text/javascript">
+<!--审核通过-->
+function oper_pass(id) {
+		location.href="sale_approve/passArticle/"+id;
+		return false;
+	}
+<!--审核退回-->
+function oper_reject(id) {
+		location.href="sale_approve/rejectArticle/"+id;
+		return false;
+	}
+</script>
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Target Material Design Bootstrap Admin Template</title>
+	<title>特卖/审核</title>
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="${BASE_PATH }static/backend/assets/materialize/css/materialize.min.css" media="screen,projection" />
@@ -101,7 +113,7 @@
 								</thead>
 								<!--盒马CEO就上海“标签门”致歉，宣布免去上海区总经理职务--在瑞幸们的围剿之下，为什么说涨价是星巴克最错误的战略决策？-->
 								<tbody>
-								<tr>
+								<!--<tr>
 									<td>1</td>
 									<td>鸡蛋10块钱一斤</td>
 									<td>狗蛋</td>
@@ -110,17 +122,32 @@
 										<a class="waves-effect waves-light btn">通过</a>&nbsp;
 										<a class="waves-effect waves-light btn">退回</a>
 									</td>
-								</tr>
+								</tr>-->
+								<!--全部显示//待分页弄好,再删除-->
+								<% for(item in lists){ %>
 								<tr>
-									<td>2</td>
-									<td>白菜20块钱一颗</td>
-									<td>狗剩</td>
-									<td>2018-11-19 14:51:59</td>
+									<td>${itemLP.index}</td>
+									<td>${item.name}</td>
+									<td>${item.publish_user}</td>
+									<td>${item.update_time}</td>
 									<td>
-										<a class="waves-effect waves-light btn">通过</a>&nbsp;
-										<a class="waves-effect waves-light btn">退回</a>
+										<a class="waves-effect waves-light btn" onclick="oper_pass(${item.id!'0'});">通过</a>&nbsp;
+										<a class="waves-effect waves-light btn" onclick="oper_reject(${item.id!'0'});">退回</a>
 									</td>
 								</tr>
+								<% } %>
+								<!--<%//
+                                var sales=tempProjectapp.sales(1,5);%>
+                                <% for(item in sales.list){ %>
+                                    <tr>
+                                         <td>${itemLP.index}</td>
+                                         <td>${item.name}</td>
+                                         <td>${item.update_time}</td>
+                                            <a class="waves-effect waves-light btn" onclick="oper_pass(${item.id!'0'});">通过</a>&nbsp;
+										<a class="waves-effect waves-light btn" onclick="oper_reject(${item.id!'0'});">退回</a>
+                                         </td>
+                                     </tr>
+                                <% } %>-->
 								</tbody>
 							</table>
 							<p class="pageBtnList">

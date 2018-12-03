@@ -12,7 +12,7 @@ import com.jfspecial.jfinal.component.db.SQLUtils;
 import com.jfspecial.modules.admin.newscenter.model.TbNewsCenter;
 import com.jfspecial.modules.admin.newscenter.model.TbNewsCenterTags;
 import com.jfspecial.modules.admin.newscenter.service.NewsCenterAlbumService;
-import com.jfspecial.modules.admin.sale.model.TbSale;
+import com.jfspecial.modules.admin.sale.TbSale;
 import com.jfspecial.modules.admin.sale.service.SaleAlbumService;
 import com.jfspecial.modules.admin.site.TbSite;
 import com.jfspecial.system.file.util.FileUploadUtils;
