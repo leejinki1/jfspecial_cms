@@ -9,7 +9,7 @@ import com.jfspecial.component.util.ImageModel;
 import com.jfspecial.component.util.ImageUtils;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
 import com.jfspecial.jfinal.component.db.SQLUtils;
-import com.jfspecial.modules.admin.sale.model.TbSale;
+import com.jfspecial.modules.admin.sale.TbSale;
 import com.jfspecial.modules.admin.sale.model.TbSaleTags;
 import com.jfspecial.modules.admin.sale.service.SaleAlbumService;
 import com.jfspecial.modules.admin.site.TbSite;
@@ -235,20 +235,20 @@ public class SaleController extends BaseProjectController {
 		// 设置图片信息
 		if (StrUtils.isNotEmpty(model.getImageNetUrl())) {
 			ImageModel imageModel = ImageUtils.getIamge(model.getImageNetUrl());
-			model.setExt(imageModel.getExt());
-			model.setWidth(imageModel.getWidth() + "");
-			model.setHeight(imageModel.getHeight() + "");
+			//model.setE(imageModel.getExt());
+		//	model.setWidth(imageModel.getWidth() + "");
+			//model.setHeight(imageModel.getHeight() + "");
 			
-			model.setLinkurl(model.getImageNetUrl());
+			//model.setLinkurl(model.getImageNetUrl());
 		} else if (StrUtils.isNotEmpty(model.getImageUrl())) {
 			ImageModel imageModel = ImageUtils
 					.getIamge(PathKit.getWebRootPath() + File.separator + model.getImageUrl());
-			model.setExt(imageModel.getExt());
-			model.setWidth(imageModel.getWidth() + "");
-			model.setHeight(imageModel.getHeight() + "");
+			//model.setExt(imageModel.getExt());
+			//model.setWidth(imageModel.getWidth() + "");
+			//model.setHeight(imageModel.getHeight() + "");
 			
 			String linkUrl = getAttr("BASE_PATH") + model.getImageUrl();
-			model.setLinkurl(linkUrl.replace("\\", "/"));
+			//model.setLinkurl(linkUrl.replace("\\", "/"));
 		}
 		
 		Integer userid = getSessionUser().getUserid();

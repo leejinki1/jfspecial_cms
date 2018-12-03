@@ -8,6 +8,7 @@
 
 <script type="text/javascript">
 	var ue;
+	<!--预加载函数-->
 	$(document).ready(function(){
 		ue = UE.getEditor('editor',{
 			initialFrameHeight:350  //初始化编辑器高度,默认320
@@ -22,6 +23,7 @@
                   ]]
 		});
 	});
+
 
 <!--发布-->
 function oper_save(id) {
@@ -171,6 +173,91 @@ function oper_savedraft(id) {
 
 		return false;
 }
+
+<!--新增分类 11.30-->
+function oper_addAlbum(id){
+	<!--新分类名称-->
+	var name=$("#albumname").val();
+	if(name==''){
+		return false;
+	}
+
+
+	<!--ajax新增-->
+	jQuery.ajax({
+	type:'POST',
+			url:'addoilalbum/addAlbum/'+id,
+			data:$("#form1").serialize(),
+			success:function(data){
+			if(data.status==1){
+					alert('发布成功');
+						<!--模态框中新增补充代码-->
+					$('#modal_tobody').append(data.modal);
+						<!--下拉列表中新增代码段-->
+					$('#select').append(data.option);
+						<!--清空输入框内容-->
+					$('#albumname').val('');
+				} else {
+					alert('发布失败：'+data.msg);
+				}
+			},
+			error:function(html){
+				var flag = (typeof console != 'undefined');
+				if(flag) console.log("服务器忙，提交数据失败，代码:" +html.status+ "，请联系管理员！");
+				alert("服务器忙，提交数据失败，请联系管理员！");
+			}
+		});
+}
+
+<!--删除分类 11.30-->
+function oper_delAlbum(id){
+
+<!--ajax删除-->
+<!--$("#form2").serialize()-->
+	jQuery.ajax({
+	type:'POST',
+			url:'addoilalbum/delAlbum/'+id,
+			data:'',
+			success:function(data){
+			if(data.status==1){
+					alert('删除成功');
+						<!--页面上移除删除的分类-->
+					$('#modal'+id+'').html('');
+						<!--移除下拉列表中的分类-->
+					$('#option'+id+'').css('display','none');
+					return false;
+				} else {
+					alert('删除失败：'+data.msg);
+				}
+			},
+			error:function(html){
+				var flag = (typeof console != 'undefined');
+				if(flag) console.log("服务器忙，提交数据失败，代码:" +html.status+ "，请联系管理员！");
+				alert("服务器忙，提交数据失败，请联系管理员！");
+			}
+		});
+		return false;
+}
+
+
+
+<!--显示隐藏框-->
+function opendiv(){
+	var display=$('#hiddendiv').css('display');
+	if(display=='none'){
+		$('#hiddendiv').css('display','block');
+		$('#displaybutton').text('点击关闭分类编辑');
+	}else{
+		$('#hiddendiv').css('display','none');
+		$('#displaybutton').text('点击编辑分类');
+	}
+}
+
+<!--鼠标离开,关闭编辑分类框-->
+function closediv(){
+		$('#hiddendiv').css('display','none');
+		$('#displaybutton').text('点击编辑分类');
+}
 </script>
 <head>
     <meta charset="utf-8" />
@@ -190,6 +277,7 @@ function oper_savedraft(id) {
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/cssCharts.css">
+
 </head>
 <body>
     <div id="wrapper">
@@ -206,185 +294,19 @@ function oper_savedraft(id) {
 		<div id="sideNav" href=""><i class="material-icons dp48">toc</i></div>
             </div>
 
-            <ul class="nav navbar-top-links navbar-right"> 
-				<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown4"><i class="fa fa-envelope fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li>				
-				<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown3"><i class="fa fa-tasks fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li>
-				<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown2"><i class="fa fa-bell fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li>
-				  <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>John Doe</b> <i class="material-icons right">arrow_drop_down</i></a></li>
-            </ul>
-        </nav>
+			<!--右侧菜单列表-->
+			<ul class="nav navbar-top-links navbar-right">
+				<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>John Doe</b> <i class="material-icons right">arrow_drop_down</i></a></li>
+			</ul>
+		</nav>
 		<!-- Dropdown Structure -->
 		<ul id="dropdown1" class="dropdown-content">
-		<li><a href="#"><i class="fa fa-user fa-fw"></i> My Profile</a>
-		</li>
-		<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-		</li>
-		<li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-		</li>
-		</ul>
-		<ul id="dropdown2" class="dropdown-content w250">
-		  <li>
-									<a href="#">
-										<div>
-											<i class="fa fa-comment fa-fw"></i> New Comment
-											<span class="pull-right text-muted small">4 min</span>
-										</div>
-									</a>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<a href="#">
-										<div>
-											<i class="fa fa-twitter fa-fw"></i> 3 New Followers
-											<span class="pull-right text-muted small">12 min</span>
-										</div>
-									</a>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<a href="#">
-										<div>
-											<i class="fa fa-envelope fa-fw"></i> Message Sent
-											<span class="pull-right text-muted small">4 min</span>
-										</div>
-									</a>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<a href="#">
-										<div>
-											<i class="fa fa-tasks fa-fw"></i> New Task
-											<span class="pull-right text-muted small">4 min</span>
-										</div>
-									</a>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<a href="#">
-										<div>
-											<i class="fa fa-upload fa-fw"></i> Server Rebooted
-											<span class="pull-right text-muted small">4 min</span>
-										</div>
-									</a>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<a class="text-center" href="#">
-										<strong>See All Alerts</strong>
-										<i class="fa fa-angle-right"></i>
-									</a>
-								</li>
-		</ul>
-		<ul id="dropdown3" class="dropdown-content dropdown-tasks w250">
-		<li>
-				<a href="#">
-					<div>
-						<p>
-							<strong>Task 1</strong>
-							<span class="pull-right text-muted">60% Complete</span>
-						</p>
-						<div class="progress progress-striped active">
-							<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-								<span class="sr-only">60% Complete (success)</span>
-							</div>
-						</div>
-					</div>
-				</a>
+			<li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
 			</li>
-			<li class="divider"></li>
-			<li>
-				<a href="#">
-					<div>
-						<p>
-							<strong>Task 2</strong>
-							<span class="pull-right text-muted">28% Complete</span>
-						</p>
-						<div class="progress progress-striped active">
-							<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100" style="width: 28%">
-								<span class="sr-only">28% Complete</span>
-							</div>
-						</div>
-					</div>
-				</a>
-			</li>
-			<li class="divider"></li>
-			<li>
-				<a href="#">
-					<div>
-						<p>
-							<strong>Task 3</strong>
-							<span class="pull-right text-muted">60% Complete</span>
-						</p>
-						<div class="progress progress-striped active">
-							<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-								<span class="sr-only">60% Complete (warning)</span>
-							</div>
-						</div>
-					</div>
-				</a>
-			</li>
-			<li class="divider"></li>
-			<li>
-				<a href="#">
-					<div>
-						<p>
-							<strong>Task 4</strong>
-							<span class="pull-right text-muted">85% Complete</span>
-						</p>
-						<div class="progress progress-striped active">
-							<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
-								<span class="sr-only">85% Complete (danger)</span>
-							</div>
-						</div>
-					</div>
-				</a>
-			</li>
-			<li class="divider"></li>
-			<li>
 		</ul>
-		<ul id="dropdown4" class="dropdown-content dropdown-tasks w250 taskList">
-		  <li>
-										<div>
-											<strong>John Doe</strong>
-											<span class="pull-right text-muted">
-												<em>Today</em>
-											</span>
-										</div>
-										<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-									</a>
-								</li>
-								<li class="divider"></li>
-								<li>
-										<div>
-											<strong>John Smith</strong>
-											<span class="pull-right text-muted">
-												<em>Yesterday</em>
-											</span>
-										</div>
-										<p>Lorem Ipsum has been the industry's standard dummy text ever since an kwilnw...</p>
-									</a>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<a href="#">
-										<div>
-											<strong>John Smith</strong>
-											<span class="pull-right text-muted">
-												<em>Yesterday</em>
-											</span>
-										</div>
-										<p>Lorem Ipsum has been the industry's standard dummy text ever since the...</p>
-									</a>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<a class="text-center" href="#">
-										<strong>Read All Messages</strong>
-										<i class="fa fa-angle-right"></i>
-									</a>
-								</li>
-		</ul>
-	   <!--/. NAV TOP  -->
+
+
+		<!--左侧菜单  -->
         <!--/. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
@@ -410,10 +332,10 @@ function oper_savedraft(id) {
                 	帮扶信息
         </h1>
 	    <ol class="breadcrumb">
-			<li><a href="#">首页</a></li>
-			<li><a href="#">帮扶企业 </a></li>
-			<li><a href="#">帮扶信息 </a></li>
-			<li class="active">Data</li>
+			<li><a href="../admin">首页</a></li>
+			<li><a href="addoil_publish">帮扶企业 </a></li>
+			<li><a href="addoil_publish">帮扶信息 </a></li>
+			<!--<li class="active">Data</li>-->
 		</ol> 							
 	</div>
 		<!--666-->
@@ -423,7 +345,7 @@ function oper_savedraft(id) {
 		<div class="row">
 			<div class="col-lg-12">
 	            <div class="card">
-	            	<div class="card-action">
+	            	<div class="card-action" id="mainframe">
                             	发布帮扶企业
                     </div>
 					<div class="card-content">
@@ -435,19 +357,49 @@ function oper_savedraft(id) {
 								<div class="form-group">
 									<label for="model.album_id" class="col-sm-2 control-label">栏目</label>
 									<div class="col-sm-10" >
-										<select  class="form-control" name="model.album_id">
+										<select id="select" class="form-control" name="model.album_id">
 											<option value="-1">--请选择栏目--</option>
 											<%  //var albums=tempTrd.albums();
 												if(!isEmpty(albums)) {
 											 	for(item in albums){ %>
-													<option value="${item.id}" ${item.id==model.album_id!0?'selected':''} >${item.name}</option>
+													<option id="option${item.id}" value="${item.id}" ${item.id==model.album_id!0?'selected':''} >${item.name}</option>
 													<%
 													}
 											    }
 											%>
 										</select>
+
+
+										<!--<button data-toggle="modal" data-target="#myModal">新增分类</button>-->
+										<button id="displaybutton" onclick="opendiv();return false;">点击编辑分类</button>
+										<!--隐藏div  代替模态框-->
+										<div id="hiddendiv" onmouseleave="closediv();return false;" style="display:none;">
+												<div class="modal-body">
+													<input id="albumname" type="text" name="albumname" placeholder="输入新分类的名称">
+													<input type="button" value="确认增加" onclick="oper_addAlbum('0');return false;">
+												</div>
+												<!--&lt;!&ndash;显示原来的分类&ndash;&gt;-->
+												<div class="modal-body">
+													<table>
+														<thead>
+														<th>分类名称</th>
+														<th>删除</th>
+														</thead>
+														<tbody id="modal_tobody">
+														<%for(item in albums){ %>
+														<tr id="modal${item.id}">
+															<td>${item.name}</td>
+															<td><a onclick="oper_delAlbum(${item.id!'0'});return false;" aria-hidden="true">删除</a></td>
+														</tr>
+														<%}%>
+														</tbody>
+													</table>
+												</div>
+										</div>
 									</div>
 								</div>
+
+
 								<!--标题-->
 								<div class="form-group">
 									<label for="model.name" class="col-sm-2 control-label">标题</label>
@@ -494,8 +446,8 @@ function oper_savedraft(id) {
 									        <label>
 									         <input type="button" value="确认发布"  class="waves-effect waves-light btn-large" onclick="oper_save(${model.id!'0'});"/>&nbsp;
 									          <input type="button" value="保存草稿箱"  class="waves-effect waves-light btn-large" onclick="oper_savedraft(${model.id!'0'});"/>
-									          <!-- <a class="waves-effect waves-light btn-large">保存草稿箱</a>&nbsp;
-									          <!--  <a class="waves-effect waves-light btn-large">确认发布</a>-->
+									          <!-- <a class="waves-effect waves-light btn-large">保存草稿箱</a>
+									          <a class="waves-effect waves-light btn-large">确认发布</a>-->
 									        </label>
 										</div>
 									</div>
@@ -513,14 +465,15 @@ function oper_savedraft(id) {
 		
 	</div><!-- /. PAGE WRAPPER  -->
 
+
 </div>
+</body>
      <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
     <script src="${BASE_PATH }static/backend/assets/js/jquery-1.10.2.js"></script>
-	
-	<!-- Bootstrap Js -->
-
+	<script src="${BASE_PATH }static/backend/assets/js/jquery-1.12.4.js"></script>
+	<!---->
     <script src="${BASE_PATH }static/backend/assets/js/bootstrap.min.js"></script>
 	
 	<script src="${BASE_PATH }static/backend/assets/materialize/js/materialize.min.js"></script>
@@ -541,6 +494,6 @@ function oper_savedraft(id) {
    <script src="${BASE_PATH }static/backend/assets/js/custom-scripts.js"></script>
 
 
-</body>
+
 
 </html>
