@@ -77,6 +77,8 @@ public class AdminHomeController extends BaseProjectController {
 		//帮扶企业 308
 		long addoils=Db.queryLong("select count(*)  from tb_addoil where 1=1");
 
+		//获取当前用户的权限
+
 		setAttr("specials", specials);
 		setAttr("sales", sales);
 		setAttr("newscenters", newscenters);

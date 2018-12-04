@@ -16,7 +16,7 @@ import java.io.File;
  * 
  * @author ZR2018.11.20
  */
-@ControllerBind(controllerKey = "/admin/logo")
+@ControllerBind(controllerKey = "/admin/setting_logo")
 public class LogoController extends BaseProjectController {
 
 	private static final String path = "/pages/admin/aboutweb/setting_";
@@ -78,7 +78,7 @@ public class LogoController extends BaseProjectController {
 		renderMessage("保存成功");
 
 		//render( "/pages/admin/aboutweb/setting_logo.html");//12.4修改
-		redirect("/admin/logo");//12.4修改
+		redirect("/admin/setting_logo");//12.4修改
 	}
 }
 

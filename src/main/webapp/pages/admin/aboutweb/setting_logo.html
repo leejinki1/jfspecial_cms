@@ -88,7 +88,7 @@
                             	发布新闻
                     </div>
 					<div class="card-content">
-						<form class="col s12 form-horizontal" enctype="multipart/form-data" method="post" action="logo/save">
+                        <form id="form1" class="form-horizontal" name="form1" action="" method="post" enctype="multipart/form-data">
 							<div class="row">
 								<div class="file-field input-field col s12">
 							      <div class="btn">
@@ -159,7 +159,14 @@
                 alert("上传图片为空");
                 return false;
             }
+
+            <!--提交-->
+		form1.action = "setting_logo/save";
+		form1.submit();
+		return true;
         }
+        }
+
     </script>
 </body>
 

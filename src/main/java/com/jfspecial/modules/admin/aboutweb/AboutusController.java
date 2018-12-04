@@ -13,7 +13,7 @@ import javax.xml.ws.RequestWrapper;
  * 
  * @author ZR2018.11.20
  */
-@ControllerBind(controllerKey = "/admin/aboutus")
+@ControllerBind(controllerKey = "/admin/setting_aboutus")
 public class AboutusController extends BaseController {
 
 	private static final String path = "/pages/admin/aboutweb/setting_";
