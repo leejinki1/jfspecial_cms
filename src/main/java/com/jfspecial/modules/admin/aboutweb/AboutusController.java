@@ -1,8 +1,10 @@
 package com.jfspecial.modules.admin.aboutweb;
 
+import com.alibaba.fastjson.JSONObject;
 import com.jfspecial.jfinal.base.BaseController;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
 import com.jfspecial.jfinal.component.db.SQLUtils;
+import com.jfspecial.system.user.SysUser;
 
 import javax.xml.ws.RequestWrapper;
 
@@ -33,14 +35,23 @@ public class AboutusController extends BaseController {
 
 	//这个方法没有试验是否有效,因为没有进来
 	public void save(){
-		//renderText("声明此方法是一个action");
+		JSONObject json = new JSONObject();
+		json.put("status", 2);// 失败
+
+		SysUser user = (SysUser) getSessionUser();
+		if (user == null) {
+			json.put("msg", "没有登录，不能提交文章！");
+			renderJson(json.toJSONString());
+			return;
+		}
 
 		//获取前台页面的值
-		//System.out.println("测试3:save++++++++"+getPara("model.introduction"));//测试方法1
+		Integer pid = getParaToInt();//获取路径中的id值
 		SysAboutus model = getModel(SysAboutus.class);
+		String in=model.getIntroduction();
+
 		//用set方法修改model的值
-		model.setIntroduction(getPara("model.introduction"));
-		model.setId("1");
+		model.setId("1");//表单中没有提交id的值,
 
 		//设置修改人和修改时间
 		Integer userid= getSessionUser().getUserid();
@@ -51,19 +62,33 @@ public class AboutusController extends BaseController {
 		model.setUpdatedate(now);
 
 		//修改
-		//System.out.println("测试:"+model);//测试
-		boolean a=model.update();
-		if(a){
-			System.out.println("成功");//测试
-		}else {
-			System.out.println("失败");//测试
+		boolean is=false;
+		if(pid != null && pid > 0) {//更新
+			is=model.update();
+			if(is){
+				System.out.println("修改成功");//测试
+				json.put("status", 1);// 成功
+			}else {
+				System.out.println("修改失败");//测试
+				json.put("msg","数据库错误");// 失败
+			}
+		}else{//新增
+			model.remove("id");
+			is=model.save();
+			if(is){
+				System.out.println("新增成功");//测试
+				json.put("status", 1);// 成功
+			}else {
+				System.out.println("新增失败");//测试
+				json.put("msg","数据库错误");// 失败
+			}
 		}
-		//System.out.println("测试:"+model);//测试
+		System.out.println(is);
 
 		//保存设置,返回给前台
 		setAttr("model", model);
-		renderMessage("保存成功");
-		show();
+		//增加msg的值,报错误原因
+		renderJson(json.toJSONString());
 
 	}
 }
