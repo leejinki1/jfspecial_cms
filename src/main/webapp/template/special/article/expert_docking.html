@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- jquery -->
+<% include("/template/includes/jquery.html"){} %>
+<% include("/template/includes/ueditor.html"){} %>
+
+<script type="text/javascript">
+	var ue;
+	$(document).ready(function(){
+		ue = UE.getEditor('editor',{
+			initialFrameHeight:350  //初始化编辑器高度,默认320
+			,compressSide:1
+			,imageScaleEnabled:false // 图片不允许拖拽
+       		, toolbars: [[
+                       'source', '|',
+                      'bold', 'italic', 'underline', 'strikethrough', 'insertorderedlist', 'insertunorderedlist', 'paragraph', '|',
+                      'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|',
+                      'link', 'unlink', '|',
+                      'simpleupload', 'insertimage', 'emotion' , 'insertcode'
+                  ]]
+		});
+
+	});
+
+function oper_save1() {
+		var specialId = $('[name="model.special_id"]').val();
+		if(specialId=='-1') {
+			Alert('请选择栏目');
+			return false;
+		}
+
+        var yourName = $('[name="model.your_name"]').val();
+		if(yourName==''){
+			alert('您的姓名不能为空！');
+			return;
+		}
+
+		var imageCode = $('[name="imageCode"]').val();
+		if(imageCode==''){
+			alert('验证码不能为空！');
+			return;
+		}
+		var title = $('[name="model.name"]').val();
+		if(title=='') {
+			Alert('请输入文章题目');
+			return false;
+		}
+		if(title.length > 80 ) {
+			Alert('文章（'+title.length+'字）题目过长，请输入小于80个字');
+			return false;
+		}
+
+		if(!ue.hasContents()){
+			Alert('请输入文章内容');
+			return false;
+		}
+		if(ue.getContentTxt().length > 1200){
+			Alert('文章（'+ue.getContentTxt().length+'字）文字过长，请输入小于1200个字');
+			return false;
+		}
+
+
+    //form1.action =  "../../../front/expert/expert_docking/save/"+ $('[name="articleId"]').val();
+	//		form1.submit();
+		jQuery.ajax({
+			type:'POST',
+			url:'../../../front/special/expert_docking/save',
+			data:$("form").serialize(),
+			success:function(data){
+				if(data.status==1){
+					alert('保存成功');
+					return true;
+				} else {
+					alert('发布失败：'+data.msg);
+				}
+			},
+			error:function(html){
+				var flag = (typeof console != 'undefined');
+				if(flag) console.log("服务器忙，提交数据失败，代码:" +html.status+ "，请联系管理员！");
+				alert("服务器忙，提交数据失败，请联系管理员！");
+			}
+		});
+		return false;
+	}
+function loadPicimageCode() {
+		document.getElementById("picimageCode").src = '${BASE_PATH }front/image_code?ran=' + Math.random();
+	}
+</script>
+
+<head>
+    <title>特派员</title>
+    <!-- meta-tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //meta-tags -->
+    <!-- Custom Theme files -->
+    <link href="${BASE_PATH }static/frontend/css/all.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="${BASE_PATH }static/frontend/css/special/tepaiyuan.css" />
+    <!-- js -->
+    <script src="${BASE_PATH }static/frontend/js/jquery-1.11.1.min.js"></script>
+    <!-- //js -->
+    <!-- web-font -->
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
+    <!-- //web-font -->
+   <script>
+	$(function() {
+		$('#save_btn').on('click', function (e) {
+			form1.action =  "../../../front/special/expert_docking/save";
+			form1.submit();
+	    });
+	});
+	</script>
+</head>
+<body>
+<!-- header -->
+<% include("/template/special/includes/header_article.html"){} %>
+<!-- //header -->
+<!-- centerBox -->
+<div class="centerBox container-fluid">
+    <div class="row">
+        <!--中间--左边-->
+        <div class="centerBox-left col-md-4 col-sm-4 col-xs-12">
+            <div class="centerBox-left-c1">
+                <h4>特派员</h4>
+                <ul>
+                    <li><button type="button" class="btn btn-xs tepaiyuan_c1" onclick="tepaiyuan_c1()" >特派员列表</button></li>
+                    <li><button type="button" class="btn btn-xs tepaiyuan_c2" style="border: 2px solid;">特派员介绍</button></li>
+                    <li><button type="button" class="btn btn-xs tepaiyuan_c3" onclick="tepaiyuan_c3()">对接专家</button></li>
+                    <li><button type="button" class="btn btn-xs tepaiyuan_c4" onclick="tepaiyuan_c4()">解答列表</button></li>
+                </ul>
+            </div>
+            <div class="centerBox-left-c2"></div>
+        </div>
+        <!--中间--右边-->
+        <div class="centerBox-right col-md-8 col-sm-8 col-xs-12">
+            <div class="centerBox-right-c1">
+                <ol class="breadcrumb">
+                    <li><a href="../../../index.html">首页</a></li>
+                    <li><a href="../../../special.html">特派员</a></li>
+                    <li class="active">对接专家</li>
+                </ol>
+            </div>
+
+            <div class="centerBox-right-c2">
+                <form  class="form-horizontal" name="form1" action="" method="post"style="margin:5px 0px;">
+                    <div class="form-group">
+                        <label for="model.special_id" class="col-sm-3 col-xs-12 control-label">指定特派员</label>
+                        <div class="col-sm-9 col-xs-12">
+                            <select name="model.special_id" id="model.special_id"class="form-control">
+                                <option value="-1">--请选择特派员--</option>
+                                <%
+                                if(!isEmpty(specials)) {
+                                    for(item in specials){ %>
+                                    <option value="${item.userid}" ${item.userid==userId!0?'selected':''} >${item.realname}</option>
+                                    <%
+                                    }
+                                }
+                                %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="your_name" class="col-sm-3 control-label">您的姓名</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="your_name" placeholder="请输入姓名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="your_contact" class="col-sm-3 control-label">联系方式</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="your_contact" placeholder="请输入联系方式">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="model.name" class="col-sm-3 control-label">标题</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="model.name" placeholder="请输入标题">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="remark" class="col-sm-3 control-label">内容</label>
+                        <div class="col-sm-9">
+                            <script id="editor" type="text/plain" name="model.content"
+                                    style="width: 98%; height: 320px;">${model.content!''}</script>
+						</div>
+					</div>
+                   <!-- <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-3 control-label">正文内容</label>
+                        <div class="col-sm-9">
+                            <textarea id="content" class="form-control" rows="6" placeholder="..."></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-3 control-label">文件上传</label>
+                        <div class="col-sm-9">
+                            <input type="file" class="btn btn-default">
+                        </div>
+                    </div>-->
+
+                        <div class="form-group">
+                        <label for="imageCode" class="col-sm-3 control-label">验证码</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="imageCode" name="imageCode"placeholder="">
+                        </div>
+                        <div class="col-sm-6" style="text-align: left;">
+                            <img id="picimageCode" src="${BASE_PATH }front/image_code"onclick="loadPicimageCode()" width="100px" height="40px"/>&nbsp;
+                            <button type="button" class="btn btn-link"onclick="loadPicimageCode()">获取验证码</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="submit" class="btn btn-default btn-lg"name="save_btn"id="save_btn" value="提 交" >&nbsp;
+                                    <input class="btn btn-default btn-lg" type="reset" value="重 置" >
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="centerBox-right-c3"></div>
+        </div>
+    </div>
+
+</div>
+<!-- //centerBox -->
+<!-- footer -->
+<% include("/template/special/includes/footer1.html"){} %>
+<!-- //footer -->
+<!-- start-smooth-scrolling -->
+<script type="text/javascript" src="${BASE_PATH }static/frontend/js/move-top.js"></script>
+<script type="text/javascript" src="${BASE_PATH }static/frontend/js/easing.js"></script>
+<script type="text/javascript" src="${BASE_PATH }static/frontend/js/jquery-1.11.1.min.js" ></script>
+<script type="text/javascript" src="${BASE_PATH }static/frontend/js/special/article.js" ></script>
+
+<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){
+					event.preventDefault();
+
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+	</script>
+<!-- //end-smooth-scrolling -->
+<!-- smooth-scrolling-of-move-up -->
+<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+			var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear'
+			};
+			*/
+
+			//$().UItoTop({ easingType: 'easeOutQuart' });
+
+		});
+	</script>
+<!-- //smooth-scrolling-of-move-up -->
+<!-- for bootstrap working -->
+<script src="${BASE_PATH }static/frontend/js/bootstrap.js"> </script>
+<!-- //for bootstrap working -->
+</body>
+</html>

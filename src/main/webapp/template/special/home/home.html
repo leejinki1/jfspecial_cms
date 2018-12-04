@@ -1,12 +1,6 @@
 <%
 // 首页图片 13
-var topPics = temp.rollPicture(1);
-
-// 最新动态
-var newArticles = temp.articlePageTop(1, 10, session.site.siteId);
-
-// 公告
-var noticeList = temp.notice(1);
+//var topPics = temp.rollPicture(1);
 
 //特派员 300
 var specials=	temp.articlePage(1,10,300);
@@ -35,6 +29,8 @@ var projectapps=tempProjectApp.alter_projectapps(1,5);
 //帮扶企业 308
 var addoils=tempAddOil.alter_addoils(1,5);
 
+//专家对接308
+var expertdockings=tempExpertDocking.alter_expertdockings(1,5);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -147,23 +143,24 @@ var addoils=tempAddOil.alter_addoils(1,5);
 					/*.lgLink,.userBox{border: 1px white solid;}*/
 				</style>
 				<div class="loginAndregister">
-					<% if(isEmpty(session.session_user)){ %>
-					<div class="lgLink">
-						<a href="login.html">登 录</a>&nbsp;
-						<a href="front/regist.html">注 册</a>
-					</div>
+					<% if (isEmpty(session.session_user)){ %>
+						<div class="lgLink">
+							<a href="login.html">登 录</a>&nbsp;
+							<a href="front/regist.html">注 册</a>
+						</div>
 					<% } else { %>
-					<div class="userBox">
-						<p>
-							<span class="glyphicon glyphicon-user" aria-hidden="false"></span>
-							${session.session_user.realname}&nbsp;<a href="${BASE_PATH }front/logout">注 销</a>
-						</p>
-					</div>
+					    ${session.session_user.realname}&nbsp;<a href="${BASE_PATH }front/logout">注 销</a>
+						<!--<div class="userBox">
+							<p>
+
+								<span class="glyphicon glyphicon-user" aria-hidden="false"></span>
+								${session.session_user.realname}&nbsp;<a href="${BASE_PATH }front/logout">注 销</a>
+							</p>
+						</div>-->
 					<% } %>
+
 				</div>
-
-
-				<!-- 收集的导航链接，和其他形式的内容，锁定 -->
+				        <!-- 收集的导航链接，和其他形式的内容，锁定 -->
 				<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li class="hvr-bounce-to-bottom active"><a href="index.html">主页</a></li>
@@ -298,9 +295,18 @@ var addoils=tempAddOil.alter_addoils(1,5);
 		<ul>
 			<li class="hc-top"><p>专家对接</p></li>
 			<li class="hc-center">
-				<div><a href="#"><b>绿水青山富农家</b><p>2018-11-15 10:20:00</p></a></div>
-				<div><a href="#"><b>绿水青山富农家</b><p>2018-11-15 10:20:00</p></a></div>
-				<div><a href="#"><b>绿水青山富农家</b><p>2018-11-15 10:20:00</p></a></div>
+				<% for(item in expertdockings.list){ %>
+				<% if(itemLP.index > 0){ %>
+				<div><a href="${BASE_PATH }front/trd/article/${item.id}.html" title="${item.title}">
+					<b>
+						<% if (strutil.length(item.name) > 8) { %>
+						${strutil.subStringTo(item.name, 0, 8)}...
+						<% 	} else { %>
+						${item.name}
+						<%  } %></b>
+					<p>${flyfox.substr(item.create_time,0,19) }</p></a></div>
+				<% } %>
+				<% } %>
 			</li>
 			<li class="hc-foot"><a href="special.html">浏览更多</a></li>
 		</ul>

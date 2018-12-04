@@ -30,6 +30,14 @@ public class TemplateSpecialService extends BaseService {
 		return service.getSpecial(new Paginator(pageNo, pageSize), albumId);
 	}
 
+	public Page<TbSpecial> alterspecials(int pageNo, int pageSize) {
+		return service.alterSpecial(new Paginator(pageNo, pageSize));
+	}
+
+	public Page<TbSpecial> alterspecials(int pageNo, int pageSize, int albumId) {
+		return service.alterSpecial(new Paginator(pageNo, pageSize), albumId);
+	}
+
 	public TbSpecial special(Integer userId) {
 		return service.getSpecial(userId);
 	}

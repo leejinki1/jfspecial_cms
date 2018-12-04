@@ -67,7 +67,7 @@ public class FrontNewsCenterService extends BaseService {
 	public Page<TbNewsCenter> alterNewsCenter(Paginator paginator) {
 		String key = ("newscenter_" + System.currentTimeMillis());
 		Page<TbNewsCenter> newscenters = TbNewsCenter.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_policy " //
+				, " from tb_newscenter " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " order by update_time desc");
 		return newscenters;

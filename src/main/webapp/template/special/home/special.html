@@ -9,10 +9,8 @@
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- //meta-tags -->
     <!-- Custom Theme files -->
-    <link href="${BASE_PATH }static/frontend/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${BASE_PATH }static/frontend/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="${BASE_PATH }static/frontend/css/all.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" href="${BASE_PATH }static/frontend/css/special/tepaiyuan.css" />
-    <link href="${BASE_PATH }static/frontend/css/font-awesome.css" rel="stylesheet"> 			<!-- font-awesome icons -->
     <!-- //Custom Theme files -->
     <!-- js -->
     <script src="${BASE_PATH }static/frontend/js/jquery-1.11.1.min.js"></script>
@@ -21,14 +19,11 @@
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
     <!-- //web-font -->
     <script>
-
     </script>
 </head>
 <body>
 <!-- header -->
-<div class="tou">
-
-</div>
+<% include("/template/special/includes/header1.html"){} %>
 <!-- //header -->
 <!-- centerBox -->
 <div class="centerBox container-fluid">
@@ -36,7 +31,6 @@
         <!--中间--左边-->
         <div class="centerBox-left col-md-4 col-sm-4 col-xs-12">
             <div class="centerBox-left-c1">
-
             </div>
             <div class="centerBox-left-c2"></div>
         </div>
@@ -61,8 +55,7 @@
 </div>
 <!-- //centerBox -->
 <!-- footer -->
-
-<div class="wei"></div>
+<% include("/template/special/includes/footer1.html"){} %>
 <!-- //footer -->
 <!-- start-smooth-scrolling -->
 <script type="text/javascript" src="${BASE_PATH }static/frontend/js/move-top.js"></script>

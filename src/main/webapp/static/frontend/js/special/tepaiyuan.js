@@ -8,10 +8,7 @@ function tepaiyuan_c1(){
 		$(".centerBox-right-c2").load("static/frontend/html/special/test1.html",function(){
 			$(".centerBox-right-c1 button:last").text($(".tepaiyuan_c1").text());//连动
 		});
-		
 	}else{}
-	
-
 }
 //特派员介绍
 function tepaiyuan_c2(){
@@ -66,12 +63,12 @@ $(document).on("click",".centerBox-right-c2 td a",function(){
 /*这些是特卖区的函数*/
 
 $(function(){
-		$(".tou").load("static/frontend/html/header.html");
+		$(".tou").load("static/frontend/html/header1.html");
         	$(".wei").load("static/frontend/html/footer.html");
 	//默认第一个--特派员--
 	/*特派员的初始化*/
-//	$(".centerBox-left-c1").load("static/frontend/html/special/tepaiyuan_left_1.html");
-//	$(".centerBox-right-c1").load("static/frontend/html/special/tepaiyuan_right_1.html");
+	$(".centerBox-left-c1").load("static/frontend/html/special/tepaiyuan_left_1.html");
+	//$(".centerBox-right-c1").load("static/frontend/html/special/tepaiyuan_right_1.html");
 	//$(".centerBox-right-c2").load("static/frontend/html/special/test1.html");
 	
 	

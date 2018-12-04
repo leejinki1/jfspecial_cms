@@ -9,10 +9,8 @@
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- //meta-tags -->
     <!-- Custom Theme files -->
-    <link href="${BASE_PATH }static/frontend/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${BASE_PATH }static/frontend/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="${BASE_PATH }static/frontend/css/all.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" href="${BASE_PATH }static/frontend/css/special/tepaiyuan.css" />
-    <link href="${BASE_PATH }static/frontend/css/font-awesome.css" rel="stylesheet"> 			<!-- font-awesome icons -->
     <!-- //Custom Theme files -->
     <!-- js -->
     <script src="${BASE_PATH }static/frontend/js/jquery-1.11.1.min.js"></script>
@@ -21,14 +19,11 @@
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
     <!-- //web-font -->
     <script>
-
     </script>
 </head>
 <body>
 <!-- header -->
-<div class="tou">
-
-</div>
+<% include("/template/special/includes/header_article.html"){} %>
 <!-- //header -->
 <!-- centerBox -->
 <div class="centerBox container-fluid">
@@ -49,15 +44,17 @@
         <!--中间--右边-->
         <div class="centerBox-right col-md-8 col-sm-8 col-xs-12">
             <div class="centerBox-right-c1">
-                <button class="btn btn-warning btn-xs" disabled="disabled">首页</button>
-                <img src="${BASE_PATH }static/frontend/images/rightImg.png"/>
-                <button class="btn btn-warning btn-xs" disabled="disabled">特派员</button>
-                <img src='${BASE_PATH }static/frontend/images/rightImg.png'/><span>特派员介绍</span>
+                <ol class="breadcrumb">
+                    <li><a href="../../../index.html">首页</a></li>
+                    <li><a href="../../../special.html">特卖区</a></li>
+                    <li class="active">特派员介绍</li>
+                </ol>
+
             </div>
 
             <div class="centerBox-right-c2">
                 <h4>特派员个人信息</h4>
-                <table class="table table-striped">
+                <table class="table table-striped onlyMessage">
                     <tr>
                         <td>姓名</td><td>${item.realname}</td>
                     </tr>
@@ -96,13 +93,15 @@
                     </tr>
                     <tr>
                         <td>工作经历</td><td>
-                        <textarea class="form-control" rows="3">
+                        <textarea class="form-control" rows="10" readonly="readonly">
                             ${item.workexperience}
                          </textarea>
                     </td>
                     </tr>
                 </table>
-                <button type="button" class="btn btn-warning" style="width: 100%;">对接此专家</button>
+                <a href="${BASE_PATH }front/special/expert_docking/${item.userid}.html">
+                   <button type="button" class="btn btn-warning" style="width: 100%;">对接此专家</button>
+                </a>
             </div>
             <div class="centerBox-right-c3"></div>
         </div>
@@ -111,8 +110,7 @@
 </div>
 <!-- //centerBox -->
 <!-- footer -->
-
-<div class="wei"></div>
+<% include("/template/special/includes/footer1.html"){} %>
 <!-- //footer -->
 <!-- start-smooth-scrolling -->
 <script type="text/javascript" src="${BASE_PATH }static/frontend/js/move-top.js"></script>

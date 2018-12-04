@@ -95,6 +95,7 @@ public class BaseConfig extends JFinalConfig {
 		groupTemplate.registerFunctionPackage("tempSpp", TemplateSppService.class);
 		groupTemplate.registerFunctionPackage("tempProjectApp", TemplateProjectAppService.class);
 		groupTemplate.registerFunctionPackage("tempAddOil", TemplateAddoilService.class);
+		groupTemplate.registerFunctionPackage("tempExpertDocking", TemplateExpertDockingService.class);
 		groupTemplate.registerFunctionPackage("tempSpecial", TemplateSpecialService.class);
 	};
 	

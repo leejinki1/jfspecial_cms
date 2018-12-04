@@ -1,4 +1,3 @@
-
 $(document).on("click",".centerBox-left-c1 .btn",function(){
 	/*来变颜色*/
 	$(".centerBox-left-c1 .btn").css("border","0px");
@@ -13,10 +12,23 @@ $(document).on("click",".centerBox-right-c2 p a",function(){
 	$(".centerBox-left-c2").load("temaiqu_left_2_2.html");
 	$(".centerBox-right-c1 p").append("<img src='../../images/rightImg.png'/>"+
 	"<span>正文</span>");
-	
+
 })
+$(document).on("click",".centerBox-left-c1 li",function(){
+	var clickName=$(this).text();
+	/*来变颜色*/
+	$(".centerBox-left-c1 li").css({"background":"#1b1e31"},{"color":"whitesmoke"});
+	$(this).css("background","#8f56cc7a");
+	$(".centerBox-right-c2").empty();
+	$(".centerBox-right-c2").load("temaiqu_right_2.html",function(){
+
+		$(".breadcrumb li:last-child").text(clickName);
+	});
+
+})
+
 $(function(){
-	    $(".tou").load("static/frontend/html/header.html");
+	    $(".tou").load("static/frontend/html/header1.html");
     	$(".wei").load("static/frontend/html/footer.html");
 	/*特卖区的初始化*/
 //	$(".centerBox-left-c1").load("temaiqu_left_1.html");

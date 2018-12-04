@@ -26,9 +26,7 @@
 </head>
 <body>
 <!-- header -->
-<div class="tou">
-
-</div>
+<% include("/template/special/includes/header1.html"){} %>
 <!-- //header -->
 <!-- centerBox -->
 <div class="centerBox container-fluid">
@@ -47,13 +45,8 @@
 </div>
 <!-- //centerBox -->
 <!-- footer -->
-
-<div class="wei"></div>
-<!-- //footer -->
-<!-- start-smooth-scrolling -->
-<script type="text/javascript" src="${BASE_PATH }static/frontend/js/move-top.js"></script>
-<script type="text/javascript" src="${BASE_PATH }static/frontend/js/easing.js"></script>
-<script type="text/javascript" src="${BASE_PATH }static/frontend/js/jquery-1.11.1.min.js" ></script>
+<% include("/template/special/includes/footer1.html"){} %>
+<!-- //footer --><!-- start-smooth-scrolling -->
 <script type="text/javascript" src="${BASE_PATH }static/frontend/js/projectapp/xiangmushenbao.js" ></script>
 
 <script type="text/javascript">
@@ -82,9 +75,5 @@
 
 		});
 	</script>
-<!-- //smooth-scrolling-of-move-up -->
-<!-- for bootstrap working -->
-<script src="${BASE_PATH }static/frontend/js/bootstrap.js"> </script>
-<!-- //for bootstrap working -->
 </body>
 </html>

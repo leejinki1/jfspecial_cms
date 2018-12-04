@@ -36,8 +36,7 @@ public class RegistController extends BaseProjectController {
 		if (user != null) {
 			redirect(prePage);
 		} else {
-			//renderAuto(path + "show_regist.html");
-			renderAuto(path + "login.html");
+			renderAuto(path + "register.html");
 		}
 	}
 
@@ -52,6 +51,7 @@ public class RegistController extends BaseProjectController {
 		String password = getPara("password");
 		String password2 = getPara("password2");
 		String key = user.getStr("username");
+		String rolename = user.getStr("rolename");
 
 		// 获取验证码
 		String imageCode = getSessionAttr(ImageCode.class.getName());
@@ -89,6 +89,7 @@ public class RegistController extends BaseProjectController {
 		}
 
 		user.set("username", key);
+		user.set("rolename", rolename);
 		user.set("password", JFSpecialUtils.passwordEncrypt(password));
 		user.set("usertype", JFSpecialUtils.USER_TYPE_FRONT);
 		user.set("departid", JFSpecialUtils.DEPART_REGIST_ID);

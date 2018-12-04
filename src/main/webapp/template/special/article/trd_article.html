@@ -9,10 +9,8 @@
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- //meta-tags -->
     <!-- Custom Theme files -->
-    <link href="${BASE_PATH }static/frontend/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${BASE_PATH }static/frontend/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="${BASE_PATH }static/frontend/css/all.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" href="${BASE_PATH }static/frontend/css/trd/jishuxuqiu.css" />
-    <link href="${BASE_PATH }static/frontend/css/font-awesome.css" rel="stylesheet"> 			<!-- font-awesome icons -->
     <!-- //Custom Theme files -->
     <!-- js -->
     <script src="${BASE_PATH }static/frontend/js/jquery-1.11.1.min.js"></script>
@@ -26,9 +24,7 @@
 </head>
 <body>
 <!-- header -->
-<div class="tou">
-
-</div>
+<% include("/template/special/includes/header_article.html"){} %>
 <!-- //header -->
 <!-- centerBox -->
 <div class="centerBox container-fluid">
@@ -53,12 +49,11 @@
         <!--中间--右边-->
         <div class="centerBox-right col-md-8 col-sm-8 col-xs-12">
             <div class="centerBox-right-c1">
-                <p>
-                    <button class="btn btn-warning btn-xs" disabled="disabled">首页</button>
-                    <img src="${BASE_PATH }static/frontend/images/rightImg.png"/>
-                    <button class="btn btn-warning btn-xs" disabled="disabled">技术需求</button>
-                    <img src='${BASE_PATH }static/frontend/images/rightImg.png'/><span>正文</span>
-                </p>
+                <ol class="breadcrumb">
+                    <li><a href="../../../index.html">首页</a></li>
+                    <li><a href="../../../spp.html">技术需求</a></li>
+                    <li class="active">正文</li>
+                </ol>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -87,8 +82,7 @@
 </div>
 <!-- //centerBox -->
 <!-- footer -->
-
-<div class="wei"></div>
+<% include("/template/special/includes/footer1.html"){} %>
 <!-- //footer -->
 <!-- start-smooth-scrolling -->
 <script type="text/javascript" src="${BASE_PATH }static/frontend/js/move-top.js"></script>

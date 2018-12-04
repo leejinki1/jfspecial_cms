@@ -1,37 +1,36 @@
-/* tepaiyuan.html、、、 :功能模块center中的样式*/
 
-.centerBox-left{margin-bottom: 3px;background: #E6E6E6;}
-.centerBox-left h4{padding: 2px;font-weight: bolder;}
-.centerBox-left ul li{padding: 2px;}
-.centerBox-left-c1 button{background: white;font-size: 14px;}
-
-.centerBox-right{}
-.centerBox-right-c1 ul li{display: inline-block;}
-.centerBox-right-c1 p img{width: 36px;height: 15px;}
-
-
-.centerBox-right-c2 h4{text-align: center;font-weight: bolder;}
-
-
-
-/*手机*/
-@media screen and (min-width: 66px) {
-    .centerBox-left ul li{display: inline-block;}
-    .centerBox-right-c2 table{width: 100%;font-size:14px;text-align: center;}
-    .centerBox-right-c2 table tr{width:100%;display: flex;flex-wrap: wrap;}
-    .centerBox-right-c2 table tr td{width:50%;}
-    .centerBox-right-c2 table tr td img{width:95%;height:150px;}
-	
+/*图片自适应*/
+.centerBox-right-c2 .temaiquUL{display: flex;flex-wrap: wrap;text-align: center;}
+.centerBox-right-c2 .temaiquUL li{padding: 3px;}
+.centerBox-right-c2 .temaiquUL li div:nth-child(2) p a{width: 100%;display: inline-block;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
 }
-/*平板*/
-@media screen and (min-width: 768px) {
-	.centerBox-left ul li{display: block;}
-    .centerBox-right-c2 table{width: 100%;font-size:18px;text-align: center;font-weight: bolder;}
-    .centerBox-right-c2 table tr{width:100%;}
-    .centerBox-right-c2 table tr td{width:25%;}
-    .centerBox-right-c2 table tr td img{width:95%;height:200px;}
-    .centerBox-left-c1 button{width:50%;}
-}
+/*图片自适应*/
+.centerBox-right-c2 .temaiquUL li div:nth-child(1) img{width: 100%;height: 100%;}
 
 
-/*特派员--解答列表*/
+	/*手机*/
+	@media screen and (min-width:200px) and (max-width:768px){
+	    .centerBox-right-c2 .temaiquUL li{width: 50%;}
+		.centerBox-right-c2 .temaiquUL li div:nth-child(1){height: 200px;}
+		
+	}
+	/*平板*/
+	@media screen and (min-width:769px) and (max-width:991px){
+		.centerBox-right-c2 .temaiquUL li{width: 33.3%;}
+		.centerBox-right-c2 .temaiquUL li div:nth-child(1){height: 100px;}
+	}
+	/*电脑桌面*/
+	@media screen and (min-width:922px) and (max-width:1999px){
+		.centerBox-right-c2 .temaiquUL li{width: 25%;}
+		.centerBox-right-c2 .temaiquUL li div:nth-child(1){height: 150px;}
+	    
+	}
+	/*超大屏幕*/
+	@media screen and (min-width:1200px){
+		.centerBox-right-c2 .temaiquUL li{width: 20%;}
+		.centerBox-right-c2 .temaiquUL li div:nth-child(1){height: 200px;}
+	}
+

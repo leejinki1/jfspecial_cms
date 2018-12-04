@@ -9,11 +9,8 @@
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- //meta-tags -->
     <!-- Custom Theme files -->
-    <link href="${BASE_PATH }static/frontend/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${BASE_PATH }static/frontend/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="${BASE_PATH }static/frontend/css/all.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" href="${BASE_PATH }static/frontend/css/policy/zhengcefagui.css" />
-    <link href="${BASE_PATH }static/frontend/css/font-awesome.css" rel="stylesheet"> 			<!-- font-awesome icons -->
-    <!-- //Custom Theme files -->
     <!-- js -->
     <script src="${BASE_PATH }static/frontend/js/jquery-1.11.1.min.js"></script>
     <!-- //js -->
@@ -26,9 +23,7 @@
 </head>
 <body>
 <!-- header -->
-<div class="tou">
-
-</div>
+<% include("/template/special/includes/header_article.html"){} %>
 <!-- //header -->
 <!-- centerBox -->
 <div class="centerBox container-fluid">
@@ -53,20 +48,20 @@
         <!--中间--右边-->
         <div class="centerBox-right col-md-8 col-sm-8 col-xs-12">
             <div class="centerBox-right-c1">
-                <p>
-                    <button class="btn btn-warning btn-xs" disabled="disabled">首页</button>
-                    <img src="${BASE_PATH }static/frontend/images/rightImg.png"/>
-                    <button class="btn btn-warning btn-xs" disabled="disabled">政策法规</button>
-                    <img src='${BASE_PATH }static/frontend/images/rightImg.png'/><span>正文</span>
-                </p>
+                <ol class="breadcrumb">
+                    <li><a href="../../../index.html">首页</a></li>
+                    <li><a href="../../../policy.html">政策法规</a></li>
+                    <li class="active">正文</li>
+                </ol>
+
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="input-group" style="margin: 3px 0px;">
                                 <input type="text" class="form-control" placeholder="请输入您要搜索的内容">
                                 <span class="input-group-btn">
-			    	<button class="btn btn-default" type="button">搜索</button>
-			    </span>
+                                    <button class="btn btn-default" type="button">搜索</button>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -87,8 +82,7 @@
 </div>
 <!-- //centerBox -->
 <!-- footer -->
-
-<div class="wei"></div>
+<% include("/template/special/includes/footer1.html"){} %>
 <!-- //footer -->
 <!-- start-smooth-scrolling -->
 <script type="text/javascript" src="${BASE_PATH }static/frontend/js/move-top.js"></script>
