@@ -53,9 +53,12 @@ public class SignupMakerController extends BaseProjectController {
 		model.setContact(contact);
 		model.setEmail(email);
 		model.setRemark(remark);
-		model.setCreateId(getSessionUser().getUserid());
+		model.setRealName(realname);
+		//model.setCreateId(getSessionUser().getUserid());
 		model.setCreateTime(getNow());
 		model.save();
+
+		redirect( "/maker.html");
 
 	}
 

@@ -89,8 +89,8 @@ public class FrontAddoilService extends BaseService {
 	}
 	public Page<TbAddOil> alterAddOil(Paginator paginator, int albumId) {
 		String key = ("addoil_"  + System.currentTimeMillis());
-		Page<TbAddOil> addoils = TbAddOil.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_addoil " //
+		Page<TbAddOil> addoils = TbAddOil.dao.paginateCache(cacheName, key, paginator, "select (@i:=@i+1)pm,t.*  " //
+				, " from tb_addoil t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
 						+ " order by update_time desc", albumId);

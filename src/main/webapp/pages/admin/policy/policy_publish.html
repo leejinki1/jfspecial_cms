@@ -5,7 +5,20 @@
 <% include("/template/includes/jquery.html"){} %>
 <% include("/template/includes/ueditor.html"){} %>
 
-
+<script type="text/javascript">
+	var oper = {
+		save:function(id){
+			//if(!validForm()) {
+			//	return false;
+			//}
+			id = id || '0';
+			var url = 'policy_publish/publishArticle/'+id;
+			form1.action = url;
+			form1.submit();
+			return true;
+		}
+	};
+</script>
 
 <script type="text/javascript">
 	var ue;
@@ -22,7 +35,6 @@
                       'simpleupload', 'insertimage', 'emotion' , 'insertcode'
                   ]]
 		});
-
 	});
 function oper_save(id) {
 		<!--判断栏目-->
@@ -31,7 +43,6 @@ function oper_save(id) {
 			alert('请选择栏目');
 			return false;
 		}
-
 		<!--判断标题-->
 		var title = $('[name="model.name"]').val();
 		if(title=='') {
@@ -67,7 +78,6 @@ function oper_save(id) {
 
 		<!--利用插件上传文件-->
 
-
 		<!--ajax上传-->
 
 		jQuery.ajax({
@@ -83,9 +93,6 @@ function oper_save(id) {
 				} else {
 					alert('发布失败：'+data.msg);
 				}
-				$('[name="old_password"]').val('');
-				$('[name="new_password"]').val('');
-				$('[name="new_password2"]').val('');
 			},
 			error:function(html){
 				var flag = (typeof console != 'undefined');
@@ -159,9 +166,6 @@ function oper_savedraft(id) {
 				} else {
 					alert('发布失败：'+data.msg);
 				}
-				$('[name="old_password"]').val('');
-				$('[name="new_password"]').val('');
-				$('[name="new_password2"]').val('');
 			},
 			error:function(html){
 				var flag = (typeof console != 'undefined');
@@ -343,9 +347,10 @@ function closediv(){
                             	发布新闻
                     </div>
 					<div class="card-content">
-						<form class="form-horizontal" name="form1" action="" method="post" id="form1">
+						<form class="form-horizontal" name="form1" action="" method="post"
+							  enctype="multipart/form-data" role="form" id="form1">
 							<input type="hidden" name="model.id" class="form-control" id="model.id"
-								   value="${model.id!'0'}">
+								   value="${model.id!'0'}"/>
 							<div class="row">
 								<!--文章分类栏目-->
 								<div class="form-group">
@@ -408,11 +413,9 @@ function closediv(){
 										<!--下面是上传图片的,暂时未完成-->
 										<input  type="button" value="没有网络图片,点击上传本地图片;如果同时上传,以网络图片为准;" >
 										<input type="file" name="model.image_url" class="form-control" id="model.image_urle"
-											   value="${model.image_url!''}" placeholder="没有网络图片,点击上传本地图片;如果同时上传,以网络图片为准;">
-
+											   value="${model.image_url!''}" accept="image/*" placeholder="没有网络图片,点击上传本地图片;如果同时上传,以网络图片为准;">
 									</div>
 								</div>
-
 
 								<!--文字内容-->
 								<div class="form-group">
@@ -421,28 +424,28 @@ function closediv(){
 										<script id="editor" type="text/plain" name="model.content"
 												style="width: 98%; height: 320px;">${model.content!''}</script>
 									</div>
-							  </div>
+							 	 </div>
 
-							    <!--
-								<div class="input-field col s12">
-								  <textarea id="textarea1" class="materialize-textarea"></textarea>
-								  <label for="textarea1">分类设置</label>
-								</div>-->
-								<!--提交按钮-->
-									<div class="form-group">
+							 	 <div style="visibility: none;"
+							 	    <script id="editor" type="text/plain" name=""
+												style="width: 98%; height: 320px;">${model.content!''}</script>
+									</div>
+
+  								<!--提交按钮-->
+								<div class="form-group">
 										<div class="col-sm-offset-3 col-sm-9">
 											<div class="checkbox">
 												<label>
-												 <input type="button" value="确认发布"  class="waves-effect waves-light btn-large" onclick="oper_save(${model.id!'0'});"/>&nbsp;
-												  <input type="button" value="保存草稿箱"  class="waves-effect waves-light btn-large" onclick="oper_savedraft(${model.id!'0'});"/>
+												 <input type="button" value="确认发布"  class="waves-effect waves-light btn-large" onclick="oper_save(${model.id!'0'});return false;"/>&nbsp;
+												  <input type="button" value="保存草稿箱"  class="waves-effect waves-light btn-large" onclick="oper_savedraft(${model.id!'0'});return false;"/>
 												  <!-- <a class="waves-effect waves-light btn-large">保存草稿箱</a>&nbsp;
 												<!--  <a class="waves-effect waves-light btn-large">确认发布</a>-->
 												</label>
 											</div>
 										</div>
-									</div>
-
 								</div>
+								</div>
+							</div>
 							</form>
     					<div class="clearBoth"></div>
 	   					

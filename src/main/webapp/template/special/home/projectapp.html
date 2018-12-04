@@ -34,9 +34,10 @@
 
         <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
             <ul>
-                <li><a href="#">项目申请1</a></li>
-                <li><a href="#">项目申请2</a></li>
-                <li><a href="#">项目申请3</a></li>
+                <%  var page = tempProjectApp.alter_projectapps(paginator.pageNo, 10);%>
+                <% for(item in page.list){ %>
+                    <li><a href="#">${item.pm}、 ${item.name}</a></li>
+                <% } %>
             </ul>
         </div>
 
@@ -47,7 +48,7 @@
 <!-- footer -->
 <% include("/template/special/includes/footer1.html"){} %>
 <!-- //footer --><!-- start-smooth-scrolling -->
-<script type="text/javascript" src="${BASE_PATH }static/frontend/js/projectapp/xiangmushenbao.js" ></script>
+<script type="text/javascript" src="${BASE_PATH }static/frontend/js/projectapp/xiangmus1henbao.js" ></script>
 
 <script type="text/javascript">
 			jQuery(document).ready(function($) {

@@ -28,16 +28,16 @@ public class FrontSpecialService extends BaseService {
 	 */
 	public Page<TbSpecial> getSpecial(Paginator paginator) {
 		String key = ("special_" + paginator.getPageNo() + "_" + paginator.getPageSize());
-		Page<TbSpecial> specials = TbSpecial.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from sys_user " //
+		Page<TbSpecial> specials = TbSpecial.dao.paginateCache(cacheName, key, paginator, "select (@i:=@i+1)pm,t.* " //
+				, " from sys_user t,(select @i:=0)s " //
 						+ " where usertype = 10 " // 查询状态为显示
 						+ " order by create_time desc");
 		return specials;
 	}
 	public Page<TbSpecial> alterSpecial(Paginator paginator) {
 		String key = ("special_" + System.currentTimeMillis());
-		Page<TbSpecial> specials = TbSpecial.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from sys_user " //
+		Page<TbSpecial> specials = TbSpecial.dao.paginateCache(cacheName, key, paginator, "select (@i:=@i+1)pm,t.* " //
+				, " from sys_user t,(select @i:=0)s " //
 						+ " where usertype = 10 " // 查询状态为显示
 						+ " order by create_time desc");
 		return specials;
@@ -60,8 +60,8 @@ public class FrontSpecialService extends BaseService {
 
 	public Page<TbSpecial> alterSpecial(Paginator paginator, int userId) {
 		String key = ("special_" + System.currentTimeMillis());
-		Page<TbSpecial> specials = TbSpecial.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from sys_user " //
+		Page<TbSpecial> specials = TbSpecial.dao.paginateCache(cacheName, key, paginator, "select (@i:=@i+1)pm,t.* " //
+				, " from sys_user t,(select @i:=0)s " //
 						+ " where userid = ? " // 查询状态为显示
 						+ " order by create_time desc", userId);
 		return specials;

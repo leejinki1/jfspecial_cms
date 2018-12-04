@@ -65,8 +65,8 @@ public class FrontSppService extends BaseService {
 	}
 	public Page<TbSpp> alterSpp(Paginator paginator) {
 		String key = ("spp_" + System.currentTimeMillis());
-		Page<TbSpp> spps = TbSpp.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_spp " //
+		Page<TbSpp> spps = TbSpp.dao.paginateCache(cacheName, key, paginator, "select  (@i:=@i+1)pm,t.*  " //
+				, " from tb_spp  t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " order by update_time desc");
 		return spps;
@@ -90,8 +90,8 @@ public class FrontSppService extends BaseService {
 	}
 	public Page<TbSpp> alterSpp(Paginator paginator, int albumId) {
 		String key = ("spp_" + System.currentTimeMillis());
-		Page<TbSpp> spps = TbSpp.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_spp " //
+		Page<TbSpp> spps = TbSpp.dao.paginateCache(cacheName, key, paginator, "select  (@i:=@i+1)pm,t.*  " //
+				, " from tb_spp  t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
 						+ " order by update_time desc", albumId);

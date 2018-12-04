@@ -2,17 +2,17 @@
 <ul>
 	<% var x=0; for(item in albumlist){ x++;%>
 	<% if  (session.albumId==item.id) { %>
-	<li class="kepubankuai_c1">
-		<a href="${BASE_PATH }front/spp/${item.id}" title="${item.name}">
+	<a href="${BASE_PATH }front/spp/${item.id}" title="${item.name}">
+	<li class="kepubankuai_c1"style="background: rgba(143, 86, 204, 0.48);">
 			 ${item.name}
-		</a>
 	</li>
+	</a>
 	<% } else { %>
-	<li class="kepubankuai_c2">
-		<a href="${BASE_PATH }front/spp/${item.id}" title="${item.name}">
+	<a href="${BASE_PATH }front/spp/${item.id}" title="${item.name}">
+	<li class="kepubankuai_c2"style="background: rgb(27, 30, 49);">
 			${item.name}
-		</a>
 	</li>
+	</a>
 	<% } %>
 	<% } %>
 </ul>
