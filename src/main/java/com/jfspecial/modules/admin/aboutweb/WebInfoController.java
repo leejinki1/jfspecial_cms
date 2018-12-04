@@ -1,6 +1,7 @@
 package com.jfspecial.modules.admin.aboutweb;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.jfinal.kit.PathKit;
 import com.jfinal.upload.UploadFile;
 import com.jfspecial.component.util.ImageModel;
@@ -10,6 +11,7 @@ import com.jfspecial.jfinal.component.annotation.ControllerBind;
 import com.jfspecial.jfinal.component.db.SQLUtils;
 import com.jfspecial.modules.admin.site.TbSite;
 import com.jfspecial.system.file.util.FileUploadUtils;
+import com.jfspecial.system.user.SysUser;
 import com.jfspecial.util.StrUtils;import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
@@ -34,8 +36,8 @@ import java.io.File;
  * 
  * @author ZR2018.11.20
  */
-@ControllerBind(controllerKey = "/admin/hostcontact")
-public class WebInfoController extends BaseController {
+@ControllerBind(controllerKey = "/admin/setting_contact")
+public class WebInfoController extends BaseProjectController {
 
 	private static final String path = "/pages/admin/aboutweb/setting_";
 	
@@ -55,33 +57,33 @@ public class WebInfoController extends BaseController {
 
 	//这个方法没有试验是否有效,因为没有进来
 	public void save(){
+		JSONObject json = new JSONObject();
+		json.put("status", 2);// 失败
 
-		//renderText("声明此方法是一个action");
-
-		//上传图片
-		//TbSite site = getBackSite();
-		//public UploadFile getFile(String parameterName//参数名称, String saveDirectory//保存路径//默认是tomacat下upload下的文件夹, Integer maxPostSize//最大传输值, String encoding//编码,可用可不用)
-		//UploadFile uploadImage = getFile("model.image_url", FileUploadUtils.getUploadTmpPath(site), FileUploadUtils.UPLOAD_MAX);
-		UploadFile uploadImage=null;
-		try{
-			uploadImage = getFile("model.wechat","logo",FileUploadUtils.UPLOAD_MAX,"utf-8");
-		}catch(Exception exception){
-			System.out.println("路径错误");
+		SysUser user = (SysUser) getSessionUser();
+		if (user == null) {
+			json.put("msg", "没有登录，不能提交文章！");
+			renderJson(json.toJSONString());
+			return;
 		}
 
+		//上传图片
+		TbSite site = getBackSite();
+		String temUrl=FileUploadUtils.getUploadTmpPath(site);//获取临时存储路径
+		UploadFile uploadImage = getFile("model.weichat",temUrl, FileUploadUtils.UPLOAD_MAX,"utf-8");
+		//获取路径参数
+		SysAboutus model = getModel(SysAboutus.class);
+		if (uploadImage != null) {
+			model.setWechat(temUrl+"\\"+uploadImage.getFileName());//设置文件名
+		}else{
+			System.out.println("上传图片为空");
+		}
 
 		//获取前台页面的值
-		//System.out.println("测试3:save++++++++"+getPara("model.introduction"));//测试方法1
-		SysAboutus model = getModel(SysAboutus.class);
-		//用set方法修改model的值
+		Integer pid = getParaToInt();//获取路径中的id值
+		//Integer pid =1;
+		String wechat = getPara("wechat");
 		model.setId("1");
-		model.setDepartment(getPara("model.department"));
-		model.setAddress(getPara("model.address"));
-		model.setTel(getPara("model.tel"));
-		model.setFax(getPara("model.fax"));
-		model.setEmail(getPara("model.email"));
-		model.setWechat(uploadImage.getUploadPath()+"\\"+uploadImage.getFileName());
-		//System.out.println("测试:"+uploadImage.getUploadPath()+uploadImage.getFileName());
 
 
 
@@ -94,19 +96,32 @@ public class WebInfoController extends BaseController {
 		model.setUpdatedate(now);
 
 		//修改
-		//System.out.println("测试:"+model);//测试
-		boolean a=model.update();
-		if(a){
-			System.out.println("成功");//测试
-		}else {
-			System.out.println("失败");//测试
+		boolean is=false;
+		if(pid != null && pid > 0) {//更新
+			is=model.update();
+			if(is){
+				System.out.println("修改成功");//测试
+				json.put("status", 1);// 成功
+			}else {
+				System.out.println("修改失败");//测试
+				json.put("msg","数据库错误");// 失败
+			}
+		}else{//新增
+			model.remove("id");
+			is=model.save();
+			if(is){
+				System.out.println("新增成功");//测试
+				json.put("status", 1);// 成功
+			}else {
+				System.out.println("新增失败");//测试
+				json.put("msg","数据库错误");// 失败
+			}
 		}
-		//System.out.println("测试:"+model);//测试
-
 		//保存设置,返回给前台
 		setAttr("model", model);
-		renderMessage("保存成功");
-		show();
+		//增加msg的值,报错误原因
+
+		redirect("/admin/setting_contact");//12.4修改
 	}
 }
 

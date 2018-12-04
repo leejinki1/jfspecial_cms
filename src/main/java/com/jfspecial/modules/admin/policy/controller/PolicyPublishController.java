@@ -51,6 +51,7 @@ public class PolicyPublishController extends BaseProjectController {
 
 		setAttr("user", user);
 
+
 		// 不是自己的文章也想修改,总有不怀好意的人哦
 		//	if (model.getCreateId() != user.getUserid()) {
 		//		System.err.println("####userid(" + user.getUserid() + ")非法编辑内容");
@@ -87,32 +88,22 @@ public class PolicyPublishController extends BaseProjectController {
 
 		Integer pid = getParaToInt();
 		TbPolicy model = getModel(TbPolicy.class);
-
-		TbSite site = getBackSite();
-		UploadFile uploadImage = getFile("model.image_url", "jfspecial/policy", FileUploadUtils.UPLOAD_MAX);
-
-		// 图片附件
-		if (uploadImage != null) {
-			String fileUrl = uploadHandler(site, uploadImage.getFile(), "roll_image");
-			model.set("image_url", fileUrl);
-		}
-
 		// 验证题目，内容
 		String content = model.getContent();
 		String title = model.getName();
 
 		// 删除侵入脚本
-	//	content = JFSpecialUtils.delScriptTag(content);
-	//	title = HtmlUtils.delHTMLTag(title);
+		content = JFSpecialUtils.delScriptTag(content);
+		title = HtmlUtils.delHTMLTag(title);
 
 		// 这里没有必要提示太精准~因为前台有验证~绕过的都不是好人哦
-	/*	if (content == null || HtmlUtils.delHTMLTag(content).length() > 2000 //
+		if (content == null || HtmlUtils.delHTMLTag(content).length() > 2000 //
 				|| title == null || title.length() > 200 //
 		) {
 			json.put("msg", "文章信息错误，请输入正确数据！");
 			renderJson(json.toJSONString());
 			return;
-		} */
+		}
 
 		model.setUpdateTime(getNow());
 		if (pid != null && pid > 0) { // 更新
@@ -143,6 +134,8 @@ public class PolicyPublishController extends BaseProjectController {
 			model.setCreateTime(getNow());
 			model.setIsDraft("0");//0=发布;1=草稿箱
 
+			//上传图片(未完成)
+			System.out.println("输出1此"+model);
 			//判断图片是否上传
 	//		UploadFile uploadImage=null;//声明上传文件
 			//System.out.println("文件名"+uploadImage.getFileName());

@@ -3,12 +3,14 @@ package com.jfspecial.modules.admin.sale;
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.aop.Before;
 import com.jfinal.upload.UploadFile;
+import com.jfspecial.component.base.BaseProjectController;
 import com.jfspecial.component.util.JFSpecialUtils;
 import com.jfspecial.jfinal.base.BaseController;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
 import com.jfspecial.modules.CommonController;
 import com.jfspecial.modules.admin.article.ArticleConstant;
 import com.jfspecial.modules.admin.sale.model.TbSaleAlbum;
+import com.jfspecial.modules.admin.site.TbSite;
 import com.jfspecial.modules.front.interceptor.FrontInterceptor;
 import com.jfspecial.system.file.util.FileUploadUtils;
 import com.jfspecial.system.user.SysUser;
@@ -21,7 +23,7 @@ import java.util.List;
  * @author ljk 2018.11.27
  */
 @ControllerBind(controllerKey = "/admin/sale_publish")
-public class SalePublishController extends BaseController {
+public class SalePublishController extends BaseProjectController{
 
 	private static final String path = "/pages/admin/sale/sale_publish";
 
@@ -78,8 +80,19 @@ public class SalePublishController extends BaseController {
 			return;
 		}
 
-		Integer pid = getParaToInt();
+
+
+		//上传图片
+		TbSite site = getBackSite();
+		String temUrl=FileUploadUtils.getUploadTmpPath(site);//获取临时存储路径
+		UploadFile uploadImage = getFile("model.logo",temUrl, FileUploadUtils.UPLOAD_MAX,"utf-8");
+		//获取路径参数
 		TbSale model = getModel(TbSale.class);
+		if (uploadImage != null) {
+			model.setImageUrl(temUrl+"\\"+uploadImage.getFileName());//设置文件名
+		}else{
+			System.out.println("上传图片为空");
+		}
 		// 验证题目，内容
 		String content = model.getContent();
 		String title = model.getName();
@@ -97,7 +110,8 @@ public class SalePublishController extends BaseController {
 			renderJson(json.toJSONString());
 			return;
 		}
-
+//获取其他参数:
+		Integer pid = getParaToInt();
 		model.setUpdateTime(getNow());
 		if (pid != null && pid > 0) { // 更新
 			// 管理员或者自己才能修改
@@ -127,26 +141,15 @@ public class SalePublishController extends BaseController {
 			model.setCreateTime(getNow());
 			model.setIsDraft(0);//0=发布;1=草稿箱
 
-			//上传图片(未完成)
-			System.out.println("输出1此"+model);
-			//判断图片是否上传
-			UploadFile uploadImage=null;//声明上传文件
-			//System.out.println("文件名"+uploadImage.getFileName());
-			try{
-				uploadImage = getFile("model.image_url","logo", FileUploadUtils.UPLOAD_MAX,"utf-8");
-			}catch(Exception exception){
-				System.out.println("路径错误");
-			}
-			if(uploadImage!=null){
-				model.setImageUrl("\\logo\\"+uploadImage.getFileName());
-			}
-			//System.out.println("输出2此"+model);
+
 
 			model.save();
 		}
 
 		json.put("status", 1);// 成功
-		renderJson(json.toJSONString());
+		//renderJson(json.toJSONString());
+
+		redirect("/admin/sale_publish");//12.4修改   后期:
 	}
 
 
@@ -167,8 +170,19 @@ public class SalePublishController extends BaseController {
 			return;
 		}
 
-		Integer pid = getParaToInt();
+
+
+		//上传图片
+		TbSite site = getBackSite();
+		String temUrl=FileUploadUtils.getUploadTmpPath(site);//获取临时存储路径
+		UploadFile uploadImage = getFile("model.logo",temUrl, FileUploadUtils.UPLOAD_MAX,"utf-8");
+		//获取路径参数
 		TbSale model = getModel(TbSale.class);
+		if (uploadImage != null) {
+			model.setImageUrl(temUrl+"\\"+uploadImage.getFileName());//设置文件名
+		}else{
+			System.out.println("上传图片为空");
+		}
 		// 验证题目，内容
 		String content = model.getContent();
 		String title = model.getName();
@@ -185,7 +199,8 @@ public class SalePublishController extends BaseController {
 			renderJson(json.toJSONString());
 			return;
 		}
-
+//获取其他参数:
+		Integer pid = getParaToInt();
 		model.setUpdateTime(getNow());
 		if (pid != null && pid > 0) { // 更新
 			// 管理员或者自己才能修改
@@ -215,27 +230,15 @@ public class SalePublishController extends BaseController {
 			model.setUpdateId(getSessionUser().getUserid());
 			model.setCreateTime(getNow());
 
-			//上传图片(未完成)
-			System.out.println("输出1此"+model);
-			//判断图片是否上传
-			UploadFile uploadImage=null;//声明上传文件
-			//System.out.println("文件名"+uploadImage.getFileName());
-			try{
-				uploadImage = getFile("model.image_url","logo", FileUploadUtils.UPLOAD_MAX,"utf-8");
-			}catch(Exception exception){
-				System.out.println("路径错误");
-			}
-			if(uploadImage!=null){
-				model.setImageUrl("\\logo\\"+uploadImage.getFileName());
-			}
-			//System.out.println("输出2此"+model);
+
 
 			/*保存*/
 			model.save();
 		}
 
 		json.put("status", 1);// 成功
-		renderJson(json.toJSONString());
+		//renderJson(json.toJSONString());
+		redirect("/admin/sale_publish");//12.4修改   后期:
 	}
 
 }

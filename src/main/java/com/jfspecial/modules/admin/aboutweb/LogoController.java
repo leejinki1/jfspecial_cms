@@ -2,18 +2,22 @@ package com.jfspecial.modules.admin.aboutweb;
 
 
 import com.jfinal.upload.UploadFile;
+import com.jfspecial.component.base.BaseProjectController;
 import com.jfspecial.jfinal.base.BaseController;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
 import com.jfspecial.jfinal.component.db.SQLUtils;
+import com.jfspecial.modules.admin.site.TbSite;
 import com.jfspecial.system.file.util.FileUploadUtils;
+
+import java.io.File;
 
 /**
  * 网站配置/logo更换/logo
  * 
  * @author ZR2018.11.20
  */
-@ControllerBind(controllerKey = "/admin/logo")
-public class LogoController extends BaseController {
+@ControllerBind(controllerKey = "/admin/setting_logo")
+public class LogoController extends BaseProjectController {
 
 	private static final String path = "/pages/admin/aboutweb/setting_";
 
@@ -34,26 +38,27 @@ public class LogoController extends BaseController {
 
 	//参数:model.logo
 	public void save(){
-		//renderText("声明此方法是一个action");
 		SysAboutus model = getModel(SysAboutus.class);
-
-
+		TbSite site = getBackSite();//站点信息//[id:10][name:特派员][template:special][templateMobile:special][domainPc:special.demo.com][domainMobile:special.demo.com][domainOthers:null][siteTitle:科技特派员创业扶贫联盟平台][siteFolderId:1][siteArticleId:1][dbUrl:null][dbUser:null][dbPwd:null][dbDriver:null][sort:10][status:1][updateTime:2018-11-14 00:50:57][updateId:1][createTime:2018-11-14 00:50:57][createId:1]
+		//System.out.println("---12.4 site是什么:"+site);
+		String temUrl=FileUploadUtils.getUploadTmpPath(site);//获取临时存储路径
 		//上传图片
-		//TbSite site = getBackSite();
 		//public UploadFile getFile(String parameterName//参数名称, String saveDirectory//保存路径//默认是tomacat下upload下的文件夹, Integer maxPostSize//最大传输值, String encoding//编码,可用可不用)
-		UploadFile uploadImage=null;//声明上传文件
-		try{
-			uploadImage = getFile("model.logo","logo", FileUploadUtils.UPLOAD_MAX,"utf-8");
-		}catch(Exception exception){
-			System.out.println("路径错误");
-		}
+		UploadFile uploadImage = getFile("model.logo",temUrl, FileUploadUtils.UPLOAD_MAX,"utf-8");
+		//long currentTime=System.currentTimeMillis();//12.4 获取当前时间戳//打算改文件名的,没有可改的地方
 
+		if (uploadImage != null) {
+			//File file=new File(temUrl+"\\"+uploadImage.getFileName());
+			//System.out.println("12.4 ---"+temUrl+"\\"+uploadImage.getFileName());
+			//String fileUrl = uploadHandler(site,file,"image");
+			model.setLogo(temUrl+"\\"+uploadImage.getFileName());//设置文件名
+			//model.setLogo(fileUrl);//设置文件名
+		}else{
+			System.out.println("上传图片为空");
+		}
 
 		//修改参数
 		model.setId("1");
-		model.setLogo("\\logo\\"+uploadImage.getFileName());
-		//System.out.println("测试:"+uploadImage.getUploadPath()+"\\"+uploadImage.getFileName());
-
 
 
 		//修改人员信息
@@ -72,7 +77,8 @@ public class LogoController extends BaseController {
 		setAttr("model", model);
 		renderMessage("保存成功");
 
-		render( "/pages/admin/aboutweb/setting_logo.html");
+		//render( "/pages/admin/aboutweb/setting_logo.html");//12.4修改
+		redirect("/admin/setting_logo");//12.4修改
 	}
 }
 

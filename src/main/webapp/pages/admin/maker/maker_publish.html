@@ -68,35 +68,11 @@ function oper_save(id) {
 			return false;
 		}
 
-		<!--利用插件上传文件-->
-
-
-		<!--ajax上传-->
-		jQuery.ajax({
-			type:'POST',
-			url:'maker_publish/publishArticle/'+id,
-			data:$("form").serialize(),
-			success:function(data){
-				if(data.status==1){
-					alert('发布成功');
-					form1.action = "maker_publish";
-					form1.submit();
-					return true;
-				} else {
-					alert('发布失败：'+data.msg);
-				}
-				$('[name="old_password"]').val('');
-				$('[name="new_password"]').val('');
-				$('[name="new_password2"]').val('');
-			},
-			error:function(html){
-				var flag = (typeof console != 'undefined');
-				if(flag) console.log("服务器忙，提交数据失败，代码:" +html.status+ "，请联系管理员！");
-				alert("服务器忙，提交数据失败，请联系管理员！");
-			}
-		});
-
-		return false;
+		<!--提交-->
+		$('#isdraft').val('0');
+		form1.action = "maker_publish/publishArticle";
+		form1.submit();
+		return true;
 	}
 
 	<!--保存到草稿箱-->
@@ -142,36 +118,11 @@ function oper_savedraft(id) {
 			return false;
 		}
 
-		<!--利用插件上传文件-->
-
-
-
-		<!--ajax上传-->
-		jQuery.ajax({
-			type:'POST',
-			url:'maker_publish/saveToDrafts/'+id,
-			data:$("form").serialize(),
-			success:function(data){
-				if(data.status==1){
-					alert('发布成功');
-					form1.action = "maker_publish";
-					form1.submit();
-					return true;
-				} else {
-					alert('发布失败：'+data.msg);
-				}
-				$('[name="old_password"]').val('');
-				$('[name="new_password"]').val('');
-				$('[name="new_password2"]').val('');
-			},
-			error:function(html){
-				var flag = (typeof console != 'undefined');
-				if(flag) console.log("服务器忙，提交数据失败，代码:" +html.status+ "，请联系管理员！");
-				alert("服务器忙，提交数据失败，请联系管理员！");
-			}
-		});
-
-		return false;
+		<!--提交-->
+		$('#isdraft').val('1');
+		form1.action = "maker_publish/saveToDrafts";
+		form1.submit();
+		return true;
 }
 
 <!--新增分类 11.30-->
@@ -345,7 +296,7 @@ function closediv(){
                             	发布新闻
                     </div>
 					<div class="card-content">
-						<form class="form-horizontal" name="form1" action="" method="post" id="form1">
+						<form id="form1" class="form-horizontal" name="form1" action="" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="model.id" class="form-control" id="model.id"
 								   value="${model.id!'0'}">
 							<div class="row">
@@ -403,15 +354,14 @@ function closediv(){
 
 								<!--主题图片/网络-->
 								<div class="form-group">
-									<label for="model.image_net_url" class="col-sm-2 control-label">主题图片</label>
+									<label for="model.image_url" class="col-sm-2 control-label">主题图片</label>
 									<div class="col-sm-10">
+										<label>方法一:</label>
+										<input type="file" name="model.image_url" class="form-control" id="file"
+											   value="${model.image_url!''}" >
+										<label>方法二:</label>
 										<input name="model.image_net_url" class="form-control" id="model.image_net_url"
-											   value="${model.image_net_url!''}" placeholder="输入网络图片地址">
-										<!--下面是上传图片的,暂时未完成-->
-										<input  type="button" value="没有网络图片,点击上传本地图片;如果同时上传,以网络图片为准;" >
-										<input type="file" name="model.image_url" class="form-control" id="model.image_urle"
-											   value="${model.image_url!''}" placeholder="没有网络图片,点击上传本地图片;如果同时上传,以网络图片为准;">
-
+											   value="${model.image_net_url!''}" placeholder="复制/粘贴网络图片地址">
 									</div>
 								</div>
 
@@ -435,8 +385,9 @@ function closediv(){
 										<div class="col-sm-offset-3 col-sm-9">
 											<div class="checkbox">
 												<label>
-												 <input type="button" value="确认发布"  class="waves-effect waves-light btn-large" onclick="oper_save(${model.id!'0'});"/>&nbsp;
-												  <input type="button" value="保存草稿箱"  class="waves-effect waves-light btn-large" onclick="oper_savedraft(${model.id!'0'});"/>
+												<input type="hidden" name="model.is_draft" value="" id="isdraft">
+												 <input type="button" value="确认发布"  class="waves-effect waves-light btn-large" onclick="return oper_save(${model.id!'0'});"/>&nbsp;
+												  <input type="button" value="保存草稿箱"  class="waves-effect waves-light btn-large" onclick="return oper_savedraft(${model.id!'0'});"/>
 												  <!-- <a class="waves-effect waves-light btn-large">保存草稿箱</a>&nbsp;
 												<!--  <a class="waves-effect waves-light btn-large">确认发布</a>-->
 												</label>
