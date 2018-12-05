@@ -5,8 +5,6 @@ import com.jfspecial.jfinal.base.BaseService;
 import com.jfspecial.jfinal.base.Paginator;
 import com.jfspecial.modules.admin.addoil.model.TbAddOil;
 import com.jfspecial.modules.admin.addoil.model.TbAddOilAlbum;
-import com.jfspecial.modules.admin.sale.model.TbSale;
-import com.jfspecial.modules.admin.sale.model.TbSaleAlbum;
 import com.jfspecial.util.cache.CacheManager;
 
 import java.util.List;

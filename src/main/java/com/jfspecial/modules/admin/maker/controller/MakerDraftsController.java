@@ -36,7 +36,8 @@ public class MakerDraftsController extends BaseProjectController {
 
 	//显示保存的草稿
 	public void index() {
-		String sql = "select t.id,t.name,t.publish_user, t.update_time from tb_maker t where  status = 1 and is_draft = 1 order by sort,id desc";
+		String sql = "select t.id,t.name,t.publish_user, t.update_time ,t.content,t.image_url,t.album_name " +
+				"from tb_maker t where  status = 1 and is_draft = 1 order by sort,id desc";
 		List<TbMaker> lists = TbMaker.dao.find(sql);
 		setAttr("lists", lists);
 		render(path+".html");

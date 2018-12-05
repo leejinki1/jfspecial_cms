@@ -3,8 +3,6 @@ package com.jfspecial.modules.front.service;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfspecial.jfinal.base.BaseService;
 import com.jfspecial.jfinal.base.Paginator;
-import com.jfspecial.modules.admin.sale.model.TbSale;
-import com.jfspecial.modules.admin.sale.model.TbSaleAlbum;
 import com.jfspecial.modules.admin.spp.model.TbSpp;
 import com.jfspecial.modules.admin.spp.model.TbSppAlbum;
 import com.jfspecial.util.cache.CacheManager;

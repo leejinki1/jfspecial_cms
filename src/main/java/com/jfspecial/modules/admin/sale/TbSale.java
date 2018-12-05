@@ -129,7 +129,7 @@ public class TbSale extends BaseProjectModel<TbSale> {
 		return this;
 	}
 
-	public String getPrice() {
+	public Double getPrice() {
 		return get(PRICE);
 	}
 	public TbSale setNum(Integer value) {
@@ -137,7 +137,7 @@ public class TbSale extends BaseProjectModel<TbSale> {
 		return this;
 	}
 
-	public String getNum() {
+	public Integer getNum() {
 		return get(NUM);
 	}
 	public TbSale setUnit(String value) {

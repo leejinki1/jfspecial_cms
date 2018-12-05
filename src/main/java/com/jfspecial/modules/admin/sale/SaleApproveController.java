@@ -21,7 +21,8 @@ public class SaleApproveController extends BaseController {
 
 	//显示待审核
 	public void index() {
-		String sql = "select t.id,t.name,t.publish_user, t.update_time from tb_sale t where  status = 1 and approve_status = 1  and is_draft=0 order by sort,id desc";
+		String sql = "select t.id,t.name,t.publish_user, t.update_time ,t.content,t.image_url,t.album_name,t.price,t.num,t.unit,t.property " +
+				"from tb_sale t where  status = 1 and approve_status = 1  and is_draft=0 order by sort,id desc";
 		//待审核:审核状态=1初始+++不在草稿箱
 		List<TbSale> lists = TbSale.dao.find(sql);
 		setAttr("lists", lists);

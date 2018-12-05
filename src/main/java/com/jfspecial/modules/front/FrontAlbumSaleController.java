@@ -5,7 +5,7 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfspecial.component.base.BaseProjectController;
 import com.jfspecial.component.util.JFSpecialUtils;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
-import com.jfspecial.modules.admin.sale.model.TbSale;
+import com.jfspecial.modules.admin.sale.TbSale;
 import com.jfspecial.modules.admin.sale.model.TbSaleAlbum;
 import com.jfspecial.modules.front.interceptor.FrontInterceptor;
 import com.jfspecial.modules.front.service.FrontSaleService;

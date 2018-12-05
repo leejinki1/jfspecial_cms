@@ -3,15 +3,9 @@ package com.jfspecial.modules.front.controller;
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfspecial.component.base.BaseProjectController;
-import com.jfspecial.component.util.JFSpecialUtils;
-import com.jfspecial.jfinal.base.Paginator;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
-import com.jfspecial.modules.admin.article.TbArticle;
-import com.jfspecial.modules.admin.sale.model.TbSale;
-import com.jfspecial.modules.admin.tags.TbTags;
+import com.jfspecial.modules.admin.sale.TbSale;
 import com.jfspecial.modules.front.interceptor.FrontInterceptor;
-import com.jfspecial.modules.front.service.FrontCacheService;
-import com.jfspecial.util.extend.HtmlUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;

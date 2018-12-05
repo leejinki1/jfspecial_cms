@@ -8,7 +8,6 @@ import com.jfspecial.jfinal.base.Paginator;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
 import com.jfspecial.modules.admin.article.TbArticle;
 import com.jfspecial.modules.admin.folder.FolderService;
-import com.jfspecial.modules.admin.sale.model.TbSale;
 import com.jfspecial.modules.admin.spp.model.TbSpp;
 import com.jfspecial.modules.admin.sysuser.TbSysUser;
 import com.jfspecial.modules.admin.tags.TbTags;

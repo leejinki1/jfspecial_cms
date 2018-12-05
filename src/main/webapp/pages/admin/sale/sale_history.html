@@ -3,7 +3,7 @@
 <!--特卖/历史-->
 <script type="text/javascript">
 function oper_delete(id) {
-		location.href="projectapp_history/delArticle/"+id;
+		location.href="sale_history/delArticle/"+id;
 		return false;
 	}
 </script>
@@ -99,6 +99,13 @@ function oper_delete(id) {
 								<tr>
 									<th>序号</th>
 									<th>标题</th>
+									<th>属性</th>
+									<th>价格</th>
+									<th>数量</th>
+									<th>单位</th>
+									<th>内容</th>
+									<th>主题图片</th>
+									<th>栏目</th>
 									<th>发布人</th>
 									<th>时间</th>
 									<th>操作</th>
@@ -119,6 +126,13 @@ function oper_delete(id) {
 								<tr>
 									<td>${itemLP.index}</td>
 									<td>${item.name}</td>
+									<td>${item.property}</td>
+									<td>${item.price}</td>
+									<td>${item.num}</td>
+									<td>${item.unit}</td>
+									<td>${item.content}</td>
+									<td><img src="${BASE_PATH}upload/${item.image_url}" style="height:80px;width:80px;"></td>
+									<td>${item.album_name}</td>
 									<td>${item.publish_user}</td>
 									<td>${item.update_time}</td>
 									<td>
@@ -127,11 +141,18 @@ function oper_delete(id) {
 								</tr>
 								<% } %>
 								<!--<%
-                               var sales=tempProjectapp.sales(1,5);%>
+                               var sales=tempSale.sales(1,5);%>
                                 <% for(item in sales.list){ %>
                                     <tr>
                                          <td>${itemLP.index}</td>
                                          <td>${item.name}</td>
+									<td>${item.property}</td>
+									<td>${item.price}</td>
+									<td>${item.num}</td>
+									<td>${item.unit}</td>
+								<td>${item.content}</td>
+								<td><img src="${BASE_PATH}upload/${item.image_url}" style="height:80px;width:80px;"></td>
+                                <td>${item.album_name}</td>
                                          <td>${item.publish_user}</td>
                                          <td>${item.update_time}</td>
                                              <a class="waves-effect waves-light btn" onclick="oper_delete(${item.id!'0'});">删除</a>

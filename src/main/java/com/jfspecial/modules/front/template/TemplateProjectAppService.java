@@ -5,10 +5,7 @@ import com.jfspecial.jfinal.base.BaseService;
 import com.jfspecial.jfinal.base.Paginator;
 import com.jfspecial.modules.admin.projectapp.model.TbProjectApp;
 import com.jfspecial.modules.admin.projectapp.model.TbProjectAppAlbum;
-import com.jfspecial.modules.admin.sale.model.TbSale;
-import com.jfspecial.modules.admin.sale.model.TbSaleAlbum;
 import com.jfspecial.modules.front.service.FrontProjectAppService;
-import com.jfspecial.modules.front.service.FrontSaleService;
 import com.jfspecial.util.extend.RandomStrUtils;
 
 import java.util.List;

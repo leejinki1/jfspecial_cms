@@ -36,7 +36,8 @@ public class MakerHistoryController extends BaseProjectController {
 
 	@Before(FrontInterceptor.class)
 	public void index() {
-		String sql = "select t.id,t.name,t.publish_user, t.update_time from tb_maker t where  status = 1  and approve_status = 10 order by sort,id desc";
+		String sql = "select t.id,t.name,t.publish_user, t.update_time ,t.content,t.image_url,t.album_name " +
+				"from tb_maker t where  status = 1  and approve_status = 10 order by sort,id desc";
 		List<TbMaker> lists = TbMaker.dao.find(sql);
 		setAttr("lists", lists);
 		render(path+".html");//先反回主页,待补充

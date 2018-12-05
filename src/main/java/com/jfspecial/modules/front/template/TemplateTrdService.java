@@ -3,11 +3,8 @@ package com.jfspecial.modules.front.template;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfspecial.jfinal.base.BaseService;
 import com.jfspecial.jfinal.base.Paginator;
-import com.jfspecial.modules.admin.sale.model.TbSale;
-import com.jfspecial.modules.admin.sale.model.TbSaleAlbum;
 import com.jfspecial.modules.admin.trd.model.TbTrd;
 import com.jfspecial.modules.admin.trd.model.TbTrdAlbum;
-import com.jfspecial.modules.front.service.FrontSaleService;
 import com.jfspecial.modules.front.service.FrontTrdService;
 import com.jfspecial.util.extend.RandomStrUtils;
 

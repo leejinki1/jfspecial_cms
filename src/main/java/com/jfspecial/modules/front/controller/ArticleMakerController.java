@@ -9,7 +9,6 @@ import com.jfspecial.jfinal.component.annotation.ControllerBind;
 import com.jfspecial.modules.admin.article.TbArticle;
 import com.jfspecial.modules.admin.folder.FolderService;
 import com.jfspecial.modules.admin.maker.model.TbMaker;
-import com.jfspecial.modules.admin.sale.model.TbSale;
 import com.jfspecial.modules.admin.sysuser.TbSysUser;
 import com.jfspecial.modules.admin.tags.TbTags;
 import com.jfspecial.modules.front.interceptor.FrontInterceptor;

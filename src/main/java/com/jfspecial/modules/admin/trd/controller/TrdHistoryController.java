@@ -22,7 +22,8 @@ public class TrdHistoryController extends BaseController {
 
 	@Before(FrontInterceptor.class)
 	public void index() {
-		String sql = "select t.id,t.name,t.publish_user, t.update_time from tb_trd t where  status = 1  and approve_status = 10 order by sort,id desc";
+		String sql = "select t.id,t.name,t.publish_user, t.update_time ,t.content,t.image_url,t.album_name" +
+				"from tb_trd t where  status = 1  and approve_status = 10 order by sort,id desc";
 		List<TbTrd> lists = TbTrd.dao.find(sql);
 		setAttr("lists", lists);
 		render(path+".html");//先反回主页,待补充

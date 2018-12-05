@@ -23,7 +23,8 @@ public class TrdApproveController extends BaseController {
 
 	//显示待审核
 	public void index() {
-		String sql = "select t.id,t.name,t.publish_user, t.update_time from tb_trd t where  status = 1 and approve_status = 1 and  is_draft=0  order by sort,id desc";
+		String sql = "select t.id,t.name,t.publish_user, t.update_time,t.content,t.image_url,t.album_name" +
+                " from tb_trd t where  status = 1 and approve_status = 1 and  is_draft=0  order by sort,id desc";
         //待审核:审核状态=1初始+++不在草稿箱
 		List<TbTrd> lists = TbTrd.dao.find(sql);
 		setAttr("lists", lists);
