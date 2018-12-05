@@ -65,8 +65,8 @@ public class FrontTrdService extends BaseService {
 	}
 	public Page<TbTrd> alterTrd(Paginator paginator) {
 		String key = ("trd_" + System.currentTimeMillis());
-		Page<TbTrd> trds = TbTrd.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_trd " //
+		Page<TbTrd> trds = TbTrd.dao.paginateCache(cacheName, key, paginator, "select  (@i:=@i+1)pm,t.* " //
+				, " from tb_trd  t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " order by update_time desc");
 		return trds;
@@ -89,8 +89,8 @@ public class FrontTrdService extends BaseService {
 	}
 	public Page<TbTrd> alterTrd(Paginator paginator, int albumId) {
 		String key = ("trd_"  + System.currentTimeMillis());
-		Page<TbTrd> trds = TbTrd.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_trd " //
+		Page<TbTrd> trds = TbTrd.dao.paginateCache(cacheName, key, paginator, "select  (@i:=@i+1)pm,t.*  " //
+				, " from tb_trd  t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
 						+ " order by update_time desc", albumId);

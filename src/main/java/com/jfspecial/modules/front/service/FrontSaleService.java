@@ -63,8 +63,8 @@ public class FrontSaleService extends BaseService {
 	}
 	public Page<TbSale> alterSale(Paginator paginator) {
 		String key = ("sale_" + System.currentTimeMillis());
-		Page<TbSale> sales = TbSale.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_sale " //
+		Page<TbSale> sales = TbSale.dao.paginateCache(cacheName, key, paginator, "select (@i:=@i+1)pm,t.*  " //
+				, " from tb_sale t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " order by update_time desc");
 		return sales;
@@ -88,8 +88,8 @@ public class FrontSaleService extends BaseService {
 	}
 	public Page<TbSale> alterSale(Paginator paginator, int albumId) {
 		String key = ("sale_" + System.currentTimeMillis());
-		Page<TbSale> sales = TbSale.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_sale " //
+		Page<TbSale> sales = TbSale.dao.paginateCache(cacheName, key, paginator, "select  (@i:=@i+1)pm,t.*  " //
+				, " from tb_sale  t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
 						+ " order by update_time desc", albumId);

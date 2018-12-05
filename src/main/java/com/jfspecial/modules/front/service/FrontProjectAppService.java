@@ -63,8 +63,8 @@ public class FrontProjectAppService extends BaseService {
 	}
 	public Page<TbProjectApp> alterProjectApp(Paginator paginator) {
 		String key = ("projectapp_" + System.currentTimeMillis());
-		Page<TbProjectApp> projectapps = TbProjectApp.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_projectapp " //
+		Page<TbProjectApp> projectapps = TbProjectApp.dao.paginateCache(cacheName, key, paginator, "select (@i:=@i+1)pm,t.*  " //
+				, " from tb_projectapp t,(select @i:=0)s  " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " order by update_time desc");
 		return projectapps;
@@ -88,8 +88,8 @@ public class FrontProjectAppService extends BaseService {
 	}
 	public Page<TbProjectApp> alterProjectApp(Paginator paginator, int albumId) {
 		String key = ("projectapp_" + System.currentTimeMillis());
-		Page<TbProjectApp> projectapps = TbProjectApp.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_projectapp " //
+		Page<TbProjectApp> projectapps = TbProjectApp.dao.paginateCache(cacheName, key, paginator, "select (@i:=@i+1)pm,t.*  " //
+				, " from tb_projectapp t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
 						+ " order by update_time desc", albumId);

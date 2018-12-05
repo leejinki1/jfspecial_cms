@@ -66,8 +66,8 @@ public class FrontNewsCenterService extends BaseService {
 	}
 	public Page<TbNewsCenter> alterNewsCenter(Paginator paginator) {
 		String key = ("newscenter_" + System.currentTimeMillis());
-		Page<TbNewsCenter> newscenters = TbNewsCenter.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_newscenter " //
+		Page<TbNewsCenter> newscenters = TbNewsCenter.dao.paginateCache(cacheName, key, paginator, "select (@i:=@i+1)pm,t.*  " //
+				, " from tb_newscenter t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " order by update_time desc");
 		return newscenters;
@@ -81,8 +81,8 @@ public class FrontNewsCenterService extends BaseService {
 	 */
 	public Page<TbNewsCenter> getNewsCenter(Paginator paginator, int albumId) {
 		String key = ("newscenter_" + albumId + "_" + paginator.getPageNo() + "_" + paginator.getPageSize());
-		Page<TbNewsCenter> newscenters = TbNewsCenter.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_newscenter " //
+		Page<TbNewsCenter> newscenters = TbNewsCenter.dao.paginateCache(cacheName, key, paginator, "select (@i:=@i+1)pm,t.*  " //
+				, " from tb_newscenter t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
 						+ " order by update_time desc", albumId);
@@ -90,8 +90,8 @@ public class FrontNewsCenterService extends BaseService {
 	}
 	public Page<TbNewsCenter> alterNewsCenter(Paginator paginator, int albumId) {
 		String key = ("newscenter_" + System.currentTimeMillis());
-		Page<TbNewsCenter> newscenters = TbNewsCenter.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_newscenter " //
+		Page<TbNewsCenter> newscenters = TbNewsCenter.dao.paginateCache(cacheName, key, paginator, "select (@i:=@i+1)pm,t.*  " //
+				, " from tb_newscenter t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
 						+ " order by update_time desc", albumId);

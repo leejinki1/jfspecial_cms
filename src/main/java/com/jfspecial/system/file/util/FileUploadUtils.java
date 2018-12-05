@@ -19,7 +19,7 @@ public class FileUploadUtils {
 	/**
 	 * 基础JFLYFOX目录
 	 */
-	private static final String JFLYFOX_PATH = "jflyfox" + File.separator;
+	private static final String JFSPECIAL_PATH = "jfspecial" + File.separator;
 
 	/**
 	 * 上传临时目录
@@ -29,7 +29,7 @@ public class FileUploadUtils {
 	/**
 	 * 临时路径
 	 * 
-	 * 2016年4月27日 下午4:07:23 flyfox 369191470@qq.com
+	 * 2018年11月27日 下午4:07:23 ljk
 	 * 
 	 * @param site
 	 * @param type
@@ -37,15 +37,15 @@ public class FileUploadUtils {
 	 */
 	public static String getUploadTmpPath(TbSite site) {
 		String sitePath = getSitePath(site);
-		String path = JFLYFOX_PATH + sitePath + UPLOAD_TMP_PATH;
+		String path = JFSPECIAL_PATH + sitePath + UPLOAD_TMP_PATH;
 
 		return path;
 	}
 
 	/**
 	 * 上传路径
-	 * 
-	 * 2016年4月27日 下午4:07:28 flyfox 369191470@qq.com
+	 *
+	 * 2018年11月27日 下午4:07:23 ljk
 	 * 
 	 * @param site
 	 * @param type
@@ -53,7 +53,7 @@ public class FileUploadUtils {
 	 */
 	public static String getUploadPath(TbSite site, String type) {
 		String sitePath = getSitePath(site);
-		String path = JFLYFOX_PATH + sitePath + type;
+		String path = JFSPECIAL_PATH + sitePath + type;
 		File file = new File(BASE_PATH + path);
 		if (!file.exists()) {
 			file.mkdirs();
@@ -64,8 +64,8 @@ public class FileUploadUtils {
 
 	/**
 	 * 获取站点路径
-	 * 
-	 * 2017年4月5日 下午2:23:42 flyfox 369191470@qq.com
+	 *
+	 * 2018年11月27日 下午4:07:23 ljk
 	 * 
 	 * @param site
 	 * @return
@@ -78,19 +78,19 @@ public class FileUploadUtils {
 
 	/**
 	 * 获取根路径
-	 * 
-	 * 2017年4月5日 下午1:57:33 flyfox 369191470@qq.com
+	 *
+	 * 2018年11月27日 下午4:07:23 ljk
 	 * 
 	 * @return
 	 */
 	public static String getBasePath() {
-		return rebuild(File.separator + JFLYFOX_PATH);
+		return rebuild(File.separator + JFSPECIAL_PATH);
 	}
 
 	/**
 	 * 获取路径根路径
-	 * 
-	 * 2017年4月5日 下午1:54:45 flyfox 369191470@qq.com
+	 *
+	 * 2018年11月27日 下午4:07:23 ljk
 	 * 
 	 * @return
 	 */
@@ -100,8 +100,8 @@ public class FileUploadUtils {
 
 	/**
 	 * 重构路径
-	 * 
-	 * 2017年4月5日 下午1:55:59 flyfox 369191470@qq.com
+	 *
+	 * 2018年11月27日 下午4:07:23 ljk
 	 * 
 	 * @param path
 	 * @return

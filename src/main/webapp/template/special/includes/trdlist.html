@@ -8,6 +8,7 @@
 		 <tbody>
 		 <% for(item in articlelist.list){ %>
 		 <tr>
+			 <td>${item.pm}</td>
 			 <td>
 				 <a href="${BASE_PATH }front/trd/article/${item.id}.html" title="${item.title}">
 				 <% if (strutil.length(item.name) > 18) { %>

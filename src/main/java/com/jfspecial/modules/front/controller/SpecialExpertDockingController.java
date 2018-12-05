@@ -69,7 +69,7 @@ public class SpecialExpertDockingController extends BaseProjectController {
 		model.setUpdateTime(getNow());
 		model.save();
 
-		redirect( "/special.html");
+		redirect( "/answer_list.html");
 	//	renderAuto(path + "answer_list.html");
 	}
 }
