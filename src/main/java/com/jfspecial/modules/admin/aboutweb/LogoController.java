@@ -44,14 +44,14 @@ public class LogoController extends BaseProjectController {
 		String temUrl=FileUploadUtils.getUploadTmpPath(site);//获取临时存储路径
 		//上传图片
 		//public UploadFile getFile(String parameterName//参数名称, String saveDirectory//保存路径//默认是tomacat下upload下的文件夹, Integer maxPostSize//最大传输值, String encoding//编码,可用可不用)
-		UploadFile uploadImage = getFile("model.logo",temUrl, FileUploadUtils.UPLOAD_MAX,"utf-8");
+		UploadFile uploadImage = getFile("model.logo","logo", FileUploadUtils.UPLOAD_MAX,"utf-8");
 		//long currentTime=System.currentTimeMillis();//12.4 获取当前时间戳//打算改文件名的,没有可改的地方
 
 		if (uploadImage != null) {
 			//File file=new File(temUrl+"\\"+uploadImage.getFileName());
 			//System.out.println("12.4 ---"+temUrl+"\\"+uploadImage.getFileName());
 			//String fileUrl = uploadHandler(site,file,"image");
-			model.setLogo(temUrl+"\\"+uploadImage.getFileName());//设置文件名
+			model.setLogo("logo\\"+uploadImage.getFileName());//设置文件名
 			//model.setLogo(fileUrl);//设置文件名
 		}else{
 			System.out.println("上传图片为空");

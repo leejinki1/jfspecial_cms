@@ -70,11 +70,11 @@ public class WebInfoController extends BaseProjectController {
 		//上传图片
 		TbSite site = getBackSite();
 		String temUrl=FileUploadUtils.getUploadTmpPath(site);//获取临时存储路径
-		UploadFile uploadImage = getFile("model.weichat",temUrl, FileUploadUtils.UPLOAD_MAX,"utf-8");
+		UploadFile uploadImage = getFile("model.weichat","wechat", FileUploadUtils.UPLOAD_MAX,"utf-8");
 		//获取路径参数
 		SysAboutus model = getModel(SysAboutus.class);
 		if (uploadImage != null) {
-			model.setWechat(temUrl+"\\"+uploadImage.getFileName());//设置文件名
+			model.setWechat("wechat\\"+uploadImage.getFileName());//设置文件名
 		}else{
 			System.out.println("上传图片为空");
 		}

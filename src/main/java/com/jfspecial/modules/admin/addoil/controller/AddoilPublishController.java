@@ -85,11 +85,11 @@ public class AddoilPublishController extends BaseProjectController {
 		//上传图片
 		TbSite site = getBackSite();
 		String temUrl=FileUploadUtils.getUploadTmpPath(site);//获取临时存储路径
-		UploadFile uploadImage = getFile("model.logo",temUrl, FileUploadUtils.UPLOAD_MAX,"utf-8");
+		UploadFile uploadImage = getFile("model.image_url","addoil", FileUploadUtils.UPLOAD_MAX,"utf-8");
 		TbAddOil model = getModel(TbAddOil.class);
 
 		if (uploadImage != null) {
-			model.setImageUrl(temUrl+"\\"+uploadImage.getFileName());//设置文件名
+			model.setImageUrl("addoil\\"+uploadImage.getFileName());//设置文件名
 		}else{
 			System.out.println("上传图片为空");
 		}
@@ -177,11 +177,11 @@ public class AddoilPublishController extends BaseProjectController {
 		//上传图片
 		TbSite site = getBackSite();
 		String temUrl=FileUploadUtils.getUploadTmpPath(site);//获取临时存储路径
-		UploadFile uploadImage = getFile("model.logo",temUrl, FileUploadUtils.UPLOAD_MAX,"utf-8");
+		UploadFile uploadImage = getFile("model.image_url","addoil", FileUploadUtils.UPLOAD_MAX,"utf-8");
 		//获取路径参数
 		TbAddOil model = getModel(TbAddOil.class);
 		if (uploadImage != null) {
-			model.setImageUrl(temUrl+"\\"+uploadImage.getFileName());//设置文件名
+			model.setImageUrl("addoil\\"+uploadImage.getFileName());//设置文件名
 		}else{
 			System.out.println("上传图片为空");
 		}

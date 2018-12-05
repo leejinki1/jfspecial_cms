@@ -10,7 +10,7 @@ import com.jfspecial.system.file.util.FileUploadUtils;
  * 
  * @author ZR2018.11.23
  */
-@ControllerBind(controllerKey = "/admin/banner")
+@ControllerBind(controllerKey = "/admin/setting_banner")
 public class BannerController extends BaseController {
 
 	private static final String path = "/pages/admin/aboutweb/setting_";
@@ -29,24 +29,20 @@ public class BannerController extends BaseController {
 
 	}
 	public void save1(){
-		//renderText("声明此方法是一个action");
-		SysAboutus model = getModel(SysAboutus.class);
-
-
 		//上传图片
 		//TbSite site = getBackSite();
 		//public UploadFile getFile(String parameterName//参数名称, String saveDirectory//保存路径//默认是tomacat下upload下的文件夹, Integer maxPostSize//最大传输值, String encoding//编码,可用可不用)
-		UploadFile uploadImage1=null;//声明上传文件
+		UploadFile uploadImage1 = getFile("model.banner1","banner", FileUploadUtils.UPLOAD_MAX,"utf-8");//声明上传文件
 		//UploadFile uploadImage2=null;//声明上传文件
 		//UploadFile uploadImage3=null;//声明上传文件
+		SysAboutus model = getModel(SysAboutus.class);
 		try{
-			uploadImage1 = getFile("model.banner1","web", FileUploadUtils.UPLOAD_MAX,"utf-8");
+			model.setLogo("banner\\"+uploadImage1.getFileName());//设置文件名
 			//uploadImage2 = getFile("model.banner2","web", FileUploadUtils.UPLOAD_MAX,"utf-8");
 			//uploadImage3 = getFile("model.banner3","web", FileUploadUtils.UPLOAD_MAX,"utf-8");
 		}catch(Exception exception){
 			System.out.println("路径错误");
 		}
-
 
 		//修改参数
 		model.setId("1");
@@ -77,25 +73,27 @@ public class BannerController extends BaseController {
 		renderMessage("保存成功");
 
 
-		render(path + "banner.html");
+		//render(path + "banner.html");
+		redirect("/admin/setting_logo");//12.4修改
 	}
 
 
 	//参数:model.
 	public void save2(){
 		//renderText("声明此方法是一个action");
-		SysAboutus model = getModel(SysAboutus.class);
+
 
 
 		//上传图片
 		//TbSite site = getBackSite();
 		//public UploadFile getFile(String parameterName//参数名称, String saveDirectory//保存路径//默认是tomacat下upload下的文件夹, Integer maxPostSize//最大传输值, String encoding//编码,可用可不用)
 		//UploadFile uploadImage1=null;//声明上传文件
-		UploadFile uploadImage2=null;//声明上传文件
+		UploadFile uploadImage2 = getFile("model.banner2","banner", FileUploadUtils.UPLOAD_MAX,"utf-8");
+		SysAboutus model = getModel(SysAboutus.class);
 	//	UploadFile uploadImage3=null;//声明上传文件
 		try{
 			//uploadImage1 = getFile("model.banner1","web", FileUploadUtils.UPLOAD_MAX,"utf-8");
-			uploadImage2 = getFile("model.banner2","web", FileUploadUtils.UPLOAD_MAX,"utf-8");
+			model.setBanner2("banner\\"+uploadImage2.getFileName());
 			//uploadImage3 = getFile("model.banner3","web", FileUploadUtils.UPLOAD_MAX,"utf-8");
 		}catch(Exception exception){
 			System.out.println("路径错误");
@@ -105,8 +103,6 @@ public class BannerController extends BaseController {
 		//修改参数
 		model.setId("1");
 		//model.setBanner1("\\web\\"+uploadImage1.getFileName());
-		model.setBanner2("\\web\\"+uploadImage2.getFileName());
-
 		model.setBannerTitle2(getPara("model.bannertitle2"));
 		model.setBannerTitleContent2(getPara("model.bannertitlecontent2"));
 		//model.setBanner3("\\web\\"+uploadImage3.getFileName());
@@ -132,14 +128,15 @@ public class BannerController extends BaseController {
 		renderMessage("保存成功");
 
 
-		render(path + "banner.html");
+		//render(path + "banner.html");
+		redirect("/admin/setting_logo");//12.4修改
 	}
 
 
 	//参数:model.
 	public void save3(){
 		//renderText("声明此方法是一个action");
-		SysAboutus model = getModel(SysAboutus.class);
+
 
 
 		//上传图片
@@ -147,11 +144,12 @@ public class BannerController extends BaseController {
 		//public UploadFile getFile(String parameterName//参数名称, String saveDirectory//保存路径//默认是tomacat下upload下的文件夹, Integer maxPostSize//最大传输值, String encoding//编码,可用可不用)
 		//UploadFile uploadImage1=null;//声明上传文件
 		//UploadFile uploadImage2=null;//声明上传文件
-		UploadFile uploadImage3=null;//声明上传文件
+		UploadFile uploadImage3 = getFile("model.banner3","banner", FileUploadUtils.UPLOAD_MAX,"utf-8");
+		SysAboutus model = getModel(SysAboutus.class);
 		try{
 			//uploadImage1 = getFile("model.banner1","web", FileUploadUtils.UPLOAD_MAX,"utf-8");
 			//uploadImage2 = getFile("model.banner2","web", FileUploadUtils.UPLOAD_MAX,"utf-8");
-			uploadImage3 = getFile("model.banner3","web", FileUploadUtils.UPLOAD_MAX,"utf-8");
+			model.setBanner3("banner\\"+uploadImage3.getFileName());
 		}catch(Exception exception){
 			System.out.println("路径错误");
 		}
@@ -161,8 +159,6 @@ public class BannerController extends BaseController {
 		model.setId("1");
 		//model.setBanner1("\\web\\"+uploadImage1.getFileName());
 		//model.setBanner2("\\web\\"+uploadImage2.getFileName());
-		model.setBanner3("\\web\\"+uploadImage3.getFileName());
-
 		model.setBannerTitle3(getPara("model.bannertitle3"));
 		model.setBannerTitleContent3(getPara("model.bannertitlecontent3"));
 		//System.out.println("测试:"+uploadImage.getUploadPath()+"\\"+uploadImage.getFileName());
@@ -187,7 +183,8 @@ public class BannerController extends BaseController {
 		renderMessage("保存成功");
 
 
-		render(path + "banner.html");
+		//render(path + "banner.html");
+		redirect("/admin/setting_logo");//12.4修改
 	}
 }
 
