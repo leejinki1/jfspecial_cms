@@ -98,6 +98,11 @@ function oper_publish(id) {
 			return false;
 		}
 
+		<!--增加参数:分类名称-->
+		var a="option"+albumId;
+		var albumName=$('#'+a).html();
+		//alert(albumName);
+		$('[name="model.album_name"]').val(albumName);
 
 		<!--提交-->
 		$('#isdraft').val('0');
@@ -152,6 +157,11 @@ function oper_savedraft(id) {
 			return false;
 		}
 
+		<!--增加参数:分类名称-->
+		var a="option"+albumId;
+		var albumName=$('#'+a).html();
+		//alert(albumName);
+		$('[name="model.album_name"]').val(albumName);
 
 		<!--提交-->
 		$('#isdraft').val('1');
@@ -343,6 +353,9 @@ function closediv(){
 												}
 												%>
 											</select>
+
+											<input type="hidden" name="model.album_name" value="" ><!--提交分类名称-->
+
 											<!--<button data-toggle="modal" data-target="#myModal">新增分类</button>-->
 											<button id="displaybutton" onclick="opendiv();return false;">点击编辑分类</button>
 											<!--隐藏div  代替模态框-->

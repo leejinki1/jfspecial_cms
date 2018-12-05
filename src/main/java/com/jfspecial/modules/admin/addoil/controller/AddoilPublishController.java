@@ -173,10 +173,9 @@ public class AddoilPublishController extends BaseProjectController {
 			return;
 		}
 
-
 		//上传图片
-		TbSite site = getBackSite();
-		String temUrl=FileUploadUtils.getUploadTmpPath(site);//获取临时存储路径
+		//TbSite site = getBackSite();
+		//String temUrl=FileUploadUtils.getUploadTmpPath(site);//获取临时存储路径
 		UploadFile uploadImage = getFile("model.image_url","addoil", FileUploadUtils.UPLOAD_MAX,"utf-8");
 		//获取路径参数
 		TbAddOil model = getModel(TbAddOil.class);

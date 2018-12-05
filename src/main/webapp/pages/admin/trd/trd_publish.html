@@ -50,6 +50,12 @@ function oper_save(id) {
 			return false;
 		}
 
+		<!--增加参数:分类名称-->
+		var a="option"+albumId;
+		var albumName=$('#'+a).html();
+		//alert(albumName);
+		$('[name="model.album_name"]').val(albumName);
+
 		<!--提交-->
 		$('#isdraft').val('0');
 		form1.action = "trd_publish/publishArticle";
@@ -99,6 +105,13 @@ function oper_savedraft(id) {
 			alert('文章（'+ue.getContentTxt().length+'字）文字过长，请输入小于1200个字');
 			return false;
 		}
+
+		<!--增加参数:分类名称-->
+		var a="option"+albumId;
+		var albumName=$('#'+a).html();
+		//alert(albumName);
+		$('[name="model.album_name"]').val(albumName);
+
 
 		<!--提交-->
 		$('#isdraft').val('1');
@@ -298,6 +311,9 @@ function closediv(){
 											}
 											%>
 										</select>
+
+										<input type="hidden" name="model.album_name" value="" ><!--提交分类名称-->
+
 										<!--<button data-toggle="modal" data-target="#myModal">新增分类</button>-->
 										<button id="displaybutton" onclick="opendiv();return false;">点击编辑分类</button>
 										<!--隐藏div  代替模态框-->
@@ -368,7 +384,10 @@ function closediv(){
 										<div class="col-sm-offset-3 col-sm-9">
 											<div class="checkbox">
 												<label>
+												<!--隐藏域-->
 												<input type="hidden" name="model.is_draft" value="" id="isdraft">
+
+												<!--提交-->
 												 <input type="button" value="确认发布"  class="waves-effect waves-light btn-large" onclick="return oper_save(${model.id!'0'});"/>&nbsp;
 												  <input type="button" value="保存草稿箱"  class="waves-effect waves-light btn-large" onclick="return oper_savedraft(${model.id!'0'});"/>
 												  <!-- <a class="waves-effect waves-light btn-large">保存草稿箱</a>&nbsp;

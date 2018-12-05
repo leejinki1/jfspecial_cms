@@ -35,7 +35,6 @@ public class TbAddOil extends BaseProjectModel<TbAddOil> {
 	private String CONTENT = "content"; // 正文
 	private String IS_DRAFT= "is_draft"; // 是否保存到草稿箱:0 否 1 是
 	private String APPROVE_STATUS = "approve_status"; // 是否保存到草稿箱:0 否 1 是
-
 	public TbAddOil setApproveStatus(String value) {
 		set(APPROVE_STATUS, value);
 		return this;

@@ -21,9 +21,12 @@ public class AddoilHistoryController extends BaseController {
 
 	@Before(FrontInterceptor.class)
 	public void index() {
-		String sql = "select t.id,t.name,t.publish_user, t.update_time from tb_addoil t where  status = 1  and approve_status = 10 order by sort,id desc";
+		String sql = "select t.id,t.name,t.publish_user, t.update_time,t.content,t.image_url,ta.name " +
+				"from tb_addoil t ,tb_addoil_album ta " +
+				"where t.album_id=ta.id and t.status = 1  and approve_status = 10 order by t.sort,t.id desc";
 		//历史:发布状态未10;
 		List<TbAddOil> lists = TbAddOil.dao.find(sql);
+		System.out.println("12.5--------------"+lists);
 		setAttr("lists", lists);
 		render(path+".html");//先反回主页,待补充
 	}
