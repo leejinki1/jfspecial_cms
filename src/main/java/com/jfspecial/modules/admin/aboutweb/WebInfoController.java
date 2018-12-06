@@ -40,7 +40,8 @@ import java.io.File;
 public class WebInfoController extends BaseProjectController {
 
 	private static final String path = "/pages/admin/aboutweb/setting_";
-	
+	private static String msg="";
+
 	public void index() {
 		//System.out.println("测试1:index");//测试方法1
 		show();
@@ -70,11 +71,11 @@ public class WebInfoController extends BaseProjectController {
 		//上传图片
 		TbSite site = getBackSite();
 		String temUrl=FileUploadUtils.getUploadTmpPath(site);//获取临时存储路径
-		UploadFile uploadImage = getFile("model.weichat","wechat", FileUploadUtils.UPLOAD_MAX,"utf-8");
+		UploadFile uploadImage = getFile("model.wechat","wechat", FileUploadUtils.UPLOAD_MAX,"utf-8");
 		//获取路径参数
 		SysAboutus model = getModel(SysAboutus.class);
 		if (uploadImage != null) {
-			model.setWechat("wechat\\"+uploadImage.getFileName());//设置文件名
+			model.setWechat("\\upload\\wechat\\"+uploadImage.getFileName());//设置文件名
 		}else{
 			System.out.println("上传图片为空");
 		}
@@ -82,7 +83,7 @@ public class WebInfoController extends BaseProjectController {
 		//获取前台页面的值
 		Integer pid = getParaToInt();//获取路径中的id值
 		//Integer pid =1;
-		String wechat = getPara("wechat");
+		//String wechat = getPara("wechat");
 		model.setId("1");
 
 
@@ -96,30 +97,21 @@ public class WebInfoController extends BaseProjectController {
 		model.setUpdatedate(now);
 
 		//修改
-		boolean is=false;
-		if(pid != null && pid > 0) {//更新
-			is=model.update();
-			if(is){
-				System.out.println("修改成功");//测试
-				json.put("status", 1);// 成功
-			}else {
-				System.out.println("修改失败");//测试
-				json.put("msg","数据库错误");// 失败
-			}
-		}else{//新增
-			model.remove("id");
-			is=model.save();
-			if(is){
-				System.out.println("新增成功");//测试
-				json.put("status", 1);// 成功
-			}else {
-				System.out.println("新增失败");//测试
-				json.put("msg","数据库错误");// 失败
-			}
+		boolean is = model.update();
+
+		//发送给页面
+		if(is){
+			//setAttr("msg", "保存成功");
+			msg="banner3保存成功";
+			//System.out.println("保存成功banner3");
+		}else{
+			setAttr("msg", "保存失败");
+			msg="banner3保存失败";
+			//System.out.println("失败banner3");
 		}
-		//保存设置,返回给前台
 		setAttr("model", model);
-		//增加msg的值,报错误原因
+		renderMessage("保存成功");
+		//保存设置,返回给前台
 
 		redirect("/admin/setting_contact");//12.4修改
 	}

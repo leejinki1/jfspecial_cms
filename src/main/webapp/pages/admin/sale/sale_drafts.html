@@ -3,13 +3,13 @@
 <!--特卖/草稿-->
 <script type="text/javascript">
 function oper_delete(id) {
-		location.href="projectapp_drafts/delArticle/"+id;
+		location.href="sale_drafts/delArticle/"+id;
 		return false;
 	}
 <!--修改-->
 function oper_edit(id) {
 
-      location.href="projectapp_drafts/editArticle/"+id;
+      location.href="sale_drafts/editArticle/"+id;
 
 	}
 </script>
@@ -130,7 +130,7 @@ function oper_edit(id) {
 									<td>${item.price}</td>
 									<td>${item.num}</td>
 									<td>${item.unit}</td>
-									<td>${item.content}</td>
+									<td>见详情页</td>
 									<%if(""==item.image_url){%>
 									<td><img src="${item.image_net_url}" style="height:80px;width:80px;"></td>
 									<%}else {%>

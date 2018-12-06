@@ -22,7 +22,7 @@ public class AddoilDraftsController extends BaseController {
 
 	//显示保存的草稿
 	public void index() {
-		String sql = "select t.id,t.name,t.publish_user, t.update_time ,t.content,t.image_url,t.album_name   " +
+		String sql = "select t.id,t.name,t.publish_user, t.update_time ,t.content,t.image_url,t.image_net_url,t.album_name   " +
 				"from tb_addoil t where  status = 1 and is_draft = 1 order by sort,id desc";
 		//草稿:在草稿中1
 		List<TbAddOil> lists = TbAddOil.dao.find(sql);

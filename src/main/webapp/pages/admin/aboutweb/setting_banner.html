@@ -20,7 +20,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="${BASE_PATH}static/backend/assets/js/Lightweight-Chart/cssCharts.css">
 </head>
-<body>
+<body onload="init()">
     <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
@@ -92,14 +92,15 @@
 
 							<div class="row">
 								<!--banner1上传-->
-								<form class="col s12 form-horizontal" enctype="multipart/form-data" method="post" action="" name="form1">
+								<form class="col s12 form-horizontal" enctype="multipart/form-data" method="post" action="setting_banner/save1" name="form1" >
 									<!--上传图片1-->
 									<div class="file-field input-field col s12">
 										  <div class="btn">
 											<span>文件上传</span>
-											<input type="file" name="model.banner1" >
+											<input type="file" name="model.banner1"onchange="imageUrlChange1(this)" >
 										  </div>
 										  <div class="file-path-wrapper">
+											  <img id="banner1" src="${BASE_PATH}${model.banner1}" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
 											<input class="file-path validate" type="text" value="请上传轮播图1">
 										  </div>
 									</div>
@@ -127,7 +128,7 @@
 											<div class="checkbox">
 												<label>
 												  <!--<a class="waves-effect waves-light btn-large" href="${BASE_PATH}admin/banner">保存</a>-->
-													<input class="btn-large" type="submit" value="保存" onclick="return save1()">
+													<input class="btn-large" type="submit" value="保存" onclick="return saveBannerOne();">
 												</label>
 											</div>
 										</div>
@@ -135,14 +136,15 @@
 								</form>
 
 								<!--banner2上传-->
-								<form class="col s12 form-horizontal" enctype="multipart/form-data" method="post" action="" name="form2">
+								<form class="col s12 form-horizontal" enctype="multipart/form-data" method="post" action="setting_banner/save2" name="form2">
 									<!--上传图片1-->
 									<div class="file-field input-field col s12">
 										<div class="btn">
 											<span>文件上传</span>
-											<input type="file" name="model.banner2" >
+											<input type="file" name="model.banner2"  onchange="imageUrlChange2(this)">
 										</div>
 										<div class="file-path-wrapper">
+											<img id="banner2" src="${BASE_PATH}${model.banner2}" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
 											<input class="file-path validate" type="text" value="请上传轮播图2">
 										</div>
 									</div>
@@ -170,7 +172,7 @@
 											<div class="checkbox">
 												<label>
 													<!--<a class="waves-effect waves-light btn-large" href="${BASE_PATH}admin/banner">保存</a>-->
-													<input class="btn-large" type="submit" value="保存"onclick="return save2()">
+													<input class="btn-large" type="submit" value="保存"onclick="return saveBannerTwo();">
 												</label>
 											</div>
 										</div>
@@ -178,14 +180,15 @@
 								</form>
 
 								<!--banner3-->
-								<form class="col s12 form-horizontal" enctype="multipart/form-data" method="post" action="" name="form3">
+								<form class="col s12 form-horizontal" enctype="multipart/form-data" method="post" action="setting_banner/save3" name="form3">
 									<!--上传图片1-->
 									<div class="file-field input-field col s12">
 										<div class="btn">
 											<span>文件上传</span>
-											<input type="file" name="model.banner3" >
+											<input type="file" name="model.banner3"onchange="imageUrlChange3(this)" >
 										</div>
 										<div class="file-path-wrapper">
+											<img id="banner3" src="${BASE_PATH}${model.banner3}" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
 											<input class="file-path validate" type="text" value="请上传轮播图3">
 										</div>
 									</div>
@@ -213,14 +216,14 @@
 											<div class="checkbox">
 												<label>
 													<!--<a class="waves-effect waves-light btn-large" href="${BASE_PATH}admin/banner">保存</a>-->
-													<input class="btn-large" type="submit" value="保存"onclick="return save3()">
+													<input class="btn-large" type="submit" value="保存"onclick="return saveBannerThree();">
 												</label>
 											</div>
 										</div>
 									</div>
 								</form>
 							</div>
-
+							<input type="hidden" id="msg" value="${msg}">
     					<div class="clearBoth"></div>
 	   					
 					</div>
@@ -256,92 +259,94 @@
 	
     <!-- Custom Js -->
    <script src="${BASE_PATH}static/backend/assets/js/custom-scripts.js"></script>
-		<script type="text/javascript">
-		function save1(){
-
-			//获取上传图片
-            var banner1=$('[name="model.banner1"]').val();
-          	if(banner1==''){
-             alert("请上传图片!");
-             return false;
-         	}
-         	//获取主题1
-            var bannertitle1=$('[name="model.bannertitle1"]').val();
-          	if(bannertitle1==''){
-             alert("请输入主题!");
-             return false;
-         	}
-			//获取主题内容1
-            var bannertitlecontent1=$('[name="model.bannertitlecontent1"]').val();
-          	if(bannertitlecontent1==''){
-             alert("请输入主题内容!");
-             return false;
-         	}
-
-         	<!--提交-->
-			form1.action = "setting_banner/save1";
-			form1.submit();
-			return true;
+	<script type="text/javascript">
+		function init(){
+			var msg=$('#msg').val();
+			if(msg!=''){
+			 alert(msg);
 			}
+
 		}
 
-		function save2(){
-
-			//获取上传图片
-            var banner2=$('[name="model.banner2"]').val();
-          	if(banner2==''){
-             alert("请上传图片!");
-             return false;
-         	}
-         	//获取主题2
-            var bannertitle2=$('[name="model.bannertitle2"]').val();
-          	if(bannertitle2==''){
-             alert("请输入主题!");
-             return false;
-         	}
-			//获取主题内容2
-            var bannertitlecontent2=$('[name="model.bannertitlecontent2"]').val();
-          	if(bannertitlecontent2==''){
-             alert("请输入主题内容2!");
-             return false;
-         	}
-
-         	<!--提交-->
-			form2.action = "setting_banner/save2";
-			form2.submit();
-			return true;
-			}
-		}
-
-
-		function save3(){
-
-			//获取上传图片
-            var banner3=$('[name="model.banner3"]').val();
-          	if(banner3==''){
-             alert("请上传图片3!");
-             return false;
-         	}
-         	//获取主题3
-            var bannertitle3=$('[name="model.bannertitle3"]').val();
-          	if(bannertitle3==''){
-             alert("请输入主题3!");
-             return false;
-         	}
-			//获取主题内容3
-            var bannertitlecontent3=$('[name="model.bannertitlecontent3"]').val();
-          	if(bannertitlecontent3==''){
-             alert("请输入主题内容3!");
-             return false;
-         	}
-
-         	<!--提交-->
-			form3.action = "setting_banner/save3";
-			form3.submit();
-			return true;
-			}
-		}
-		</script>
+<!--显示本地图片/预览1-->
+function imageUrlChange1(){
+	alert(1);
+	//判断是否支持FileReader
+    if(window.FileReader) {
+        var reader = new FileReader();
+    } else {
+        alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+    }
+    //获取文件
+    var file =  $('[name="model.banner1"]')[0].files[0];
+    var imageType = /^image\//;
+    //是否是图片
+    if(!imageType.test(file.type)) {
+        alert("请选择图片！");
+        return;
+    }
+    //读取完成
+    reader.onload = function(e) {
+        //获取图片dom
+        var img = document.getElementById("banner1");
+        //图片路径设置为读取的图片
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+<!--显示本地图片/预览2-->
+function imageUrlChange2(){
+	alert(2);
+	//判断是否支持FileReader
+    if(window.FileReader) {
+        var reader = new FileReader();
+    } else {
+        alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+    }
+    //获取文件
+    var file =  $('[name="model.banner2"]')[0].files[0];
+    var imageType = /^image\//;
+    //是否是图片
+    if(!imageType.test(file.type)) {
+        alert("请选择图片！");
+        return;
+    }
+    //读取完成
+    reader.onload = function(e) {
+        //获取图片dom
+        var img = document.getElementById("banner2");
+        //图片路径设置为读取的图片
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+<!--显示本地图片/预览3-->
+function imageUrlChange3(){
+	alert(3);
+	//判断是否支持FileReader
+    if(window.FileReader) {
+        var reader = new FileReader();
+    } else {
+        alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+    }
+    //获取文件
+    var file =  $('[name="model.banner3"]')[0].files[0];
+    var imageType = /^image\//;
+    //是否是图片
+    if(!imageType.test(file.type)) {
+        alert("请选择图片！");
+        return;
+    }
+    //读取完成
+    reader.onload = function(e) {
+        //获取图片dom
+        var img = document.getElementById("banner3");
+        //图片路径设置为读取的图片
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+	</script>
 
 </body>
 

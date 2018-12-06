@@ -159,14 +159,14 @@
             <!--ajax新增-->
             jQuery.ajax({
             type:'POST',
-                    url:'aboutus/save/'+id,
+                    url:'setting_aboutus/save/'+id,
                     data:$("form").serialize(),
                     async:false,
                     success:function(data){
-                    alert(data.status);
+                    //alert(data.status);
                     if(data.status==1){
                             alert('发布成功');
-                            location.href="aboutus";
+                            location.href="setting_aboutus";
                         } else {
                             alert('发布失败：'+data.msg);
                         }

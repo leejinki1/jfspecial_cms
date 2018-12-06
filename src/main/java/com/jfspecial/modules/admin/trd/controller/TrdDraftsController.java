@@ -22,7 +22,7 @@ public class TrdDraftsController extends BaseController {
 
 	//显示保存的草稿
 	public void index() {
-		String sql = "select t.id,t.name,t.publish_user, t.update_time ,t.content,t.image_url,t.album_name " +
+		String sql = "select t.id,t.name,t.publish_user, t.update_time ,t.content,t.image_url,t.image_net_url,t.album_name " +
 				"from tb_trd t where  status = 1 and is_draft = 1 order by sort,id desc";
 		List<TbTrd> lists = TbTrd.dao.find(sql);
 		setAttr("lists", lists);

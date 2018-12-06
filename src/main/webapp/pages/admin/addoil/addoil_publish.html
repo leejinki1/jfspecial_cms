@@ -106,16 +106,16 @@ function oper_savedraft(id) {
 		}
 
 		<!--判断标题图片-->
-		//var image_net_url=$('[name="model.image_net_url"]').val();
+		var image_net_url=$('[name="model.image_net_url"]').val();
 		var image_url=$('[name="model.image_url"]').val();
 		//alert(image_net_url);
 		//alert(image_url);
-		//if(image_net_url==''){
+		if(image_net_url==''){
 			if(image_url==''){
-				alert('请提交图片');
+				alert('请至少选择一种方式提交图片');
 				return false;
 			}
-		//}
+		}
 
 		<!--判断内容-->
 		if(!ue.hasContents()){

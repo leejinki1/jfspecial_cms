@@ -20,7 +20,7 @@ import java.io.File;
 public class LogoController extends BaseProjectController {
 
 	private static final String path = "/pages/admin/aboutweb/setting_";
-
+	private static String msg;
 	public void index() {
 
 		//System.out.println("测试1:index++++++++++++"+getPara(0));//测试方法1
@@ -38,20 +38,21 @@ public class LogoController extends BaseProjectController {
 
 	//参数:model.logo
 	public void save(){
-		SysAboutus model = getModel(SysAboutus.class);
-		TbSite site = getBackSite();//站点信息//[id:10][name:特派员][template:special][templateMobile:special][domainPc:special.demo.com][domainMobile:special.demo.com][domainOthers:null][siteTitle:科技特派员创业扶贫联盟平台][siteFolderId:1][siteArticleId:1][dbUrl:null][dbUser:null][dbPwd:null][dbDriver:null][sort:10][status:1][updateTime:2018-11-14 00:50:57][updateId:1][createTime:2018-11-14 00:50:57][createId:1]
+		System.out.println("12.6----进入logo的save方法" );
+		//TbSite site = getBackSite();//站点信息//[id:10][name:特派员][template:special][templateMobile:special][domainPc:special.demo.com][domainMobile:special.demo.com][domainOthers:null][siteTitle:科技特派员创业扶贫联盟平台][siteFolderId:1][siteArticleId:1][dbUrl:null][dbUser:null][dbPwd:null][dbDriver:null][sort:10][status:1][updateTime:2018-11-14 00:50:57][updateId:1][createTime:2018-11-14 00:50:57][createId:1]
 		//System.out.println("---12.4 site是什么:"+site);
-		String temUrl=FileUploadUtils.getUploadTmpPath(site);//获取临时存储路径
+		//String temUrl=FileUploadUtils.getUploadTmpPath(site);//获取临时存储路径
 		//上传图片
 		//public UploadFile getFile(String parameterName//参数名称, String saveDirectory//保存路径//默认是tomacat下upload下的文件夹, Integer maxPostSize//最大传输值, String encoding//编码,可用可不用)
 		UploadFile uploadImage = getFile("model.logo","logo", FileUploadUtils.UPLOAD_MAX,"utf-8");
 		//long currentTime=System.currentTimeMillis();//12.4 获取当前时间戳//打算改文件名的,没有可改的地方
 
+		SysAboutus model = getModel(SysAboutus.class);
 		if (uploadImage != null) {
 			//File file=new File(temUrl+"\\"+uploadImage.getFileName());
 			//System.out.println("12.4 ---"+temUrl+"\\"+uploadImage.getFileName());
 			//String fileUrl = uploadHandler(site,file,"image");
-			model.setLogo("logo\\"+uploadImage.getFileName());//设置文件名
+			model.setLogo("\\upload\\logo\\"+uploadImage.getFileName());//设置文件名
 			//model.setLogo(fileUrl);//设置文件名
 		}else{
 			System.out.println("上传图片为空");
@@ -70,10 +71,16 @@ public class LogoController extends BaseProjectController {
 		model.setUpdatedate(now);
 
 		//修改
-		model.update();
-
+		boolean is= model.update();
+		if(is){
+			msg="修改logo成功";
+			System.out.println("修改logo成功");
+		}else{
+			msg="修改logo失败";
+			System.out.println("修改logo失败");
+		}
 		//发送给页面
-		System.out.println("测试:"+model);//测试
+		//System.out.println("测试:"+model);//测试
 		setAttr("model", model);
 		renderMessage("保存成功");
 

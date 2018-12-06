@@ -21,7 +21,7 @@ public class AddoilHistoryController extends BaseController {
 
 	@Before(FrontInterceptor.class)
 	public void index() {
-		String sql = "select t.id,t.name,t.publish_user, t.update_time,t.content,t.image_url,t.album_name  " +
+		String sql = "select t.id,t.name,t.publish_user, t.update_time,t.content,t.image_url,t.image_net_url,t.album_name  " +
 				"from tb_addoil t " +
 				"where t.status = 1  and approve_status = 10 order by t.sort,t.id desc";
 		//历史:发布状态未10;
