@@ -101,7 +101,7 @@ public class ProjectappPublishController extends BaseProjectController {
 
 		TbProjectApp model = getModel(TbProjectApp.class);
 		if (uploadImage != null) {
-			model.setImageUrl("projectapp\\"+uploadImage.getFileName());//设置文件名
+			model.setImageUrl("\\upload\\projectapp\\"+uploadImage.getFileName());//设置文件名
 		}else{
 			System.out.println("上传图片为空");
 		}
@@ -134,6 +134,11 @@ public class ProjectappPublishController extends BaseProjectController {
 			//	renderJson(json.toJSONString());
 			//	return;
 			//	}
+			model.setPublishTime(DateUtils.getNow("yyyy-MM-dd")); // 发布时间//没有时分秒
+			model.setPublishUser(user.getUserName()); // 发布人
+			model.setUpdateId(getSessionUser().getUserid());//修改人
+			model.setUpdateTime(getNow());//修改时间
+			model.setIsDraft("0");//0=发布;1=草稿箱  可能是从草稿箱过来的
 			model.update();
 		} else { // 新增
 			model.remove("id");
@@ -146,12 +151,13 @@ public class ProjectappPublishController extends BaseProjectController {
 			model.setIsRecommend(2);// 不推荐
 			model.setSort(20); // 排序
 			model.set("approve_status", ArticleConstant.APPROVE_STATUS_UPDATE); // 需要审核改为update
-			model.setPublishTime(DateUtils.getNow("yyyy-MM-dd")); // 发布时间
+			model.setPublishTime(DateUtils.getNow("yyyy-MM-dd")); // 发布时间//没有时分秒
 			model.setPublishUser(user.getUserName()); // 发布人
-			model.setCreateId(getSessionUser().getUserid());
-			model.setUpdateId(getSessionUser().getUserid());
-			model.setCreateTime(getNow());
-			model.setIsDraft("0");//0=发布;1=草稿箱
+			model.setCreateId(getSessionUser().getUserid());//创建人
+			model.setCreateTime(getNow());//创建时间
+			model.setUpdateId(getSessionUser().getUserid());//修改人
+			model.setUpdateTime(getNow());//修改时间
+			model.setIsDraft("0");//0==发布;1==草稿箱
 
 
 
@@ -161,7 +167,7 @@ public class ProjectappPublishController extends BaseProjectController {
 
 		json.put("status", 1);// 成功
 		//renderJson(json.toJSONString());
-		redirect("/admin/projectapp_publish");//12.4修改   后期:跳转到待审核页面
+		redirect("/admin/projectapp_approve");//12.4修改   后期:跳转到待审核页面
 	}
 
 
@@ -191,7 +197,7 @@ public class ProjectappPublishController extends BaseProjectController {
 		UploadFile uploadImage = getFile("model.image_url","projectapp", FileUploadUtils.UPLOAD_MAX,"utf-8");//获取路径参数
 		TbProjectApp model = getModel(TbProjectApp.class);
 		if (uploadImage != null) {
-			model.setImageUrl("projectapp\\"+uploadImage.getFileName());//设置文件名
+			model.setImageUrl("\\upload\\projectapp\\"+uploadImage.getFileName());//设置文件名
 		}else{
 			System.out.println("上传图片为空");
 		}
@@ -224,6 +230,9 @@ public class ProjectappPublishController extends BaseProjectController {
 			//	renderJson(json.toJSONString());
 			//	return;
 			//	}
+			model.setUpdateId(getSessionUser().getUserid());//修改人
+			model.setUpdateTime(getNow());//修改时间
+			model.setIsDraft("1");//0=发布;1=草稿箱
 			model.update();
 		} else { // 新增
 			model.remove("id");
@@ -237,11 +246,12 @@ public class ProjectappPublishController extends BaseProjectController {
 			model.setSort(20); // 排序
 			model.setIsDraft("1");//0=发布;1=草稿箱
 			//model.set("approve_status", ArticleConstant.APPROVE_STATUS_UPDATE); // 需要审核改为update
-			model.setPublishTime(DateUtils.getNow("yyyy-MM-dd")); // 发布时间
-			model.setPublishUser(user.getUserName()); // 发布人
-			model.setCreateId(getSessionUser().getUserid());
-			model.setUpdateId(getSessionUser().getUserid());
-			model.setCreateTime(getNow());
+			//model.setPublishTime(DateUtils.getNow("yyyy-MM-dd")); // 发布时间
+			//model.setPublishUser(user.getUserName()); // 发布人
+			model.setCreateId(getSessionUser().getUserid());//创建人
+			model.setCreateTime(getNow());//创建时间
+			model.setUpdateId(getSessionUser().getUserid());//修改人
+			model.setUpdateTime(getNow());//修改时间
 
 
 
@@ -251,7 +261,7 @@ public class ProjectappPublishController extends BaseProjectController {
 
 		json.put("status", 1);// 成功
 		//renderJson(json.toJSONString());
-		redirect("/admin/projectapp_publish");//12.4修改   后期:
+		redirect("/admin/projectapp_drafts");//12.4修改   后期:
 	}
 
 }

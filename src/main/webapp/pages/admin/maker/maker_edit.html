@@ -1,14 +1,11 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+<!--创客/修改-->
 <!-- jquery -->
 <% include("/template/includes/jquery.html"){} %>
 <% include("/template/includes/ueditor.html"){} %>
-
-
-
 <script type="text/javascript">
 	var ue;
-	<!--预加载函数-->
 	$(document).ready(function(){
 		ue = UE.getEditor('editor',{
 			initialFrameHeight:350  //初始化编辑器高度,默认320
@@ -22,12 +19,12 @@
                       'simpleupload', 'insertimage', 'emotion' , 'insertcode'
                   ]]
 		});
+
 	});
 
 
-<!--发布-->
+	<!--发布-->
 function oper_save(id) {
-
 		<!--判断栏目-->
 		var albumId = $('[name="model.album_id"]').val();
 		if(albumId=='-1') {
@@ -46,19 +43,14 @@ function oper_save(id) {
 			return false;
 		}
 
-
-
 		<!--判断标题图片-->
 		var image_net_url=$('[name="model.image_net_url"]').val();
 		var image_url=$('[name="model.image_url"]').val();
 		//alert(image_net_url);
 		//alert(image_url);
-		if(image_net_url==''){
-			if(image_url==''){
-				alert('请至少选择一种方式提交图片');
-				return false;
-			}
-		}
+		//if(image_url==''){
+		//		alert("请上传图片");
+		//}
 
 		<!--判断内容-->
 		if(!ue.hasContents()){
@@ -76,15 +68,14 @@ function oper_save(id) {
 		//alert(albumName);
 		$('[name="model.album_name"]').val(albumName);
 
-
 		<!--提交-->
 		$('#isdraft').val('0');
-		form1.action = "addoil_publish/publishArticle";
+		form1.action = "../../maker_publish/publishArticle/"+id;
 		form1.submit();
 		return true;
 	}
 
-<!--保存到草稿箱-->
+	<!--保存到草稿箱-->
 function oper_savedraft(id) {
 
 		<!--判断栏目-->
@@ -106,15 +97,12 @@ function oper_savedraft(id) {
 		}
 
 		<!--判断标题图片-->
-		//var image_net_url=$('[name="model.image_net_url"]').val();
+		var image_net_url=$('[name="model.image_net_url"]').val();
 		var image_url=$('[name="model.image_url"]').val();
 		//alert(image_net_url);
 		//alert(image_url);
-		//if(image_net_url==''){
-			if(image_url==''){
-				alert('请提交图片');
-				return false;
-			}
+		//if(image_url==''){
+		//		alert("请上传图片");
 		//}
 
 		<!--判断内容-->
@@ -133,9 +121,10 @@ function oper_savedraft(id) {
 		//alert(albumName);
 		$('[name="model.album_name"]').val(albumName);
 
+
 		<!--提交-->
 		$('#isdraft').val('1');
-		form1.action = "addoil_publish/saveToDrafts";
+		form1.action = "../../maker_publish/saveToDrafts/"+id;
 		form1.submit();
 		return true;
 }
@@ -152,11 +141,11 @@ function oper_addAlbum(id){
 	<!--ajax新增-->
 	jQuery.ajax({
 	type:'POST',
-			url:'addoilalbum/addAlbum/'+id,
+			url:'../../makeralbum/addAlbum/'+id,
 			data:$("#form1").serialize(),
 			success:function(data){
 			if(data.status==1){
-					alert('新增成功');
+					alert('发布成功');
 						<!--模态框中新增补充代码-->
 					$('#modal_tobody').append(data.modal);
 						<!--下拉列表中新增代码段-->
@@ -164,7 +153,7 @@ function oper_addAlbum(id){
 						<!--清空输入框内容-->
 					$('#albumname').val('');
 				} else {
-					alert('新增失败：'+data.msg);
+					alert('发布失败：'+data.msg);
 				}
 			},
 			error:function(html){
@@ -173,17 +162,16 @@ function oper_addAlbum(id){
 				alert("服务器忙，提交数据失败，请联系管理员！");
 			}
 		});
-		return false;
 }
 
 <!--删除分类 11.30-->
 function oper_delAlbum(id){
 
-<!--ajax删除-->
-<!--$("#form2").serialize()-->
+	<!--ajax删除-->
+	<!--$("#form2").serialize()-->
 	jQuery.ajax({
 	type:'POST',
-			url:'addoilalbum/delAlbum/'+id,
+			url:'../../makeralbum/delAlbum/'+id,
 			data:'',
 			success:function(data){
 			if(data.status==1){
@@ -192,7 +180,6 @@ function oper_delAlbum(id){
 					$('#modal'+id+'').html('');
 						<!--移除下拉列表中的分类-->
 					$('#option'+id+'').css('display','none');
-					return false;
 				} else {
 					alert('删除失败：'+data.msg);
 				}
@@ -203,7 +190,6 @@ function oper_delAlbum(id){
 				alert("服务器忙，提交数据失败，请联系管理员！");
 			}
 		});
-		return false;
 }
 
 
@@ -225,9 +211,10 @@ function closediv(){
 		$('#hiddendiv').css('display','none');
 		$('#displaybutton').text('点击编辑分类');
 }
+
 <!--显示本地图片/预览-->
 function imageUrlChange(){
-	//alert(1);
+	alert(1);
 	//判断是否支持FileReader
     if(window.FileReader) {
         var reader = new FileReader();
@@ -255,7 +242,7 @@ function imageUrlChange(){
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Target Material Design Bootstrap Admin Template</title>
+    <title>创客/发布</title>
 	
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="${BASE_PATH }static/backend/assets/materialize/css/materialize.min.css" media="screen,projection" />
@@ -270,7 +257,6 @@ function imageUrlChange(){
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/cssCharts.css">
-
 </head>
 <body>
     <div id="wrapper">
@@ -282,7 +268,7 @@ function imageUrlChange(){
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand waves-effect waves-dark" href="index.html"><i class="large material-icons">track_changes</i> <strong>帮扶企业</strong></a>
+                <a class="navbar-brand waves-effect waves-dark" href="index.html"><i class="large material-icons">track_changes</i> <strong>创客活动</strong></a>
 				
 		<div id="sideNav" href=""><i class="material-icons dp48">toc</i></div>
             </div>
@@ -306,10 +292,10 @@ function imageUrlChange(){
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a href="../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 信息统计</a>
+                        <a href="../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 首页</a>
                     </li>
                     <li>
-                        <a href="addoil_publish" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 帮扶信息</a>
+                        <a href="maker_publish" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 创客活动信息</a>
                     </li>
 
                 </ul>
@@ -322,24 +308,23 @@ function imageUrlChange(){
 <div id="page-wrapper">
 	<div class="header"> 
         <h1 class="page-header">
-                	帮扶信息
+                	创客活动信息
         </h1>
 	    <ol class="breadcrumb">
 			<li><a href="../admin">首页</a></li>
-			<li><a href="addoil_publish">帮扶企业 </a></li>
-			<li><a href="addoil_publish">帮扶信息 </a></li>
+			<li><a href="maker_publish">创客活动 </a></li>
+			<li><a href="maker_publish">创客活动信息 </a></li>
 			<!--<li class="active">Data</li>-->
 		</ol> 							
 	</div>
 		<!--666-->
-	<div id="page-inner">
-
-		<!--edit blog-->
+	<div id="page-inner"> 
+		
 		<div class="row">
 			<div class="col-lg-12">
 	            <div class="card">
-	            	<div class="card-action" id="mainframe">
-                            	发布帮扶企业
+	            	<div class="card-action">
+                            	发布新闻
                     </div>
 					<div class="card-content">
 						<form id="form1" class="form-horizontal" name="form1" action="" method="post" enctype="multipart/form-data">
@@ -350,51 +335,48 @@ function imageUrlChange(){
 								<div class="form-group">
 									<label for="model.album_id" class="col-sm-2 control-label">栏目</label>
 									<div class="col-sm-10" >
-										<select id="select" class="form-control" name="model.album_id">
+										<select  class="form-control" name="model.album_id" id="select">
 											<option value="-1">--请选择栏目--</option>
 											<%  //var albums=tempTrd.albums();
-												if(!isEmpty(albums)) {
-											 	for(item in albums){ %>
-													<option id="option${item.id}" value="${item.id}" ${item.id==model.album_id!0?'selected':''} >${item.name}</option>
-													<%
-													}
-											    }
+											if(!isEmpty(albums)) {
+											for(item in albums){ %>
+											<option id="option${item.id}" value="${item.id}" ${item.id==model.album_id!0?'selected':''} >${item.name}</option>
+											<%
+											}
+											}
 											%>
 										</select>
 
 										<input type="hidden" name="model.album_name" value="" ><!--提交分类名称-->
 
-
 										<!--<button data-toggle="modal" data-target="#myModal">新增分类</button>-->
 										<button id="displaybutton" onclick="opendiv();return false;">点击编辑分类</button>
 										<!--隐藏div  代替模态框-->
 										<div id="hiddendiv" onmouseleave="closediv();return false;" style="display:none;">
-												<div class="modal-body">
-													<input id="albumname" type="text" name="albumname" placeholder="输入新分类的名称">
-													<input type="button" value="确认增加" onclick="oper_addAlbum('0');return false;">
-												</div>
-												<!--&lt;!&ndash;显示原来的分类&ndash;&gt;-->
-												<div class="modal-body">
-													<table>
-														<thead>
-														<th>分类名称</th>
-														<th>删除</th>
-														</thead>
-														<tbody id="modal_tobody">
-														<%for(item in albums){ %>
-														<tr id="modal${item.id}">
-															<td>${item.name}</td>
-															<td><a onclick="oper_delAlbum(${item.id!'0'});return false;" aria-hidden="true">删除</a></td>
-														</tr>
-														<%}%>
-														</tbody>
-													</table>
-												</div>
+											<div class="modal-body">
+												<input id="albumname" type="text" name="albumname" placeholder="输入新分类的名称">
+												<input type="button" value="确认增加" onclick="oper_addAlbum('0');return false;">
+											</div>
+											<!--&lt;!&ndash;显示原来的分类&ndash;&gt;-->
+											<div class="modal-body">
+												<table>
+													<thead>
+													<th>分类名称</th>
+													<th>删除</th>
+													</thead>
+													<tbody id="modal_tobody">
+													<%for(item in albums){ %>
+													<tr id="modal${item.id}">
+														<td>${item.name}</td>
+														<td><a onclick="oper_delAlbum(${item.id!'0'});return false;" aria-hidden="true">删除</a></td>
+													</tr>
+													<%}%>
+													</tbody>
+												</table>
+											</div>
 										</div>
 									</div>
 								</div>
-
-
 								<!--标题-->
 								<div class="form-group">
 									<label for="model.name" class="col-sm-2 control-label">标题</label>
@@ -409,9 +391,9 @@ function imageUrlChange(){
 									<label for="model.image_url" class="col-sm-2 control-label">主题图片</label>
 									<div class="col-sm-10">
 										<label>方法一:</label>
-										<img id="imageUrl" src="" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
+										<img id="imageUrl" src="${BASE_PATH}${model.image_url}" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
 										<input type="file" name="model.image_url" class="form-control" id="file"
-											   value="${model.image_url!''}" onchange="imageUrlChange(this)">
+											   value="${model.image_url!''}" >
 										<label>方法二:</label>
 										<input name="model.image_net_url" class="form-control" id="model.image_net_url"
 											   value="${model.image_net_url!''}" placeholder="复制/粘贴网络图片地址">
@@ -428,22 +410,28 @@ function imageUrlChange(){
 									</div>
 							  </div>
 
-								<div class="form-group">
-								    <div class="col-sm-offset-3 col-sm-9">
-									    <div class="checkbox">
-									        <label>
-									        <input type="hidden" name="model.is_draft" value="" id="isdraft">
-									         <input type="button" value="确认发布"  class="waves-effect waves-light btn-large" onclick="return oper_save(${model.id!'0'});"/>&nbsp;
-									          <input type="button" value="保存草稿箱"  class="waves-effect waves-light btn-large" onclick="return oper_savedraft(${model.id!'0'});"/>
-									          <!-- <a class="waves-effect waves-light btn-large">保存草稿箱</a>
-									          <a class="waves-effect waves-light btn-large">确认发布</a>-->
-									        </label>
+							    <!--
+								<div class="input-field col s12">
+								  <textarea id="textarea1" class="materialize-textarea"></textarea>
+								  <label for="textarea1">分类设置</label>
+								</div>-->
+								<!--提交按钮-->
+									<div class="form-group">
+										<div class="col-sm-offset-3 col-sm-9">
+											<div class="checkbox">
+												<label>
+												<input type="hidden" name="model.is_draft" value="" id="isdraft">
+												 <input type="button" value="确认发布"  class="waves-effect waves-light btn-large" onclick="return oper_save(${model.id!'0'});"/>&nbsp;
+												  <input type="button" value="保存草稿箱"  class="waves-effect waves-light btn-large" onclick="return oper_savedraft(${model.id!'0'});"/>
+												  <!-- <a class="waves-effect waves-light btn-large">保存草稿箱</a>&nbsp;
+												<!--  <a class="waves-effect waves-light btn-large">确认发布</a>-->
+												</label>
+											</div>
 										</div>
 									</div>
-								</div>
 
-							</div>
-						</form>
+								</div>
+							</form>
     					<div class="clearBoth"></div>
 	   					
 					</div>
@@ -454,15 +442,13 @@ function imageUrlChange(){
 		
 	</div><!-- /. PAGE WRAPPER  -->
 
-
 </div>
-</body>
      <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
     <script src="${BASE_PATH }static/backend/assets/js/jquery-1.10.2.js"></script>
-	<script src="${BASE_PATH }static/backend/assets/js/jquery-1.12.4.js"></script>
-	<!---->
+	
+	<!-- Bootstrap Js -->
     <script src="${BASE_PATH }static/backend/assets/js/bootstrap.min.js"></script>
 	
 	<script src="${BASE_PATH }static/backend/assets/materialize/js/materialize.min.js"></script>
@@ -474,13 +460,15 @@ function imageUrlChange(){
     <script src="${BASE_PATH }static/backend/assets/js/morris/morris.js"></script>
 	
 
-	<script src="${BASE_PATH }static/backend/assets/js/easypiechart.js"></script>
-	<script src="${BASE_PATH }static/backend/assets/js/easypiechart-data.js"></script>
+	<script src="assets/js/easypiechart.js"></script>
+	<script src="assets/js/easypiechart-data.js"></script>
 	
-	<script src="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/jquery.chart.js"></script>
+	<script src="assets/js/Lightweight-Chart/jquery.chart.js"></script>
 	
     <!-- Custom Js -->
-   <script src="${BASE_PATH }static/backend/assets/js/custom-scripts.js"></script>
+   <script src="assets/js/custom-scripts.js"></script> 
 
+
+</body>
 
 </html>

@@ -134,7 +134,11 @@ function oper_reject(id) {
 									<td>${itemLP.index}</td>
 									<td>${item.name}</td>
 									<td>${item.content}</td>
-									<td><img src="${BASE_PATH}upload/${item.image_url}" style="height:80px;width:80px;"></td>
+									<%if(""==item.image_url){%>
+									<td><img src="${item.image_net_url}" style="height:80px;width:80px;"></td>
+									<%}else {%>
+									<td><img src="${BASE_PATH}${item.image_url}" style="height:80px;width:80px;"></td>
+									<%}%>
 									<td>${item.album_name}</td>
 									<td>${item.publish_user}</td>
 									<td>${item.update_time}</td>
@@ -151,7 +155,11 @@ function oper_reject(id) {
                                          <td>${itemLP.index}</td>
                                          <td>${item.name}</td>
 								<td>${item.content}</td>
-								<td><img src="${BASE_PATH}upload/${item.image_url}" style="height:80px;width:80px;"></td>
+								<%if(""==item.image_url){%>
+                                    <td><img src="${item.image_net_url}" style="height:80px;width:80px;"></td>
+                                    <%}else {%>
+                                    <td><img src="${BASE_PATH}${item.image_url}" style="height:80px;width:80px;"></td>
+                                    <%}%>
                                 <td>${item.album_name}</td>
                                          <td>${item.update_time}</td>
                                              <a class="waves-effect waves-light btn" onclick="oper_pass(${item.id!'0'});">通过</a>&nbsp;

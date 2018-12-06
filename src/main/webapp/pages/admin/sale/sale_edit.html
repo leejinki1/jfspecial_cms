@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<!--特卖/发布-->
+<!--特卖/编辑-->
 <!-- jquery -->
 <% include("/template/includes/jquery.html"){} %>
 <% include("/template/includes/ueditor.html"){} %>
-
 <script type="text/javascript">
 	var ue;
 	$(document).ready(function(){
@@ -82,12 +81,9 @@ function oper_publish(id) {
 		var image_url=$('[name="model.image_url"]').val();
 		//alert(image_net_url);
 		//alert(image_url);
-		if(image_net_url==''){
-			if(image_url==''){
-				alert('请至少选择一种方式提交图片');
-				return false;
-			}
-		}
+		//if(image_url==''){
+		//		alert("请上传图片");
+		//}
 
 		if(!ue.hasContents()){
 			alert('请输入文章内容');
@@ -106,7 +102,7 @@ function oper_publish(id) {
 
 		<!--提交-->
 		$('#isdraft').val('0');
-		form1.action = "sale_publish/publishArticle/"+id;
+		form1.action = "../../sale_publish/publishArticle/"+id;
 		form1.submit();
 		return true;
 	}
@@ -133,6 +129,40 @@ function oper_savedraft(id) {
 			return false;
 		}
 
+		<!--判断属性-->
+		var property = $('[name="model.property"]').val();
+		if(property=='') {
+			alert('请输入属性');
+			return false;
+		}
+
+		<!--判断价格-->
+		var price = $('[name="model.price"]').val();
+		if(price=='') {
+			alert('请输入价格');
+			return false;
+		}else if(isNaN(price)){
+			alert('请输入数字');
+			return false;
+		}
+
+
+		<!--判断数量-->
+		var num = $('[name="model.num"]').val();
+		if(num=='') {
+			alert('请输入数量');
+			return false;
+		}else if(isNaN(num)){
+			alert('请输入数字');
+			return false;
+		}
+
+		<!--判断单位-->
+		var unit = $('[name="model.unit"]').val();
+		if(unit=='') {
+			alert('请输入单位');
+			return false;
+		}
 
 
 		<!--判断标题图片-->
@@ -140,12 +170,9 @@ function oper_savedraft(id) {
 		var image_url=$('[name="model.image_url"]').val();
 		//alert(image_net_url);
 		//alert(image_url);
-		if(image_net_url==''){
-			if(image_url==''){
-				alert('请至少选择一种方式提交图片');
-				return false;
-			}
-		}
+		//if(image_url==''){
+		//		alert("请上传图片");
+		//}
 
 		<!--判断内容-->
 		if(!ue.hasContents()){
@@ -165,7 +192,7 @@ function oper_savedraft(id) {
 
 		<!--提交-->
 		$('#isdraft').val('1');
-		form1.action = "sale_publish/saveToDrafts/"+id;
+		form1.action = "../../sale_publish/saveToDrafts/"+id;
 		form1.submit();
 		return true;
 }
@@ -183,7 +210,7 @@ function oper_addAlbum(id){
 	<!--ajax新增-->
 	jQuery.ajax({
 	type:'POST',
-			url:'salealbum/addAlbum/'+id,
+			url:'../../salealbum/addAlbum/'+id,
 			data:$("form").serialize(),
 			success:function(data){
 			if(data.status==1){
@@ -212,7 +239,7 @@ function oper_delAlbum(id){
 <!--$("form").serialize()-->
 	jQuery.ajax({
 	type:'POST',
-			url:'salealbum/delAlbum/'+id,
+			url:'../../salealbum/delAlbum/'+id,
 			data:'',
 			async:false,
 			success:function(data){
@@ -254,9 +281,10 @@ function closediv(){
 		$('#displaybutton').text('点击编辑分类');
 }
 
+
 <!--显示本地图片/预览-->
 function imageUrlChange(){
-	//alert(1);
+	alert(1);
 	//判断是否支持FileReader
     if(window.FileReader) {
         var reader = new FileReader();
@@ -454,9 +482,9 @@ function imageUrlChange(){
 										<label for="model.image_url" class="col-sm-2 control-label">主题图片</label>
 										<div class="col-sm-10">
 											<label>方法一:</label>
-											<img id="imageUrl" src="" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
+											<img id="imageUrl" src="${BASE_PATH}${model.image_url}" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
 											<input type="file" name="model.image_url" class="form-control" id="file"
-												   value="${model.image_url!''}" onchange="imageUrlChange(this)">
+												   value="${model.image_url!''}" >
 											<label>方法二:</label>
 											<input name="model.image_net_url" class="form-control" id="model.image_net_url"
 												   value="${model.image_net_url!''}" placeholder="复制/粘贴网络图片地址">

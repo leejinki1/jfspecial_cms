@@ -1,11 +1,10 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+<!--帮扶/编辑页-->
+
 <!-- jquery -->
 <% include("/template/includes/jquery.html"){} %>
 <% include("/template/includes/ueditor.html"){} %>
-
-
-
 <script type="text/javascript">
 	var ue;
 	<!--预加载函数-->
@@ -53,12 +52,9 @@ function oper_save(id) {
 		var image_url=$('[name="model.image_url"]').val();
 		//alert(image_net_url);
 		//alert(image_url);
-		if(image_net_url==''){
-			if(image_url==''){
-				alert('请至少选择一种方式提交图片');
-				return false;
-			}
-		}
+		//if(image_url==''){
+		//		alert("请上传图片");
+		//}
 
 		<!--判断内容-->
 		if(!ue.hasContents()){
@@ -79,7 +75,7 @@ function oper_save(id) {
 
 		<!--提交-->
 		$('#isdraft').val('0');
-		form1.action = "addoil_publish/publishArticle";
+		form1.action = "../../addoil_publish/publishArticle/"+id;
 		form1.submit();
 		return true;
 	}
@@ -106,15 +102,12 @@ function oper_savedraft(id) {
 		}
 
 		<!--判断标题图片-->
-		//var image_net_url=$('[name="model.image_net_url"]').val();
+		var image_net_url=$('[name="model.image_net_url"]').val();
 		var image_url=$('[name="model.image_url"]').val();
 		//alert(image_net_url);
 		//alert(image_url);
-		//if(image_net_url==''){
-			if(image_url==''){
-				alert('请提交图片');
-				return false;
-			}
+		//if(image_url==''){
+		//		alert("请上传图片");
 		//}
 
 		<!--判断内容-->
@@ -135,7 +128,7 @@ function oper_savedraft(id) {
 
 		<!--提交-->
 		$('#isdraft').val('1');
-		form1.action = "addoil_publish/saveToDrafts";
+		form1.action = "../../addoil_publish/saveToDrafts/"+id;
 		form1.submit();
 		return true;
 }
@@ -152,7 +145,7 @@ function oper_addAlbum(id){
 	<!--ajax新增-->
 	jQuery.ajax({
 	type:'POST',
-			url:'addoilalbum/addAlbum/'+id,
+			url:'../../addoilalbum/addAlbum/'+id,
 			data:$("#form1").serialize(),
 			success:function(data){
 			if(data.status==1){
@@ -183,7 +176,7 @@ function oper_delAlbum(id){
 <!--$("#form2").serialize()-->
 	jQuery.ajax({
 	type:'POST',
-			url:'addoilalbum/delAlbum/'+id,
+			url:'../../addoilalbum/delAlbum/'+id,
 			data:'',
 			success:function(data){
 			if(data.status==1){
@@ -225,9 +218,10 @@ function closediv(){
 		$('#hiddendiv').css('display','none');
 		$('#displaybutton').text('点击编辑分类');
 }
+
 <!--显示本地图片/预览-->
 function imageUrlChange(){
-	//alert(1);
+	alert(1);
 	//判断是否支持FileReader
     if(window.FileReader) {
         var reader = new FileReader();
@@ -362,7 +356,7 @@ function imageUrlChange(){
 											%>
 										</select>
 
-										<input type="hidden" name="model.album_name" value="" ><!--提交分类名称-->
+										<input type="hidden" name="model.album_name" value="${model.album_name!''}" ><!--提交分类名称-->
 
 
 										<!--<button data-toggle="modal" data-target="#myModal">新增分类</button>-->
@@ -409,9 +403,9 @@ function imageUrlChange(){
 									<label for="model.image_url" class="col-sm-2 control-label">主题图片</label>
 									<div class="col-sm-10">
 										<label>方法一:</label>
-										<img id="imageUrl" src="" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
+										<img id="imageUrl" src="${BASE_PATH}${model.image_url}" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
 										<input type="file" name="model.image_url" class="form-control" id="file"
-											   value="${model.image_url!''}" onchange="imageUrlChange(this)">
+											   value="${model.image_url!''}"  onchange="imageUrlChange(this)">
 										<label>方法二:</label>
 										<input name="model.image_net_url" class="form-control" id="model.image_net_url"
 											   value="${model.image_net_url!''}" placeholder="复制/粘贴网络图片地址">
@@ -432,7 +426,7 @@ function imageUrlChange(){
 								    <div class="col-sm-offset-3 col-sm-9">
 									    <div class="checkbox">
 									        <label>
-									        <input type="hidden" name="model.is_draft" value="" id="isdraft">
+									        <input type="hidden" name="model.is_draft" value="" id="isdraft"><!--没什么用-->
 									         <input type="button" value="确认发布"  class="waves-effect waves-light btn-large" onclick="return oper_save(${model.id!'0'});"/>&nbsp;
 									          <input type="button" value="保存草稿箱"  class="waves-effect waves-light btn-large" onclick="return oper_savedraft(${model.id!'0'});"/>
 									          <!-- <a class="waves-effect waves-light btn-large">保存草稿箱</a>

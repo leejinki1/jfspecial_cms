@@ -6,7 +6,12 @@ function oper_delete(id) {
 		location.href="newscenter_drafts/delArticle/"+id;
 		return false;
 	}
+<!--修改-->
+function oper_edit(id) {
 
+      location.href="newscenter_drafts/editArticle/"+id;
+
+	}
 </script>
 
 <head>
@@ -122,10 +127,15 @@ function oper_delete(id) {
                                     <td>${itemLP.index}</td>
                                     <td>${item.name}</td>
                                     <td>${item.content}</td>
-                                    <td><img src="${BASE_PATH}upload/${item.image_url}" style="height:80px;width:80px;"></td>
+                                    <%if(""==item.image_url){%>
+                                    <td><img src="${item.image_net_url}" style="height:80px;width:80px;"></td>
+                                    <%}else {%>
+                                    <td><img src="${BASE_PATH}${item.image_url}" style="height:80px;width:80px;"></td>
+                                    <%}%>
                                     <td>${item.album_name}</td>
                                     <td>${item.update_time}</td>
                                     <td>
+                                        <a class="waves-effect waves-light btn" onclick="oper_edit(${item.id!'0'});">修改</a>
                                         <a class="waves-effect waves-light btn" onclick="oper_delete(${item.id!'0'});">删除</a>
                                     </td>
                                 </tr>
@@ -137,9 +147,14 @@ function oper_delete(id) {
                                          <td>${itemLP.index}</td>
                                          <td>${item.name}</td>
 								<td>${item.content}</td>
-								<td><img src="${BASE_PATH}upload/${item.image_url}" style="height:80px;width:80px;"></td>
+								<%if(""==item.image_url){%>
+                                    <td><img src="${item.image_net_url}" style="height:80px;width:80px;"></td>
+                                    <%}else {%>
+                                    <td><img src="${BASE_PATH}${item.image_url}" style="height:80px;width:80px;"></td>
+                                    <%}%>
                                 <td>${item.album_name}</td>
                                          <td>${item.update_time}</td>
+                                          <a class="waves-effect waves-light btn" onclick="oper_edit(${item.id!'0'});">修改</a>
                                              <a class="waves-effect waves-light btn" onclick="oper_delete(${item.id!'0'});">删除</a>
                                          </td>
                                      </tr>

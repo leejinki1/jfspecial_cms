@@ -12,6 +12,7 @@ import com.jfspecial.jfinal.component.annotation.ControllerBind;
 import com.jfspecial.jfinal.component.db.SQLUtils;
 import com.jfspecial.modules.CommonController;
 import com.jfspecial.modules.admin.newscenter.model.TbNewsCenter;
+import com.jfspecial.modules.admin.newscenter.model.TbNewsCenterAlbum;
 import com.jfspecial.modules.admin.newscenter.model.TbNewsCenterTags;
 import com.jfspecial.modules.admin.newscenter.service.NewsCenterAlbumService;
 import com.jfspecial.modules.admin.site.TbSite;
@@ -30,15 +31,15 @@ import java.util.List;
 @ControllerBind(controllerKey = "/admin/newscenter_drafts")
 public class NewsCenterDraftsController extends BaseProjectController {
 
-	private static final String path = "/pages/admin/newscenter/newscenter_drafts";
+	private static final String path = "/pages/admin/newscenter/newscenter_";
 
 	//显示保存的草稿
 	public void index() {
-		String sql = "select t.id,t.name,t.publish_user, t.update_time ,t.content,t.image_url,t.album_name" +
+		String sql = "select t.id,t.name,t.publish_user, t.update_time ,t.content,t.image_url,t.album_name " +
 				" from tb_newscenter t where  status = 1 and is_draft = 1 order by sort,id desc";
 		List<TbNewsCenter> lists = TbNewsCenter.dao.find(sql);
 		setAttr("lists", lists);
-		render(path+".html");
+		render(path+"drafts.html");
 	}
 
 	/**
@@ -70,5 +71,40 @@ public class NewsCenterDraftsController extends BaseProjectController {
 		// 删除文章
 		TbNewsCenter.dao.deleteById(id);
 		redirect("/admin/newscenter_drafts");
+	}
+
+	/**
+	 *	edit article
+	 *	修改
+	 * 	2018.12.5 zr
+	 */
+	@Before(FrontInterceptor.class)
+	public void  editArticle() {
+
+		//判断登陆和是否将id传过来
+		SysUser user = (SysUser) getSessionUser();
+		Integer id = getParaToInt();
+		//id不存在或用户名不存在,返回
+		if (user == null || id == null) {
+			redirect(CommonController.firstPage);
+			return;
+		}
+
+		//判断权限,非本人不能删除
+		TbNewsCenter model = TbNewsCenter.dao.findById(getParaToInt());
+		setAttr("model", model);
+		// 不是自己的文章也想修改,总有不怀好意的人哦
+		if (model.getCreateId() != user.getUserid()) {
+			System.err.println("####userid(" + user.getUserid() + ")非法编辑内容");
+			redirect(CommonController.firstPage);
+			return;
+		}
+
+		//传参,下拉列表
+		String sql = "select * from tb_newscenter_album t where  status = 1 order by sort,id desc";
+		List<TbNewsCenterAlbum> albums = TbNewsCenterAlbum.dao.find(sql);
+		setAttr("albums", albums);
+
+		render(path+"edit.html");//转到编辑页
 	}
 }

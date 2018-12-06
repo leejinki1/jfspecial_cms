@@ -20,7 +20,7 @@ public class SaleHistoryController extends BaseController {
 
 	@Before(FrontInterceptor.class)
 	public void index() {
-		String sql = "select t.id,t.name,t.publish_user, t.update_time ,t.content,t.image_url,t.album_name ,t.price,t.num,t.unit,t.property" +
+		String sql = "select t.id,t.name,t.publish_user, t.update_time ,t.content,t.image_url,t.image_net_url,t.album_name ,t.price,t.num,t.unit,t.property " +
 				"from tb_sale t where  status = 1 and approve_status=10 order by sort,id desc";
 		//历史===已发布(approve.status=pass)===不在草稿(is_draft=0)
 		List<TbSale> lists = TbSale.dao.find(sql);
