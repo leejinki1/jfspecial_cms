@@ -12,6 +12,12 @@ function oper_reject(id) {
 		location.href="maker_approve/rejectArticle/"+id;
 		return false;
 	}
+		<!--审核跳转-->
+	function oper_approve(id){
+	//alert(1);
+	    location.href="maker_approve/approveArticle/"+id;
+		return false;
+	}
 </script>
 <head>
     <meta charset="utf-8" />
@@ -141,8 +147,9 @@ function oper_reject(id) {
 									<td>${item.publish_user}</td>
 									<td>${item.update_time}</td>
 									<td>
-										<a class="waves-effect waves-light btn" onclick="oper_pass(${item.id!'0'});">通过</a>&nbsp;
-										<a class="waves-effect waves-light btn" onclick="oper_reject(${item.id!'0'});">退回</a>
+										<a class="waves-effect waves-light btn" onclick="oper_approve(${item.id!'0'});">审核</a>
+										<!--<a class="waves-effect waves-light btn" onclick="oper_pass(${item.id!'0'});">通过</a>&nbsp;
+										<a class="waves-effect waves-light btn" onclick="oper_reject(${item.id!'0'});">退回</a>-->
 									</td>
 								</tr>
 								<% } %>
@@ -208,13 +215,13 @@ function oper_reject(id) {
     <script src="${BASE_PATH }static/backend/assets/js/morris/morris.js"></script>
 	
 
-	<script src="assets/js/easypiechart.js"></script>
-	<script src="assets/js/easypiechart-data.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/easypiechart.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/easypiechart-data.js"></script>
 	
-	<script src="assets/js/Lightweight-Chart/jquery.chart.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/jquery.chart.js"></script>
 	
     <!-- Custom Js -->
-   <script src="assets/js/custom-scripts.js"></script> 
+   <script src="${BASE_PATH }static/backend/assets/js/custom-scripts.js"></script>
 
 
 </body>

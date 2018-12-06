@@ -3,13 +3,20 @@
 <!--帮扶/审核-->
 <script type="text/javascript">
 <!--审核通过-->
-function oper_pass(id) {
-		location.href="addoil_approve/passArticle/"+id;
-		return false;
-	}
+//function oper_pass(id) {
+	//	location.href="addoil_approve/passArticle/"+id;
+	//	return false;
+	//}
 <!--审核退回-->
-function oper_reject(id) {
-		location.href="addoil_approve/rejectArticle/"+id;
+//function oper_reject(id) {
+		//location.href="addoil_approve/rejectArticle/"+id;
+		//return false;
+	//}
+
+	<!--审核跳转-->
+	function oper_approve(id){
+	//alert(1);
+	    location.href="addoil_approve/approveArticle/"+id;
 		return false;
 	}
 </script>
@@ -130,8 +137,8 @@ function oper_reject(id) {
 								<tr>
 									<td>${itemLP.index}</td>
 									<td>${item.name}</td>
-									<td>详见详情页</td>
-									<%if(""==item.image_url||item.image_url==null){%><!--12.5-->
+                                    <td><a onclick="oper_approve(${item.id!'0'});">详见详情页</a></td>
+									<%if(""==item.image_url||item.image_url==null){%>
 									<td><img src="${item.image_net_url}" style="height:80px;width:80px;"></td>
 									<%}else {%>
 									<td><img src="${BASE_PATH}${item.image_url}" style="height:80px;width:80px;"></td>
@@ -140,8 +147,9 @@ function oper_reject(id) {
 									<td>${item.publish_user}</td>
 									<td>${item.update_time}</td>
 									<td>
-										<a class="waves-effect waves-light btn" onclick="oper_pass(${item.id!'0'});">通过</a>&nbsp;
-										<a class="waves-effect waves-light btn" onclick="oper_reject(${item.id!'0'});">退回</a>
+                                        <a class="waves-effect waves-light btn" onclick="oper_approve(${item.id!'0'});">审核</a>
+										<!--<a class="waves-effect waves-light btn" onclick="oper_pass(${item.id!'0'});">通过</a>&nbsp;
+										<a class="waves-effect waves-light btn" onclick="oper_reject(${item.id!'0'});">退回</a>-->
 									</td>
 								</tr>
 								<% } %>
@@ -160,7 +168,7 @@ function oper_reject(id) {
                                         <td>${item.album_name}</td>
                                         <td>${item.publish_user}</td>
                                          <td>${item.update_time}</td>
-                                             <a class="waves-effect waves-light btn" onclick="oper_delete(${item.id!'0'});">删除</a>
+                                              <a class="waves-effect waves-light btn" onclick="oper_approve(${item.id!'0'});">审核</a>
                                          </td>
                                      </tr>
                                 <% } %>-->
@@ -193,27 +201,27 @@ function oper_reject(id) {
      <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
-    <script src="assets/js/jquery-1.10.2.js"></script>
+    <script src="${BASE_PATH }static/backend/assets/js/jquery-1.10.2.js"></script>
 	
 	<!-- Bootstrap Js -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="${BASE_PATH }static/backend/assets/js/bootstrap.min.js"></script>
 	
-	<script src="assets/materialize/js/materialize.min.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/materialize/js/materialize.min.js"></script>
 	
     <!-- Metis Menu Js -->
-    <script src="assets/js/jquery.metisMenu.js"></script>
+    <script src="${BASE_PATH }static/backend/assets/js/jquery.metisMenu.js"></script>
     <!-- Morris Chart Js -->
-    <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
-    <script src="assets/js/morris/morris.js"></script>
+    <script src="${BASE_PATH }static/backend/assets/js/morris/raphael-2.1.0.min.js"></script>
+    <script src="${BASE_PATH }static/backend/assets/js/morris/morris.js"></script>
 	
 
-	<script src="assets/js/easypiechart.js"></script>
-	<script src="assets/js/easypiechart-data.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/easypiechart.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/easypiechart-data.js"></script>
 	
-	<script src="assets/js/Lightweight-Chart/jquery.chart.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/jquery.chart.js"></script>
 	
     <!-- Custom Js -->
-   <script src="assets/js/custom-scripts.js"></script> 
+   <script src="${BASE_PATH }static/backend/assets/js/custom-scripts.js"></script>
 
 
 </body>

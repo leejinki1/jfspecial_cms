@@ -95,6 +95,36 @@ public class SaleApproveController extends BaseController {
 		redirect("/admin/sale_approve");
 	}
 
+	/**
+	 *  approve article
+	 *  跳转到审核页面
+	 *	2018.12.6  zr
+	 */
+	@Before(FrontInterceptor.class)
+	public void  approveArticle() {
+		SysUser user = (SysUser) getSessionUser();
+		Integer pid = getParaToInt();
+
+		if (user == null || pid == null) {
+			redirect(CommonController.firstPage);
+			return;
+		}
+
+		TbSale model = TbSale.dao.findById(pid);
+		// 不是自己的文章也想修改,总有不怀好意的人哦
+		if (model.getCreateId() != user.getUserid()) {
+			System.err.println("####userid(" + user.getUserid() + ")非法编辑内容");
+			redirect(CommonController.firstPage);
+			return;
+		}
+
+		//保存数据
+		setAttr("model", model);
+		//返回审核页面
+		render(path+"_detail.html");
+
+	}
+
 }
 
 

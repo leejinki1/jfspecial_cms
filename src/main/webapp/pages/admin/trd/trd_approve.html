@@ -12,6 +12,13 @@ function oper_reject(id) {
 		location.href="trd_approve/rejectArticle/"+id;
 		return false;
 	}
+
+		<!--审核跳转-->
+	function oper_approve(id){
+	//alert(1);
+	    location.href=trd_approve/approveArticle/"+id;
+		return false;
+	}
 </script>
 <head>
     <meta charset="utf-8" />
@@ -143,8 +150,9 @@ function oper_reject(id) {
 									<td>${item.publish_user}</td>
 									<td>${item.update_time}</td>
 									<td>
-										<a class="waves-effect waves-light btn" onclick="oper_pass(${item.id!'0'});">通过</a>&nbsp;
-										<a class="waves-effect waves-light btn" onclick="oper_reject(${item.id!'0'});">退回</a>
+										<a class="waves-effect waves-light btn" onclick="oper_approve(${item.id!'0'});">审核</a>
+										<!--<a class="waves-effect waves-light btn" onclick="oper_pass(${item.id!'0'});">通过</a>&nbsp;
+										<a class="waves-effect waves-light btn" onclick="oper_reject(${item.id!'0'});">退回</a>-->
 									</td>
 								</tr>
 								<% } %>

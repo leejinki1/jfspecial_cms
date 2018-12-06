@@ -1,19 +1,17 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<!--帮扶/编辑页-->
-
+<!--创客/审核详情-->
 <!-- jquery -->
 <% include("/template/includes/jquery.html"){} %>
 <% include("/template/includes/ueditor.html"){} %>
 <script type="text/javascript">
 	var ue;
-	<!--预加载函数-->
 	$(document).ready(function(){
 		ue = UE.getEditor('editor',{
 			initialFrameHeight:350  //初始化编辑器高度,默认320
 			,compressSide:1
 			,imageScaleEnabled:false // 图片不允许拖拽
-			,readonly : true
+       		,readonly : true
        		, toolbars: [[
                        'source', '|',
                       'bold', 'italic', 'underline', 'strikethrough', 'insertorderedlist', 'insertunorderedlist', 'paragraph', '|',
@@ -22,19 +20,21 @@
                       'simpleupload', 'insertimage', 'emotion' , 'insertcode'
                   ]]
 		});
+
 	});
+
 <!--审核通过-->
 function oper_pass(id) {
-		location.href="../../addoil_approve/passArticle/"+id;
+		location.href="../../maker_approve/passArticle/"+id;
 		return false;
 	}
 <!--审核退回-->
 function oper_reject(id) {
-		location.href="../../addoil_approve/rejectArticle/"+id;
+		location.href="../../maker_approve/rejectArticle/"+id;
 		return false;
 	}
 
-	<!--返回审核列表-->
+		<!--返回审核列表-->
 	function oper_reback(){
 		location.href="../../addoil_approve";
 	}
@@ -42,7 +42,7 @@ function oper_reject(id) {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Target Material Design Bootstrap Admin Template</title>
+    <title>创客/发布</title>
 	
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="${BASE_PATH }static/backend/assets/materialize/css/materialize.min.css" media="screen,projection" />
@@ -57,7 +57,6 @@ function oper_reject(id) {
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/cssCharts.css">
-
 </head>
 <body>
     <div id="wrapper">
@@ -69,7 +68,7 @@ function oper_reject(id) {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand waves-effect waves-dark" href="index.html"><i class="large material-icons">track_changes</i> <strong>帮扶企业</strong></a>
+                <a class="navbar-brand waves-effect waves-dark" href="index.html"><i class="large material-icons">track_changes</i> <strong>创客活动</strong></a>
 				
 		<div id="sideNav" href=""><i class="material-icons dp48">toc</i></div>
             </div>
@@ -93,10 +92,10 @@ function oper_reject(id) {
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a href="../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 信息统计</a>
+                        <a href="../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 首页</a>
                     </li>
                     <li>
-                        <a href="addoil_publish" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 帮扶信息</a>
+                        <a href="maker_publish" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 创客活动信息</a>
                     </li>
 
                 </ul>
@@ -109,60 +108,61 @@ function oper_reject(id) {
 <div id="page-wrapper">
 	<div class="header"> 
         <h1 class="page-header">
-                	帮扶信息
+                	创客活动信息
         </h1>
 	    <ol class="breadcrumb">
 			<li><a href="../admin">首页</a></li>
-			<li><a href="addoil_publish">帮扶企业 </a></li>
-			<li><a href="addoil_publish">帮扶信息 </a></li>
+			<li><a href="maker_publish">创客活动 </a></li>
+			<li><a href="maker_publish">创客活动信息 </a></li>
 			<!--<li class="active">Data</li>-->
 		</ol> 							
 	</div>
 		<!--666-->
-	<div id="page-inner">
-
-		<!--edit blog-->
+	<div id="page-inner"> 
+		
 		<div class="row">
 			<div class="col-lg-12">
 	            <div class="card">
-	            	<div class="card-action" id="mainframe">
-                            	发布帮扶企业
+	            	<div class="card-action">
+                            	发布新闻
                     </div>
 					<div class="card-content">
 						<form id="form1" class="form-horizontal" name="form1" action="" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="model.id" class="form-control" id="model.id"
 								   value="${model.id!'0'}">
 							<div class="row">
-								<!--文章分类栏目-->
-								<div class="form-group">
-									<label for="model.album_id" class="col-sm-2 control-label">栏目</label>
-									<div class="col-sm-10" >
-										<input type="text" value="${model.album_name!''}" readonly>
+								<input type="hidden" name="model.id" class="form-control" id="model.id"
+									   value="${model.id!'0'}">
+								<div class="row">
+									<!--文章分类栏目-->
+									<div class="form-group">
+										<label for="model.album_id" class="col-sm-2 control-label">栏目</label>
+										<div class="col-sm-10" >
+											<input type="text" value="${model.album_name!''}" readonly>
 
+										</div>
 									</div>
-								</div>
 
-
-								<!--标题-->
-								<div class="form-group">
-									<label for="model.name" class="col-sm-2 control-label">标题</label>
-									<div class="col-sm-10">
-										<input name="model.name" class="form-control" id="model.name" type="text"
-											   value="${model.name!''}" placeholder="标题" readonly>
+									<!--标题-->
+									<div class="form-group">
+										<label for="model.name" class="col-sm-2 control-label">标题</label>
+										<div class="col-sm-10">
+											<input name="model.name" class="form-control" id="model.name" type="text"
+												   value="${model.name!''}" placeholder="标题" readonly>
+										</div>
 									</div>
-								</div>
 
-								<!--主题图片/网络-->
-								<div class="form-group">
-									<label for="model.image_url" class="col-sm-2 control-label">主题图片</label>
-									<div class="col-sm-10">
-										<label>本地上传图片:</label>
-										<img id="imageUrl" src="${BASE_PATH}${model.image_url}" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
+									<!--主题图片/网络-->
+									<div class="form-group">
+										<label for="model.image_url" class="col-sm-2 control-label">主题图片</label>
+										<div class="col-sm-10">
+											<label>本地上传图片:</label>
+											<img id="imageUrl" src="${BASE_PATH}${model.image_url}" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
 
-										<label>网络图片:</label>
-										<img id="imageUrl1" src="${model.image_net_url}" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
+											<label>网络图片:</label>
+											<img id="imageUrl1" src="${model.image_net_url}" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
+										</div>
 									</div>
-								</div>
 
 
 								<!--文字内容-->
@@ -170,26 +170,32 @@ function oper_reject(id) {
 									<label for="remark" class="col-sm-2 control-label">内容</label>
 									<div class="col-sm-10">
 										<script id="editor" type="text/plain" name="model.content"
-												style="width: 98%; height: 320px;" >${model.content!''}</script>
+												style="width: 98%; height: 320px;">${model.content!''}</script>
 									</div>
 							  </div>
 
-								<div class="form-group">
-								    <div class="col-sm-offset-3 col-sm-9">
-									    <div class="checkbox">
-									        <label>
-									         	<a class="waves-effect waves-light btn" onclick="oper_pass(${model.id!'0'});">通过</a>&nbsp;
-												<a class="waves-effect waves-light btn" onclick="oper_reject(${model.id!'0'});">退回</a>&nbsp;
+							    <!--
+								<div class="input-field col s12">
+								  <textarea id="textarea1" class="materialize-textarea"></textarea>
+								  <label for="textarea1">分类设置</label>
+								</div>-->
+								<!--提交按钮-->
+									<div class="form-group">
+										<div class="col-sm-offset-3 col-sm-9">
+											<div class="checkbox">
+												<label>
+												 <a class="waves-effect waves-light btn" onclick="oper_pass(${model.id!'0'});">通过</a>&nbsp;
+												<a class="waves-effect waves-light btn" onclick="oper_reject(${model.id!'0'});">退回</a>
 												<a class="waves-effect waves-light btn" onclick="oper_reback(${model.id!'0'});">返回审核列表</a>
 												<!-- <a class="waves-effect waves-light btn-large">保存草稿箱</a>
 									          <a class="waves-effect waves-light btn-large">确认发布</a>-->
-									        </label>
+												</label>
+											</div>
 										</div>
 									</div>
-								</div>
 
-							</div>
-						</form>
+								</div>
+							</form>
     					<div class="clearBoth"></div>
 	   					
 					</div>
@@ -200,15 +206,13 @@ function oper_reject(id) {
 		
 	</div><!-- /. PAGE WRAPPER  -->
 
-
 </div>
-</body>
      <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
     <script src="${BASE_PATH }static/backend/assets/js/jquery-1.10.2.js"></script>
-	<script src="${BASE_PATH }static/backend/assets/js/jquery-1.12.4.js"></script>
-	<!---->
+	
+
     <script src="${BASE_PATH }static/backend/assets/js/bootstrap.min.js"></script>
 	
 	<script src="${BASE_PATH }static/backend/assets/materialize/js/materialize.min.js"></script>
@@ -220,13 +224,15 @@ function oper_reject(id) {
     <script src="${BASE_PATH }static/backend/assets/js/morris/morris.js"></script>
 	
 
-	<script src="${BASE_PATH }static/backend/assets/js/easypiechart.js"></script>
-	<script src="${BASE_PATH }static/backend/assets/js/easypiechart-data.js"></script>
+	<script src="assets/js/easypiechart.js"></script>
+	<script src="assets/js/easypiechart-data.js"></script>
 	
-	<script src="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/jquery.chart.js"></script>
+	<script src="assets/js/Lightweight-Chart/jquery.chart.js"></script>
 	
     <!-- Custom Js -->
-   <script src="${BASE_PATH }static/backend/assets/js/custom-scripts.js"></script>
+   <script src="assets/js/custom-scripts.js"></script> 
 
+
+</body>
 
 </html>
