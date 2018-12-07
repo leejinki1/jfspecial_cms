@@ -7,6 +7,7 @@ import com.jfspecial.component.util.JFSpecialUtils;
 import com.jfspecial.jfinal.base.BaseController;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
 import com.jfspecial.jfinal.component.db.SQLUtils;
+import com.jfspecial.modules.CommonController;
 import com.jfspecial.modules.admin.aboutweb.SysAboutus;
 import com.jfspecial.system.department.DepartmentSvc;
 import com.jfspecial.system.file.util.FileUploadUtils;
@@ -32,6 +33,9 @@ public class SecurityUserController extends BaseController {
 		list();
 	}
 
+	/**
+	 * 	显示全部用户(有权限限制)
+	 */
 	public void list() {
 		SysUser model = getModelByAttr(SysUser.class);
 
@@ -59,77 +63,20 @@ public class SecurityUserController extends BaseController {
 		// 下拉框
 		setAttr("departSelect", new DepartmentSvc().selectDepart(model.getInt("departid")));
 
+		//查询全部//有权限限制(只能查出比自己权限小的)
+		Integer userType= getSessionUser().getInt("usertype");
+		String sql1 = "select * " +
+				"from sys_user t where  usertype >" +userType+
+				" order by userid desc";
+		List<SysUser> list=SysUser.dao.find(sql1);
+
 		setAttr("page", page);
 		setAttr("attr", model);
+		setAttr("list",list);
 		render(path + "list.html");
 	}
 
-	public void add() {
-		setAttr("departSelect", new DepartmentSvc().selectDepart(0));
 
-		render(path + "add.html");
-	}
-
-	public void view() {
-		SysUser model = SysUser.dao.findById(getParaToInt());
-		model.put("secretKey", new Md5Utils().getMD5(model.getStr("password")).toLowerCase());
-
-		// 部门名称
-		model.put("departname", new DepartmentSvc().getDepartName(model.getInt("departid")));
-		setAttr("model", model);
-
-		render(path + "view.html");
-	}
-
-	public void delete() {
-		int userid = getParaToInt();
-		// 日志添加
-		SysUser model = new SysUser();
-		String now = getNow();
-		model.put("update_id", getSessionUser().getUserid());
-		model.put("update_time", now);
-
-		// 删除授权
-		Db.update("delete from sys_user_role where userid = ? ", userid);
-
-		model.deleteById(userid);
-
-		UserCache.init();
-		list();
-	}
-
-	public void edit() {
-		SysUser model = SysUser.dao.findById(getParaToInt());
-
-		setAttr("departSelect", new DepartmentSvc().selectDepart(model.getInt("departid")));
-
-		setAttr("model", model);
-		render(path + "edit.html");
-	}
-
-	public void save() {
-		Integer pid = getParaToInt();
-		SysUser model = getModel(SysUser.class);
-
-		// 日志添加
-		Integer userid = getSessionUser().getUserid();
-		String now = getNow();
-		model.put("update_id", userid);
-		model.put("update_time", now);
-		if (pid != null && pid > 0) { // 更新
-			model.update();
-		} else { // 新增
-			model.remove("userid");
-			if (StrUtils.isEmpty(model.getStr("password"))) {
-				model.put("password", JFSpecialUtils.getDefaultPassword());
-			}
-			model.put("create_id", userid);
-			model.put("create_time", now);
-			model.save();
-		}
-		UserCache.init();
-		renderMessage("保存成功");
-	}
 
 	/**
 	 * 跳转到授权页面
@@ -159,6 +106,83 @@ public class SecurityUserController extends BaseController {
 
 		new UserSvc().saveAuth(userid, roleids, getSessionUser().getUserid());
 		renderMessage("保存成功");
+	}
+
+	/**
+	 * 跳转到新增页面
+	 *
+	*/
+	public void toSaveUser(){
+		/*判断是否登陆或登陆过期*/
+		SysUser user = (SysUser) getSessionUser();
+		if (user == null) {
+			redirect(CommonController.firstPage);
+			return;
+		}
+
+		/*判断权限(userType  1或9  为管理员,可以新增)*/
+		Integer userType =  user.getInt("usertype");
+		//System.out.println("12.7----安全/userC/toCreateUser----"+userType);
+		String msg;
+		if(!(userType==1||userType==9)){
+			msg="没有权限";
+			setAttr("msg",msg);
+			render(path+"list.html");
+
+		}else{
+
+		}
+
+		/*从前台获取数据*//*保存返回前台的参数*/
+		Integer pid = getParaToInt();//获取路径中的参数
+		SysUser model = SysUser.dao.findById(pid);//根据id查出model的值
+
+		if (pid != null && pid > 0) { // 更新
+			setAttr("model",model);
+			render(path + "edit.html");
+			return;
+		}else{//新增
+			render(path + "edit.html");
+			return;
+		}
+
+	}
+
+
+	public void saveUser() {
+		/*判断是否登陆或登陆过期*/
+		SysUser user = (SysUser) getSessionUser();
+		if (user == null) {
+			redirect(CommonController.firstPage);
+			return;
+		}
+
+		/*从前台获取提交数据*/
+		SysUser model = getModel(SysUser.class);
+		Integer pid = getParaToInt();//获取路径中的参数
+
+		/*提交*/
+		boolean is;
+		if (pid != null && pid > 0) {//修改
+			is=model.update();
+		}else{//新增
+			is=model.save();
+		}
+
+
+		/*判断提交结果*/
+		String msg="";
+		if(is){
+			msg="保存成功";
+			System.out.println("保存成功");
+		}else{
+			msg="保存失败";
+			System.out.println("保存失败");
+		}
+
+		/*保存反回参数*/
+		setAttr("msg",msg);
+		redirect("/admin/security_user");//跳转回
 	}
 }
 

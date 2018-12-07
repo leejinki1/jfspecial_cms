@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<!--安全管理/用户管理/-->
+<!--安全管理/用户管理/新用户/-->
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -54,10 +54,10 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a href="../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 信息统计</a>
+                        <a href="../../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 信息统计</a>
                     </li>
                     <li>
-                        <a href="security_user" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 用户管理</a>
+                        <a href="../security_user" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 用户管理</a>
                     </li>
 
                 </ul>
@@ -73,7 +73,7 @@
 				用户管理
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="../admin">首页</a></li>
+				<li><a href="../../admin">首页</a></li>
 				<li><a href="#">安全管理 </a></li>
 				<li><a href="#">用户管理 </a></li>
 				<li class="active">Data</li>
@@ -90,75 +90,52 @@
 						</div>
 
 						<div class="card-content">
-							<div class="input-field col s10">
-								<input value="" id="first_name2" type="text" class="validate">
-								<label class="active" for="first_name2">请输入搜索内容</label>
-							</div>
-							<div class="input-field col s2">
-								<a class="waves-effect waves-light btn" >搜索</a>
-								<a class="waves-effect waves-light btn" onclick="oper_toSaveUser(0);">新增用户</a>
-							</div>
-							<table class="table table-striped highlight centered responsive-table">
-								<thead>
-								<tr>
-									<th>序号</th>
-									<th>账号</th>
-									<th>用户姓名</th>
-									<th>角色</th>
-									<th>操作</th>
-								</tr>
-								</thead>
-								<tbody>
-								<% for(item in page.list){ %>
-								<tr>
-									<td>${itemLP.index }</td><!--序号-->
-									<td>${item.username}</td><!--账号-->
-									<td>${item.realname}</td><!--用户姓名-->
-									<td><% if(item.usertype==1) { %>
-										超级管理员
-										<%	} %>
-										<% if(item.usertype==2) { %>
-										普通用户
-										<%	} %>
-										<% if(item.usertype==3) { %>
-										前台用户
-										<%	} %>
-										<% if(item.usertype==4) { %>
-										第三方用户
-										<%	} %>
-										<% if(item.usertype==5) { %>
-										API用户
-										<%	} %>
-										<% if(item.usertype==9) { %>
-										管理员
-										<%	} %>
-										<% if(item.usertype==10) { %>
-										特派员
-										<%	} %>
-										<% if(item.usertype==11) { %>
-										农户
-										<%	} %>
-										<% if(item.usertype==12) { %>
-										农业公司
-										<%	} %></td><!--角色/科技特派员等-->
-									<td>
-										<a class="waves-effect waves-light btn" onclick="oper_resetPassword(${item.userid!'0'});">重置密码</a>&nbsp;
-										<a class="waves-effect waves-light btn" onclick="oper_toSaveUser(${item.userid!'0'});">${item.userid!'0'}编辑</a>
-									</td>
-								</tr>
-								<% } %>
-								</tbody>
-							</table>
-							<div class="clearBoth"></div>
-						</div>
+								<form id="form1" class="form-horizontal" name="form1" action="" method="post">
+									<!--表单填写内容-->
+									<div class="row">
+										<!--账号-->
+										<div class="form-group">
+											<label for="model.username" class="col-sm-2 control-label">账号</label>
+											<div class="col-sm-10" >
+												<input name="model.username" class="form-control"
+													   value="${model.username!''}" placeholder="登陆账号">
+											</div>
+										</div>
 
+										<div class="form-group">
+											<label for="model.password" class="col-sm-2 control-label">密码</label>
+											<div class="col-sm-10">
+												<input name="model.password" class="form-control"
+													   value="${model.password!''}" placeholder="密码">
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label for="model.realname" class="col-sm-2 control-label">真实姓名</label>
+											<div class="col-sm-10">
+												<input name="model.realname" class="form-control"
+													   value="${model.realname!''}" placeholder="真实姓名">
+											</div>
+										</div>
+									</div><!--表单填写内容完-->
+
+									<!--表单提交-->
+									<div class="form-group">
+										<div class="col-sm-offset-3 col-sm-9">
+											<div class="checkbox">
+												<label>
+												 <input type="button" value="保存"  class="waves-effect waves-light btn-large" onclick="return oper_save(${model.id!'0'});"/>&nbsp;
+												  <input type="reset" value="重置"  class="waves-effect waves-light btn-large" />
+												</label>
+											</div>
+										</div>
+									</div><!--表单提交完-->
+								</form>
+						</div>
 					</div>
 				</div>
-			</div>
-
-		</div><!-- /. PAGE WRAPPER  -->
-
-	</div>
+			</div><!-- /. PAGE WRAPPER  -->
+		</div>
 	</div>
      <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
@@ -186,38 +163,37 @@
    <script src="${BASE_PATH}static/backend/assets/js/custom-scripts.js"></script>
 
 	<script type="text/javascript">
-		<!--跳转到创建新用户页面-->
-		function oper_toSaveUser(id){
-			//alert(id);
-			location.href="security_user/toSaveUser/"+id;
-		}
-
-		<!--重置密码-->
-		function oper_resetPassword(id){
-			//alert(id);
-			var password=prompt("请输入新密码;","");
-			if(password){
-				var repassword=prompt("请再次输入密码:");
-				if(repassword){
-					if(repassword==password){
-						jQuery.ajax({
-							type:'POST',
-							url:'security_user/resetPassword/'+id,
-							data:password,
-							success:function(data){
-								alert(data.msg);
-							},
-							error:function(html){
-								var flag = (typeof console != 'undefined');
-								if(flag) console.log("服务器忙，提交数据失败，代码:" +html.status+ "，请联系管理员！");
-								alert("服务器忙，提交数据失败，请联系管理员！");
-							}
-							});
-					}else{
-						alert("2次输入的密码不相同!")
-					}
-				}
+		<!--保存-->
+		function oper_save(id){
+			<!--用户名-->
+			//alert(0);
+			var username = $('[name="model.username"]').val();
+			//alert(username);
+			if(username=='') {
+				alert('请输入用户名');
+				return false;
 			}
+
+			<!--密码-->
+			var password = $('[name="model.password"]').val();
+			//alert(password);
+			if(password=='') {
+				alert('请输入密码');
+				return false;
+			}
+
+			<!--真实姓名-->
+			var realname = $('[name="model.realname"]').val();
+			//alert(realname);
+			if(realname=='') {
+				alert('请输入真实姓名');
+				return false;
+			}
+
+			//alert(1);
+			<!--提交-->
+			form1.action = "../../security_user/saveUser/"+id;
+			form1.submit();
 		}
 	</script>
 
