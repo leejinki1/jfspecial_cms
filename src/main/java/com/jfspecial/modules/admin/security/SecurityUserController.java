@@ -1,5 +1,6 @@
 package com.jfspecial.modules.admin.security;
 
+import com.alibaba.fastjson.JSONObject;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.upload.UploadFile;
@@ -128,10 +129,13 @@ public class SecurityUserController extends BaseController {
 			msg="没有权限";
 			setAttr("msg",msg);
 			render(path+"list.html");
-
-		}else{
+			return;
 
 		}
+
+		String sql = "select * from sys_role t where  status = 1 order by sort,id desc";
+		List<SysRole> albums = SysRole.dao.find(sql);
+		setAttr("albums", albums);
 
 		/*从前台获取数据*//*保存返回前台的参数*/
 		Integer pid = getParaToInt();//获取路径中的参数
@@ -148,7 +152,10 @@ public class SecurityUserController extends BaseController {
 
 	}
 
-
+	/**
+	 * 保存新增或修改用户的结果
+	 *
+	 */
 	public void saveUser() {
 		/*判断是否登陆或登陆过期*/
 		SysUser user = (SysUser) getSessionUser();
@@ -160,12 +167,20 @@ public class SecurityUserController extends BaseController {
 		/*从前台获取提交数据*/
 		SysUser model = getModel(SysUser.class);
 		Integer pid = getParaToInt();//获取路径中的参数
+		System.out.println("12.11---------------model"+model);
 
 		/*提交*/
 		boolean is;
 		if (pid != null && pid > 0) {//修改
 			is=model.update();
 		}else{//新增
+			String sql="select max(userid) userid from sys_user";
+			SysUser model1=SysUser.dao.findFirst(sql);
+			//System.out.println("12.10-----"+model1);
+			Integer id=model1.getUserid()+1;//获取原来数据库中最大id,加1,即是新的id
+			//System.out.println("12.10------"+id);
+			model.set("id",id);
+			//System.out.println("12.10----"+model);
 			is=model.save();
 		}
 
@@ -183,6 +198,55 @@ public class SecurityUserController extends BaseController {
 		/*保存反回参数*/
 		setAttr("msg",msg);
 		redirect("/admin/security_user");//跳转回
+	}
+
+	/**
+	 * 修改密码
+	 *
+	 */
+	public void resetPassword() {
+		/*ajax提交返回值*/
+		JSONObject json = new JSONObject();
+		json.put("msg", "失败");// 失败
+
+		/*判断是否登陆或登陆过期*/
+		SysUser user = (SysUser) getSessionUser();
+		if (user == null) {
+			redirect(CommonController.firstPage);
+			return;
+		}
+
+		/*从前台获取提交数据*/
+
+		Integer pid = getParaToInt();//获取路径中的参数
+		String password = getPara("password");
+		//String sql="select * from sys_user where userid="+pid;
+		SysUser model = SysUser.dao.findFirstByWhere("where userid = ? ", pid);
+		model.set("password", JFSpecialUtils.passwordEncrypt(password));
+		//model.put("realname","1234567890");
+		//System.out.println("12.10---model:"+model);
+
+		if (StrUtils.isEmpty(password)|| password.length() < 6 || password.length() > 20 // 密码长度限制
+			) {
+			json.put("msg", "提交数据错误！");
+			renderJson(json.toJSONString());
+			return;
+		}
+
+		/*提交*/
+		boolean is;
+		is=model.update();
+
+		/*判断提交结果*/
+		if(is){
+			json.put("msg", "ok");// 成功
+			System.out.println("保存成功");
+		}else{
+			System.out.println("保存失败");
+		}
+
+		/*保存反回参数*/
+		renderJson(json.toJSONString());
 	}
 }
 

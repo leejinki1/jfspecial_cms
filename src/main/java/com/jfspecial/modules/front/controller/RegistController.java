@@ -94,6 +94,12 @@ public class RegistController extends BaseProjectController {
 		user.set("usertype", JFSpecialUtils.USER_TYPE_FRONT);
 		user.set("departid", JFSpecialUtils.DEPART_REGIST_ID);
 		user.set("state", 2); // 需要认证
+
+		String sql="select max(userid) userid from sys_user";
+		SysUser model=SysUser.dao.findFirst(sql);
+		Integer id=model.getUserid()+1;//获取原来数据库中最大id,加1,即是新的id
+		user.set("id",id);
+
 		// 站点设置
 		TbSite site = getSessionSite().getModel();
 		user.set("back_site_id", 0);

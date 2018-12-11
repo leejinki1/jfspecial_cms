@@ -98,15 +98,7 @@
 											<label for="model.username" class="col-sm-2 control-label">账号</label>
 											<div class="col-sm-10" >
 												<input name="model.username" class="form-control"
-													   value="${model.username!''}" placeholder="登陆账号">
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label for="model.password" class="col-sm-2 control-label">密码</label>
-											<div class="col-sm-10">
-												<input name="model.password" class="form-control"
-													   value="${model.password!''}" placeholder="密码">
+													   value="${model.username!''}" placeholder="登陆账号" readonly>
 											</div>
 										</div>
 
@@ -117,6 +109,23 @@
 													   value="${model.realname!''}" placeholder="真实姓名">
 											</div>
 										</div>
+
+										<div class="form-group">
+											<label for="model.usertype" class="col-sm-2 control-label">角色</label>
+											<div class="col-sm-10">
+												<select  class="form-control" name="model.usertype" id="select">
+													<option value="-1">--请选择栏目--</option>
+													<%
+													if(!isEmpty(albums)) {
+													for(item in albums){ %>
+													<option id="option${item.id}" value="${item.usertype}" ${item.usertype==model.usertype!0?'selected':''} >${item.name}</option>
+													<%
+													}
+													}
+													%>
+												</select>
+											</div>
+										</div>
 									</div><!--表单填写内容完-->
 
 									<!--表单提交-->
@@ -124,8 +133,9 @@
 										<div class="col-sm-offset-3 col-sm-9">
 											<div class="checkbox">
 												<label>
-												 <input type="button" value="保存"  class="waves-effect waves-light btn-large" onclick="return oper_save(${model.id!'0'});"/>&nbsp;
-												  <input type="reset" value="重置"  class="waves-effect waves-light btn-large" />
+													<input type="hidden" name="model.userid" value="${model.userid!''}">
+												 	<input type="button" value="保存"  class="waves-effect waves-light btn-large" onclick="return oper_save(${model.id!'0'});"/>&nbsp;
+												  	<input type="reset" value="重置"  class="waves-effect waves-light btn-large" />
 												</label>
 											</div>
 										</div>

@@ -143,7 +143,7 @@
 										<%	} %></td><!--角色/科技特派员等-->
 									<td>
 										<a class="waves-effect waves-light btn" onclick="oper_resetPassword(${item.userid!'0'});">重置密码</a>&nbsp;
-										<a class="waves-effect waves-light btn" onclick="oper_toSaveUser(${item.userid!'0'});">${item.userid!'0'}编辑</a>
+										<a class="waves-effect waves-light btn" onclick="oper_toSaveUser(${item.userid!'0'});">编辑</a>
 									</td>
 								</tr>
 								<% } %>
@@ -195,15 +195,15 @@
 		<!--重置密码-->
 		function oper_resetPassword(id){
 			//alert(id);
-			var password=prompt("请输入新密码;","");
+			var password=prompt("请输入6-20位新密码;","");
 			if(password){
-				var repassword=prompt("请再次输入密码:");
+				var repassword=prompt("请再次输入6-20位密码:");
 				if(repassword){
 					if(repassword==password){
 						jQuery.ajax({
 							type:'POST',
 							url:'security_user/resetPassword/'+id,
-							data:password,
+							data:{"password":password},
 							success:function(data){
 								alert(data.msg);
 							},
