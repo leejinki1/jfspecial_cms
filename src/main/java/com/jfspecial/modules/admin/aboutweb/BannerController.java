@@ -5,6 +5,8 @@ import com.jfspecial.jfinal.base.BaseController;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
 import com.jfspecial.system.file.util.FileUploadUtils;
 
+import java.io.File;
+
 /**
  * 网站配置/banner图更换/banner
  * 
@@ -33,12 +35,28 @@ public class BannerController extends BaseController {
 	public void save1(){
 		System.out.println("12.6----进入banner/save1");
 		//上传图片
-		UploadFile uploadImage1 = getFile("model.banner1","banner", FileUploadUtils.UPLOAD_MAX,"utf-8");//声明上传文件
+		//UploadFile("model.banner1","../static/frontend/images","banner.jpg",, String contentType);//试验
+		UploadFile uploadImage1= getFile();//获取上传的文件
+		String oldPath="/static/frontend/images/banner.jpg";//banner图的目标路径//写死在css中
+		boolean isFile=false;//图片保存成功
+		if(uploadImage1!=null){
+			//如果获取的文件不为空
+			//System.out.println("zr-----bannerC"+uploadImage1.getFileName());//上传文件的名称
+			String oldPathRealpath = getSession().getServletContext().getRealPath(oldPath);//获取目标路径在项目中的位置
+			File oldFile=new File(oldPathRealpath);//找到目标图片的文件
+			//删除原来的文件
+			if(oldFile.exists()){
+				oldFile.delete();
+			}
+			isFile=uploadImage1.getFile().renameTo(new File(oldPathRealpath));
+		}
+		//UploadFile uploadImage1 = getFile("model.banner1","banner", FileUploadUtils.UPLOAD_MAX,"utf-8");//声明上传文件
 		SysAboutus model = getModel(SysAboutus.class);
-		try{
-			model.setBanner1("\\upload\\banner\\"+uploadImage1.getFileName());//设置文件名
-		}catch(Exception exception){
-			System.out.println("没有上传图片banner1");
+		if(isFile){
+			model.setBanner1(oldPath);
+			//model.setBanner1("\\upload\\banner\\"+uploadImage1.getFileName());//设置文件名
+		}else{
+			//上传没有成功
 		}
 
 		//修改参数
@@ -80,12 +98,27 @@ public class BannerController extends BaseController {
 	public void save2(){
 		System.out.println("12.6----进入banner/save1");
 		//上传图片
-		UploadFile uploadImage2 = getFile("model.banner2","banner", FileUploadUtils.UPLOAD_MAX,"utf-8");
+		UploadFile uploadImage1= getFile();//获取上传的文件
+		String oldPath="/static/frontend/images/banner1.jpg";//banner图的目标路径//写死在css中
+		boolean isFile=false;//图片保存成功
+		if(uploadImage1!=null){
+			//如果获取的文件不为空
+			//System.out.println("zr-----bannerC"+uploadImage1.getFileName());//上传文件的名称
+			String oldPathRealpath = getSession().getServletContext().getRealPath(oldPath);//获取目标路径在项目中的位置
+			File oldFile=new File(oldPathRealpath);//找到目标图片的文件
+			//删除原来的文件
+			if(oldFile.exists()){
+				oldFile.delete();
+			}
+			isFile=uploadImage1.getFile().renameTo(new File(oldPathRealpath));
+		}
+		//UploadFile uploadImage1 = getFile("model.banner1","banner", FileUploadUtils.UPLOAD_MAX,"utf-8");//声明上传文件
 		SysAboutus model = getModel(SysAboutus.class);
-		try{
-			model.setBanner2("\\upload\\banner\\"+uploadImage2.getFileName());
-		}catch(Exception exception){
-			System.out.println("没有上传图片banner2");
+		if(isFile){
+			model.setBanner2(oldPath);
+			//model.setBanner1("\\upload\\banner\\"+uploadImage1.getFileName());//设置文件名
+		}else{
+			//上传没有成功
 		}
 
 
@@ -131,15 +164,27 @@ public class BannerController extends BaseController {
 	public void save3(){
 		System.out.println("12.6----进入banner/save1");
 
-		//上传图片
-		//TbSite site = getBackSite();
-		//public UploadFile getFile(String parameterName//参数名称, String saveDirectory//保存路径//默认是tomacat下upload下的文件夹, Integer maxPostSize//最大传输值, String encoding//编码,可用可不用)
-		UploadFile uploadImage3 = getFile("model.banner3","banner", FileUploadUtils.UPLOAD_MAX,"utf-8");
+		UploadFile uploadImage1= getFile();//获取上传的文件
+		String oldPath="/static/frontend/images/banner2.jpg";//banner图的目标路径//写死在css中
+		boolean isFile=false;//图片保存成功
+		if(uploadImage1!=null){
+			//如果获取的文件不为空
+			System.out.println("zr-----bannerC"+uploadImage1.getFileName());//上传文件的名称
+			String oldPathRealpath = getSession().getServletContext().getRealPath(oldPath);//获取目标路径在项目中的位置
+			File oldFile=new File(oldPathRealpath);//找到目标图片的文件
+			//删除原来的文件
+			if(oldFile.exists()){
+				oldFile.delete();
+			}
+			isFile=uploadImage1.getFile().renameTo(new File(oldPathRealpath));
+		}
+		//UploadFile uploadImage1 = getFile("model.banner1","banner", FileUploadUtils.UPLOAD_MAX,"utf-8");//声明上传文件
 		SysAboutus model = getModel(SysAboutus.class);
-		try{
-			model.setBanner3("\\upload\\banner\\"+uploadImage3.getFileName());
-		}catch(Exception exception){
-			System.out.println("没有上传图片banner3");
+		if(isFile){
+			model.setBanner3(oldPath);
+			//model.setBanner1("\\upload\\banner\\"+uploadImage1.getFileName());//设置文件名
+		}else{
+			//上传没有成功
 		}
 
 

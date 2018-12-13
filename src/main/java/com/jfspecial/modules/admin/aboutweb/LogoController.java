@@ -44,19 +44,32 @@ public class LogoController extends BaseProjectController {
 		//String temUrl=FileUploadUtils.getUploadTmpPath(site);//获取临时存储路径
 		//上传图片
 		//public UploadFile getFile(String parameterName//参数名称, String saveDirectory//保存路径//默认是tomacat下upload下的文件夹, Integer maxPostSize//最大传输值, String encoding//编码,可用可不用)
-		UploadFile uploadImage = getFile("model.logo","logo", FileUploadUtils.UPLOAD_MAX,"utf-8");
+		UploadFile uploadImage = getFile();
 		//long currentTime=System.currentTimeMillis();//12.4 获取当前时间戳//打算改文件名的,没有可改的地方
 
 		SysAboutus model = getModel(SysAboutus.class);
-		if (uploadImage != null) {
-			//File file=new File(temUrl+"\\"+uploadImage.getFileName());
-			//System.out.println("12.4 ---"+temUrl+"\\"+uploadImage.getFileName());
-			//String fileUrl = uploadHandler(site,file,"image");
-			model.setLogo("\\upload\\logo\\"+uploadImage.getFileName());//设置文件名
-			//model.setLogo(fileUrl);//设置文件名
-		}else{
-			System.out.println("上传图片为空");
+
+		String oldPath="/upload/logo/logo.jpg";//覆盖
+		boolean isFile=false;//图片保存成功
+		if(uploadImage!=null){
+			//如果获取的文件不为空
+			//System.out.println("zr-----bannerC"+uploadImage1.getFileName());//上传文件的名称
+			String oldPathRealpath = getSession().getServletContext().getRealPath(oldPath);//获取目标路径在项目中的位置
+			File oldFile=new File(oldPathRealpath);//找到目标图片的文件
+			//删除原来的文件
+			if(oldFile.exists()){
+				oldFile.delete();
+			}
+			isFile=uploadImage.getFile().renameTo(new File(oldPathRealpath));
 		}
+
+		if(isFile){
+			model.setLogo(oldPath);//设置文件名
+			//model.setBanner1("\\upload\\banner\\"+uploadImage1.getFileName());//设置文件名
+		}else{
+			//上传没有成功
+		}
+
 
 		//修改参数
 		model.setId("1");

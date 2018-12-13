@@ -5,6 +5,7 @@ import com.jfspecial.component.base.BaseProjectController;
 import com.jfspecial.component.util.ImageCode;
 import com.jfspecial.component.util.JFSpecialUtils;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
+import com.jfspecial.modules.admin.aboutweb.SysAboutus;
 import com.jfspecial.modules.admin.folder.FolderService;
 import com.jfspecial.modules.admin.folder.TbFolder;
 import com.jfspecial.modules.admin.site.SessionSite;
@@ -80,6 +81,10 @@ public class CommonController extends BaseProjectController {
 			renderAuto(Home.PATH + urlKey + ".html");
 		}
 
+		//增加logo--------------定版后改放到缓存处
+		String sql="select * from tb_webinfo where id = 1";
+		SysAboutus webinfo=SysAboutus.dao.findFirst(sql);
+		setAttr("webinfo",webinfo);
 	}
 
 	/**

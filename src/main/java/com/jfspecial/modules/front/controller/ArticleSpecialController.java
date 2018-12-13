@@ -38,8 +38,8 @@ public class ArticleSpecialController extends BaseProjectController {
 		// 数据列表
 		int userId = getParaToInt();
 
-		// 文章
-		// TbArticle article = new FrontCacheService().getArticle(articleId);
+
+		// 获取特派员的信息
 		SysUser special = SysUser.dao.findFirst(
 				"select * from sys_user where userid = ? ",userId);
 

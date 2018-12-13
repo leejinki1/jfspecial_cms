@@ -131,9 +131,11 @@ var expertdockings=tempExpertDocking.alter_expertdockings(1,5);
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<h1><a class="navbar-brand" href="index.html"><span>科技</span>特派员创业扶贫联盟平台</a></h1>
+
+					<h1><a class="navbar-brand" href="index.html"><span><img src="${BASE_PATH }${webinfo.logo}" style="width:80px;height:80px;"  class="nav navbar-nav"></span></a></h1>
 				</div>
 				<!--暂时放这 -->
+
 				<style>
 					/*.header *{border: 1px white solid;}*/
 					.loginAndregister{color: white;line-height: 50px;text-align: right;}
@@ -162,7 +164,9 @@ var expertdockings=tempExpertDocking.alter_expertdockings(1,5);
 				</div>
 				        <!-- 收集的导航链接，和其他形式的内容，锁定 -->
 				<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+
 					<ul class="nav navbar-nav">
+
 						<li class="hvr-bounce-to-bottom active"><a href="index.html">主页</a></li>
 						<li class="hvr-bounce-to-bottom"><a href="special.html" />特派员</a></li>
 						<li class="hvr-bounce-to-bottom"><a href="sale.html" />特卖区</a></li>
@@ -212,24 +216,30 @@ var expertdockings=tempExpertDocking.alter_expertdockings(1,5);
 				<li>
 					<div class="banner-info" >
 						<div class="baner-w3text">
-							<h3>“科学探索奖”：首期十亿元大奖将带来哪些改变</h3>
-							<p>科学探索奖</p>
+							<h3>${webinfo.bannertitle1}</h3>
+							<!--<h3>“科学探索奖”：首期十亿元大奖将带来哪些改变</h3>-->
+							<p>${webinfo.bannertitlecontent1}</p>
+							<!--科学探索奖-->
 						</div>
 					</div>
 				</li>
 				<li>
 					<div class="banner-info1">
 						<div class="baner-w3text">
-							<h3>聚焦企业创新发展生态圈！园区携手相城区共建开发区企</h3>
-							<p>聚焦企业创新</p>
+							<!--<h3>聚焦企业创新发展生态圈！园区携手相城区共建开发区企</h3>-->
+							<h3>${webinfo.bannertitle2}</h3>
+							<p>${webinfo.bannertitlecontent2}</p>
+							<!--<p>聚焦企业创新</p>-->
 						</div>
 					</div>
 				</li>
 				<li>
 					<div class="banner-info2">
 						<div class="baner-w3text">
-							<h3>创新“照亮”未来 互联网大咖聊人工智能</h3>
-							<p>互联网大咖聊人工智能</p>
+							<h3>${webinfo.bannertitle3}</h3>
+							<p>${webinfo.bannertitlecontent3}</p>
+							<!--<h3>创新“照亮”未来 互联网大咖聊人工智能</h3>
+							<p>互联网大咖聊人工智能</p>-->
 						</div>
 					</div>
 				</li>
@@ -407,16 +417,16 @@ var expertdockings=tempExpertDocking.alter_expertdockings(1,5);
 		<ul>
 			<li>网站信息</li>
 			<li><a href="#">首页</a></li>
-			<li><a href="#">关于</a></li>
+			<li><a href="#">关于</a>${webinfo.aboutus}</li>
 			<li><a href="#">博客</a></li>
 			<li><a href="#">接触</a></li>
 		</ul>
 		<ul>
 			<li>联系我们</li>
 			<li><a href="#">玉林市科技局</a></li>
-			<li>电话：<span>800-255-9999</span></li>
-			<li>传真：<span>1234 568</span></li>
-			<li>邮箱：<span>example.com</span></li>
+			<li>电话：<span>${webinfo.tel}</span></li>
+			<li>传真：<span>${webinfo.fax}</span></li>
+			<li>邮箱：<span>${webinfo.email}</span></li>
 		</ul>
 	</div>
 
