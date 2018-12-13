@@ -3,6 +3,7 @@ package com.jfspecial.modules.admin.home;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfspecial.component.base.BaseProjectController;
+import com.jfspecial.component.util.JFSpecialUtils;
 import com.jfspecial.jfinal.base.Paginator;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
 import com.jfspecial.modules.CommonController;
@@ -15,6 +16,7 @@ public class AdminHomeController extends BaseProjectController {
 	private static final String path = "/pages/admin/home/";
 
 	public void index() {
+		System.out.println("12.12---------入方法");
 		SysUser user = (SysUser) getSessionUser();
 		if (user == null) {
 			redirect(CommonController.firstPage);
@@ -22,6 +24,7 @@ public class AdminHomeController extends BaseProjectController {
 		}
 		setAttr("nowUser", user);
 
+		System.out.println("12.12---------入方法");
 		/*
 		// 最新文件
 		Page<TbArticle> articlePage = TbArticle.dao.paginate(new Paginator(1, 10), "select t.*,f.name as folderName " //
@@ -76,6 +79,9 @@ public class AdminHomeController extends BaseProjectController {
 		long projectapps=Db.queryLong("select count(*)  from tb_projectapp where 1=1");
 		//帮扶企业 308
 		long addoils=Db.queryLong("select count(*)  from tb_addoil where 1=1");
+		//专家对接
+		long experts=Db.queryLong("select count(*)  from tb_expert_docking where 1=1");
+
 
 		//获取当前用户的权限
 
@@ -88,7 +94,9 @@ public class AdminHomeController extends BaseProjectController {
 		setAttr("spps", spps);
 		setAttr("projectapps", projectapps);
 		setAttr("addoils", addoils);
+		setAttr("experts", experts);
 
+		System.out.println("12.12---------出方法");
 		render(path + "home.html");
 	}
 }

@@ -67,7 +67,7 @@ public class SecurityUserController extends BaseController {
 		//查询全部//有权限限制(只能查出比自己权限小的)
 		Integer userType= getSessionUser().getInt("usertype");
 		String sql1 = "select * " +
-				"from sys_user t where  usertype >" +userType+
+				"from sys_user t " +
 				" order by userid desc";
 		List<SysUser> list=SysUser.dao.find(sql1);
 
@@ -139,7 +139,14 @@ public class SecurityUserController extends BaseController {
 
 		/*从前台获取数据*//*保存返回前台的参数*/
 		Integer pid = getParaToInt();//获取路径中的参数
-		SysUser model = SysUser.dao.findById(pid);//根据id查出model的值
+		SecurityUser model = SecurityUser.dao.findById(pid);//根据id查出model的值
+		if(model!=null){//解密
+			String password = model.getPassword();
+			System.out.println("12.12------password" +password);
+			model.setPassword(JFSpecialUtils.passwordDecrypt(password));
+			System.out.println("12.12------解密后的password:"+JFSpecialUtils.passwordDecrypt(password));
+		}
+
 
 		if (pid != null && pid > 0) { // 更新
 			setAttr("model",model);
@@ -165,9 +172,14 @@ public class SecurityUserController extends BaseController {
 		}
 
 		/*从前台获取提交数据*/
-		SysUser model = getModel(SysUser.class);
+		SecurityUser model = getModel(SecurityUser.class);
 		Integer pid = getParaToInt();//获取路径中的参数
-		System.out.println("12.11---------------model"+model);
+
+		if(model!=null){//加密密码
+			System.out.println("12.11---------------model"+model);
+			String password = model.getPassword();
+			model.setPassword(JFSpecialUtils.passwordEncrypt(password));
+		}
 
 		/*提交*/
 		boolean is;

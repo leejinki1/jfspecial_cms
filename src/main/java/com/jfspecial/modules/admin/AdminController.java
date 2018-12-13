@@ -29,6 +29,7 @@ public class AdminController extends BaseProjectController {
 			// 如果session存在，不再验证
 			redirect(homePage);
 		} else {
+
 			render(loginPage);
 		}
 
@@ -67,7 +68,7 @@ public class AdminController extends BaseProjectController {
 		String encryptPassword = password;
 
 		SysUser user = SysUser.dao.findFirstByWhere(" where username = ? " //
-				+ " and usertype in ( " + JFSpecialUtils.USER_TYPE_ADMIN + "," + JFSpecialUtils.USER_TYPE_NORMAL + ")",
+				+ " and usertype in ( " + JFSpecialUtils.USER_TYPE_ADMIN + "," + JFSpecialUtils.USER_TYPE_NORMAL + ",2,10,11,12,13)",
 				username);
 		if (user == null || user.getInt("userid") <= 0) {
 			setAttr("msg", "认证失败，请您重新输入。");
@@ -93,17 +94,22 @@ public class AdminController extends BaseProjectController {
 			return;
 		}
 
-		if (!(user.getInt("usertype") == 1 || user.getInt("usertype") == 2)) {
+		System.out.println("zr12.13-------------"+user.getInt("usertype"));
+		if (!(user.getInt("usertype") == 1 || user.getInt("usertype") == 2||
+				user.getInt("usertype") == 9|| user.getInt("usertype") == 10||
+				user.getInt("usertype") == 11|| user.getInt("usertype") == 12||
+				user.getInt("usertype") == 13)) {
 			setAttr("msg", "您没有登录权限，请您重新输入。");
 			render(loginPage);
 			return;
 		}
-		
+
+		//
 		setSessionUser(user);
 
-		// 第一个页面跳转
+		// 第一个页面跳转(判断是否有权限登录该页面，关键词nomenu不知道从什么地方走)
 		String tmpMainPage = setFirstPage();
-
+		System.out.println("zr---admincontroller"+tmpMainPage);
 		if (tmpMainPage == null) {
 			setAttr("msg", "没有权限，请联系管理员。");
 			render(loginPage);
@@ -120,7 +126,7 @@ public class AdminController extends BaseProjectController {
 
 	/**
 	 * 获取第一个跳转页面
-	 * @param map
+	 * @param
 	 * @return
 	 */
 	protected String setFirstPage() {
@@ -186,6 +192,7 @@ public class AdminController extends BaseProjectController {
 
 	public void trans() {
 		String redirectPath = getPara();
+		System.out.println("12.13-----"+redirectPath);
 		if (StrUtils.isEmpty(redirectPath)) {
 			redirectPath = Config.getStr("PAGES.TRANS");
 		} else if (redirectPath.equals("auth")) {

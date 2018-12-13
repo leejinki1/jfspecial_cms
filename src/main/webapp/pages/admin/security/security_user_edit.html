@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="${BASE_PATH}static/backend/assets/js/Lightweight-Chart/cssCharts.css">
 </head>
 <body>
-    <div id="wrapper">
+    <div id="wrapper" onload="init()">
         <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -57,7 +57,7 @@
                         <a href="../../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 信息统计</a>
                     </li>
                     <li>
-                        <a href="../security_user" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 用户管理</a>
+                        <a href="../../security_user" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 用户管理</a>
                     </li>
 
                 </ul>
@@ -98,10 +98,11 @@
 											<label for="model.username" class="col-sm-2 control-label">账号</label>
 											<div class="col-sm-10" >
 												<input name="model.username" class="form-control"
-													   value="${model.username!''}" placeholder="登陆账号" readonly>
+													   value="${model.username!''}" placeholder="手机号" >
 											</div>
 										</div>
 
+										<!--真实姓名-->
 										<div class="form-group">
 											<label for="model.realname" class="col-sm-2 control-label">真实姓名</label>
 											<div class="col-sm-10">
@@ -110,10 +111,20 @@
 											</div>
 										</div>
 
+										<!--密码-->
+										<div class="form-group">
+											<label for="model.password" class="col-sm-2 control-label">密码</label>
+											<div class="col-sm-10">
+												<input name="model.password" class="form-control" type="password"
+													   value="${model.password!''}" placeholder="6-20位密码">
+											</div>
+										</div>
+
+										<!--角色-->
 										<div class="form-group">
 											<label for="model.usertype" class="col-sm-2 control-label">角色</label>
 											<div class="col-sm-10">
-												<select  class="form-control" name="model.usertype" id="select">
+												<select  class="form-control" name="model.usertype" id="select" onchange="rolechange()">
 													<option value="-1">--请选择栏目--</option>
 													<%
 													if(!isEmpty(albums)) {
@@ -128,12 +139,129 @@
 										</div>
 									</div><!--表单填写内容完-->
 
+									<!--特派员特有的表单-->
+									<div class="row" id="special" style="display:none;">
+										<!--性别-->
+										<div class="form-group">
+											<label for="model.sex" class="col-sm-2 control-label">性别</label>
+											<div class="col-sm-10">
+												<input name="model.sex" class="form-control"
+													   value="${model.sex!''}" placeholder="性别">
+											</div>
+										</div>
+
+										<!--年龄-->
+										<div class="form-group">
+											<label for="model.age" class="col-sm-2 control-label">年龄</label>
+											<div class="col-sm-10">
+												<input name="model.age" class="form-control"
+													   value="${model.age!''}" placeholder="年龄">
+											</div>
+										</div>
+
+
+										<!--民族-->
+										<div class="form-group">
+											<label for="model.nation" class="col-sm-2 control-label">民族</label>
+											<div class="col-sm-10">
+												<input name="model.nation" class="form-control"
+													   value="${model.nation!''}" placeholder="民族">
+											</div>
+										</div>
+
+										<!--籍贯-->
+										<div class="form-group">
+											<label for="model.jiguan" class="col-sm-2 control-label">籍贯</label>
+											<div class="col-sm-10">
+												<input name="model.jiguan" class="form-control"
+													   value="${model.jiguan!''}" placeholder="籍贯">
+											</div>
+										</div>
+
+										<!--政治面貌-->
+										<div class="form-group">
+											<label for="model.politicalstatus" class="col-sm-2 control-label">政治面貌</label>
+											<div class="col-sm-10">
+												<input name="model.politicalstatus" class="form-control"
+													   value="${model.politicalstatus!''}" placeholder="政治面貌">
+											</div>
+										</div>
+
+										<!--文化程度-->
+										<div class="form-group">
+											<label for="model.degree" class="col-sm-2 control-label">文化程度</label>
+											<div class="col-sm-10">
+												<input name="model.degree" class="form-control"
+													   value="${model.degree!''}" placeholder="文化程度">
+											</div>
+										</div>
+
+										<!--服务领域-->
+										<div class="form-group">
+											<label for="model.serviceregion" class="col-sm-2 control-label">服务领域</label>
+											<div class="col-sm-10">
+												<input name="model.serviceregion" class="form-control"
+													   value="${model.serviceregion!''}" placeholder="服务领域">
+											</div>
+										</div>
+
+										<!--工作经历-->
+										<div class="form-group">
+											<label for="model.workexperience" class="col-sm-2 control-label">工作经历</label>
+											<div class="col-sm-10">
+												<input name="model.workexperience" class="form-control"
+													   value="${model.workexperience!''}" placeholder="工作经历">
+											</div>
+										</div>
+
+										<!--手机-->
+										<div class="form-group">
+											<label for="model.tel" class="col-sm-2 control-label">手机</label>
+											<div class="col-sm-10">
+												<input name="model.tel" class="form-control"
+													   value="${model.tel!''}" placeholder="手机">
+											</div>
+										</div>
+
+										<!--电子邮箱-->
+										<div class="form-group">
+											<label for="model.email" class="col-sm-2 control-label">电子邮箱</label>
+											<div class="col-sm-10">
+												<input name="model.email" class="form-control"
+													   value="${model.email!''}" placeholder="电子邮箱">
+											</div>
+										</div>
+
+
+										<!--QQ-->
+										<div class="form-group">
+											<label for="model.qq" class="col-sm-2 control-label">QQ</label>
+											<div class="col-sm-10">
+												<input name="model.qq" class="form-control"
+													   value="${model.qq!''}" placeholder="QQ">
+											</div>
+										</div>
+
+										<!--微信-->
+										<div class="form-group">
+											<label for="model.weixin" class="col-sm-2 control-label">微信</label>
+											<div class="col-sm-10">
+												<input name="model.weixin" class="form-control"
+													   value="${model.weixin!''}" placeholder="微信">
+											</div>
+										</div>
+
+
+									</div><!--特派员特有的表单-->
+
 									<!--表单提交-->
 									<div class="form-group">
 										<div class="col-sm-offset-3 col-sm-9">
 											<div class="checkbox">
 												<label>
+													<input type="hidden" id="usertype" value="${model.usertype!''}">
 													<input type="hidden" name="model.userid" value="${model.userid!''}">
+													<input type="hidden" name="model.id" value="${model.id!''}">
 												 	<input type="button" value="保存"  class="waves-effect waves-light btn-large" onclick="return oper_save(${model.id!'0'});"/>&nbsp;
 												  	<input type="reset" value="重置"  class="waves-effect waves-light btn-large" />
 												</label>
@@ -173,6 +301,27 @@
    <script src="${BASE_PATH}static/backend/assets/js/custom-scripts.js"></script>
 
 	<script type="text/javascript">
+		window.onload =function(){
+			//alert(1);
+			var usertype= $('#usertype').val();
+			//alert(usertype);
+			<!--9是特派员-->
+			if(usertype=='10'){
+				$('#special').css("display","display");
+			}
+		}
+
+		<!--角色改变--><!--如果是10特派员,显示special中的内容,否则不显示-->
+		function rolechange(){
+			alert(1);
+			var options=$('#select option:selected').val();
+			if(options=='10'){
+				$('#special').css("display","display");
+			}else{
+				$('#special').css("display","none");
+			}
+		}
+
 		<!--保存-->
 		function oper_save(id){
 			<!--用户名-->

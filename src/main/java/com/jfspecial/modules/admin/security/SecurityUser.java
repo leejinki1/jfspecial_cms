@@ -14,13 +14,24 @@ public class SecurityUser extends BaseProjectModel<SecurityUser> {
     private String USERNAME = "username"; // 名称
     private String USERTYPE = "usertype"; // 模板名称
     private String REALNAME = "realname"; //
+    private String PASSWORD="password";//密码
 
-    public SecurityUser setId(Integer value) {
+
+    public SecurityUser setPassword(String value) {
+        set(PASSWORD, value);
+        return this;
+    }
+
+    public String getPassword() {
+        return get(PASSWORD);
+    }
+
+    public SecurityUser setId(long value) {
         set(ID, value);
         return this;
     }
 
-    public Integer getId() {
+    public long getId() {
         return get(ID);
     }
 
@@ -69,6 +80,7 @@ public class SecurityUser extends BaseProjectModel<SecurityUser> {
                 ", ID='" + getId() + '\'' +
                 ", USERTYPE='" + getUserType() + '\'' +
                 ", REALNAME='" + getRealName() + '\'' +
+                ", PASSWORD='" + getPassword() + '\'' +
                 '}';
     }
 }

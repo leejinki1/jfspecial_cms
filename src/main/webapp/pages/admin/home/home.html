@@ -18,6 +18,9 @@
 	<!-- Google Fonts-->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 	<link rel="stylesheet" href="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/cssCharts.css">
+	<style type="text/css">
+
+	</style>
 </head>
 <%
 // 传递变量
@@ -33,19 +36,20 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand waves-effect waves-dark" href="index.html"><i class="large material-icons">track_changes</i> <strong>信息统计</strong></a>
+			<a class="navbar-brand waves-effect waves-dark" href="admin"><i class="large material-icons">track_changes</i> <strong>信息统计</strong></a>
 
 			<div id="sideNav" href=""><i class="material-icons dp48">toc</i></div>
 		</div>
 
 		<!--右侧菜单列表-->
 		<ul class="nav navbar-top-links navbar-right">
-			<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>John Doe</b> <i class="material-icons right">arrow_drop_down</i></a></li>
+			<li><a class="dropdown-button waves-effect waves-dark" href="../" ><i class="fa fa-user fa-fw"></i> <b>网站首页</b> </a></li>
+			<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>${nowUser.username}</b> <i class="material-icons right">arrow_drop_down</i></a></li>
 		</ul>
 	</nav>
 	<!-- Dropdown Structure -->
 	<ul id="dropdown1" class="dropdown-content">
-		<li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+		<li><a href="logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
 		</li>
 	</ul>
 
@@ -57,21 +61,21 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 			<ul class="nav" id="main-menu">
 
 				<li>
-					<a class="active-menu waves-effect waves-dark" href="index.html"><i class="fa fa-dashboard"></i> 信息统计</a>
+					<a class="active-menu waves-effect waves-dark" href="admin"><i class="fa fa-dashboard"></i> 信息统计</a>
 				</li>
 				<li>
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i> 特卖区<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li>
+						<li class="usertype10">
 							<a href="sale_publish">特卖区发布信息</a>
 						</li>
-						<li>
+						<li class="usertype10">
 							<a href="sale_drafts">特卖区发布信息【草稿箱】</a>
 						</li>
-						<li>
+						<li class="usertype10">
 							<a href="sale_approve">待审核信息</a>
 						</li>
-						<li>
+						<li class="usertype10">
 							<a href="sale_history">历史发布</a>
 						</li>
 					</ul>
@@ -80,16 +84,16 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 				<li>
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 新闻中心<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li>
+						<li class="usertype10">
 							<a href="newscenter_publish">新闻发布信息</a>
 						</li>
-						<li>
+						<li class="usertype10">
 							<a href="newscenter_drafts">待发布新闻【草稿箱】</a>
 						</li>
-						<li>
+						<li class="usertype10">
 							<a href="newscenter_approve">待审核新闻</a>
 						</li>
-						<li>
+						<li class="usertype10">
 							<a href="newscenter_history">历史新闻</a>
 						</li>
 					</ul>
@@ -98,16 +102,16 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 				<li>
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-qrcode"></i> 技术需求<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li>
+						<li class="usertype11">
 							<a href="trd_publish">技术需求信息</a>
 						</li>
-						<li>
+						<li class="usertype11">
 							<a href="trd_drafts">待发布需求【草稿箱】</a>
 						</li>
-						<li>
+						<li class="usertype11">
 							<a href="trd_approve">待审核需求</a>
 						</li>
-						<li>
+						<li class="usertype11">
 							<a href="trd_history">历史需求</a>
 						</li>
 					</ul>
@@ -116,16 +120,16 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 				<li>
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-table"></i> 创客活动<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li>
+						<li class="usertype10">
 							<a href="maker_publish">创客活动信息</a>
 						</li>
-						<li>
+						<li class="usertype10">
 							<a href="maker_drafts">待发布活动【草稿箱】</a>
 						</li>
-						<li>
+						<li class="usertype10">
 							<a href="maker_approve">待审核活动</a>
 						</li>
-						<li>
+						<li class="usertype10">
 							<a href="maker_history">历史活动</a>
 						</li>
 					</ul>
@@ -134,16 +138,16 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 				<li>
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 政策法规<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li>
+						<li class="usertype1">
 							<a href="policy_publish">政策法规信息</a>
 						</li>
-						<li>
+						<li class="usertype1">
 							<a href="policy_drafts">待发布信息【草稿箱】</a>
 						</li>
-						<li>
+						<li class="usertype1">
 							<a href="policy_approve">待审核信息</a>
 						</li>
-						<li>
+						<li class="usertype1">
 							<a href="policy_history">历史信息</a>
 						</li>
 					</ul>
@@ -152,16 +156,16 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 				<li>
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 科普板块<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li>
+						<li class="usertype1">
 							<a href="spp_publish">科普信息</a>
 						</li>
-						<li>
+						<li class="usertype1">
 							<a href="spp_drafts">待发布信息【草稿箱】</a>
 						</li>
-						<li>
+						<li class="usertype1">
 							<a href="spp_approve">待审核信息</a>
 						</li>
-						<li>
+						<li class="usertype1">
 							<a href="spp_history">历史信息</a>
 						</li>
 					</ul>
@@ -170,16 +174,16 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 				<li>
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 项目申报<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li>
+						<li class="usertype1">
 							<a href="projectapp_publish">项目信息</a>
 						</li>
-						<li>
+						<li class="usertype1">
 							<a href="projectapp_drafts">待发布项目【草稿箱】</a>
 						</li>
-						<li>
+						<li class="usertype1">
 							<a href="projectapp_approve">待审核项目</a>
 						</li>
-						<li>
+						<li class="usertype1">
 							<a href="projectapp_history">历史项目</a>
 						</li>
 					</ul>
@@ -188,16 +192,16 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 				<li>
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 帮扶企业<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li>
+						<li class="usertype1">
 							<a href="addoil_publish">帮扶信息</a>
 						</li>
-						<li>
+						<li class="usertype1">
 							<a href="addoil_drafts">待发布信息【草稿箱】</a>
 						</li>
-						<li>
+						<li class="usertype1">
 							<a href="addoil_approve">待审核帮扶申请</a>
 						</li>
-						<li>
+						<li class="usertype1">
 							<a href="addoil_history">历史帮扶申请</a>
 						</li>
 					</ul>
@@ -206,10 +210,10 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 				<li>
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 安全管理<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li>
+						<li class="usertype10">
 							<a href="security_user">用户管理</a>
 						</li>
-						<li>
+						<li class="usertype1">
 							<a href="security_role">角色管理</a>
 						</li>
 					</ul>
@@ -218,16 +222,16 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 				<li>
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 网站设置<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li>
+						<li class="usertype1">
 							<a href="setting_logo">Logo更换</a>
 						</li>
-						<li>
+						<li class="usertype1">
 							<a href="setting_aboutus">关于我们</a>
 						</li>
-						<li>
+						<li class="usertype1">
 							<a href="setting_contact">联系方式</a>
 						</li>
-						<li>
+						<li class="usertype1">
 							<a href="setting_banner">广告轮播图</a>
 						</li>
 					</ul>
@@ -237,7 +241,7 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 			</ul>
 
 		</div>
-
+		<input id="usertype" type="hidden" value="${nowUser.usertype}">
 	</nav>
 	<!-- /. NAV SIDE  -->
 
@@ -253,12 +257,12 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 			</ol>
 
 		</div>
+		<!--管理员显示界面-->
 		<div id="page-inner">
 
 			<div class="dashboard-cards">
 				<div class="row">
 					<div class="col-xs-12 col-sm-6 col-md-3">
-
 						<div class="card horizontal cardIcon waves-effect waves-dark">
 							<div class="card-image green">
 								<i class="material-icons dp48">import_export</i>
@@ -346,7 +350,7 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 							</div>
 							<div class="card-stacked green">
 								<div class="card-content">
-									<h3>0</h3>
+									<h3>${experts}</h3>
 								</div>
 								<div class="card-action">
 									<strong>专家对接</strong>
@@ -363,7 +367,7 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 							</div>
 							<div class="card-stacked green">
 								<div class="card-content">
-									<h3>88,888</h3>
+									<h3>19,578</h3>
 								</div>
 								<div class="card-action">
 									<strong>网站访问量</strong>
@@ -389,8 +393,12 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 				</div>
 
 			</div>
-		</div>
+		</div><!--管理员界面-->
 
+		<!--其他后台用户界面-->
+		<div id="page-inner">
+
+		</div>
 
 		<footer>
 			<p>
@@ -410,28 +418,65 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 <!-- /. WRAPPER  -->
 <!-- JS Scripts-->
 <!-- jQuery Js -->
-<script src="${BASE_PATH }static/backend/assets/js/jquery-1.10.2.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/jquery-1.10.2.js"></script>
 
-<!-- Bootstrap Js -->
-<script src="${BASE_PATH }static/backend/assets/js/bootstrap.min.js"></script>
+	<!-- Bootstrap Js -->
+	<script src="${BASE_PATH }static/backend/assets/js/bootstrap.min.js"></script>
 
-<script src="${BASE_PATH }static/backend/assets/materialize/js/materialize.min.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/materialize/js/materialize.min.js"></script>
 
-<!-- Metis Menu Js -->
-<script src="${BASE_PATH }static/backend/assets/js/jquery.metisMenu.js"></script>
-<!-- Morris Chart Js -->
-<script src="${BASE_PATH }static/backend/assets/js/morris/raphael-2.1.0.min.js"></script>
-<script src="${BASE_PATH }static/backend/assets/js/morris/morris.js"></script>
+	<!-- Metis Menu Js -->
+	<script src="${BASE_PATH }static/backend/assets/js/jquery.metisMenu.js"></script>
+	<!-- Morris Chart Js -->
+	<script src="${BASE_PATH }static/backend/assets/js/morris/raphael-2.1.0.min.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/morris/morris.js"></script>
 
 
-<script src="${BASE_PATH }static/backend/assets/js/easypiechart.js"></script>
-<script src="${BASE_PATH }static/backend/assets/js/easypiechart-data.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/easypiechart.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/easypiechart-data.js"></script>
 
-<script src="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/jquery.chart.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/jquery.chart.js"></script>
 
-<!-- Custom Js -->
-<script src="${BASE_PATH }static/backend/assets/js/custom-scripts.js"></script>
-
+	<!-- Custom Js -->
+	<script src="${BASE_PATH }static/backend/assets/js/custom-scripts.js"></script>
+	<script type="text/javascript">
+		window.onload =function(){
+			//alert(1);
+			var usertype=$('#usertype').val();
+			alert(usertype);
+			if(usertype=='1'){
+				<!--管理员--><!--
+				$('.usertype1').css("display","display");
+				$('.usertype11').css("display","display");
+				$('.usertype10').css("display","display");-->
+			}else if(usertype>=11&&usertype<=13){
+				<!--农户11-13-->
+				$('.usertype1').css("display","none");
+				$('.usertype1').parent().parent().css("display","none");
+				$('.usertype10').css("display","none");
+				$('.usertype10').parent().parent().css("display","none");
+				$('.usertype11').css("display","display");
+				$('.usertype11').parent().parent().css("display","display");
+			}else if(usertype=='10'){
+				<!--特派员-->
+				$('.usertype1').css("display","none");
+				$('.usertype1').parent().parent().css("display","none");
+				$('.usertype11').css("display","none");
+				$('.usertype11').parent().parent().css("display","none");
+				$('.usertype10').css("display","display");
+				$('.usertype10').parent().parent().css("display","display");
+			}else{
+				<!--其他人员-->
+				$('.usertype1').css("display","none");
+				$('.usertype10').css("display","none");
+				$('.usertype11').css("display","none");
+				$('.usertype1').parent().parent().css("display","none");
+				$('.usertype10').parent().parent().css("display","none");
+				$('.usertype11').parent().parent().css("display","none");
+				alert("您没有后台操作权限!");
+			}
+		}
+	</script>
 
 </body>
 
