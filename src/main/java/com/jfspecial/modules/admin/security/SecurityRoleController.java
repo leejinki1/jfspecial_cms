@@ -6,6 +6,7 @@ import com.jfspecial.component.util.JFSpecialUtils;
 import com.jfspecial.jfinal.base.BaseController;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
 import com.jfspecial.jfinal.component.db.SQLUtils;
+import com.jfspecial.modules.CommonController;
 import com.jfspecial.system.department.DepartmentSvc;
 import com.jfspecial.system.menu.MenuSvc;
 import com.jfspecial.system.menu.SysMenu;
@@ -154,6 +155,34 @@ public class SecurityRoleController extends BaseController {
 
 		new RoleSvc().saveAuth(roleid, menus, getSessionUser().getUserid());
 		renderMessage("保存成功");
+	}
+
+	public void list1(){
+		/*判断是否登陆或登陆过期*/
+		SysUser user = (SysUser) getSessionUser();
+		if (user == null) {
+			redirect(CommonController.firstPage);
+			return;
+		}
+
+		/*判断权限(userType  1或9  为管理员,可以新增)*/
+		Integer userType =  user.getInt("usertype");
+		//System.out.println("12.7----安全/userC/toCreateUser----"+userType);
+		String msg;
+		if(!(userType==1||userType==9)){
+			//考虑要不要去掉
+			msg="没有权限";
+			setAttr("msg",msg);
+			//只能查看自己的权限//显示角色名字,显示权限模块
+			String usertype=getSessionAttr("usertype");
+			SysRole role=SysRole.dao.findFirst("select rolename from sys_role where roleid="+usertype);
+			setAttr("role",role);
+			//List<SysMenu> menus = SysRole.dao.find("select name from sys_menu  where id in(select menuid from sys_role_menu where roleid=)+usertype);
+			render(path+"list.html");
+			return;
+
+		}
+
 	}
 }
 

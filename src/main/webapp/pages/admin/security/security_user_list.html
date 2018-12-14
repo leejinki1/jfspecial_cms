@@ -114,7 +114,8 @@
 									<td>${itemLP.index }</td><!--序号-->
 									<td>${item.username}</td><!--账号-->
 									<td>${item.realname}</td><!--用户姓名-->
-									<td><% if(item.usertype==1) { %>
+									<td>${item.rolename}
+										<!--<% if(item.usertype==1) { %>
 										超级管理员
 										<%	} %>
 										<% if(item.usertype==2) { %>
@@ -140,7 +141,7 @@
 										<%	} %>
 										<% if(item.usertype==12) { %>
 										农业公司
-										<%	} %></td><!--角色/科技特派员等-->
+										<%	} %>--></td><!--角色/科技特派员等-->
 									<td>
 										<a class="waves-effect waves-light btn" onclick="oper_resetPassword(${item.userid!'0'});">重置密码</a>&nbsp;
 										<a class="waves-effect waves-light btn" onclick="oper_toSaveUser(${item.userid!'0'});">编辑</a>
