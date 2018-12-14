@@ -68,7 +68,7 @@ public class AdminController extends BaseProjectController {
 		String encryptPassword = password;
 
 		SysUser user = SysUser.dao.findFirstByWhere(" where username = ? " //
-				+ " and usertype in ( " + JFSpecialUtils.USER_TYPE_ADMIN + "," + JFSpecialUtils.USER_TYPE_NORMAL + ",2,10,11,12,13)",
+				+ " and usertype in ( " + JFSpecialUtils.USER_TYPE_ADMIN +" ,9,10,11,12,13)",
 				username);
 		if (user == null || user.getInt("userid") <= 0) {
 			setAttr("msg", "认证失败，请您重新输入。");
@@ -95,7 +95,7 @@ public class AdminController extends BaseProjectController {
 		}
 
 		System.out.println("zr12.13-------------"+user.getInt("usertype"));
-		if (!(user.getInt("usertype") == 1 || user.getInt("usertype") == 2||
+		if (!(user.getInt("usertype") == 1 ||
 				user.getInt("usertype") == 9|| user.getInt("usertype") == 10||
 				user.getInt("usertype") == 11|| user.getInt("usertype") == 12||
 				user.getInt("usertype") == 13)) {
@@ -109,19 +109,26 @@ public class AdminController extends BaseProjectController {
 
 		// 第一个页面跳转(判断是否有权限登录该页面，关键词nomenu不知道从什么地方走)
 		String tmpMainPage = setFirstPage();
-		System.out.println("zr---admincontroller"+tmpMainPage);
+		/*System.out.println("zr---admincontroller"+tmpMainPage);
 		if (tmpMainPage == null) {
 			setAttr("msg", "没有权限，请联系管理员。");
 			render(loginPage);
 			return;
-		}
+		}*/
 
 		// 添加日志
 		user.put("update_id", user.getUserid());
 		user.put("update_time", getNow());
 		saveLog(user, SysLog.SYSTEM_LOGIN);
 
-		redirect(tmpMainPage);
+		/*if(tmpMainPage!=null) {
+			System.out.println("zr12.14------adminC" + tmpMainPage);
+			redirect("../" + tmpMainPage);
+			return;
+		}*/
+
+		redirectAuto("../../"+homePage);
+
 	}
 
 	/**

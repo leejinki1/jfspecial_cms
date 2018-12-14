@@ -25,18 +25,19 @@
 <%
 // 传递变量
 var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.userid;
+var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.usertype;
 %>
 <body>
 <div id="wrapper">
 	<nav class="navbar navbar-default top-navbar" role="navigation">
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle waves-effect waves-dark" data-toggle="collapse" data-target=".sidebar-collapse">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
 				<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand waves-effect waves-dark" href="admin"><i class="large material-icons">track_changes</i> <strong>信息统计</strong></a>
+			<a class="navbar-brand waves-effect waves-dark" href="index.html"><i class="large material-icons">track_changes</i> <strong>后台管理</strong></a>
 
 			<div id="sideNav" href=""><i class="material-icons dp48">toc</i></div>
 		</div>
@@ -44,16 +45,13 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 		<!--右侧菜单列表-->
 		<ul class="nav navbar-top-links navbar-right">
 			<li><a class="dropdown-button waves-effect waves-dark" href="../" ><i class="fa fa-user fa-fw"></i> <b>网站首页</b> </a></li>
-			<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>${nowUser.username}</b> <i class="material-icons right">arrow_drop_down</i></a></li>
+			<li><a class="dropdown-button waves-effect waves-dark" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>${session.session_user.realname}</b> <i class="material-icons right">arrow_drop_down</i></a></li>
 		</ul>
 	</nav>
-	<!-- Dropdown Structure -->
+	<!-- 下拉列表/通过id定位上级 -->
 	<ul id="dropdown1" class="dropdown-content">
-		<li><a href="logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-		</li>
+		<li><a href="logout"><i class="fa fa-sign-out fa-fw"></i> 退出</a></li>
 	</ul>
-
-
 	<!--左侧菜单  -->
 	<!--/. NAV TOP  -->
 	<nav class="navbar-default navbar-side" role="navigation">
@@ -61,7 +59,7 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 			<ul class="nav" id="main-menu">
 
 				<li>
-					<a class="active-menu waves-effect waves-dark" href="admin"><i class="fa fa-dashboard"></i> 信息统计</a>
+					<a class="active-menu waves-effect waves-dark" href="admin"><i class="fa fa-dashboard"></i> 首页</a>
 				</li>
 				<li>
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i> 特卖区<span class="fa arrow"></span></a>
@@ -443,12 +441,9 @@ var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.user
 		window.onload =function(){
 			//alert(1);
 			var usertype=$('#usertype').val();
-			alert(usertype);
-			if(usertype=='1'){
-				<!--管理员--><!--
-				$('.usertype1').css("display","display");
-				$('.usertype11').css("display","display");
-				$('.usertype10').css("display","display");-->
+			//alert(usertype);
+			if(usertype=='1'||usertype=='9'){
+				<!--管理员/经理-->
 			}else if(usertype>=11&&usertype<=13){
 				<!--农户11-13-->
 				$('.usertype1').css("display","none");

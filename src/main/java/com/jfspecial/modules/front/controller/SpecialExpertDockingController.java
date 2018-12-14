@@ -3,6 +3,7 @@ package com.jfspecial.modules.front.controller;
 import com.jfinal.aop.Before;
 import com.jfspecial.component.base.BaseProjectController;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
+import com.jfspecial.modules.CommonController;
 import com.jfspecial.modules.admin.expert.model.TbExpertDocking;
 import com.jfspecial.modules.admin.makersingup.TbMakerSignup;
 import com.jfspecial.modules.front.interceptor.FrontInterceptor;
@@ -23,8 +24,8 @@ public class SpecialExpertDockingController extends BaseProjectController {
 
 	/**
 	 * 查看文章
-	 * 
-	 * @see 不用缓存便于实时更新，访问量大再优化
+	 * 不用缓存便于实时更新
+	 * @see ，访问量大再优化
 	 * 
 	 *     * 2018年11月18日 上午3:43:39 ljk
 	 */
@@ -69,7 +70,25 @@ public class SpecialExpertDockingController extends BaseProjectController {
 		model.setUpdateTime(getNow());
 		model.save();
 
-		redirect( "/answer_list.html");
+		renderAuto(path + "answer_list.html");
+		//redirect(  "/answer_list.html");
 	//	renderAuto(path + "answer_list.html");
+	}
+
+	public void answer_list() {
+		SysUser user = (SysUser) getSessionUser();
+		//验证用户非空
+		if (user == null) {
+			redirect(CommonController.firstPage);
+			return;
+		}
+
+		Integer userid=user.getUserid();//取出登录用户的id
+		String sql="select * from tb_expert_docking where publish_user ="+userid+" order by id desc";
+		List<TbExpertDocking> list = TbExpertDocking.dao.find(sql);
+
+		setAttr("list",list);
+		render(  path+"expertdockinglist.html");//zr-------------2018.12.13
+
 	}
 }

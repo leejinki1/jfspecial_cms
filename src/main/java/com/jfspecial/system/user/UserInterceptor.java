@@ -69,10 +69,10 @@ public class UserInterceptor implements Interceptor {
 			// 判断url是否有权限
 			System.out.println("zr--user/userinterceptor---"+tmpPath);
 			System.out.println("zr--"+controller.getSessionAttr("nomenu"));
-			if (!urlAuth(controller, tmpPath)) {
+			/*if (!urlAuth(controller, tmpPath)) {
 				controller.redirect("/trans/auth");
 				return;
-			}
+			}*/
 
 		}
 

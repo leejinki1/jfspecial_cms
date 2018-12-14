@@ -255,29 +255,29 @@ function imageUrlChange(){
 </head>
 <body>
     <div id="wrapper">
-        <nav class="navbar navbar-default top-navbar" role="navigation">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand waves-effect waves-dark" href="index.html"><i class="large material-icons">track_changes</i> <strong>科普板块</strong></a>
-				
-		<div id="sideNav" href=""><i class="material-icons dp48">toc</i></div>
-            </div>
-
+		<!--admin/header-->
+		<nav class="navbar navbar-default top-navbar" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand waves-effect waves-dark" href="index.html"><i class="large material-icons">track_changes</i> <strong>后台管理</strong></a>
+				<div id="sideNav" href=""><i class="material-icons dp48">toc</i></div>
+			</div>
 			<!--右侧菜单列表-->
 			<ul class="nav navbar-top-links navbar-right">
-				<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>John Doe</b> <i class="material-icons right">arrow_drop_down</i></a></li>
+				<li><a class="dropdown-button waves-effect waves-dark" href="../" ><i class="fa fa-user fa-fw"></i> <b>网站首页</b> </a></li>
+				<li><a class="dropdown-button waves-effect waves-dark" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>${session.session_user.realname}</b> <i class="material-icons right">arrow_drop_down</i></a></li>
 			</ul>
 		</nav>
-		<!-- Dropdown Structure -->
+		<!-- 下拉列表/通过id定位上级 -->
 		<ul id="dropdown1" class="dropdown-content">
-			<li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-			</li>
+			<li><a href="logout"><i class="fa fa-sign-out fa-fw"></i> 退出</a></li>
 		</ul>
+		<!--//admin/header-->
 
 
 		<!--左侧菜单  -->
@@ -287,7 +287,7 @@ function imageUrlChange(){
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a href="../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 信息统计</a>
+                        <a href="../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 首页</a>
                     </li>
                     <li>
                         <a href="spp_publish" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 科普信息</a>

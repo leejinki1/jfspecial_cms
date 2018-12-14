@@ -38,7 +38,7 @@ public class SecurityRoleController extends BaseController {
 	public void list() {
 		SysRole model = getModelByAttr(SysRole.class);
 
-		SQLUtils sql = new SQLUtils(" from sys_role t where 1=1 ");
+		SQLUtils sql = new SQLUtils(" from sys_role t where status=1 ");
 		if (model.getAttrValues().length != 0) {
 			sql.setAlias("t");
 			// 查询条件
