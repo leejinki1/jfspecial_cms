@@ -5,7 +5,7 @@ public class ArticleConstant {
 	/**
 	 * 初始
 	 */
-	public static final int APPROVE_STATUS_INIT  = 1;
+	public static final int APPROVE_STATUS_INIT  = 0;
 	
 	/**
 	 * 更新

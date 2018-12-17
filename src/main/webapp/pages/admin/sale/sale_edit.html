@@ -284,7 +284,7 @@ function closediv(){
 
 <!--显示本地图片/预览-->
 function imageUrlChange(){
-	alert(1);
+	//alert(1);
 	//判断是否支持FileReader
     if(window.FileReader) {
         var reader = new FileReader();
@@ -482,7 +482,7 @@ function imageUrlChange(){
 										<label for="model.image_url" class="col-sm-2 control-label">主题图片</label>
 										<div class="col-sm-10">
 											<label>方法一:</label>
-											<img id="imageUrl" src="${BASE_PATH}${model.image_url}" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
+											<img id="imageUrl" src="${BASE_PATH}${model.image_url}" onerror="onerror=null;src='${BASE_PATH }static/images/common/no_image.jpg'"  style="height:80px;width:80px;" ><!--数据库中原来的图片-->
 											<input type="file" name="model.image_url" class="form-control" id="file"
 												   value="${model.image_url!''}" >
 											<label>方法二:</label>

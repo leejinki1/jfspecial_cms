@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--创客/我的-->
+<script type="text/javascript">
+function oper_delete(id) {
+
+		location.href="maker_history/delArticle/"+id;
+		return false;
+	}
+
+</script>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>创客/我的</title>
+	
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="${BASE_PATH }static/backend/assets/materialize/css/materialize.min.css" media="screen,projection" />
+    <!-- Bootstrap Styles-->
+    <link href="${BASE_PATH }static/backend/assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="${BASE_PATH }static/backend/assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- Morris Chart Styles-->
+    <link href="${BASE_PATH }static/backend/assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="${BASE_PATH }static/backend/assets/css/custom-styles.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/cssCharts.css">
+    <link rel="stylesheet" href="${BASE_PATH }static/backend/adminStyle/all.css" />
+</head>
+<body>
+    <div id="wrapper">
+		<!--admin/header-->
+		<nav class="navbar navbar-default top-navbar" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand waves-effect waves-dark" href="index.html"><i class="large material-icons">track_changes</i> <strong>后台管理</strong></a>
+				<div id="sideNav" href=""><i class="material-icons dp48">toc</i></div>
+			</div>
+			<!--右侧菜单列表-->
+			<ul class="nav navbar-top-links navbar-right">
+				<li><a class="dropdown-button waves-effect waves-dark" href="../" ><i class="fa fa-user fa-fw"></i> <b>网站首页</b> </a></li>
+				<li><a class="dropdown-button waves-effect waves-dark" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>${session.session_user.realname}</b> <i class="material-icons right">arrow_drop_down</i></a></li>
+			</ul>
+		</nav>
+		<!-- 下拉列表/通过id定位上级 -->
+		<ul id="dropdown1" class="dropdown-content">
+			<li><a href="logout"><i class="fa fa-sign-out fa-fw"></i> 退出</a></li>
+		</ul>
+		<!--//admin/header-->
+
+		<!--左侧菜单  -->
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+
+                    <li>
+                        <a href="../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 首页</a>
+                    </li>
+                    <li>
+                        <a href="maker_history" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i>我的创客发布</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+<!--菜单栏+右中内容的大盒子-->
+<div id="page-wrapper">
+	<div class="header"> 
+        <h1 class="page-header">
+			我的创客发布
+        </h1>
+	    <ol class="breadcrumb">
+			<li><a href="../admin">首页</a></li>
+			<li><a href="maker_history">创客活动 </a></li>
+			<li><a href="maker_history">我的创客发布 </a></li>
+			<!--<li class="active">Data</li>-->
+		</ol> 							
+	</div>
+		<!--666-->
+	<div id="page-inner"> 
+		
+		<div class="row">
+			<div class="col-lg-12">
+	            <div class="card">
+	            	<div class="card-action">
+						我的创客发布
+                    </div>
+					<div class="card-content">
+						<table class="table table-striped highlight centered responsive-table">
+							<thead>
+								<tr>
+									<th>序号</th>
+								 	<th>标题</th>
+									<th>内容</th>
+									<th>主题图片</th>
+									<th>分类</th>
+								 	<th>发布人</th> 
+									<th>时间</th>
+									<th>状态</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--全部显示//待分页弄好,再删除-->
+								<% for(item in lists){ %>
+								<tr>
+									<td>${itemLP.index}</td>
+									<td>${item.name}</td>
+									<td>详见详情页</td>
+									<%if(""==item.image_url){%>
+									<td><img src="${item.image_net_url}" style="height:80px;width:80px;"></td>
+									<%}else {%>
+									<td><img src="${BASE_PATH}${item.image_url}" style="height:80px;width:80px;"></td>
+									<%}%>
+									<td>${item.album_name}</td>
+									<td>${item.publish_user}</td>
+									<td>${item.update_time}</td>
+									<%if(item.approve_status==10){%>
+									<td>
+										<span style="color:green;">审核通过,已发布</span>
+									</td>
+									<%}else if(item.approve_status==9){%>
+									<td>
+										<span style="color:red">审核不通过,已退回</span>
+									</td>
+									<%}else if(item.approve_status==1){%>
+									<td>
+										未审核
+									</td>
+									<%}%>
+								</tr>
+								<% } %>
+								<!--<%
+                                var addoils=tempAddOil.addoils(1,5);%>
+                                <% for(item in addoils.list){ %>
+                                    <tr>
+                                         <td>${itemLP.index}</td>
+                                         <td>${item.name}</td>
+								<td>${item.content}</td>
+								<%if(""==item.image_url){%>
+                                    <td><img src="${item.image_net_url}" style="height:80px;width:80px;"></td>
+                                    <%}else {%>
+                                    <td><img src="${BASE_PATH}${item.image_url}" style="height:80px;width:80px;"></td>
+                                    <%}%>
+                                <td>${item.album_name}</td>
+                                         <td>${item.publish_user}</td>
+                                         <td>${item.update_time}</td>
+                                             <a class="waves-effect waves-light btn" onclick="oper_delete(${item.id!'0'});">删除</a>
+                                         </td>
+                                     </tr>
+                                <% } %>-->
+						 	</tbody>
+						</table>
+						<p class="pageBtnList">
+							<button type="button" class="btn btn-default btn-sm">首页</button>
+							<button type="button" class="btn btn-default btn-sm img-circle">上一页</button>
+							<button type="button" class="btn btn-default btn-xs">1</button>
+							<button type="button" class="btn btn-default btn-xs">2</button>
+							<button type="button" class="btn btn-default btn-xs">3</button>
+							<button type="button" class="btn btn-default btn-xs">4</button>
+							<button type="button" class="btn btn-default btn-xs">5</button>
+							<button type="button" class="btn btn-default btn-sm img-circle">下一页</button>
+							<button type="button" class="btn btn-default btn-sm">尾页</button>
+						</p>
+						<p class="pageBtnList">
+							第<span>1</span>页&nbsp;共<span>6</span>页&nbsp;共<span>30</span>条记录
+						</p>	
+						<div class="clearBoth"></div>
+					</div>
+					
+  				</div>
+			</div>	
+		</div>		
+		
+	</div><!-- /. PAGE WRAPPER  -->
+
+</div>
+     <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+	
+	<!-- Bootstrap Js -->
+    <script src="${BASE_PATH }static/backend/assets/js/bootstrap.min.js"></script>
+	
+	<script src="${BASE_PATH }static/backend/assets/materialize/js/materialize.min.js"></script>
+	
+    <!-- Metis Menu Js -->
+    <script src="${BASE_PATH }static/backend/assets/js/jquery.metisMenu.js"></script>
+    <!-- Morris Chart Js -->
+    <script src="${BASE_PATH }static/backend/assets/js/morris/raphael-2.1.0.min.js"></script>
+    <script src="${BASE_PATH }static/backend/assets/js/morris/morris.js"></script>
+	
+
+	<script src="${BASE_PATH }static/backend/assets/js/easypiechart.js"></script>
+	<script src="${BASE_PATH }static/backend/assets/js/easypiechart-data.js"></script>
+	
+	<script src="${BASE_PATH }static/backend/assets/js/Lightweight-Chart/jquery.chart.js"></script>
+	
+    <!-- Custom Js -->
+   <script src="${BASE_PATH }static/backend/assets/js/custom-scripts.js"></script>
+
+
+</body>
+
+</html>

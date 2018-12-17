@@ -1,29 +1,16 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<!--特卖/审核-->
+<!--特卖/我的-->
 <script type="text/javascript">
-<!--审核通过-->
-function oper_pass(id) {
-		location.href="sale_approve/passArticle/"+id;
-		return false;
-	}
-<!--审核退回-->
-function oper_reject(id) {
-		location.href="sale_approve/rejectArticle/"+id;
-		return false;
-	}
-
-		<!--审核跳转-->
-	function oper_approve(id){
-	//alert(1);
-	    location.href="sale_approve/approveArticle/"+id;
+function oper_delete(id) {
+		location.href="sale_history/delArticle/"+id;
 		return false;
 	}
 </script>
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>特卖/审核</title>
+	<title>特卖/我的</title>
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="${BASE_PATH }static/backend/assets/materialize/css/materialize.min.css" media="screen,projection" />
@@ -66,6 +53,7 @@ function oper_reject(id) {
 	</ul>
 	<!--//admin/header-->
 
+
 	<!--左侧菜单  -->
 	<nav class="navbar-default navbar-side" role="navigation">
 		<div class="sidebar-collapse">
@@ -75,9 +63,11 @@ function oper_reject(id) {
 					<a href="../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 首页</a>
 				</li>
 				<li>
-					<a href="spp_publish" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i>待审核页面</a>
+					<a href="publish" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i>我的发布</a>
 				</li>
+
 			</ul>
+
 		</div>
 
 	</nav>
@@ -86,13 +76,12 @@ function oper_reject(id) {
 	<div id="page-wrapper">
 		<div class="header">
 			<h1 class="page-header">
-				待审核信息
+				我的发布
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="../admin">首页</a></li>
-				<li><a href="sale_approve">特卖区 </a></li>
-				<li><a href="sale_approve">待审核信息 </a></li>
-				<li class="active">Data</li>
+				<li><a href="publish">特卖区 </a></li>
+				<li><a href="publish">我的发布 </a></li>
 			</ol>
 		</div>
 		<!--666-->
@@ -102,7 +91,7 @@ function oper_reject(id) {
 				<div class="col-lg-12">
 					<div class="card">
 						<div class="card-action">
-							待审核
+							我的发布
 						</div>
 						<div class="card-content">
 							<table class="table table-striped highlight centered responsive-table">
@@ -119,19 +108,17 @@ function oper_reject(id) {
 									<th>栏目</th>
 									<th>发布人</th>
 									<th>时间</th>
-									<th>审核</th>
+									<th>状态</th>
 								</tr>
 								</thead>
-								<!--盒马CEO就上海“标签门”致歉，宣布免去上海区总经理职务--在瑞幸们的围剿之下，为什么说涨价是星巴克最错误的战略决策？-->
 								<tbody>
 								<!--<tr>
 									<td>1</td>
-									<td>鸡蛋10块钱一斤</td>
+									<td>鸡蛋100块钱一斤</td>
 									<td>狗蛋</td>
 									<td>2018-11-19 14:51:59</td>
 									<td>
-										<a class="waves-effect waves-light btn">通过</a>&nbsp;
-										<a class="waves-effect waves-light btn">退回</a>
+										<a class="waves-effect waves-light btn">删除</a>
 									</td>
 								</tr>-->
 								<!--全部显示//待分页弄好,再删除-->
@@ -144,7 +131,7 @@ function oper_reject(id) {
 									<td>${item.num}</td>
 									<td>${item.unit}</td>
 									<td>见详情页</td>
-									<%if(""==item.image_url){%>
+									<%if(""==item.image_url){%><!--12.5-->
 									<td><img src="${item.image_net_url}" style="height:80px;width:80px;"></td>
 									<%}else {%>
 									<td><img src="${BASE_PATH}${item.image_url}" onerror="onerror=null;src='${BASE_PATH }static/images/common/no_image.jpg'"  style="height:80px;width:80px;"></td>
@@ -152,15 +139,23 @@ function oper_reject(id) {
 									<td>${item.album_name}</td>
 									<td>${item.publish_user}</td>
 									<td>${item.update_time}</td>
+									<%if(item.approve_status==10){%>
 									<td>
-										<a class="waves-effect waves-light btn" onclick="oper_approve(${item.id!'0'});">审核</a>
-										<!--<a class="waves-effect waves-light btn" onclick="oper_pass(${item.id!'0'});">通过</a>&nbsp;
-										<a class="waves-effect waves-light btn" onclick="oper_reject(${item.id!'0'});">退回</a>-->
+										<span style="color:green;">审核通过,已发布</span>
 									</td>
+									<%}else if(item.approve_status==9){%>
+									<td>
+										<span style="color:red">审核不通过,已退回</span>
+									</td>
+									<%}else if(item.approve_status==1){%>
+									<td>
+										未审核
+									</td>
+									<%}%>
 								</tr>
 								<% } %>
-								<!--<%//
-                                var sales=tempSale.sales(1,5);%>
+								<!--<%
+                               var sales=tempSale.sales(1,5);%>
                                 <% for(item in sales.list){ %>
                                     <tr>
                                          <td>${itemLP.index}</td>
@@ -176,9 +171,9 @@ function oper_reject(id) {
                                     <td><img src="${BASE_PATH}${item.image_url}" style="height:80px;width:80px;"></td>
                                     <%}%>
                                 <td>${item.album_name}</td>
+                                         <td>${item.publish_user}</td>
                                          <td>${item.update_time}</td>
-                                            <a class="waves-effect waves-light btn" onclick="oper_pass(${item.id!'0'});">通过</a>&nbsp;
-										<a class="waves-effect waves-light btn" onclick="oper_reject(${item.id!'0'});">退回</a>
+                                             <a class="waves-effect waves-light btn" onclick="oper_delete(${item.id!'0'});">删除</a>
                                          </td>
                                      </tr>
                                 <% } %>-->

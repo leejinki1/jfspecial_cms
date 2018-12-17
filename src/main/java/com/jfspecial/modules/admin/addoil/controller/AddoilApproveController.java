@@ -18,17 +18,40 @@ import java.util.List;
 @ControllerBind(controllerKey = "/admin/addoil_approve")
 public class AddoilApproveController extends BaseController {
 
-	private static final String path = "/pages/admin/addoil/addoil_approve";
+	private static final String path = "/pages/admin/addoil/addoil_";
 
 	//显示待审核
 	public void index() {
-		String sql = "select t.id,t.name,t.publish_user, t.update_time ,t.content,t.image_url,t.image_net_url,t.album_name " +
-				"from tb_addoil t " +
-				"where  status = 1 and approve_status = 1  and is_draft=0 order by sort,id desc";
-		//待审核:审核状态=1初始+++
-		List<TbAddOil> lists = TbAddOil.dao.find(sql);
-		setAttr("lists", lists);
-		render(path+".html");
+		//判断user是否登录,
+		SysUser user = (SysUser) getSessionUser();
+		//Integer id = getParaToInt();
+		if (user == null) {
+			redirect(CommonController.firstPage);
+			return;
+		}
+
+		//判断权限
+		String sql;
+		Integer usertype = user.getInt("usertype");
+		if(usertype>0&&usertype<=9){
+			//1-9是管理员
+			sql = "select t.id,t.name,t.publish_user, t.update_time ,t.content,t.image_url,t.image_net_url,t.album_name " +
+					"from tb_addoil t " +
+					"where  status = 1 and approve_status = 1  and is_draft=0 order by sort,id desc";
+
+
+			//待审核:审核状态=1初始+++
+			List<TbAddOil> lists = TbAddOil.dao.find(sql);
+			setAttr("lists", lists);
+			render(path+"approve.html");
+			return;
+		}
+
+			//其他的是没有权限的,提示一下
+			//理论上不会进入,在页面控制一下
+
+			setAttr("msg", "没有该权限,请联系系统管理员");
+			redirect("/admin");
 	}
 
 	/**
@@ -123,7 +146,7 @@ public class AddoilApproveController extends BaseController {
 		//保存数据
 		setAttr("model", model);
 		//返回审核页面
-		render(path+"_detail.html");
+		render(path+"approve_detail.html");
 
 	}
 }

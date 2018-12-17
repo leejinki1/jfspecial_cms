@@ -64,16 +64,19 @@ var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.us
 				<li>
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i> 特卖区<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li class="usertype10">
+						<li class="usertype1 usertype10">
 							<a href="sale_publish">特卖区发布信息</a>
 						</li>
-						<li class="usertype10">
+						<li class="usertype1 usertype10">
 							<a href="sale_drafts">特卖区发布信息【草稿箱】</a>
 						</li>
-						<li class="usertype10">
+						<li class="usertype1">
 							<a href="sale_approve">待审核信息</a>
 						</li>
-						<li class="usertype10">
+						<li class="usertype1 usertype10">
+							<a href="sale_person">我的特卖发布</a>
+						</li>
+						<li class="usertype1">
 							<a href="sale_history">历史发布</a>
 						</li>
 					</ul>
@@ -82,16 +85,19 @@ var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.us
 				<li>
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 新闻中心<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li class="usertype10">
+						<li class="usertype1 usertype10">
 							<a href="newscenter_publish">新闻发布信息</a>
 						</li>
-						<li class="usertype10">
+						<li class="usertype1 usertype10">
 							<a href="newscenter_drafts">待发布新闻【草稿箱】</a>
 						</li>
-						<li class="usertype10">
+						<li class="usertype1">
 							<a href="newscenter_approve">待审核新闻</a>
 						</li>
-						<li class="usertype10">
+						<li class="usertype1 usertype10">
+							<a href="newscenter_person">我的新闻</a>
+						</li>
+						<li class="usertype1">
 							<a href="newscenter_history">历史新闻</a>
 						</li>
 					</ul>
@@ -100,16 +106,19 @@ var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.us
 				<li>
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-qrcode"></i> 技术需求<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li class="usertype11">
-							<a href="trd_publish">技术需求信息</a>
+						<li class="usertype1 usertype11">
+							<a href="trd_publish">技术需求信息发布</a>
 						</li>
-						<li class="usertype11">
+						<li class="usertype1 usertype11">
 							<a href="trd_drafts">待发布需求【草稿箱】</a>
 						</li>
-						<li class="usertype11">
+						<li class="usertype1">
 							<a href="trd_approve">待审核需求</a>
 						</li>
-						<li class="usertype11">
+						<li class="usertype1 usertype11">
+							<a href="trd_person">我的技术需求</a>
+						</li>
+						<li class="usertype1">
 							<a href="trd_history">历史需求</a>
 						</li>
 					</ul>
@@ -118,16 +127,19 @@ var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.us
 				<li>
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-table"></i> 创客活动<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li class="usertype10">
-							<a href="maker_publish">创客活动信息</a>
+						<li class="usertype1 usertype10 usertype21">
+							<a href="maker_publish">创客活动信息发布</a>
 						</li>
-						<li class="usertype10">
+						<li class="usertype1 usertype10 usertype21">
 							<a href="maker_drafts">待发布活动【草稿箱】</a>
 						</li>
-						<li class="usertype10">
+						<li class="usertype1">
 							<a href="maker_approve">待审核活动</a>
 						</li>
-						<li class="usertype10">
+						<li class="usertype1 usertype10">
+							<a href="maker_person">我的创客活动</a>
+						</li>
+						<li class="usertype1">
 							<a href="maker_history">历史活动</a>
 						</li>
 					</ul>
@@ -137,7 +149,7 @@ var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.us
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 政策法规<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li class="usertype1">
-							<a href="policy_publish">政策法规信息</a>
+							<a href="policy_publish">政策法规信息发布</a>
 						</li>
 						<li class="usertype1">
 							<a href="policy_drafts">待发布信息【草稿箱】</a>
@@ -148,6 +160,9 @@ var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.us
 						<li class="usertype1">
 							<a href="policy_history">历史信息</a>
 						</li>
+						<li class="usertype1">
+							<a href="policy_person">我发布的政策法规</a>
+						</li>
 					</ul>
 				</li>
 
@@ -155,7 +170,7 @@ var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.us
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 科普板块<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li class="usertype1">
-							<a href="spp_publish">科普信息</a>
+							<a href="spp_publish">科普信息发布</a>
 						</li>
 						<li class="usertype1">
 							<a href="spp_drafts">待发布信息【草稿箱】</a>
@@ -166,6 +181,9 @@ var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.us
 						<li class="usertype1">
 							<a href="spp_history">历史信息</a>
 						</li>
+						<li class="usertype1">
+							<a href="spp_person">我发布的科普信息</a>
+						</li>
 					</ul>
 				</li>
 
@@ -173,7 +191,7 @@ var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.us
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 项目申报<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li class="usertype1">
-							<a href="projectapp_publish">项目信息</a>
+							<a href="projectapp_publish">项目信息发布</a>
 						</li>
 						<li class="usertype1">
 							<a href="projectapp_drafts">待发布项目【草稿箱】</a>
@@ -184,20 +202,26 @@ var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.us
 						<li class="usertype1">
 							<a href="projectapp_history">历史项目</a>
 						</li>
+						<li class="usertype1">
+							<a href="projectapp_person">我发布的项目信息</a>
+						</li>
 					</ul>
 				</li>
 
 				<li>
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 帮扶企业<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li class="usertype1">
-							<a href="addoil_publish">帮扶信息</a>
+						<li class="usertype1 usertype20">
+							<a href="addoil_publish">帮扶信息发布</a>
 						</li>
-						<li class="usertype1">
+						<li class="usertype1 usertype20">
 							<a href="addoil_drafts">待发布信息【草稿箱】</a>
 						</li>
 						<li class="usertype1">
 							<a href="addoil_approve">待审核帮扶申请</a>
+						</li>
+						<li class="usertype1 usertype20">
+							<a href="addoil_person">我的帮扶申请</a>
 						</li>
 						<li class="usertype1">
 							<a href="addoil_history">历史帮扶申请</a>
@@ -208,7 +232,7 @@ var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.us
 				<li>
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 安全管理<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li class="usertype10">
+						<li class="usertype1 usertype10">
 							<a href="security_user">用户管理</a>
 						</li>
 						<!--<li class="usertype1">
@@ -443,31 +467,35 @@ var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.us
 			var usertype=$('#usertype').val();
 			//alert(usertype);
 			if(usertype=='1'||usertype=='9'){
-				<!--管理员/经理-->
+				<!--管理员/经理/全部权限usertype1-->
 			}else if(usertype>=11&&usertype<=13){
-				<!--农户11-13-->
+				<!--农户11-13/有需求发布权限/usertype11-->
 				$('.usertype1').css("display","none");
 				$('.usertype1').parent().parent().css("display","none");
-				$('.usertype10').css("display","none");
-				$('.usertype10').parent().parent().css("display","none");
 				$('.usertype11').css("display","display");
 				$('.usertype11').parent().parent().css("display","display");
 			}else if(usertype=='10'){
-				<!--特派员-->
+				<!--特派员10/有新闻,特卖,创客发布权限/usertype10-->
 				$('.usertype1').css("display","none");
 				$('.usertype1').parent().parent().css("display","none");
-				$('.usertype11').css("display","none");
-				$('.usertype11').parent().parent().css("display","none");
 				$('.usertype10').css("display","display");
 				$('.usertype10').parent().parent().css("display","display");
-			}else{
-				<!--其他人员-->
+			}else if(usertype=='20'){
+				<!--帮扶经理20/有帮扶发布权限/usertype20-->
 				$('.usertype1').css("display","none");
-				$('.usertype10').css("display","none");
-				$('.usertype11').css("display","none");
 				$('.usertype1').parent().parent().css("display","none");
-				$('.usertype10').parent().parent().css("display","none");
-				$('.usertype11').parent().parent().css("display","none");
+				$('.usertype20').css("display","display");
+				$('.usertype20').parent().parent().css("display","display");
+			}else if(usertype=='21'){
+				<!--创客经理21/有创客发布权限/usertype21-->
+				$('.usertype1').css("display","none");
+				$('.usertype1').parent().parent().css("display","none");
+				$('.usertype21').css("display","display");
+				$('.usertype21').parent().parent().css("display","display");
+			}else{
+				<!--其他人员/没有后台权限-->
+				$('.usertype1').css("display","none");
+				$('.usertype1').parent().parent().css("display","none");
 				alert("您没有后台操作权限!");
 			}
 		}

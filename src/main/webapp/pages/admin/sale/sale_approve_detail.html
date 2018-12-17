@@ -144,7 +144,7 @@ function oper_reject(id) {
 										<label for="model.image_url" class="col-sm-2 control-label">主题图片</label>
 										<div class="col-sm-10">
 											<label>本地上传图片:</label>
-											<img id="imageUrl" src="${BASE_PATH}${model.image_url}" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
+											<img id="imageUrl" src="${BASE_PATH}${model.image_url}" onerror="onerror=null;src='${BASE_PATH }static/images/common/no_image.jpg'"  style="height:80px;width:80px;" ><!--数据库中原来的图片-->
 
 											<label>网络图片:</label>
 											<img id="imageUrl1" src="${model.image_net_url}" style="height:80px;width:80px;" ><!--数据库中原来的图片-->

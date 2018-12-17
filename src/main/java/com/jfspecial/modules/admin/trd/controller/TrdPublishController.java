@@ -121,6 +121,7 @@ public class TrdPublishController extends BaseProjectController {
 			//	renderJson(json.toJSONString());
 			//	return;
 			//	}
+			model.set("approve_status", ArticleConstant.APPROVE_STATUS_UPDATE); // 待审核==update;
 			model.setPublishTime(DateUtils.getNow("yyyy-MM-dd")); // 发布时间//没有时分秒
 			model.setPublishUser(user.getUserName()); // 发布人
 			model.setUpdateId(getSessionUser().getUserid());//修改人
@@ -153,7 +154,7 @@ public class TrdPublishController extends BaseProjectController {
 
 		json.put("status", 1);// 成功
 		//renderJson(json.toJSONString());
-		redirect("/admin/trd_approve");//12.4修改   后期:跳转到待审核页面
+		redirect("/admin/trd_person");//12.4修改   后期:跳转到待审核页面
 	}
 
 
@@ -216,6 +217,7 @@ public class TrdPublishController extends BaseProjectController {
 			//	renderJson(json.toJSONString());
 			//	return;
 			//	}
+			model.set("approve_status", ArticleConstant.APPROVE_STATUS_INIT); // 草稿即为未发布
 			model.setUpdateId(getSessionUser().getUserid());//修改人
 			model.setUpdateTime(getNow());//修改时间
 			model.setIsDraft("1");//0=发布;1=草稿箱
@@ -234,6 +236,7 @@ public class TrdPublishController extends BaseProjectController {
 			//model.set("approve_status", ArticleConstant.APPROVE_STATUS_UPDATE); // 需要审核改为update
 			//model.setPublishTime(DateUtils.getNow("yyyy-MM-dd")); // 发布时间
 			//model.setPublishUser(user.getUserName()); // 发布人
+			model.set("approve_status", ArticleConstant.APPROVE_STATUS_INIT); // 草稿即为未发布
 			model.setCreateId(getSessionUser().getUserid());//创建人
 			model.setCreateTime(getNow());//创建时间
 			model.setUpdateId(getSessionUser().getUserid());//修改人
