@@ -40,7 +40,7 @@ public class PolicyalbumController extends BaseProjectController {
 		//获取参数
 		Integer pid = getParaToInt();
 		TbPolicyAlbum model = new TbPolicyAlbum();
-		String sql1="select max(id) id from tb_addoil_album t";
+		String sql1="select max(id) id from tb_policy_album t";
 		model=TbPolicyAlbum.dao.findFirst(sql1);
 		Integer id=model.getId()+1;//获取原来数据库中最大id,加1,即是新的id
 		String name=getPara("albumname");

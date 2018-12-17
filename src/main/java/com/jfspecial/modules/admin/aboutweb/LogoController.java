@@ -53,22 +53,30 @@ public class LogoController extends BaseProjectController {
 		boolean isFile=false;//图片保存成功
 		if(uploadImage!=null){
 			//如果获取的文件不为空
-			//System.out.println("zr-----bannerC"+uploadImage1.getFileName());//上传文件的名称
+			System.out.println("zr-----bannerC"+uploadImage.getFileName());//上传文件的名称
 			String oldPathRealpath = getSession().getServletContext().getRealPath(oldPath);//获取目标路径在项目中的位置
+			System.out.println("zr___logoC__oldpath"+oldPathRealpath);
 			File oldFile=new File(oldPathRealpath);//找到目标图片的文件
 			//删除原来的文件
+			System.out.println("zr____logoC__oldFile"+oldFile);
 			if(oldFile.exists()){
+				System.out.println("有旧图片");
 				oldFile.delete();
 			}
 			isFile=uploadImage.getFile().renameTo(new File(oldPathRealpath));
+
+
+			System.out.println("zr-----logoC___isFile"+isFile);
+			if(isFile){
+				model.setLogo(oldPath);//设置文件名
+				//model.setBanner1("\\upload\\banner\\"+uploadImage1.getFileName());//设置文件名
+			}else{
+				model.setLogo("/upload/"+uploadImage.getFileName());
+				//上传没有成功
+			}
 		}
 
-		if(isFile){
-			model.setLogo(oldPath);//设置文件名
-			//model.setBanner1("\\upload\\banner\\"+uploadImage1.getFileName());//设置文件名
-		}else{
-			//上传没有成功
-		}
+
 
 
 		//修改参数

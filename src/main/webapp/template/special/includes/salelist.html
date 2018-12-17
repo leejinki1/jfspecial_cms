@@ -13,7 +13,7 @@
 						 <% if (!isEmpty(item.image_net_url)) { %>
 							 <img alt="${item.name}" src="${item.image_net_url}" onerror="onerror=null;src='${BASE_PATH }static/images/common/no_image.jpg'"  data-holder-rendered="true"/>
 						 <% } else { %>
-							 <img alt="${item.name}" src="${flyfox.getImage(item)}" onerror="onerror=null;src='${BASE_PATH }static/images/common/no_image.jpg'"  data-holder-rendered="true"/>
+							 <img alt="${item.name}" src="${BASE_PATH }${item.image_url}" onerror="onerror=null;src='${BASE_PATH }static/images/common/no_image.jpg'"  data-holder-rendered="true"/>
 						 <% } %>
 					 </div>
 						<div>

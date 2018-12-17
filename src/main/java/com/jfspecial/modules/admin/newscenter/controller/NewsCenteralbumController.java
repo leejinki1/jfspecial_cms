@@ -40,7 +40,7 @@ public class NewsCenteralbumController extends BaseProjectController {
 		//获取参数
 		Integer pid = getParaToInt();
 		TbNewsCenterAlbum model = new TbNewsCenterAlbum();
-		String sql1="select max(id) id from tb_addoil_album t";
+		String sql1="select max(id) id from tb_newscenter_album t";
 		model=TbNewsCenterAlbum.dao.findFirst(sql1);
 		Integer id=model.getId()+1;//获取原来数据库中最大id,加1,即是新的id
 		String name=getPara("albumname");
