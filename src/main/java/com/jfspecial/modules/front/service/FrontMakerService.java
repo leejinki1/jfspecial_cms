@@ -58,6 +58,7 @@ public class FrontMakerService extends BaseService {
 		Page<TbMaker> makers = TbMaker.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_maker " //
 						+ " where status = 1 " // 查询状态为显示
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc");
 		return makers;
 	}
@@ -66,6 +67,7 @@ public class FrontMakerService extends BaseService {
 		Page<TbMaker> makers = TbMaker.dao.paginateCache(cacheName, key, paginator, "select (@i:=@i+1)pm,t.* " //
 				, " from tb_maker t,(select @i:=0)s  " //
 						+ " where status = 1 " // 查询状态为显示
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc");
 		return makers;
 	}
@@ -82,6 +84,7 @@ public class FrontMakerService extends BaseService {
 				, " from tb_maker " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc", albumId);
 		return makers;
 	}
@@ -91,6 +94,7 @@ public class FrontMakerService extends BaseService {
 				, " from tb_maker t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc", albumId);
 		return makers;
 	}
@@ -103,6 +107,7 @@ public class FrontMakerService extends BaseService {
 				, " from tb_maker t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc", albumId);
 		return makers;
 	}
@@ -130,6 +135,7 @@ public class FrontMakerService extends BaseService {
 		Page<TbMaker> articles = TbMaker.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_maker  where status = 1 " //
 						+ " and is_recommend = 1 " // 推荐文章
+						+ " and approve_status = 10 "//审核通过
 						+ " order by sort,create_time desc");
 		return articles;
 	}

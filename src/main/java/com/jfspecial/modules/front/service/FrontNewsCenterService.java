@@ -61,6 +61,7 @@ public class FrontNewsCenterService extends BaseService {
 		Page<TbNewsCenter> newscenters = TbNewsCenter.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_newscenter " //
 						+ " where status = 1 " // 查询状态为显示
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc");
 		return newscenters;
 	}
@@ -69,6 +70,7 @@ public class FrontNewsCenterService extends BaseService {
 		Page<TbNewsCenter> newscenters = TbNewsCenter.dao.paginateCache(cacheName, key, paginator, "select (@i:=@i+1)pm,t.*  " //
 				, " from tb_newscenter t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc");
 		return newscenters;
 	}
@@ -85,6 +87,7 @@ public class FrontNewsCenterService extends BaseService {
 				, " from tb_newscenter t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc", albumId);
 		return newscenters;
 	}
@@ -94,6 +97,7 @@ public class FrontNewsCenterService extends BaseService {
 				, " from tb_newscenter t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc", albumId);
 		return newscenters;
 	}
@@ -121,6 +125,7 @@ public class FrontNewsCenterService extends BaseService {
 		Page<TbNewsCenter> articles = TbNewsCenter.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_newscenter  where status = 1 " //
 						+ " and is_recommend = 1 " // 推荐文章
+						+ " and approve_status = 10 "//审核通过
 						+ " order by sort,create_time desc");
 		return articles;
 	}

@@ -58,6 +58,7 @@ public class FrontSppService extends BaseService {
 		Page<TbSpp> spps = TbSpp.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_spp " //
 						+ " where status = 1 " // 查询状态为显示
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc");
 		return spps;
 	}
@@ -66,6 +67,7 @@ public class FrontSppService extends BaseService {
 		Page<TbSpp> spps = TbSpp.dao.paginateCache(cacheName, key, paginator, "select  (@i:=@i+1)pm,t.*  " //
 				, " from tb_spp  t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc");
 		return spps;
 	}
@@ -83,6 +85,7 @@ public class FrontSppService extends BaseService {
 				, " from tb_spp " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc", albumId);
 		return spps;
 	}
@@ -92,6 +95,7 @@ public class FrontSppService extends BaseService {
 				, " from tb_spp  t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc", albumId);
 		return spps;
 	}
@@ -119,6 +123,7 @@ public class FrontSppService extends BaseService {
 		Page<TbSpp> articles = TbSpp.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_spp  where status = 1 " //
 						+ " and is_recommend = 1 " // 推荐文章
+						+ " and approve_status = 10 "//审核通过
 						+ " order by sort,create_time desc");
 		return articles;
 	}

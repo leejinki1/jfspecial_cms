@@ -58,6 +58,7 @@ public class FrontPolicyService extends BaseService {
 		Page<TbPolicy> policys = TbPolicy.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_policy " //
 						+ " where status = 1 " // 查询状态为显示
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc");
 		return policys;
 	}
@@ -67,6 +68,7 @@ public class FrontPolicyService extends BaseService {
 		Page<TbPolicy> policys = TbPolicy.dao.paginateCache(cacheName, key, paginator, "select (@i:=@i+1)pm,t.*  " //
 				, " from tb_policy t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc");
 		return policys;
 	}
@@ -84,6 +86,7 @@ public class FrontPolicyService extends BaseService {
 				, " from tb_policy " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc", albumId);
 		return policys;
 	}
@@ -94,6 +97,7 @@ public class FrontPolicyService extends BaseService {
 				, " from tb_policy t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc", albumId);
 		return policys;
 	}
@@ -122,6 +126,7 @@ public class FrontPolicyService extends BaseService {
 		Page<TbPolicy> articles = TbPolicy.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_policy  where status = 1 " //
 						+ " and is_recommend = 1 " // 推荐文章
+						+ " and approve_status = 10 "//审核通过
 						+ " order by sort,create_time desc");
 		return articles;
 	}

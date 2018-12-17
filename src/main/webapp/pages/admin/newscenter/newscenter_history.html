@@ -7,7 +7,21 @@ function oper_delete(id) {
 		location.href="newscenter_history/delArticle/"+id;
 		return false;
 	}
+<!--管理员修改-->
+function oper_edit(id) {
+      location.href="newscenter_history/editArticle/"+id;
 
+	}
+	<!--管理员修改前台显示-->
+function oper_show(id) {
+      location.href="newscenter_history/showArticle/"+id;
+
+	}
+	<!--管理员修改前台不显示-->
+function oper_hide(id) {
+      location.href="newscenter_history/hideArticle/"+id;
+
+	}
 </script>
 <head>
     <meta charset="utf-8" />
@@ -65,7 +79,7 @@ function oper_delete(id) {
                         <a href="../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 首页</a>
                     </li>
                     <li>
-                        <a href="newscenter_history" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 历史需求</a>
+                        <a href="newscenter_history" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 历史新闻</a>
                     </li>
 
                 </ul>
@@ -78,12 +92,12 @@ function oper_delete(id) {
 <div id="page-wrapper">
 	<div class="header"> 
         <h1 class="page-header">
-                	历史需求
+			历史新闻
         </h1>
 	    <ol class="breadcrumb">
 			<li><a href="../admin">首页</a></li>
 			<li><a href="newscenter_history">新闻中心 </a></li>
-			<li><a href="newscenter_history">历史需求 </a></li>
+			<li><a href="newscenter_history">历史新闻 </a></li>
 			<!--<li class="active">Data</li>-->
 		</ol> 							
 	</div>
@@ -99,16 +113,16 @@ function oper_delete(id) {
 					<div class="card-content">
 						<table class="table table-striped highlight centered responsive-table">
 							<thead>
-								<tr>
-									<th>序号</th>
-								 	<th>标题</th>
-									<th>内容</th>
-									<th>主题图片</th>
-									<th>分类</th>
-								 	<th>发布人</th> 
-									<th>时间</th>
-									<th>操作</th>
-								</tr>
+							<tr>
+								<th>序号</th>
+								<th>标题</th>
+								<th>主题图片</th>
+								<th>分类</th>
+								<th>发布人</th>
+								<th>时间</th>
+								<th>在网站的显示状态</th>
+								<th>操作</th>
+							</tr>
 							</thead>
 							<tbody>
 							<!--全部显示//待分页弄好,再删除-->
@@ -116,7 +130,6 @@ function oper_delete(id) {
 							<tr>
 								<td>${itemLP.index}</td>
 								<td>${item.name}</td>
-								<td>详见详情页</td>
 								<%if(""==item.image_url){%>
 								<td><img src="${item.image_net_url}" style="height:80px;width:80px;"></td>
 								<%}else {%>
@@ -125,7 +138,15 @@ function oper_delete(id) {
 								<td>${item.album_name}</td>
 								<td>${item.publish_user}</td>
 								<td>${item.update_time}</td>
+								<%if(item.status==1){%>
+								<td>显示</br><a class="waves-effect waves-light btn" onclick="oper_hide(${item.id!'0'});">切换为不显示</a></td>
+								<%}else {%>
+								<td>不显示</br><a class="waves-effect waves-light btn" onclick="oper_show(${item.id!'0'});">切换为显示</a></td>
+								<%}%>
 								<td>
+
+
+									<a class="waves-effect waves-light btn" onclick="oper_edit(${item.id!'0'});">修改</a>
 									<a class="waves-effect waves-light btn" onclick="oper_delete(${item.id!'0'});">删除</a>
 								</td>
 							</tr>

@@ -60,6 +60,7 @@ public class FrontTrdService extends BaseService {
 		Page<TbTrd> trds = TbTrd.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_trd " //
 						+ " where status = 1 " // 查询状态为显示
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc");
 		return trds;
 	}
@@ -68,6 +69,7 @@ public class FrontTrdService extends BaseService {
 		Page<TbTrd> trds = TbTrd.dao.paginateCache(cacheName, key, paginator, "select  (@i:=@i+1)pm,t.* " //
 				, " from tb_trd  t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc");
 		return trds;
 	}
@@ -84,6 +86,7 @@ public class FrontTrdService extends BaseService {
 				, " from tb_trd " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc", albumId);
 		return trds;
 	}
@@ -93,6 +96,7 @@ public class FrontTrdService extends BaseService {
 				, " from tb_trd  t,(select @i:=0)s " //
 						+ " where status = 1 " // 查询状态为显示
 						+ " and album_id =  ? " //
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc", albumId);
 		return trds;
 	}
@@ -121,6 +125,7 @@ public class FrontTrdService extends BaseService {
 		Page<TbTrd> articles = TbTrd.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_trd where status = 1 " //
 						+ " and is_recommend = 1 " // 推荐文章
+						+ " and approve_status = 10 "//审核通过
 						+ " order by update_time desc");
 		return articles;
 	}
