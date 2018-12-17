@@ -71,7 +71,7 @@ public class AdminController extends BaseProjectController {
 				+ " and usertype in ( " + JFSpecialUtils.USER_TYPE_ADMIN +" ,9,10,11,12,13)",
 				username);
 		if (user == null || user.getInt("userid") <= 0) {
-			setAttr("msg", "认证失败，请您重新输入。");
+			setAttr("msg", "账号错误，请您重新输入。");
 			render(loginPage);
 			return;
 		}
@@ -80,6 +80,7 @@ public class AdminController extends BaseProjectController {
 		try {
 			String userPassword = user.get("password");
 			String decryptPassword = JFSpecialUtils.passwordDecrypt(userPassword);
+
 			md5Password = new Md5Utils().getMD5(decryptPassword).toLowerCase();
 		} catch (Exception e) {
 			log.error("认证异常", e);
@@ -89,12 +90,12 @@ public class AdminController extends BaseProjectController {
 		}
 		
 		if (!md5Password.equals(encryptPassword)) {
-			setAttr("msg", "认证错误，请您重新输入。");
+			setAttr("msg", "密码错误，请您重新输入。");
 			render(loginPage);
 			return;
 		}
 
-		System.out.println("zr12.13-------------"+user.getInt("usertype"));
+
 		if (!(user.getInt("usertype") == 1 ||
 				user.getInt("usertype") == 9|| user.getInt("usertype") == 10||
 				user.getInt("usertype") == 11|| user.getInt("usertype") == 12||
