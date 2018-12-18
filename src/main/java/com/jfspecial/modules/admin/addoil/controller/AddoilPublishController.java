@@ -131,13 +131,13 @@ public class AddoilPublishController extends BaseProjectController {
 		    model.setUpdateId(getSessionUser().getUserid());//修改人
 		    model.setUpdateTime(getNow());//修改时间
 		    model.setIsDraft("0");//0=发布;1=草稿箱  可能是从草稿箱过来的
+		   	model.setStatus(0);//显示=1,不显示=0;默认不在前台显示,等待管理员去修改;
 			model.update();
 		} else { // 新增
 			model.remove("id");
 			if (model.getAlbumId() == null || model.getAlbumId() <= 0) {
 				//model.getAlbumId(JFSpecialUtils.MENU_BLOG); // 博文目录
 			}
-			model.setStatus(1); // 显示
 			//model.setType(11);
 			model.setIsComment(1); // 能评论
 			model.setIsRecommend(2);// 不推荐
@@ -150,6 +150,7 @@ public class AddoilPublishController extends BaseProjectController {
 		    model.setUpdateId(getSessionUser().getUserid());//修改人
 			model.setUpdateTime(getNow());//修改时间
 		    model.setIsDraft("0");//0==发布;1==草稿箱
+		   model.setStatus(0);//显示=1,不显示=0;默认不在前台显示,等待管理员去修改;
 		   //上传图片(未完成)
 		   //System.out.println("输出1此"+model);
 
@@ -224,13 +225,14 @@ public class AddoilPublishController extends BaseProjectController {
 			model.setUpdateId(getSessionUser().getUserid());//修改人
 			model.setUpdateTime(getNow());//修改时间
 			model.setIsDraft("1");//0=发布;1=草稿箱
+			model.setStatus(0);//显示=1,不显示=0;默认不在前台显示,等待管理员去修改;
 			model.update();
 		} else { // 新增
 			model.remove("id");
 			if (model.getAlbumId() == null || model.getAlbumId() <= 0) {
 				//model.getAlbumId(JFSpecialUtils.MENU_BLOG); // 博文目录
 			}
-			model.setStatus(1); // 显示
+			model.setStatus(0);//显示=1,不显示=0;默认不在前台显示,等待管理员去修改;
 			//model.setType(11);
 			model.setIsComment(1); // 能评论
 			model.setIsRecommend(2);// 不推荐

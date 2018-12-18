@@ -39,17 +39,20 @@ public class TrdHistoryController extends BaseController {
 			sql = "select t.id,t.name,t.publish_user, t.update_time,t.content,t.image_url,t.image_net_url,t.album_name,t.status  " +
 					"from tb_trd t " +
 					"where approve_status = 10 order by t.sort,t.id desc";
-		}else{
-			//非管理员,只能看到自己的权限//理论上进不来
-			sql = "select t.id,t.name,t.publish_user, t.update_time,t.content,t.image_url,t.image_net_url,t.album_name,t.status  " +
-					"from tb_trd t " +
-					"where approve_status = 10 and create_id=" +user.getUserid()+
-					" order by t.sort,t.id desc";
+			List<TbTrd> lists = TbTrd.dao.find(sql);
+			setAttr("lists", lists);
+			render(path+"history.html");//先反回主页,待补充
+			return;
 		}
 
-		List<TbTrd> lists = TbTrd.dao.find(sql);
-		setAttr("lists", lists);
-		render(path+"history.html");//先反回主页,待补充
+
+			//理论上不会进入,在页面控制一下
+
+			setAttr("msg", "没有该权限,请联系系统管理员");
+			redirect("/admin");
+
+
+
 	}
 
 	/**
@@ -67,17 +70,14 @@ public class TrdHistoryController extends BaseController {
 		}
 
 		TbTrd model = TbTrd.dao.findById(getParaToInt());
-		setAttr("model", model);
-		// 不是自己的文章也想修改,总有不怀好意的人哦
-		if (model.getCreateId() != user.getUserid()) {
+		Integer usertype=user.getInt("usertype");
+		if(!(usertype>0&&usertype<10)){
+			//没有权限
 			System.err.println("####userid(" + user.getUserid() + ")非法编辑内容");
 			redirect(CommonController.firstPage);
 			return;
 		}
 
-		// 删除评论~
-		//new CommentService().deleteComment(id);
-		// 删除文章
 		TbTrd.dao.deleteById(id);
 		redirect("/admin/trd_history");
 	}

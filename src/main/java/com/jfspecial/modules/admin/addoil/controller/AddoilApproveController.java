@@ -8,7 +8,6 @@ import com.jfspecial.modules.admin.addoil.model.TbAddOil;
 import com.jfspecial.modules.admin.article.ArticleConstant;
 import com.jfspecial.modules.front.interceptor.FrontInterceptor;
 import com.jfspecial.system.user.SysUser;
-
 import java.util.List;
 
 /**
@@ -37,7 +36,7 @@ public class AddoilApproveController extends BaseController {
 			//1-9是管理员
 			sql = "select t.id,t.name,t.publish_user, t.update_time ,t.content,t.image_url,t.image_net_url,t.album_name " +
 					"from tb_addoil t " +
-					"where  status = 1 and approve_status = 1  and is_draft=0 order by sort,id desc";
+					"where approve_status = 1  and is_draft=0 order by sort,id desc";
 
 
 			//待审核:审核状态=1初始+++
@@ -69,22 +68,22 @@ public class AddoilApproveController extends BaseController {
 		}
 
 		TbAddOil model = TbAddOil.dao.findById(getParaToInt());
-		setAttr("model", model);
-		// 不是自己的文章也想修改,总有不怀好意的人哦
-		if (model.getCreateId() != user.getUserid()) {
-			System.err.println("####userid(" + user.getUserid() + ")非法编辑内容");
-			redirect(CommonController.firstPage);
-			return;
+		Integer usertype = user.getInt("usertype");
+		if(usertype>0&&usertype<10){
+			//1-9是系统管理员
+			//修改审核状态
+			model.set("approve_status", ArticleConstant.APPROVE_STATUS_PASS); // 需要审核改为update;通过审核为pass
+
+			//保存到数据库
+			model.update();
+			//返回审核页面
+			redirect("/admin/addoil_approve");
 		}
 
-		//修改审核状态
-        model.set("approve_status", ArticleConstant.APPROVE_STATUS_PASS); // 需要审核改为update;通过审核为pass
-
-		//保存到数据库
-        model.update();
-
+		// 没有权限的一般也进不来
+		System.err.println("####userid(" + user.getUserid() + ")非法编辑内容");
         //返回审核页面
-        redirect("/admin/addoil_approve");
+        redirect("/admin.html");
 	}
 
     /**
@@ -102,22 +101,25 @@ public class AddoilApproveController extends BaseController {
         }
 
         TbAddOil model = TbAddOil.dao.findById(pid);
-        setAttr("model", model);
-        // 不是自己的文章也想修改,总有不怀好意的人哦
-        if (model.getCreateId() != user.getUserid()) {
-            System.err.println("####userid(" + user.getUserid() + ")非法编辑内容");
-            redirect(CommonController.firstPage);
-            return;
-        }
+        Integer usertype = user.getInt("usertype");
+		if(usertype>0&&usertype<10) {
+			//修改审核状态
+			model.set("approve_status", ArticleConstant.APPROVE_STATUS_REJECT); // 需要审核改为update;通过审核为pass;不通过为reject
 
-        //修改审核状态
-        model.set("approve_status", ArticleConstant.APPROVE_STATUS_REJECT); // 需要审核改为update;通过审核为pass;不通过为reject
+			//保存到数据库
+			model.update();
 
-        //保存到数据库
-        model.update();
+			//返回审核页面
+			redirect("/admin/addoil_approve");
+			return;
+		}
+		//其他的是没有权限的,提示一下
+		//理论上不会进入,在页面控制一下
 
-        //返回审核页面
-        redirect("/admin/addoil_approve");
+		setAttr("msg", "没有该权限,请联系系统管理员");
+		redirect("/admin");
+
+
     }
 
 	/**
@@ -129,24 +131,26 @@ public class AddoilApproveController extends BaseController {
 	public void  approveArticle() {
 		SysUser user = (SysUser) getSessionUser();
 		Integer pid = getParaToInt();
-
+		Integer usertype = user.getInt("usertype");
 		if (user == null || pid == null) {
 			redirect(CommonController.firstPage);
 			return;
 		}
 
 		TbAddOil model = TbAddOil.dao.findById(pid);
+		//判断权限
+		if((usertype>0&&usertype<10)||(model.getCreateId()== user.getUserid())){
+			//是管理员//或是作者自己
+			//保存数据
+			setAttr("model", model);
+			//返回审核页面
+			render(path+"approve_detail.html");
+		}else{
 		// 不是自己的文章也想修改,总有不怀好意的人哦
-		if (model.getCreateId() != user.getUserid()) {
 			System.err.println("####userid(" + user.getUserid() + ")非法编辑内容");
 			redirect(CommonController.firstPage);
 			return;
 		}
-
-		//保存数据
-		setAttr("model", model);
-		//返回审核页面
-		render(path+"approve_detail.html");
 
 	}
 }

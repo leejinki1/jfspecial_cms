@@ -27,26 +27,26 @@
 function oper_save(id) {
 		var albumId = $('[name="model.album_id"]').val();
 		if(albumId=='-1') {
-			Alert('请选择栏目');
+			alert('请选择栏目');
 			return false;
 		}
 
 		var title = $('[name="model.name"]').val();
 		if(title=='') {
-			Alert('请输入文章题目');
+			alert('请输入文章题目');
 			return false;
 		}
 		if(title.length > 80 ) {
-			Alert('文章（'+title.length+'字）题目过长，请输入小于80个字');
+			alert('文章（'+title.length+'字）题目过长，请输入小于80个字');
 			return false;
 		}
 
 		if(!ue.hasContents()){
-			Alert('请输入文章内容');
+			alert('请输入文章内容');
 			return false;
 		}
 		if(ue.getContentTxt().length > 1200){
-			Alert('文章（'+ue.getContentTxt().length+'字）文字过长，请输入小于1200个字');
+			alert('文章（'+ue.getContentTxt().length+'字）文字过长，请输入小于1200个字');
 			return false;
 		}
 

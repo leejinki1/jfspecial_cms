@@ -20,6 +20,11 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="${BASE_PATH}static/backend/assets/js/Lightweight-Chart/cssCharts.css">
 </head>
+<%
+// 传递变量
+var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.userid;
+var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.usertype;
+%>
 <body>
     <div id="wrapper">
 		<!--admin/header-->
@@ -90,14 +95,18 @@
 						</div>
 
 						<div class="card-content">
+							<%if(sessionUserType>0&&sessionUserType<10){%>
 							<div class="input-field col s10">
 								<input value="" id="first_name2" type="text" class="validate">
 								<label class="active" for="first_name2">请输入搜索内容</label>
 							</div>
 							<div class="input-field col s2">
+
 								<a class="waves-effect waves-light btn" >搜索</a>
 								<a class="waves-effect waves-light btn" onclick="oper_toSaveUser(0);">新增用户</a>
+
 							</div>
+							<%}%>
 							<table class="table table-striped highlight centered responsive-table">
 								<thead>
 								<tr>
@@ -109,7 +118,7 @@
 								</tr>
 								</thead>
 								<tbody>
-								<% for(item in page.list){ %>
+								<% for(item in list){ %>
 								<tr>
 									<td>${itemLP.index }</td><!--序号-->
 									<td>${item.username}</td><!--账号-->

@@ -4,6 +4,11 @@
 <!-- jquery -->
 <% include("/template/includes/jquery.html"){} %>
 <% include("/template/includes/ueditor.html"){} %>
+<%
+// 传递变量
+var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.userid;
+var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.usertype;
+%>
 <script type="text/javascript">
 	var ue;
 		$(document).ready(function(){
@@ -34,7 +39,12 @@ function oper_reject(id) {
 
 		<!--返回审核列表-->
 	function oper_reback(){
-		location.href="../../addoil_approve";
+		location.href="../../sale_approve";
+	}
+
+			<!--返回发布列表-->
+	function oper_rebackPublish(){
+		location.href="../../sale_person";
 	}
 </script>
 <head>
@@ -72,13 +82,13 @@ function oper_reject(id) {
 		</div>
 		<!--右侧菜单列表-->
 		<ul class="nav navbar-top-links navbar-right">
-			<li><a class="dropdown-button waves-effect waves-dark" href="../" ><i class="fa fa-user fa-fw"></i> <b>网站首页</b> </a></li>
+			<li><a class="dropdown-button waves-effect waves-dark" href="../../../" ><i class="fa fa-user fa-fw"></i> <b>网站首页</b> </a></li>
 			<li><a class="dropdown-button waves-effect waves-dark" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>${session.session_user.realname}</b> <i class="material-icons right">arrow_drop_down</i></a></li>
 		</ul>
 	</nav>
 	<!-- 下拉列表/通过id定位上级 -->
 	<ul id="dropdown1" class="dropdown-content">
-		<li><a href="logout"><i class="fa fa-sign-out fa-fw"></i> 退出</a></li>
+		<li><a href="../../logout"><i class="fa fa-sign-out fa-fw"></i> 退出</a></li>
 	</ul>
 	<!--//admin/header-->
 
@@ -87,10 +97,10 @@ function oper_reject(id) {
 		<div class="sidebar-collapse">
 			<ul class="nav" id="main-menu">
 				<li>
-					<a href="../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 首页</a>
+					<a href="../../../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 首页</a>
 				</li>
 				<li>
-					<a href="sale_publish" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 特卖区发布信息</a>
+					<a href="../../sale_publish" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 特卖区发布信息</a>
 				</li>
 			</ul>
 		</div>
@@ -103,8 +113,8 @@ function oper_reject(id) {
 				特卖区发布信息
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="../admin">首页</a></li>
-				<li><a href="sale_publish">特卖区 </a></li>
+				<li><a href="../../../admin">首页</a></li>
+				<li><a href="../../sale_publish">特卖区 </a></li>
 			</ol>
 		</div>
 		<!--666-->
@@ -194,11 +204,14 @@ function oper_reject(id) {
 								    <div class="col-sm-offset-3 col-sm-9">
 									    <div class="checkbox">
 									        <label>
-									        <a class="waves-effect waves-light btn" onclick="oper_pass(${model.id!'0'});">通过</a>&nbsp;
-												<a class="waves-effect waves-light btn" onclick="oper_reject(${model.id!'0'});">退回</a>
+									        <%if(sessionUserType>0&&sessionUserType<10){%>
+									         	<a class="waves-effect waves-light btn" onclick="oper_pass(${model.id!'0'});">通过</a>&nbsp;
+												<a class="waves-effect waves-light btn" onclick="oper_reject(${model.id!'0'});">退回</a>&nbsp;
 												<a class="waves-effect waves-light btn" onclick="oper_reback(${model.id!'0'});">返回审核列表</a>
-												<!-- <a class="waves-effect waves-light btn-large">保存草稿箱</a>
-									          <a class="waves-effect waves-light btn-large">确认发布</a>-->
+												<a class="waves-effect waves-light btn" onclick="oper_rebackPublish(${model.id!'0'});">返回发布列表</a>
+												<%}else{%>
+												<a class="waves-effect waves-light btn" onclick="oper_rebackPublish(${model.id!'0'});">返回发布列表</a>
+												<%}%>
 									          </label>
 										</div>
 									</div>

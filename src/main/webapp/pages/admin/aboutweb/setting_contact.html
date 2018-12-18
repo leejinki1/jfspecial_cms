@@ -123,7 +123,7 @@
 								<div class="input-field col s10">
 									<input name="model.wechat"  id="first_name2" type="file" onchange="imageUrlChange()">
 									<input type="hidden" id="oldImage" value="${model.wechat}">
-									<img id="imageUrl" src="${BASE_PATH}${model.wechat}" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
+									<img id="imageUrl" src="${BASE_PATH}${model.wechat}" style="height:80px;width:80px;" onerror="onerror=null;src='${BASE_PATH }static/images/common/no_image.jpg'"><!--数据库中原来的图片-->
 							      	<!--<input name="model.wechat" value="${model.wechat}" id="first_name2" type="text" class="validate">-->
 							      <!--<label class="active" for="first_name2"></label>-->
 							    </div>

@@ -1,0 +1,1 @@
+2018.12.18 修改webinfo的introduction属性类型为longtext

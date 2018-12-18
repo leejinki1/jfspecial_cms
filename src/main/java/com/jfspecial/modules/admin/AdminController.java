@@ -68,7 +68,7 @@ public class AdminController extends BaseProjectController {
 		String encryptPassword = password;
 
 		SysUser user = SysUser.dao.findFirstByWhere(" where username = ? " //
-				+ " and usertype in ( " + JFSpecialUtils.USER_TYPE_ADMIN +" ,9,10,11,12,13)",
+				+ " and usertype in ( " + JFSpecialUtils.USER_TYPE_ADMIN +" ,9,10,11,12,13,20,21)",
 				username);
 		if (user == null || user.getInt("userid") <= 0) {
 			setAttr("msg", "账号错误，请您重新输入。");
@@ -99,7 +99,8 @@ public class AdminController extends BaseProjectController {
 		if (!(user.getInt("usertype") == 1 ||
 				user.getInt("usertype") == 9|| user.getInt("usertype") == 10||
 				user.getInt("usertype") == 11|| user.getInt("usertype") == 12||
-				user.getInt("usertype") == 13)) {
+				user.getInt("usertype") == 13|| user.getInt("usertype") == 20||
+				user.getInt("usertype") == 21)) {
 			setAttr("msg", "您没有登录权限，请您重新输入。");
 			render(loginPage);
 			return;

@@ -4,6 +4,12 @@
 <!-- jquery -->
 <% include("/template/includes/jquery.html"){} %>
 <% include("/template/includes/ueditor.html"){} %>
+<%
+// 传递变量
+var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.userid;
+var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.usertype;
+
+%>
 <script type="text/javascript">
 	var ue;
 	$(document).ready(function(){
@@ -36,7 +42,19 @@ function oper_reject(id) {
 
 		<!--返回审核列表-->
 	function oper_reback(){
-		location.href="../../addoil_approve";
+		var path=$('#returnPath').val();
+		//alert($('#returnPath').val());
+
+		location.href="../../"+path;
+	}
+			<!--返回发布列表-->
+	function oper_rebackPublish(){
+		location.href="../../maker_person";
+	}
+
+	<!--返回发布列表-->
+	function oper_rebackHistory(){
+		location.href="../../maker_history";
 	}
 </script>
 <head>
@@ -74,13 +92,13 @@ function oper_reject(id) {
 			</div>
 			<!--右侧菜单列表-->
 			<ul class="nav navbar-top-links navbar-right">
-				<li><a class="dropdown-button waves-effect waves-dark" href="../" ><i class="fa fa-user fa-fw"></i> <b>网站首页</b> </a></li>
+				<li><a class="dropdown-button waves-effect waves-dark" href="../../../" ><i class="fa fa-user fa-fw"></i> <b>网站首页</b> </a></li>
 				<li><a class="dropdown-button waves-effect waves-dark" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>${session.session_user.realname}</b> <i class="material-icons right">arrow_drop_down</i></a></li>
 			</ul>
 		</nav>
 		<!-- 下拉列表/通过id定位上级 -->
 		<ul id="dropdown1" class="dropdown-content">
-			<li><a href="logout"><i class="fa fa-sign-out fa-fw"></i> 退出</a></li>
+			<li><a href="../../logout"><i class="fa fa-sign-out fa-fw"></i> 退出</a></li>
 		</ul>
 		<!--//admin/header-->
 		<!--左侧菜单  -->
@@ -90,10 +108,10 @@ function oper_reject(id) {
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a href="../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 首页</a>
+                        <a href="../../../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 首页</a>
                     </li>
                     <li>
-                        <a href="maker_publish" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 创客活动信息</a>
+                        <a href="../../maker_publish" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 创客活动信息</a>
                     </li>
 
                 </ul>
@@ -109,9 +127,9 @@ function oper_reject(id) {
                 	创客活动信息
         </h1>
 	    <ol class="breadcrumb">
-			<li><a href="../admin">首页</a></li>
-			<li><a href="maker_publish">创客活动 </a></li>
-			<li><a href="maker_publish">创客活动信息 </a></li>
+			<li><a href="../../../admin">首页</a></li>
+			<li><a href="../../maker_publish">创客活动 </a></li>
+			<li><a href="../../maker_publish">创客活动信息 </a></li>
 			<!--<li class="active">Data</li>-->
 		</ol> 							
 	</div>
@@ -155,7 +173,7 @@ function oper_reject(id) {
 										<label for="model.image_url" class="col-sm-2 control-label">主题图片</label>
 										<div class="col-sm-10">
 											<label>本地上传图片:</label>
-											<img id="imageUrl" src="${BASE_PATH}${model.image_url}" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
+											<img id="imageUrl" src="${BASE_PATH}${model.image_url}" style="height:80px;width:80px;" onerror="onerror=null;src='${BASE_PATH }static/images/common/no_image.jpg'"><!--数据库中原来的图片-->
 
 											<label>网络图片:</label>
 											<img id="imageUrl1" src="${model.image_net_url}" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
@@ -170,8 +188,39 @@ function oper_reject(id) {
 										<script id="editor" type="text/plain" name="model.content"
 												style="width: 98%; height: 320px;">${model.content!''}</script>
 									</div>
-							  </div>
+							 	</div>
 
+								<div  class="form-group">
+									<label for="remark" class="col-sm-2 control-label">报名列表</label>
+									<div class="col-sm-10">
+										<table class="table table-striped highlight centered responsive-table">
+											<thead>
+												<tr>
+													<th>序号</th>
+													<th>姓名</th>
+													<th>联系方式</th>
+													<th>性别</th>
+													<th>邮箱</th>
+													<th>备注</th>
+													<th>报名时间</th>
+												</tr>
+											</thead>
+											<tbody>
+												<% for(item in lists){ %>
+												<tr>
+													<td>${itemLP.index}</td>
+													<td>${item.realname}</td>
+													<td>${item.contact}</td>
+													<td>${item.sex}</td>
+													<td>${item.email}</td>
+													<td>${item.remark}</td>
+													<td>${item.create_time}</td>
+												</tr>
+												<%}%>
+											</tbody>
+										</table>
+									</div>
+								</div>
 							    <!--
 								<div class="input-field col s12">
 								  <textarea id="textarea1" class="materialize-textarea"></textarea>
@@ -182,11 +231,14 @@ function oper_reject(id) {
 										<div class="col-sm-offset-3 col-sm-9">
 											<div class="checkbox">
 												<label>
-												 <a class="waves-effect waves-light btn" onclick="oper_pass(${model.id!'0'});">通过</a>&nbsp;
-												<a class="waves-effect waves-light btn" onclick="oper_reject(${model.id!'0'});">退回</a>
-												<a class="waves-effect waves-light btn" onclick="oper_reback(${model.id!'0'});">返回审核列表</a>
-												<!-- <a class="waves-effect waves-light btn-large">保存草稿箱</a>
-									          <a class="waves-effect waves-light btn-large">确认发布</a>-->
+												 <%if(sessionUserType>0&&sessionUserType<10){%>
+														<a class="waves-effect waves-light btn" onclick="oper_pass(${model.id!'0'});">通过</a>&nbsp;
+														<a class="waves-effect waves-light btn" onclick="oper_reject(${model.id!'0'});">退回</a>&nbsp;
+
+														<input type="hidden" id="returnPath" value="${returnPath!''}">
+												<%}%>
+													<a class="waves-effect waves-light btn" onclick="oper_reback();">返回</a>
+
 												</label>
 											</div>
 										</div>

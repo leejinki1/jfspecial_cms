@@ -1,6 +1,60 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!--网站设置/关于我们-->
+<% include("/template/includes/jquery.html"){} %>
+<% include("/template/includes/ueditor.html"){} %>
+<script type="text/javascript">
+	var ue;
+	$(document).ready(function(){
+		ue = UE.getEditor('editor',{
+			initialFrameHeight:350  //初始化编辑器高度,默认320
+			,compressSide:1
+			,imageScaleEnabled:false // 图片不允许拖拽
+       		, toolbars: [[
+                       'source', '|',
+                      'bold', 'italic', 'underline', 'strikethrough', 'insertorderedlist', 'insertunorderedlist', 'paragraph', '|',
+                      'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|',
+                      'link', 'unlink', '|',
+                      'simpleupload', 'insertimage', 'emotion' , 'insertcode'
+                  ]]
+		});
+
+	});
+
+	function save(id){
+			alert(id);
+            if(!ue.hasContents()){
+			alert('请输入文章内容');
+			return false;
+		}
+		if(ue.getContentTxt().length > 1200){
+			alert('文章（'+ue.getContentTxt().length+'字）文字过长，请输入小于1200个字');
+			return false;
+		}
+
+            <!--ajax新增-->
+            jQuery.ajax({
+            type:'POST',
+                    url:'setting_aboutus/save/'+id,
+                    data:$("form").serialize(),
+                    async:false,
+                    success:function(data){
+                    //alert(data.status);
+                    if(data.status==1){
+                            alert('发布成功');
+                            location.href="setting_aboutus";
+                        } else {
+                            alert('发布失败：'+data.msg);
+                        }
+                    },
+                    error:function(html){
+                        var flag = (typeof console != 'undefined');
+                        if(flag) console.log("服务器忙，提交数据失败，代码:" +html.status+ "，请联系管理员！");
+                        alert("服务器忙，提交数据失败，请联系管理员！");
+                    }
+                });
+        }
+</script>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -89,8 +143,8 @@
 						<form class="col s12 form-horizontal" action="" method="post" >
 							<div class="row">
 								<div class="input-field col s12">
-						          <textarea id="textarea1" class="materialize-textarea" name="model.introduction"  required >${model.introduction}</textarea>
-						          <!--<label for="textarea1"></label>-->
+									<script id="editor" type="text/plain" name="model.introduction"
+											style="width: 98%; height: 320px;">${model.introduction!''}</script>
 						        </div>
 							    
 								<div class="form-group">
@@ -118,12 +172,10 @@
 	</div><!-- /. PAGE WRAPPER  -->
 
 </div>
-     <!-- /. WRAPPER  -->
-    <!-- JS Scripts-->
-    <!-- jQuery Js -->
+
     <script src="${BASE_PATH}static/backend/assets/js/jquery-1.12.4.js"></script>
 	
-	<!-- Bootstrap Js -->
+
     <script src="${BASE_PATH}static/backend/assets/js/bootstrap.min.js"></script>
 	
 	<script src="${BASE_PATH}static/backend/assets/materialize/js/materialize.min.js"></script>
@@ -143,39 +195,8 @@
     <!-- Custom Js -->
    <script src="${BASE_PATH}static/backend/assets/js/custom-scripts.js"></script>
     <script type="text/javascript">
-        function save(id){
 
-            //获取内容
-            var textarea=$("#textarea1").text();
 
-            //判断内容是否为空
-            if(textarea==''){
-                alert("介绍内容不能为空,请输入后再提交!");
-                return false;
-            }
-
-            <!--ajax新增-->
-            jQuery.ajax({
-            type:'POST',
-                    url:'setting_aboutus/save/'+id,
-                    data:$("form").serialize(),
-                    async:false,
-                    success:function(data){
-                    //alert(data.status);
-                    if(data.status==1){
-                            alert('发布成功');
-                            location.href="setting_aboutus";
-                        } else {
-                            alert('发布失败：'+data.msg);
-                        }
-                    },
-                    error:function(html){
-                        var flag = (typeof console != 'undefined');
-                        if(flag) console.log("服务器忙，提交数据失败，代码:" +html.status+ "，请联系管理员！");
-                        alert("服务器忙，提交数据失败，请联系管理员！");
-                    }
-                });
-        }
     </script>
 
 </body>

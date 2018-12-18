@@ -33,7 +33,7 @@ public class NewsCenterPersonController extends BaseProjectController {
 
 		String sql = "select t.id,t.name,t.publish_user, t.update_time ,t.content,t.image_url,t.image_net_url,t.album_name,t.approve_status  " +
 				"from tb_newscenter t " +
-				"where  status = 1 and approve_status>0 and create_id="+user.getUserid();
+				"where approve_status>0 and create_id="+user.getUserid();
 
 		//待审核:审核状态=1初始+++
 		List<TbNewsCenter> lists = TbNewsCenter.dao.find(sql);

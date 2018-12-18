@@ -97,7 +97,7 @@
 											<input type="file" name="model.banner1"onchange="imageUrlChange1(this)" >
 										  </div>
 										  <div class="file-path-wrapper">
-											  <img id="banner1" src="${BASE_PATH}${model.banner1}" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
+											  <img id="banner1" src="${BASE_PATH}${model.banner1}" style="height:80px;width:80px;" onerror="onerror=null;src='${BASE_PATH }static/images/common/no_image.jpg'"><!--数据库中原来的图片-->
 											<input class="file-path validate" type="text" value="请上传轮播图1">
 										  </div>
 									</div>
@@ -141,7 +141,7 @@
 											<input type="file" name="model.banner2"  onchange="imageUrlChange2(this)">
 										</div>
 										<div class="file-path-wrapper">
-											<img id="banner2" src="${BASE_PATH}${model.banner2}" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
+											<img id="banner2" src="${BASE_PATH}${model.banner2}" style="height:80px;width:80px;" onerror="onerror=null;src='${BASE_PATH }static/images/common/no_image.jpg'"><!--数据库中原来的图片-->
 											<input class="file-path validate" type="text" value="请上传轮播图2">
 										</div>
 									</div>
@@ -185,7 +185,7 @@
 											<input type="file" name="model.banner3"onchange="imageUrlChange3(this)" >
 										</div>
 										<div class="file-path-wrapper">
-											<img id="banner3" src="${BASE_PATH}${model.banner3}" style="height:80px;width:80px;" ><!--数据库中原来的图片-->
+											<img id="banner3" src="${BASE_PATH}${model.banner3}" style="height:80px;width:80px;" onerror="onerror=null;src='${BASE_PATH }static/images/common/no_image.jpg'"><!--数据库中原来的图片-->
 											<input class="file-path validate" type="text" value="请上传轮播图3">
 										</div>
 									</div>

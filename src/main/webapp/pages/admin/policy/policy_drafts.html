@@ -124,7 +124,7 @@ function oper_edit(id) {
                                     <td>${item.name}</td>
                                     <td>详见详情页</td>
                                     <%if(""==item.image_url){%>
-                                    <td><img src="${item.image_net_url}" style="height:80px;width:80px;"></td>
+                                    <td><img src="${item.image_net_url}" style="height:80px;width:80px;"onerror="onerror=null;src='${BASE_PATH }static/images/common/no_image.jpg'"></td>
                                     <%}else {%>
                                     <td><img src="${BASE_PATH}${item.image_url}" style="height:80px;width:80px;"></td>
                                     <%}%>

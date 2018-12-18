@@ -6,7 +6,10 @@ function oper_delete(id) {
 		location.href="trd_history/delArticle/"+id;
 		return false;
 	}
-
+function oper_detail(id) {
+		location.href="trd_approve/approveArticle/"+id;
+		return false;
+	}
 </script>
 <head>
     <meta charset="utf-8" />
@@ -117,11 +120,11 @@ function oper_delete(id) {
 								<tr>
 									<td>${itemLP.index}</td>
 									<td>${item.name}</td>
-									<td>见详情页</td>
+									<td><a class="waves-effect waves-light btn" onclick="oper_detail(${item.id!'0'});">点击查看详情页</a></td>
 									<%if(""==item.image_url){%>
 									<td><img src="${item.image_net_url}" style="height:80px;width:80px;"></td>
 									<%}else {%>
-									<td><img src="${BASE_PATH}${item.image_url}" style="height:80px;width:80px;"></td>
+									<td><img src="${BASE_PATH}${item.image_url}" style="height:80px;width:80px;"onerror="onerror=null;src='${BASE_PATH }static/images/common/no_image.jpg'"></td>
 									<%}%>
 									<td>${item.album_name}</td>
 									<td>${item.publish_user}</td>

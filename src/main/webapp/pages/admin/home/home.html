@@ -158,10 +158,10 @@ var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.us
 							<a href="policy_approve">待审核信息</a>
 						</li>
 						<li class="usertype1">
-							<a href="policy_history">历史信息</a>
+							<a href="policy_person">我发布的政策法规</a>
 						</li>
 						<li class="usertype1">
-							<a href="policy_person">我发布的政策法规</a>
+							<a href="policy_history">历史信息</a>
 						</li>
 					</ul>
 				</li>
@@ -179,10 +179,10 @@ var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.us
 							<a href="spp_approve">待审核信息</a>
 						</li>
 						<li class="usertype1">
-							<a href="spp_history">历史信息</a>
+							<a href="spp_person">我发布的科普信息</a>
 						</li>
 						<li class="usertype1">
-							<a href="spp_person">我发布的科普信息</a>
+							<a href="spp_history">历史信息</a>
 						</li>
 					</ul>
 				</li>
@@ -200,10 +200,10 @@ var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.us
 							<a href="projectapp_approve">待审核项目</a>
 						</li>
 						<li class="usertype1">
-							<a href="projectapp_history">历史项目</a>
+							<a href="projectapp_person">我发布的项目信息</a>
 						</li>
 						<li class="usertype1">
-							<a href="projectapp_person">我发布的项目信息</a>
+							<a href="projectapp_history">历史项目</a>
 						</li>
 					</ul>
 				</li>
@@ -232,7 +232,7 @@ var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.us
 				<li>
 					<a href="#" class="waves-effect waves-dark"><i class="fa fa-edit"></i> 安全管理<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li class="usertype1 usertype10">
+						<li class="usertype1 usertype10 usertype11 usertype20 usertype21">
 							<a href="security_user">用户管理</a>
 						</li>
 						<!--<li class="usertype1">
@@ -263,7 +263,7 @@ var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.us
 			</ul>
 
 		</div>
-		<input id="usertype" type="hidden" value="${nowUser.usertype}">
+		<input id="usertype" type="hidden" value="${sessionUserType}">
 	</nav>
 	<!-- /. NAV SIDE  -->
 

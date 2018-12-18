@@ -7,7 +7,10 @@ function oper_delete(id) {
 		location.href="maker_history/delArticle/"+id;
 		return false;
 	}
-
+function oper_detail(id) {
+		location.href="maker_approve/approveArticle/"+id;
+		return false;
+	}
 </script>
 <head>
     <meta charset="utf-8" />
@@ -65,7 +68,7 @@ function oper_delete(id) {
                         <a href="../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 首页</a>
                     </li>
                     <li>
-                        <a href="maker_history" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i>我的创客发布</a>
+                        <a href="maker_person" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i>我的创客发布</a>
                     </li>
 
                 </ul>
@@ -82,8 +85,8 @@ function oper_delete(id) {
         </h1>
 	    <ol class="breadcrumb">
 			<li><a href="../admin">首页</a></li>
-			<li><a href="maker_history">创客活动 </a></li>
-			<li><a href="maker_history">我的创客发布 </a></li>
+			<li><a href="maker_person">创客活动 </a></li>
+			<li><a href="maker_person">我的创客发布 </a></li>
 			<!--<li class="active">Data</li>-->
 		</ol> 							
 	</div>
@@ -116,11 +119,11 @@ function oper_delete(id) {
 								<tr>
 									<td>${itemLP.index}</td>
 									<td>${item.name}</td>
-									<td>详见详情页</td>
+									<td><a class="waves-effect waves-light btn" onclick="oper_detail(${item.id!'0'});">点击查看详情页</a></td>
 									<%if(""==item.image_url){%>
 									<td><img src="${item.image_net_url}" style="height:80px;width:80px;"></td>
 									<%}else {%>
-									<td><img src="${BASE_PATH}${item.image_url}" style="height:80px;width:80px;"></td>
+									<td><img src="${BASE_PATH}${item.image_url}" style="height:80px;width:80px;"onerror="onerror=null;src='${BASE_PATH }static/images/common/no_image.jpg'"></td>
 									<%}%>
 									<td>${item.album_name}</td>
 									<td>${item.publish_user}</td>

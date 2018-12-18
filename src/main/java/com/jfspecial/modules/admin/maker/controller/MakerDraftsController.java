@@ -37,8 +37,18 @@ public class MakerDraftsController extends BaseProjectController {
 
 	//显示保存的草稿
 	public void index() {
-		String sql = "select t.id,t.name,t.publish_user, t.update_time ,t.content,t.image_url,t.image_net_url,t.album_name  " +
-				"from tb_maker t where  status = 1 and is_draft = 1 order by sort,id desc";
+		//判断user是否登录,
+		SysUser user = (SysUser) getSessionUser();
+		//Integer id = getParaToInt();
+		if (user == null) {
+			redirect(CommonController.firstPage);
+			return;
+		}
+		//判断权限//只能显示自己创建的草稿
+		String sql = "select t.id,t.name,t.publish_user, t.update_time ,t.content,t.image_url,t.image_net_url,t.album_name   " +
+				"from tb_maker t where is_draft = 1 and create_id=" +user.getUserid()+
+				" order by sort,id desc";
+
 		List<TbMaker> lists = TbMaker.dao.find(sql);
 		setAttr("lists", lists);
 		render(path+"drafts.html");

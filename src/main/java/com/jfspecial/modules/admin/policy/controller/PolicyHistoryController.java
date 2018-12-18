@@ -1,29 +1,13 @@
 package com.jfspecial.modules.admin.policy.controller;
 
 import com.jfinal.aop.Before;
-import com.jfinal.kit.PathKit;
-import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.Page;
-import com.jfinal.upload.UploadFile;
 import com.jfspecial.component.base.BaseProjectController;
-import com.jfspecial.component.util.ImageModel;
-import com.jfspecial.component.util.ImageUtils;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
-import com.jfspecial.jfinal.component.db.SQLUtils;
 import com.jfspecial.modules.CommonController;
-import com.jfspecial.modules.admin.newscenter.model.TbNewsCenter;
-import com.jfspecial.modules.admin.newscenter.model.TbNewsCenterTags;
-import com.jfspecial.modules.admin.newscenter.service.NewsCenterAlbumService;
 import com.jfspecial.modules.admin.policy.model.TbPolicy;
 import com.jfspecial.modules.admin.policy.model.TbPolicyAlbum;
-import com.jfspecial.modules.admin.site.TbSite;
-import com.jfspecial.modules.admin.trd.model.TbTrd;
 import com.jfspecial.modules.front.interceptor.FrontInterceptor;
-import com.jfspecial.system.file.util.FileUploadUtils;
 import com.jfspecial.system.user.SysUser;
-import com.jfspecial.util.StrUtils;
-
-import java.io.File;
 import java.util.List;
 
 /**
@@ -53,17 +37,17 @@ public class PolicyHistoryController extends BaseProjectController {
 			sql = "select t.id,t.name,t.publish_user, t.update_time,t.content,t.image_url,t.image_net_url,t.album_name,t.status  " +
 					"from tb_policy t " +
 					"where approve_status = 10 order by t.sort,t.id desc";
-		}else{
-			//非管理员,只能看到自己的权限//理论上进不来
-			sql = "select t.id,t.name,t.publish_user, t.update_time,t.content,t.image_url,t.image_net_url,t.album_name,t.status  " +
-					"from tb_policy t " +
-					"where approve_status = 10 and create_id=" +user.getUserid()+
-					" order by t.sort,t.id desc";
+			List<TbPolicy> lists = TbPolicy.dao.find(sql);
+			setAttr("lists", lists);
+			render(path+"history.html");//先反回主页,待补充
+			return;
 		}
 
-		List<TbPolicy> lists = TbPolicy.dao.find(sql);
-		setAttr("lists", lists);
-		render(path+"history.html");//先反回主页,待补充
+
+		//理论上不会进入,在页面控制一下
+
+		setAttr("msg", "没有该权限,请联系系统管理员");
+		redirect("/admin");
 	}
 
 	/**
@@ -81,17 +65,13 @@ public class PolicyHistoryController extends BaseProjectController {
 		}
 
 		TbPolicy model = TbPolicy.dao.findById(getParaToInt());
-		setAttr("model", model);
-		// 不是自己的文章也想修改,总有不怀好意的人哦
-		if (model.getCreateId() != user.getUserid()) {
+		Integer usertype=user.getInt("usertype");
+		if(!(usertype>0&&usertype<10)){
+			//没有权限
 			System.err.println("####userid(" + user.getUserid() + ")非法编辑内容");
 			redirect(CommonController.firstPage);
 			return;
 		}
-
-		// 删除评论~
-		//new CommentService().deleteComment(id);
-		// 删除文章
 		TbPolicy.dao.deleteById(id);
 		redirect("/admin/policy_history");
 	}

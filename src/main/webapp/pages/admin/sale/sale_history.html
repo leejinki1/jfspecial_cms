@@ -78,7 +78,7 @@ function oper_hide(id) {
 					<a href="../admin" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i> 首页</a>
 				</li>
 				<li>
-					<a href="publish" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 历史发布</a>
+					<a href="sale_history" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i> 历史发布</a>
 				</li>
 
 			</ul>
@@ -95,8 +95,8 @@ function oper_hide(id) {
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="../admin">首页</a></li>
-				<li><a href="publish">特卖区 </a></li>
-				<li><a href="publish">历史发布 </a></li>
+				<li><a href="sale_history">特卖区 </a></li>
+				<li><a href="sale_history">历史发布 </a></li>
 			</ol>
 		</div>
 		<!--666-->
@@ -131,7 +131,7 @@ function oper_hide(id) {
 									<%if(""==item.image_url){%>
 									<td><img src="${item.image_net_url}" style="height:80px;width:80px;"></td>
 									<%}else {%>
-									<td><img src="${BASE_PATH}${item.image_url}" style="height:80px;width:80px;"></td>
+									<td><img src="${BASE_PATH}${item.image_url}" style="height:80px;width:80px;"onerror="onerror=null;src='${BASE_PATH }static/images/common/no_image.jpg'"></td>
 									<%}%>
 									<td>${item.album_name}</td>
 									<td>${item.publish_user}</td>

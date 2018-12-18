@@ -22,6 +22,12 @@ function oper_hide(id) {
       location.href="maker_history/hideArticle/"+id;
 
 	}
+
+		<!--管理员查看详细信息-->
+function oper_detail(id) {
+      location.href="maker_approve/approveArticle/"+id;
+
+	}
 </script>
 <head>
     <meta charset="utf-8" />
@@ -133,7 +139,7 @@ function oper_hide(id) {
 								<%if(""==item.image_url){%>
 								<td><img src="${item.image_net_url}" style="height:80px;width:80px;"></td>
 								<%}else {%>
-								<td><img src="${BASE_PATH}${item.image_url}" style="height:80px;width:80px;"></td>
+								<td><img src="${BASE_PATH}${item.image_url}" style="height:80px;width:80px;"onerror="onerror=null;src='${BASE_PATH }static/images/common/no_image.jpg'"></td>
 								<%}%>
 								<td>${item.album_name}</td>
 								<td>${item.publish_user}</td>
@@ -145,7 +151,7 @@ function oper_hide(id) {
 								<%}%>
 								<td>
 
-
+									<a class="waves-effect waves-light btn" onclick="oper_detail(${item.id!'0'});">查看详情</a>
 									<a class="waves-effect waves-light btn" onclick="oper_edit(${item.id!'0'});">修改</a>
 									<a class="waves-effect waves-light btn" onclick="oper_delete(${item.id!'0'});">删除</a>
 								</td>

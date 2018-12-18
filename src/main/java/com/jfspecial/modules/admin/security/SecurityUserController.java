@@ -38,41 +38,32 @@ public class SecurityUserController extends BaseController {
 	 * 	显示全部用户(有权限限制)
 	 */
 	public void list() {
-		SysUser model = getModelByAttr(SysUser.class);
-
-		SQLUtils sql = new SQLUtils(" from sys_user t " //
-				+ " left join sys_department d on d.id = t.departid " //
-				+ " where 1 = 1 and userid != 1 ");
-
-		if (model.getAttrValues().length != 0) {
-			sql.whereLike("username", model.getStr("username"));
-			sql.whereLike("realname", model.getStr("realname"));
-			sql.whereEquals("usertype", model.getInt("usertype"));
-			sql.whereEquals("departid", model.getInt("departid"));
+		//判断user是否登录,
+		SysUser user = (SysUser) getSessionUser();
+		//Integer id = getParaToInt();
+		if (user == null) {
+			redirect(CommonController.firstPage);
+			return;
 		}
 
-		// 排序
-		String orderBy = getBaseForm().getOrderBy();
-		if (StrUtils.isEmpty(orderBy)) {
-			sql.append(" order by userid desc");
-		} else {
-			sql.append(" order by ").append(orderBy);
+		Integer usertype=user.getInt("usertype");
+		String sql;
+		if(usertype>0&&usertype<10){
+			//系统管理员
+			 sql="select userid,id,username,usertype,realname,rolename" +
+					" from sys_user " +
+					" where usertype>="+usertype+
+					" order by id ";
+		}else{
+			sql="select userid,id,username,usertype,realname,rolename" +
+					" from sys_user " +
+					" where userid="+user.getUserid() +
+					" order by id ";
 		}
 
-		Page<SysUser> page = SysUser.dao.paginate(getPaginator(), "select t.*,d.name as departname ", sql.toString()
-				.toString());
-		// 下拉框
-		setAttr("departSelect", new DepartmentSvc().selectDepart(model.getInt("departid")));
 
-		//查询全部//有权限限制(只能查出比自己权限小的)
-		Integer userType= getSessionUser().getInt("usertype");
-		String sql1 = "select * " +
-				"from sys_user t " +
-				" order by userid desc";
-		List<SysUser> list=SysUser.dao.find(sql1);
 
-		setAttr("page", page);
-		setAttr("attr", model);
+		List<SysUser> list=SysUser.dao.find(sql);
 		setAttr("list",list);
 		render(path + "list.html");
 	}
@@ -110,7 +101,7 @@ public class SecurityUserController extends BaseController {
 	}
 
 	/**
-	 * 跳转到新增页面
+	 * 跳转到新增/修改页面
 	 *
 	*/
 	public void toSaveUser(){
@@ -121,19 +112,12 @@ public class SecurityUserController extends BaseController {
 			return;
 		}
 
-		/*判断权限(userType  1或9  为管理员,可以新增)*/
+		//不用判断权限,有后台权限的都有这个权限.跳转到新增或修改页,如果路径有值.则是修改,如果路径没有值,则是新增
 		Integer userType =  user.getInt("usertype");
 		//System.out.println("12.7----安全/userC/toCreateUser----"+userType);
 		String msg;
-		if(!(userType==1||userType==9)){
-			msg="没有权限";
-			setAttr("msg",msg);
-			render(path+"list.html");
-			return;
 
-		}
-
-		String sql = "select * from sys_role t where  status = 1 order by sort,id desc";
+		String sql = "select * from sys_role t where  1 = 1 order by sort,id desc";
 		List<SysRole> albums = SysRole.dao.find(sql);
 		setAttr("albums", albums);
 
@@ -142,9 +126,9 @@ public class SecurityUserController extends BaseController {
 		SecurityUser model = SecurityUser.dao.findById(pid);//根据id查出model的值
 		if(model!=null){//解密
 			String password = model.getPassword();
-			System.out.println("12.12------password" +password);
+			//System.out.println("12.12------password" +password);
 			model.setPassword(JFSpecialUtils.passwordDecrypt(password));
-			System.out.println("12.12------解密后的password:"+JFSpecialUtils.passwordDecrypt(password));
+			//System.out.println("12.12------解密后的password:"+JFSpecialUtils.passwordDecrypt(password));
 		}
 
 
@@ -184,15 +168,16 @@ public class SecurityUserController extends BaseController {
 		/*提交*/
 		boolean is;
 		if (pid != null && pid > 0) {//修改
+			String roleid =model.getStr("roleid");
+			if(roleid!=null){
+				System.out.println("zr___securityuserC"+roleid);
+			}
 			is=model.update();
 		}else{//新增
 			String sql="select max(userid) userid from sys_user";
 			SysUser model1=SysUser.dao.findFirst(sql);
-			//System.out.println("12.10-----"+model1);
 			Integer id=model1.getUserid()+1;//获取原来数据库中最大id,加1,即是新的id
-			//System.out.println("12.10------"+id);
 			model.set("id",id);
-			//System.out.println("12.10----"+model);
 			is=model.save();
 		}
 

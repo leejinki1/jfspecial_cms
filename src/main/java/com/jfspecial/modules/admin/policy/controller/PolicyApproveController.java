@@ -1,29 +1,13 @@
 package com.jfspecial.modules.admin.policy.controller;
 
 import com.jfinal.aop.Before;
-import com.jfinal.kit.PathKit;
-import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.Page;
-import com.jfinal.upload.UploadFile;
 import com.jfspecial.component.base.BaseProjectController;
-import com.jfspecial.component.util.ImageModel;
-import com.jfspecial.component.util.ImageUtils;
 import com.jfspecial.jfinal.component.annotation.ControllerBind;
-import com.jfspecial.jfinal.component.db.SQLUtils;
 import com.jfspecial.modules.CommonController;
 import com.jfspecial.modules.admin.article.ArticleConstant;
-import com.jfspecial.modules.admin.maker.model.TbMaker;
-import com.jfspecial.modules.admin.newscenter.model.TbNewsCenter;
-import com.jfspecial.modules.admin.newscenter.model.TbNewsCenterTags;
-import com.jfspecial.modules.admin.newscenter.service.NewsCenterAlbumService;
 import com.jfspecial.modules.admin.policy.model.TbPolicy;
-import com.jfspecial.modules.admin.site.TbSite;
 import com.jfspecial.modules.front.interceptor.FrontInterceptor;
-import com.jfspecial.system.file.util.FileUploadUtils;
 import com.jfspecial.system.user.SysUser;
-import com.jfspecial.util.StrUtils;
-
-import java.io.File;
 import java.util.List;
 
 /**
@@ -53,7 +37,7 @@ public class PolicyApproveController extends BaseProjectController {
             //1-9是管理员
             sql = "select t.id,t.name,t.publish_user, t.update_time ,t.content,t.image_url,t.image_net_url,t.album_name " +
                     "from tb_policy t " +
-                    "where  status = 1 and approve_status = 1  and is_draft=0 order by sort,id desc";
+                    "where approve_status = 1  and is_draft=0 order by sort,id desc";
 
 
             //待审核:审核状态=1初始+++
@@ -85,22 +69,24 @@ public class PolicyApproveController extends BaseProjectController {
         }
 
         TbPolicy model = TbPolicy.dao.findById(getParaToInt());
-        setAttr("model", model);
-        // 不是自己的文章也想修改,总有不怀好意的人哦
-        if (model.getCreateId() != user.getUserid()) {
-            System.err.println("####userid(" + user.getUserid() + ")非法编辑内容");
-            redirect(CommonController.firstPage);
-            return;
+        Integer usertype = user.getInt("usertype");
+        if(usertype>0&&usertype<10){
+            //1-9是系统管理员
+            //修改审核状态
+            model.set("approve_status", ArticleConstant.APPROVE_STATUS_PASS); // 需要审核改为update;通过审核为pass
+
+            //保存到数据库
+            model.update();
+            //返回审核页面
+            //返回审核页面
+            redirect("/admin/policy_approve");
         }
 
-        //修改审核状态
-        model.set("approve_status", ArticleConstant.APPROVE_STATUS_PASS); // 需要审核改为update;通过审核为pass
-
-        //保存到数据库
-        model.update();
-
+        // 没有权限的一般也进不来
+        System.err.println("####userid(" + user.getUserid() + ")非法编辑内容");
         //返回审核页面
-        redirect("/admin/policy_approve");
+        redirect("/admin.html");
+
     }
 
     /**
@@ -118,22 +104,25 @@ public class PolicyApproveController extends BaseProjectController {
         }
 
         TbPolicy model = TbPolicy.dao.findById(getParaToInt());
-        setAttr("model", model);
-        // 不是自己的文章也想修改,总有不怀好意的人哦
-        if (model.getCreateId() != user.getUserid()) {
-            System.err.println("####userid(" + user.getUserid() + ")非法编辑内容");
-            redirect(CommonController.firstPage);
+        Integer usertype = user.getInt("usertype");
+        if(usertype>0&&usertype<10) {
+            //修改审核状态
+            model.set("approve_status", ArticleConstant.APPROVE_STATUS_REJECT); // 需要审核改为update;通过审核为pass;不通过为reject
+
+            //保存到数据库
+            model.update();
+
+            //返回审核页面
+            redirect("/admin/policy_approve");
             return;
         }
+        //其他的是没有权限的,提示一下
+        //理论上不会进入,在页面控制一下
 
-        //修改审核状态
-        model.set("approve_status", ArticleConstant.APPROVE_STATUS_REJECT); // 需要审核改为update;通过审核为pass;不通过为reject
+        setAttr("msg", "没有该权限,请联系系统管理员");
+        redirect("/admin");
 
-        //保存到数据库
-        model.update();
 
-        //返回审核页面
-        redirect("/admin/policy_approve");
     }
 
     /**
@@ -145,24 +134,26 @@ public class PolicyApproveController extends BaseProjectController {
     public void  approveArticle() {
         SysUser user = (SysUser) getSessionUser();
         Integer pid = getParaToInt();
-
+        Integer usertype = user.getInt("usertype");
         if (user == null || pid == null) {
             redirect(CommonController.firstPage);
             return;
         }
 
         TbPolicy model = TbPolicy.dao.findById(pid);
-        // 不是自己的文章也想修改,总有不怀好意的人哦
-        if (model.getCreateId() != user.getUserid()) {
+        //判断权限
+        if((usertype>0&&usertype<10)||(model.getCreateId()== user.getUserid())){
+            //是管理员//或是作者自己
+            //保存数据
+            setAttr("model", model);
+            //返回审核页面
+            render(path+"approve_detail.html");
+        }else{
+            // 不是自己的文章也想修改,总有不怀好意的人哦
             System.err.println("####userid(" + user.getUserid() + ")非法编辑内容");
             redirect(CommonController.firstPage);
             return;
         }
-
-        //保存数据
-        setAttr("model", model);
-        //返回审核页面
-        render(path+"approve_detail.html");
 
     }
 }

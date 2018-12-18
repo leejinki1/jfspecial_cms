@@ -20,6 +20,11 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="${BASE_PATH}static/backend/assets/js/Lightweight-Chart/cssCharts.css">
 </head>
+<%
+// 传递变量
+var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.userid;
+var sessionUserType = isEmpty(session.session_user) ? 0: session.session_user.usertype;
+%>
 <body>
     <div id="wrapper" onload="init()">
 		<!--admin/header-->
@@ -42,7 +47,7 @@
 		</nav>
 		<!-- 下拉列表/通过id定位上级 -->
 		<ul id="dropdown1" class="dropdown-content">
-			<li><a href="logout"><i class="fa fa-sign-out fa-fw"></i> 退出</a></li>
+			<li><a href="../../logout"><i class="fa fa-sign-out fa-fw"></i> 退出</a></li>
 		</ul>
 		<!--//admin/header-->
 
@@ -116,7 +121,7 @@
 											<label for="model.password" class="col-sm-2 control-label">密码</label>
 											<div class="col-sm-10">
 												<input name="model.password" class="form-control" type="password"
-													   value="${model.password!''}" placeholder="6-20位密码">
+													   value="${model.password!''}" placeholder="6-20位密码" autocomplete="off">
 											</div>
 										</div>
 
@@ -124,17 +129,23 @@
 										<div class="form-group">
 											<label for="model.usertype" class="col-sm-2 control-label">角色</label>
 											<div class="col-sm-10">
+												<%if(sessionUserType>0&&sessionUserType<10){%>
 												<select  class="form-control" name="model.usertype" id="select" onchange="rolechange()">
 													<option value="-1">--请选择栏目--</option>
 													<%
 													if(!isEmpty(albums)) {
 													for(item in albums){ %>
-													<option id="option${item.id}" value="${item.usertype}" ${item.usertype==model.usertype!0?'selected':''} >${item.name}</option>
+													<option id="option${item.id}" value="${item.usertype}" ${item.usertype==model.usertype!0?'selected':'selected'} >${item.name}</option>
 													<%
 													}
 													}
 													%>
 												</select>
+												<%}else{%>
+													<input name="model.rolename" class="form-control"
+													   value="${model.rolename!''}" placeholder="" readonly>
+												<%}%>
+												<input type="hidden" name="model.roleid" value="" ><!--提交分类名称-->
 											</div>
 										</div>
 									</div><!--表单填写内容完-->
@@ -313,13 +324,17 @@
 
 		<!--角色改变--><!--如果是10特派员,显示special中的内容,否则不显示-->
 		function rolechange(){
-			alert(1);
+			//alert(1);
 			var options=$('#select option:selected').val();
+			albumName=$('#select option:selected').text();
 			if(options=='10'){
 				$('#special').css("display","display");
 			}else{
 				$('#special').css("display","none");
 			}
+			$('[name="model.rolename"]').val(albumName);//隐藏域改名字
+			$('[name="model.roleid"]').val(options);
+
 		}
 
 		<!--保存-->
@@ -348,6 +363,8 @@
 				alert('请输入真实姓名');
 				return false;
 			}
+
+
 
 			//alert(1);
 			<!--提交-->

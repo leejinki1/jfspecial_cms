@@ -94,7 +94,7 @@
                                          <input id="logo" type="file" name="model.logo" class="imgInput" onchange="imageUrlChange(this)">
 							      </div>
 							      <div class="file-path-wrapper">
-                                      <img src="${BASE_PATH}${model.logo}" style="height:80px;width:80px;" id="imageUrl"><!--数据库中原来的图片-->
+                                      <img src="${BASE_PATH}${model.logo}" style="height:80px;width:80px;" id="imageUrl" onerror="onerror=null;src='${BASE_PATH }static/images/common/no_image.jpg'"><!--数据库中原来的图片-->
                                       <input class="file-path validate" type="text" value="请上传logo图片">
 							      </div>
 							    </div>
