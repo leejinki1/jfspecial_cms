@@ -16,7 +16,7 @@ public class AdminHomeController extends BaseProjectController {
 	private static final String path = "/pages/admin/home/";
 
 	public void index() {
-		System.out.println("12.12---------入方法");
+		//System.out.println("12.12---------入方法");
 		SysUser user = (SysUser) getSessionUser();
 		if (user == null) {
 			redirect(CommonController.firstPage);
@@ -24,7 +24,7 @@ public class AdminHomeController extends BaseProjectController {
 		}
 		setAttr("nowUser", user);
 
-		System.out.println("12.12---------入方法");
+		//System.out.println("12.12---------入方法");
 		/*
 		// 最新文件
 		Page<TbArticle> articlePage = TbArticle.dao.paginate(new Paginator(1, 10), "select t.*,f.name as folderName " //
@@ -96,7 +96,7 @@ public class AdminHomeController extends BaseProjectController {
 		setAttr("addoils", addoils);
 		setAttr("experts", experts);
 
-		System.out.println("12.12---------出方法");
+		//System.out.println("12.12---------出方法");
 		render(path + "home.html");
 	}
 }

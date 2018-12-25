@@ -67,8 +67,8 @@ public class UserInterceptor implements Interceptor {
 			}
 
 			// 判断url是否有权限
-			System.out.println("zr--user/userinterceptor---"+tmpPath);
-			System.out.println("zr--"+controller.getSessionAttr("nomenu"));
+			//System.out.println("zr--user/userinterceptor---"+tmpPath);
+			//System.out.println("zr--"+controller.getSessionAttr("nomenu"));
 			/*if (!urlAuth(controller, tmpPath)) {
 				controller.redirect("/trans/auth");
 				return;
@@ -90,7 +90,7 @@ public class UserInterceptor implements Interceptor {
 	 */
 	protected boolean urlAuth(Controller controller, String tmpPath) {
 		List<SysMenu> list = controller.getSessionAttr("nomenu");
-		System.out.println("ZR12.13---USER/USERINTERCEPTOR"+list);
+		//System.out.println("ZR12.13---USER/USERINTERCEPTOR"+list);
 		// nomenuList 应该是size等于0，而不是空
 		if (list == null) {
 			return false;

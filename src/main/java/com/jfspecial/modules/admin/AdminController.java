@@ -52,7 +52,7 @@ public class AdminController extends BaseProjectController {
 
 		// 初始化数据字典Map
 		String username = getPara("username");
-		String password = getPara("password");
+		String password = getPara("password");//用户输入的密码//可能是真实的密码.可能是保存的md5密码
 
 		if (StrUtils.isEmpty(username)) {
 			setAttr("msg", "用户名不能为空");
@@ -63,9 +63,7 @@ public class AdminController extends BaseProjectController {
 			render(loginPage);
 			return;
 		}
-		// String encryptPassword = JFSpecialUtils.passwordEncrypt(password); //
-		// 前台md5加密
-		String encryptPassword = password;
+
 
 		SysUser user = SysUser.dao.findFirstByWhere(" where username = ? " //
 				+ " and usertype in ( " + JFSpecialUtils.USER_TYPE_ADMIN +" ,9,10,11,12,13,20,21)",
@@ -75,21 +73,33 @@ public class AdminController extends BaseProjectController {
 			render(loginPage);
 			return;
 		}
-		
-		String md5Password = "";
-		try {
-			String userPassword = user.get("password");
-			String decryptPassword = JFSpecialUtils.passwordDecrypt(userPassword);
 
-			md5Password = new Md5Utils().getMD5(decryptPassword).toLowerCase();
+		//将数据库中的密码解密,再md5加密
+		String dbPassword = user.get("password");
+
+
+		// 前台md5加密
+
+		String md5Password = "";
+		String decryptPassword="";
+		String userPassword="";
+		String md5Password1="";
+		try {
+			userPassword = user.get("password");
+			decryptPassword = JFSpecialUtils.passwordDecrypt(userPassword);//解密后的后台密码
+			md5Password = new Md5Utils().getMD5(decryptPassword).toLowerCase();//重新加密的后台密码
+			md5Password1=new Md5Utils().getMD5(md5Password).toLowerCase();//二次加密的后台密码
+			//0c909a141f1f2c0a1cb602b0b2d7d050
+
 		} catch (Exception e) {
 			log.error("认证异常", e);
 			setAttr("msg", "认证异常，请您重新输入。");
 			render(loginPage);
 			return;
 		}
-		
-		if (!md5Password.equals(encryptPassword)) {
+
+
+		if (!(md5Password.equals(password)||md5Password1.equals(password))) {
 			setAttr("msg", "密码错误，请您重新输入。");
 			render(loginPage);
 			return;
